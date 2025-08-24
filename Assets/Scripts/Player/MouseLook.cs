@@ -22,5 +22,7 @@ public class MouseLook : MonoBehaviour
     private void Update()
     {
         parentTransform.Rotate(Vector3.up * _controller._mouseX);
+        
+
     }
 }
