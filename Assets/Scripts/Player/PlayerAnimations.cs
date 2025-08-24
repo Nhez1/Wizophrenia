@@ -7,7 +7,7 @@ public class PlayerAnimations
     private readonly string xAxisName = "xAxis";
     private readonly string zAxisName = "zAxis";
     private readonly string animBoolName = "IsMoving";
-    private readonly string animAttackName = "OnAttack";
+    //private readonly string animAttackName = "OnAttack";
 
     public PlayerAnimations(Animator a)
     {
@@ -16,9 +16,6 @@ public class PlayerAnimations
 
     public void CheckInputs(float xAxis, float zAxis)
     {
-        if (Input.GetKeyDown(KeyCode.V))
-            animator.SetTrigger(animAttackName);
-
         animator.SetFloat(xAxisName, xAxis);
         animator.SetFloat(zAxisName, zAxis);
         animator.SetBool(animBoolName, IsMoving(xAxis, zAxis));
