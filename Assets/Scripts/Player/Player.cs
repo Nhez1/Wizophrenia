@@ -9,6 +9,8 @@ public class Player : Life
     [Tooltip("Este es el incremento de velocidad cuando el jugador va a correr, no la velocidad a la que va a correr.")]
     [SerializeField] private float _runBoost = 5f;
     [SerializeField] private float _jumpForce = 3f;
+    
+    [SerializeField] private float _mouseSensibility = 100f;
 
     private InputController _controller;
     private Movement _move;
@@ -36,6 +38,7 @@ public class Player : Life
     {
         _move.OnUpdate();
         _controller.OnUpdate();
+        _controller.MouseSensibility = _mouseSensibility;
     }
 
     private void FixedUpdate()

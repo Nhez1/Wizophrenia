@@ -2,14 +2,17 @@ using UnityEngine;
 
 public class InputController
 {
+    public float MouseSensibility { get; set; }
     private float _xAxis, _zAxis;
-    public float _mouseX, _mouseY;
-    private float _mouseSensitivity = 100f;
+    private float _mouseX, _mouseY;
     private Movement _movement;
     private PlayerAnimations _animations;
     //private BasicGun _shotgun;
     //private InventoryPlayer _inventory;
     //private WeaponManager _weaponManager;
+
+    public float MouseX => _mouseX;
+    public float MouseY => _mouseY;
 
     public InputController(Movement m, PlayerAnimations anim/*, BasicGun sg, InventoryPlayer inv, WeaponManager wM*/)
     {
@@ -24,8 +27,8 @@ public class InputController
     public void OnUpdate()
     {
         //Mouse input
-        _mouseX = Input.GetAxis("Mouse X") * _mouseSensitivity * Time.deltaTime;
-        _mouseY = Input.GetAxis("Mouse Y") * _mouseSensitivity * Time.deltaTime;
+        _mouseX = Input.GetAxis("Mouse X") * MouseSensibility * Time.deltaTime;
+        _mouseY = Input.GetAxis("Mouse Y") * MouseSensibility * Time.deltaTime;
 
         //Movimiento
         _xAxis = Input.GetAxisRaw("Horizontal");
