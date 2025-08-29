@@ -7,7 +7,7 @@ public class MouseLook : MonoBehaviour
     Transform parentTransform;
     InputController _input;
     Player player;
-    float xRotation = 0f;
+    float xRotation = 45f;
 
     public InputController InputControl => InputControl;
 

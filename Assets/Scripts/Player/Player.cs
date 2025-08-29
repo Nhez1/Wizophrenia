@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Life
+public class Player : MonoBehaviour
 {
     [Header("Stats")]
+    [SerializeField] private Life _life;
+    [SerializeField] private Mana _mana;
+    [Tooltip("Sped")]
     [SerializeField] private float _speed = 3f;
     [Tooltip("Este es el incremento de velocidad cuando el jugador va a correr, no la velocidad a la que va a correr.")]
     [SerializeField] private float _runBoost = 5f;
@@ -16,6 +19,7 @@ public class Player : Life
     private Movement _move;
     private PlayerAnimations _playerAnim;
     private Rigidbody _rb;
+
     public float Speed => _speed;
     public float RunBoost => _runBoost;
     public InputController InputControl => _controller;
@@ -24,17 +28,19 @@ public class Player : Life
     {
         _rb = GetComponent<Rigidbody>();
 
-        _move = new Movement(transform, _rb, _jumpForce, _speed, _runBoost, this);
+        _life = new();
+        _mana = new();
+        _move = new(transform, _rb, _jumpForce, _speed, _runBoost, this);
         _controller = new(_move, _playerAnim);
+
     }
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
         _move.OnStart();
     }
 
-    protected virtual void Update()
+    private void Update()
     {
         _move.OnUpdate();
         _controller.OnUpdate();
