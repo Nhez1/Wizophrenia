@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
         _life = new();
         _mana = new();
         _move = new(transform, _rb, _jumpForce, _speed, _runBoost, this);
-        _controller = new(_move, _playerAnim);
+        _controller = new(_move, _playerAnim, _mana);
 
     }
 

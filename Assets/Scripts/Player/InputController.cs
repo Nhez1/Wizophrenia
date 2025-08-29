@@ -7,6 +7,7 @@ public class InputController
     private float _mouseX, _mouseY;
     private Movement _movement;
     private PlayerAnimations _animations;
+    private Mana _mana;
     //private BasicGun _shotgun;
     //private InventoryPlayer _inventory;
     //private WeaponManager _weaponManager;
@@ -14,10 +15,11 @@ public class InputController
     public float MouseX => _mouseX;
     public float MouseY => _mouseY;
 
-    public InputController(Movement m, PlayerAnimations anim/*, BasicGun sg, InventoryPlayer inv, WeaponManager wM*/)
+    public InputController(Movement m, PlayerAnimations anim, Mana ma/*, BasicGun sg, InventoryPlayer inv, WeaponManager wM*/)
     {
         _movement = m;
         _animations = anim;
+        _mana = ma;
         //_grabBehaviour = gB;
         //_shotgun = sg;
         //_inventory = inv;
@@ -58,8 +60,8 @@ public class InputController
         //    _shotgun.gunActive = false;
         //}
 
-        ////Disparo
-        //if (Input.GetKeyDown(KeyCode.Mouse0) && _shotgun.gunActive) _shotgun.Shoot();
+        //Disparo
+        if (Input.GetKeyDown(KeyCode.F)) _mana.SpendMana(10);
     }
 
     public void OnFixedUpdate()

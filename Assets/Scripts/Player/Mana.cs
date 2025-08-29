@@ -13,24 +13,17 @@ public class Mana
 
     public Mana()
     {
-        MP = _maxMP;
+        MP = MaxMP;
     }
 
-    public void ManaSpend(float amount)
-    {
-        MP -= amount;
-    }
+    public void SpendMana(float amount) => MP -= amount;
 
     /// <summary>
     /// Restore a specified amount of Mana to the player.
     /// </summary>
     public void ManaRegain(float amount)
     {
-        if (_mp < _maxMP)
-        {
-            MP += amount;
-            MP = Mathf.Min(_maxMP); // Limita el mana al máximo
-        }
+        if (_mp < _maxMP) MP += amount;
 
     }
 

@@ -11,11 +11,7 @@ public class Life: IDamageable
     [SerializeField] private float _hp;
 
     public float MaxHP { get { return _maxHP; } private set { } }
-    public float HP
-    {
-        get { return _hp; }
-        private set => _hp = Mathf.Clamp(value, 0f, _maxHP);
-    }
+    public float HP { get { return _hp; } private set => _hp = Mathf.Clamp(value, 0f, _maxHP); }
 
 
     public Life()
@@ -26,20 +22,12 @@ public class Life: IDamageable
     public void TakeDamage(float amount)
     {
         HP -= amount;
-        if (HP <= 0)
-        {
-            GameOver();
-            HP = 0;
-        }
+        if (HP <= 0) GameOver();
     }
 
     public void TakeHeal(float amount)
     {
-        if (HP < MaxHP)
-        {
-            HP += amount;
-            HP = Mathf.Min(_maxHP); // Limita la vida al máximo
-        }
+        if (HP < MaxHP) HP += amount;
 
     }
 
