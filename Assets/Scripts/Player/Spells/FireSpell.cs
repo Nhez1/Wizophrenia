@@ -2,24 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireSpell : MonoBehaviour
+public class FireSpell : MonoBehaviour, ISpell
 {
-    float manaCost;
     bool isActive;
+    
+    public float ManaCost { get; }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    IEnumerator SpendMana()
+    IEnumerator PassiveManaSpend()
     {
         yield return null;
         if (isActive)
