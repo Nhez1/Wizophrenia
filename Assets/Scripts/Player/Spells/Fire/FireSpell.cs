@@ -26,7 +26,7 @@ public class FireSpell : MonoBehaviour
 
     void Start()
     {
-        if ( fireInHand != null)
+        if ( fireInHand != null) // fih 💔
         {
             fireInHand.SetActive(false);
 
