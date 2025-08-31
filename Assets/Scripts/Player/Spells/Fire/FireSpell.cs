@@ -11,7 +11,7 @@ public class FireSpell : MonoBehaviour
 
     [Header (" Mana Settings ")]
 
-    public float manaCostPerSecond = 1f;      //Este script tiene administracion del mana propia por asi decirlo, cuando
+    private float manaCostPerSecond = 1f;      //Este script tiene administracion del mana propia por asi decirlo, cuando
     public float currentMana = 50f;           //agreguemos la del player, esta se puede borrar
     public bool isActive;
 
