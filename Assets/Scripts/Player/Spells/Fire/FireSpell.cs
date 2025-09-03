@@ -4,41 +4,45 @@ using UnityEngine;
 
 //Modificado por Jere, por las dudas revisar
 
-public class FireSpell : MonoBehaviour
+public class FireSpell : MonoBehaviour, ISpell
 {
 
     //Titulos
 
-    [Header (" Mana Settings ")]
-
+    [Header(" Mana Settings ")]
     private float manaCostPerSecond = 1f;      //Este script tiene administracion del mana propia por asi decirlo, cuando
-    public float currentMana = 50f;           //agreguemos la del player, esta se puede borrar
+    private Mana _mana;
     public bool isActive;
 
-    [Header (" Spells Objects ")]
-    public GameObject fireInHand; //El fuego que ilumina, en la mano
+    [Header(" Spells Objects ")]
+    private string _spellName = "Flame Spell";
+    public GameObject fireInHand;     //El fuego que ilumina, en la mano
     public GameObject fireballPrefab; //Prefab del proyectil
-    public Transform firePoint; //Donde aparece el proyectil
+    public Transform firePoint;       //Donde aparece el proyectil
 
-    [Header (" Fireball Settings ")] 
+    [Header(" Fireball Settings ")]
     public float FireballCooldownTime = 2f; //Tiempo de reincoporacion del proyectil
     bool canShoot = true;
 
+    public string Name => _spellName;
+    public Mana Mana => _mana;
+    public float ManaCost => manaCostPerSecond;
+
     void Start()
     {
-        if ( fireInHand != null) // fih 💔
+        if (fireInHand != null) // fih 💔
         {
             fireInHand.SetActive(false);
 
             // Con esto el hechizo empieza apagado
         }
-        
+
     }
 
     void Update()
     {
         Debug.Log("Update corriendo en: " + gameObject.name);
-        if ( Input.GetKeyDown(KeyCode.F)) //Se activa y desactiva el hechizo con la tecla "F"
+        if (Input.GetKeyDown(KeyCode.F)) //Se activa y desactiva el hechizo con la tecla "F"
         {
             Debug.Log("Presioné F, voy a alternar el hechizo");
             ToggleSpell(); //Alternar Hechizo
@@ -50,14 +54,14 @@ public class FireSpell : MonoBehaviour
         }
     }
 
-    IEnumerator SpendMana()
+    IEnumerator DrainMana()
     {
-        while (isActive && currentMana > 0)   //Si el hechizo esta activo y el mana es superior a 0
+        while (isActive && Mana.MP > ManaCost)   //Si el hechizo esta activo y el mana es superior al costo
         {
-            currentMana -= manaCostPerSecond; //Resta mana
+            Mana.SpendMana(ManaCost); //Resta mana
             yield return new WaitForSeconds(1f); //cada un seg
-            
-            if (currentMana <= 0) //Si el mana es 0 o menor, se desactiva el hechizo
+
+            if (Mana.MP <= ManaCost) //Si el mana es 0 o menor, se desactiva el hechizo
             {
                 isActive = false;
                 fireInHand.SetActive(false);
@@ -69,31 +73,31 @@ public class FireSpell : MonoBehaviour
     void ToggleSpell()  //Alternar hechizo
     {
         isActive = !isActive;
-        Debug.Log("ToggleSpell -> isActive ahora es: " + isActive);
-        fireInHand.SetActive(isActive);   // El hechizo esta activo
 
         if (fireInHand != null)
-    {
-        fireInHand.SetActive(isActive);
-        Debug.Log("fireInHand.SetActive(" + isActive + ")");
-    }
-    else
-    {
-        Debug.LogWarning("⚠ fireInHand NO está asignado en el inspector");
-    }
+        {
+            fireInHand.SetActive(isActive);
+            Debug.Log("fireInHand.SetActive(" + isActive + ")");
+        }
+        else
+        {
+            Debug.LogWarning("⚠ fireInHand NO está asignado en el inspector");
+        }
 
         if (isActive)
         {
-            StartCoroutine (SpendMana()); //Si esta activo consume mana
+            StartCoroutine(DrainMana()); //Si esta activo consume mana
         }
     }
+
+    public void Cast() => ToggleSpell();
 
     void CastFireball()
     {
         if (fireballPrefab != null && firePoint != null) // Se asegura de que haya un prefab y firepoint existente
         {
-            Instantiate (fireballPrefab, firePoint.position, firePoint.rotation); //prefab del fireball, posicion en la q aparece y direccion a la que mira
-            StartCoroutine (FireballCooldown()); //esperas 2 segundos para volver a lanzarla
+            Instantiate(fireballPrefab, firePoint.position, firePoint.rotation); //prefab del fireball, posicion en la q aparece y direccion a la que mira
+            StartCoroutine(FireballCooldown()); //esperas 2 segundos para volver a lanzarla
         }
     }
 

@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     private PlayerAnimations _playerAnim;
     private Rigidbody _rb;
 
+    public Mana Mana => _mana;
     public float Speed => _speed;
     public float RunBoost => _runBoost;
     public InputController InputControl => _controller;
