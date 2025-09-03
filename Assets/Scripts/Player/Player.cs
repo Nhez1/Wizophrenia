@@ -20,6 +20,9 @@ public class Player : MonoBehaviour
     private PlayerAnimations _playerAnim;
     private Rigidbody _rb;
 
+    // Cuando sea que se necesite hacerle daño al jugador, se usa Player.Life.TakeDamage(cantidad);
+    public Life Life => _life;
+    // Lo mismo para el mana, cuando sea que se necesite gastar mana, se usa Player.Mana.SpendMP(cantidad);
     public Mana Mana => _mana;
     public float Speed => _speed;
     public float RunBoost => _runBoost;

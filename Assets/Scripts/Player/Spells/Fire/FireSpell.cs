@@ -10,13 +10,11 @@ public class FireSpell : MonoBehaviour, ISpell
     //Titulos
 
     [Header(" Mana Settings ")]
-    private float manaCostPerSecond = 1f;      //Este script tiene administracion del mana propia por asi decirlo, cuando
+    private float _manaCost = 1f;
     private Mana _mana;
-    public bool isActive;
 
     [Header(" Spells Objects ")]
-    private string _spellName = "Flame Spell";
-    public GameObject fireInHand;     //El fuego que ilumina, en la mano
+    private string _spellName = "Fire Ball";
     public GameObject fireballPrefab; //Prefab del proyectil
     public Transform firePoint;       //Donde aparece el proyectil
 
@@ -26,17 +24,12 @@ public class FireSpell : MonoBehaviour, ISpell
 
     public string Name => _spellName;
     public Mana Mana => _mana;
-    public float ManaCost => manaCostPerSecond;
+    public float ManaCost => _manaCost;
 
-    void Start()
+    public void Init(Mana m, GameObject prefab)
     {
-        if (fireInHand != null) // fih 💔
-        {
-            fireInHand.SetActive(false);
-
-            // Con esto el hechizo empieza apagado
-        }
-
+        _mana = m;
+        fireballPrefab = prefab;
     }
 
     void Update()
@@ -45,52 +38,18 @@ public class FireSpell : MonoBehaviour, ISpell
         if (Input.GetKeyDown(KeyCode.F)) //Se activa y desactiva el hechizo con la tecla "F"
         {
             Debug.Log("Presioné F, voy a alternar el hechizo");
-            ToggleSpell(); //Alternar Hechizo
         }
-        if (isActive && Input.GetButtonDown("Fire1") && canShoot) //Si el hechizo esta activo, el click izquierdo esta apretado y se puede disparar
+        if (Input.GetButtonDown("Fire1") && canShoot) //Si el hechizo esta activo, el click izquierdo esta apretado y se puede disparar
         {
             Debug.Log("Intento castear fireball");
             CastFireball();  //se castea la fireball
         }
     }
 
-    IEnumerator DrainMana()
+    public void Cast()
     {
-        while (isActive && Mana.MP > ManaCost)   //Si el hechizo esta activo y el mana es superior al costo
-        {
-            Mana.SpendMana(ManaCost); //Resta mana
-            yield return new WaitForSeconds(1f); //cada un seg
 
-            if (Mana.MP <= ManaCost) //Si el mana es 0 o menor, se desactiva el hechizo
-            {
-                isActive = false;
-                fireInHand.SetActive(false);
-            }
-
-        }
     }
-
-    void ToggleSpell()  //Alternar hechizo
-    {
-        isActive = !isActive;
-
-        if (fireInHand != null)
-        {
-            fireInHand.SetActive(isActive);
-            Debug.Log("fireInHand.SetActive(" + isActive + ")");
-        }
-        else
-        {
-            Debug.LogWarning("⚠ fireInHand NO está asignado en el inspector");
-        }
-
-        if (isActive)
-        {
-            StartCoroutine(DrainMana()); //Si esta activo consume mana
-        }
-    }
-
-    public void Cast() => ToggleSpell();
 
     void CastFireball()
     {
