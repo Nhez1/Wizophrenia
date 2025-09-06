@@ -32,19 +32,19 @@ public class FireSpell : MonoBehaviour, ISpell
         fireballPrefab = prefab;
     }
 
-    void Update()
-    {
-        Debug.Log("Update corriendo en: " + gameObject.name);
-        if (Input.GetKeyDown(KeyCode.F)) //Se activa y desactiva el hechizo con la tecla "F"
-        {
-            Debug.Log("Presioné F, voy a alternar el hechizo");
-        }
-        if (Input.GetButtonDown("Fire1") && canShoot) //Si el hechizo esta activo, el click izquierdo esta apretado y se puede disparar
-        {
-            Debug.Log("Intento castear fireball");
-            CastFireball();  //se castea la fireball
-        }
-    }
+    //void Update()
+    //{
+    //    Debug.Log("Update corriendo en: " + gameObject.name);
+    //    if (Input.GetKeyDown(KeyCode.F)) //Se activa y desactiva el hechizo con la tecla "F"
+    //    {
+    //        Debug.Log("Presioné F, voy a alternar el hechizo");
+    //    }
+    //    if (Input.GetButtonDown("Fire1") && canShoot) //Si el hechizo esta activo, el click izquierdo esta apretado y se puede disparar
+    //    {
+    //        Debug.Log("Intento castear fireball");
+    //        CastFireball();  //se castea la fireball
+    //    }
+    //}
 
     public void Cast()
     {

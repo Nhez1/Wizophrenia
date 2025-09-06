@@ -17,14 +17,14 @@ public class Fireball : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.forward * fireballSpeed * Time.deltaTime);
+        transform.Translate(fireballSpeed * Time.deltaTime * Vector3.forward);
     }
 
     void OnTriggerEnter (Collider other)
     {
         if (ImpactEffect != null)
         {
-            Instantiate ( ImpactEffect, transform.position, Quaternion.identity);
+            Instantiate (ImpactEffect, transform.position, Quaternion.identity);
 
             Destroy(gameObject);
         }

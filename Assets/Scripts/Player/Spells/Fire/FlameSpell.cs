@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//Modificado por Jere, por las dudas revisar
+//Modificado por Fecu >:]
 
 public class FlameSpell : MonoBehaviour, ISpell
 {
