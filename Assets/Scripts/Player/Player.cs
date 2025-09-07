@@ -7,7 +7,6 @@ public class Player : MonoBehaviour
     [Header("Stats")]
     [SerializeField] private Life _life;
     [SerializeField] private Mana _mana;
-    public bool addSpell = false;
     [Tooltip("Sped")]
     [SerializeField] private float _speed = 3f;
     [Tooltip("Este es el incremento de velocidad cuando el jugador va a correr, no la velocidad a la que va a correr.")]
@@ -15,6 +14,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float _jumpForce = 3f;
     
     [SerializeField] private float _mouseSensibility = 100f;
+
+    public GameObject fireInHand;
 
     private InputController _controller;
     private Movement _move;
@@ -58,4 +59,15 @@ public class Player : MonoBehaviour
     {
         _controller.OnFixedUpdate();
     }
+
+    private void OnEnable()
+    {
+        FlameSpell.OnFlameSwitch += LightFireInHand;
+    }
+    private void OnDisable()
+    {
+        FlameSpell.OnFlameSwitch -= LightFireInHand;
+    }
+
+    private void LightFireInHand(bool isActive) => fireInHand.SetActive(isActive);
 }

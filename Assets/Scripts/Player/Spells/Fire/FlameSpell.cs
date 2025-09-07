@@ -7,16 +7,11 @@ using System;
 
 public class FlameSpell : MonoBehaviour, ISpell
 {
-    public static event Action OnFlameOn;
-    public static event Action OnFlameOff;
+    public static event Action<bool> OnFlameSwitch;
 
     //Titulos
-
-    [Header(" Mana Settings ")]
     private float _manaCostPerSecond = 1f;
     private Mana _mana;
-
-    [Header(" Spell Info ")]
     private string _spellName = "Flame Spell";
 
     public string Name => _spellName;
@@ -47,12 +42,12 @@ public class FlameSpell : MonoBehaviour, ISpell
 
         if (IsActive)
         {
-            OnFlameOn?.Invoke();
+            OnFlameSwitch?.Invoke(IsActive);
             StartCoroutine(DrainMana()); //Si esta activo consume mana
         }
         else
         {
-            OnFlameOff?.Invoke();
+            OnFlameSwitch?.Invoke(IsActive);
             StopCoroutine(DrainMana()); //Si se desactiva, se para la corutina
         }
     }
