@@ -3,24 +3,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpellManager : MonoBehaviour
+public enum Spells
 {
-    [Tooltip("Acá van los prefabs de los hechizos que los requieran.")]
-    [SerializeField] private List<GameObject> _spellPrefabs;
-    private List<ISpell> _spells;
+    FlameSpell,
+    FireBall
+}
+
+public class SpellManager
+{
+    private static Dictionary<Spells, ISpell> _spells = new();
     private Mana _mana;
+    GameObject reference;
 
-    private void Awake()
+    public SpellManager(Mana m, GameObject g)
     {
-        _mana = GetComponent<Player>().Mana;
-        _spells = new List<ISpell>();
+        _mana = m;
+        reference = g;
+    }
 
-        for (int i = 0; i < _spellPrefabs.Count; i++)
+    public void CastSpell(Spells spell)
+    {
+        if (_spells.ContainsKey(spell))
+            _spells[spell].Cast();
+        else
+            Debug.LogWarning($"Spell {spell} not found!");
+    }
+
+    public void AddSpell(Spells spell)
+    {
+        if (_spells.ContainsKey(spell)) return;
+        switch (spell)
         {
-            if (_spells.Count > 0)
-            {
-                _spells[i].Init(_mana, _spellPrefabs[i]);
-            }
+            case Spells.FlameSpell:
+                //Se agrega el hechizo al diccionario
+                _spells.Add(spell, reference.AddComponent<FlameSpell>());
+                //Se lo inicializa dándole la referencia de mana
+                _spells[spell].Init(_mana);
+                Debug.Log("Added flame!");
+                break;
+            case Spells.FireBall:
+                _spells.Add(spell, reference.AddComponent<FireSpell>());
+                _spells[spell].Init(_mana, PrefabManager.GetPrefab(PrefabType.BallOfFire));
+                break;
+            default:
+                Debug.LogWarning($"There is no {spell} yet.");
+                break;
         }
     }
 }

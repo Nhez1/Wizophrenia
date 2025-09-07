@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     [Header("Stats")]
     [SerializeField] private Life _life;
     [SerializeField] private Mana _mana;
+    public bool addSpell = false;
     [Tooltip("Sped")]
     [SerializeField] private float _speed = 3f;
     [Tooltip("Este es el incremento de velocidad cuando el jugador va a correr, no la velocidad a la que va a correr.")]
@@ -19,6 +20,7 @@ public class Player : MonoBehaviour
     private Movement _move;
     private PlayerAnimations _playerAnim;
     private Rigidbody _rb;
+    private SpellManager _spellManager;
 
     // Cuando sea que se necesite hacerle daño al jugador, se usa Player.Life.TakeDamage(cantidad);
     public Life Life => _life;
@@ -35,13 +37,14 @@ public class Player : MonoBehaviour
         _life = new();
         _mana = new();
         _move = new(transform, _rb, _jumpForce, _speed, _runBoost, this);
-        _controller = new(_move, _playerAnim, _mana);
-
+        _spellManager = new(_mana, this.gameObject);
+        _controller = new(_move, _playerAnim, _mana, _spellManager);
     }
 
     private void Start()
     {
         _move.OnStart();
+        _spellManager.AddSpell(Spells.FlameSpell);
     }
 
     private void Update()

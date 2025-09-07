@@ -48,11 +48,6 @@ public class FireSpell : MonoBehaviour, ISpell
 
     public void Cast()
     {
-
-    }
-
-    void CastFireball()
-    {
         if (fireballPrefab != null && firePoint != null) // Se asegura de que haya un prefab y firepoint existente
         {
             Instantiate(fireballPrefab, firePoint.position, firePoint.rotation); //prefab del fireball, posicion en la q aparece y direccion a la que mira

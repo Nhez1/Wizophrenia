@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public enum PrefabType
 {
-    FireBall,
+    BallOfFire,
     ImpactEffect
 }
 
