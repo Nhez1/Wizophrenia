@@ -48,8 +48,7 @@ public class Player : MonoBehaviour
     {
         _move.OnStart();
         _spellManager.AddSpell(SpellType.FlameSpell);
-        //_spellManager.AddSpell(SpellType.FireBall);
-        //Esto está comentado por el momento porque está roto.
+        _spellManager.AddSpell(SpellType.FireBall);
     }
 
     private void Update()

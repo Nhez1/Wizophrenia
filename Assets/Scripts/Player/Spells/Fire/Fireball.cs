@@ -47,11 +47,16 @@ public class FireBall : MonoBehaviour, ISpell
 
     public void Cast()
     {
-        if (fireballPrefab != null && firePoint != null) // Se asegura de que haya un prefab y firepoint existente
+        if (fireballPrefab != null) // Se asegura de que haya un prefab y firepoint existente
         {
-            Instantiate(fireballPrefab, firePoint.position, firePoint.rotation); //prefab del fireball, posicion en la q aparece y direccion a la que mira
-            StartCoroutine(FireballCooldown()); //esperas 2 segundos para volver a lanzarla
+            if (firePoint != null)
+            {
+                Instantiate(fireballPrefab, firePoint.position, firePoint.rotation); //prefab del fireball, posicion en la q aparece y direccion a la que mira
+                StartCoroutine(FireballCooldown()); //esperas 2 segundos para volver a lanzarla
+            }
+            else Debug.Log("FirePoint not used inside FireBall.cs");
         }
+        else Debug.Log("FireBall prefab not found inside FireBall.cs");
     }
 
     IEnumerator FireballCooldown()

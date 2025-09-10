@@ -224,7 +224,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.8929, y: 1, z: 1}
+  m_LocalScale: {x: 2.8929, y: 1, z: 3.3446}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -263,7 +263,8 @@ MonoBehaviour:
     prefab: {fileID: 7480827704108384566, guid: 25de5d0534a20e34dbaabd85de376fe4,
       type: 3}
   - type: 0
-    prefab: {fileID: 491580041}
+    prefab: {fileID: 5626478503070893812, guid: 6a51185de7bb8ad45b00a38776fe282f,
+      type: 3}
 --- !u!4 &67783693
 Transform:
   m_ObjectHideFlags: 0
@@ -292,7 +293,7 @@ GameObject:
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -547,12 +548,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
---- !u!1 &491580041 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5626478503070893812, guid: 6a51185de7bb8ad45b00a38776fe282f,
-    type: 3}
-  m_PrefabInstance: {fileID: 723426111}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &723426111
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -564,7 +559,7 @@ PrefabInstance:
     - target: {fileID: 2219078451791018062, guid: 6a51185de7bb8ad45b00a38776fe282f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.1881585
+      value: -9.85
       objectReference: {fileID: 0}
     - target: {fileID: 2219078451791018062, guid: 6a51185de7bb8ad45b00a38776fe282f,
         type: 3}
@@ -574,7 +569,7 @@ PrefabInstance:
     - target: {fileID: 2219078451791018062, guid: 6a51185de7bb8ad45b00a38776fe282f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.7545805
+      value: 30.76
       objectReference: {fileID: 0}
     - target: {fileID: 2219078451791018062, guid: 6a51185de7bb8ad45b00a38776fe282f,
         type: 3}
@@ -632,8 +627,7 @@ GameObject:
   - component: {fileID: 770704626}
   - component: {fileID: 770704629}
   - component: {fileID: 770704628}
-  - component: {fileID: 770704627}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Evil schizophrenic wizard eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -655,27 +649,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 915428804}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &770704627
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 770704625}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &770704628
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -786,7 +759,7 @@ GameObject:
   - component: {fileID: 901963004}
   - component: {fileID: 901963006}
   - component: {fileID: 901963005}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -907,7 +880,7 @@ GameObject:
   - component: {fileID: 915428801}
   - component: {fileID: 915428806}
   - component: {fileID: 915428805}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1003,6 +976,7 @@ Transform:
   - {fileID: 770704626}
   - {fileID: 330585546}
   - {fileID: 901963004}
+  - {fileID: 1576139816}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &915428805
@@ -1027,7 +1001,7 @@ MonoBehaviour:
   _runBoost: 3
   _jumpForce: 3
   _mouseSensibility: 250
-  spellCastPoint: {fileID: 901963004}
+  spellCastPoint: {fileID: 1576139816}
   fireInHand: {fileID: 901963003}
 --- !u!54 &915428806
 Rigidbody:
@@ -1294,6 +1268,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25de5d0534a20e34dbaabd85de376fe4, type: 3}
+--- !u!1 &1576139815
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1576139816}
+  m_Layer: 3
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1576139816
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576139815}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.3, y: 0.2, z: 0.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 915428804}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1751824770
 GameObject:
   m_ObjectHideFlags: 0

@@ -64,7 +64,7 @@ public class InputController
 
         // Flame spell toggle
         if (Input.GetKeyDown(KeyCode.F)) _spells.CastSpell(SpellType.FlameSpell);
-        //if (Input.GetKeyDown(KeyCode.Mouse0)) _spells.CastSpell(SpellType.FireBall);
+        if (Input.GetKeyDown(KeyCode.Mouse1)) _spells.CastSpell(SpellType.FireBall);
     }
 
     public void OnFixedUpdate()

@@ -6,12 +6,13 @@ public class FireballProjectile : MonoBehaviour
 {
     public float fireballSpeed = 5f;
     public float fireballLifeTime = 8f;
+    public float impactEffectLifeTime = 2f;
     public GameObject ImpactEffect;
 
 
     void Start()
     {
-        Destroy (gameObject, fireballLifeTime);
+        Destroy(gameObject, fireballLifeTime);
     }
 
 
@@ -20,13 +21,17 @@ public class FireballProjectile : MonoBehaviour
         transform.Translate(fireballSpeed * Time.deltaTime * Vector3.forward);
     }
 
-    void OnTriggerEnter (Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (ImpactEffect != null)
         {
-            Instantiate (ImpactEffect, transform.position, Quaternion.identity);
-
-            Destroy(gameObject);
+            if (!other.CompareTag("Player")) //Que no actúe si la tag es "Player".
+            {
+                Destroy(gameObject);
+            }
         }
+        else return;
     }
+
+    private void OnDestroy() => Destroy(Instantiate(ImpactEffect, transform.position, Quaternion.identity), impactEffectLifeTime);
 }
