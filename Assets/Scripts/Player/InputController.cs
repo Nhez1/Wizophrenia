@@ -62,8 +62,9 @@ public class InputController
         //    _shotgun.gunActive = false;
         //}
 
-        //Disparo
-        if (Input.GetKeyDown(KeyCode.F)) _spells.CastSpell(Spells.FlameSpell);
+        // Flame spell toggle
+        if (Input.GetKeyDown(KeyCode.F)) _spells.CastSpell(SpellType.FlameSpell);
+        //if (Input.GetKeyDown(KeyCode.Mouse0)) _spells.CastSpell(SpellType.FireBall);
     }
 
     public void OnFixedUpdate()

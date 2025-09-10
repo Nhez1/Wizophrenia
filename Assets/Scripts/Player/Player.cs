@@ -36,16 +36,16 @@ public class Player : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
 
         _life = new();
-        _mana = new();
+        _mana = new(this);
         _move = new(transform, _rb, _jumpForce, _speed, _runBoost, this);
-        _spellManager = new(_mana, this.gameObject);
+        _spellManager = new(_mana, gameObject);
         _controller = new(_move, _playerAnim, _mana, _spellManager);
     }
 
     private void Start()
     {
         _move.OnStart();
-        _spellManager.AddSpell(Spells.FlameSpell);
+        _spellManager.AddSpell(SpellType.FlameSpell);
     }
 
     private void Update()
@@ -63,11 +63,13 @@ public class Player : MonoBehaviour
     private void OnEnable()
     {
         FlameSpell.OnFlameSwitch += LightFireInHand;
+        FlameSpell.OnFlameSwitch += _mana.Drain;
     }
     private void OnDisable()
     {
         FlameSpell.OnFlameSwitch -= LightFireInHand;
+        FlameSpell.OnFlameSwitch -= _mana.Drain;
     }
 
-    private void LightFireInHand(bool isActive) => fireInHand.SetActive(isActive);
+    private void LightFireInHand(bool isActive, float x) => fireInHand.SetActive(isActive);
 }

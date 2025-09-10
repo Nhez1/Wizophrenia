@@ -26,10 +26,11 @@ public class FireSpell : MonoBehaviour, ISpell
     public Mana Mana => _mana;
     public float ManaCost => _manaCost;
 
-    public void Init(Mana m, GameObject prefab)
+    public void Init(Mana m, GameObject prefab, Transform castPoint)
     {
         _mana = m;
         fireballPrefab = prefab;
+        firePoint = castPoint;
     }
 
     //void Update()

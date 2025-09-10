@@ -6,7 +6,7 @@ public class HandsHandler : MonoBehaviour
 {
     public Animator animator;
 
-    public void FlameSwitch(bool isActive) => animator.SetBool("isActive", isActive);
+    public void FlameSwitch(bool isActive, float x) => animator.SetBool("isActive", isActive);
 
     private void OnEnable()
     {
