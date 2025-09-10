@@ -259,12 +259,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefabList:
-  - type: 0
-    prefab: {fileID: 5626478503070893812, guid: 6a51185de7bb8ad45b00a38776fe282f,
-      type: 3}
   - type: 1
     prefab: {fileID: 7480827704108384566, guid: 25de5d0534a20e34dbaabd85de376fe4,
       type: 3}
+  - type: 0
+    prefab: {fileID: 491580041}
 --- !u!4 &67783693
 Transform:
   m_ObjectHideFlags: 0
@@ -548,6 +547,12 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!1 &491580041 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5626478503070893812, guid: 6a51185de7bb8ad45b00a38776fe282f,
+    type: 3}
+  m_PrefabInstance: {fileID: 723426111}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &723426111
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -838,7 +843,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6399195, b: 0, a: 1}
-  m_Intensity: 3
+  m_Intensity: 5
   m_Range: 6
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1022,6 +1027,7 @@ MonoBehaviour:
   _runBoost: 3
   _jumpForce: 3
   _mouseSensibility: 250
+  spellCastPoint: {fileID: 901963004}
   fireInHand: {fileID: 901963003}
 --- !u!54 &915428806
 Rigidbody:

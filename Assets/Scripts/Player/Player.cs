@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [Header("Stats")]
+    [Header(" Stats ")]
     [SerializeField] private Life _life;
     [SerializeField] private Mana _mana;
-    [Tooltip("Sped")]
-    [SerializeField] private float _speed = 3f;
+    [Tooltip("Sped")] [SerializeField] private float _speed = 3f;
     [Tooltip("Este es el incremento de velocidad cuando el jugador va a correr, no la velocidad a la que va a correr.")]
     [SerializeField] private float _runBoost = 5f;
     [SerializeField] private float _jumpForce = 3f;
-    
+
+    [Header(" Internal ")]
     [SerializeField] private float _mouseSensibility = 100f;
+    [Tooltip("El punto desde el que se van a instanciar los hechizos")]
+    public Transform spellCastPoint;
 
     public GameObject fireInHand;
 
@@ -38,7 +40,7 @@ public class Player : MonoBehaviour
         _life = new();
         _mana = new(this);
         _move = new(transform, _rb, _jumpForce, _speed, _runBoost, this);
-        _spellManager = new(_mana, gameObject);
+        _spellManager = new(_mana, gameObject, spellCastPoint, this);
         _controller = new(_move, _playerAnim, _mana, _spellManager);
     }
 
@@ -46,6 +48,8 @@ public class Player : MonoBehaviour
     {
         _move.OnStart();
         _spellManager.AddSpell(SpellType.FlameSpell);
+        //_spellManager.AddSpell(SpellType.FireBall);
+        //Esto está comentado por el momento porque está roto.
     }
 
     private void Update()

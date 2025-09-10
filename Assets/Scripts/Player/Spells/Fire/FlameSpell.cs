@@ -18,7 +18,7 @@ public class FlameSpell : ISpell
     public float ManaCost => _manaCostPerSecond;
     public bool IsActive { get; private set; }
 
-    public void Init(Mana m, GameObject prefab = null, Transform castPoint = null)
+    public void Init(Mana m, GameObject prefab = null, Transform castPoint = null, MonoBehaviour mb = null)
     {
         _mana = m;
         IsActive = false;

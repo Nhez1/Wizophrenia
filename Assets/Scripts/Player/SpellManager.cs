@@ -14,11 +14,15 @@ public class SpellManager
     private static Dictionary<SpellType, ISpell> _spells = new();
     private Mana _mana;
     GameObject reference;
+    Transform castPoint;
+    MonoBehaviour coroutineStarter;
 
-    public SpellManager(Mana m, GameObject g)
+    public SpellManager(Mana m, GameObject g, Transform castPosition, MonoBehaviour mb)
     {
         _mana = m;
         reference = g;
+        castPoint = castPosition;
+        coroutineStarter = mb;
     }
 
     /// <summary>
@@ -48,11 +52,12 @@ public class SpellManager
                 _spells.Add(spell, new FlameSpell());
                 //Se lo inicializa dándole la referencia de mana
                 _spells[spell].Init(_mana);
-                Debug.Log("Added flame!");
+                Debug.Log("The Wizard has learned Flame!");
                 break;
             case SpellType.FireBall:
-                _spells.Add(spell, reference.AddComponent<FireSpell>());
-                _spells[spell].Init(_mana, PrefabManager.GetPrefab(PrefabType.BallOfFire));
+                _spells.Add(spell, reference.AddComponent<FireBall>());
+                _spells[spell].Init(_mana, PrefabManager.GetPrefab(PrefabType.BallOfFire), castPoint, coroutineStarter);
+                Debug.Log("The Wizard has learned Fire Ball!");
                 break;
             default:
                 Debug.LogWarning($"There is no {spell} yet.");
