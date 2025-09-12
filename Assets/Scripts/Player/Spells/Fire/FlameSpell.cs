@@ -29,8 +29,7 @@ public class FlameSpell : ISpell
         if (_mana == null) return;
         IsActive = !IsActive;
 
-        if (IsActive) OnFlameSwitch?.Invoke(IsActive, ManaCost);
-        else OnFlameSwitch?.Invoke(IsActive, ManaCost);
+        OnFlameSwitch?.Invoke(IsActive, ManaCost);
     }
 
     public void Cast() => ToggleSpell();

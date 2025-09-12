@@ -4,7 +4,7 @@ using UnityEngine;
 
 //Modificado por Jere, por las dudas revisar
 
-public class FireBall : MonoBehaviour, ISpell
+public class FireBall : MonoBehaviour, ISpell, IDisposable
 {
     private Mana _mana;
     private MonoBehaviour runner;
@@ -17,7 +17,8 @@ public class FireBall : MonoBehaviour, ISpell
     [Header(" Fireball Settings ")]
     private float _manaCost = 5f;
     public float FireballCooldownTime = 2f; //Tiempo de reincoporacion del proyectil
-    bool canShoot = true;
+    bool canShoot = false;
+    bool onCD = false;
 
     public string Name => _spellName;
     public Mana Mana => _mana;
@@ -29,6 +30,7 @@ public class FireBall : MonoBehaviour, ISpell
         fireballPrefab = prefab;
         firePoint = castPoint;
         runner = mb;
+        FlameSpell.OnFlameSwitch += SwitchActive;
     }
 
     //void Update()
@@ -51,8 +53,12 @@ public class FireBall : MonoBehaviour, ISpell
         {
             if (firePoint != null)
             {
-                Instantiate(fireballPrefab, firePoint.position, firePoint.rotation); //prefab del fireball, posicion en la q aparece y direccion a la que mira
-                StartCoroutine(FireballCooldown()); //esperas 2 segundos para volver a lanzarla
+                if (canShoot && !onCD)
+                {
+                    Instantiate(fireballPrefab, firePoint.position, firePoint.rotation); //prefab del fireball, posicion en la q aparece y direccion a la que mira
+                    Mana.Spend(ManaCost);
+                    runner.StartCoroutine(FireballCooldown()); //esperas 2 segundos para volver a lanzarla
+                }
             }
             else Debug.Log("FirePoint not used inside FireBall.cs");
         }
@@ -61,8 +67,12 @@ public class FireBall : MonoBehaviour, ISpell
 
     IEnumerator FireballCooldown()
     {
-        canShoot = false;  // Normalmente no se puede lanzar
+        onCD = true;  // Normalmente no se puede lanzar
         yield return new WaitForSeconds(FireballCooldownTime); //Espera 2seg o el numero que tenga fireballCooldown
-        canShoot = true;  //Se puede lanzar
+        onCD = false;  //Se puede lanzar
     }
+
+    public void SwitchActive(bool swtch, float x) => canShoot = swtch;
+
+    public void Dispose() => FlameSpell.OnFlameSwitch -= SwitchActive;
 }
