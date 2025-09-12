@@ -1,39 +1,88 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Mana
 {
-    [Header("Stats")]
-    [SerializeField] [Range(10f, 200f)] private float _maxMP = 100;
+    [Tooltip("Maximum MP")]
+    [SerializeField] private float _maxMP = 100;
+    [Tooltip("Mana Points")]
     [SerializeField] private float _mp;
 
-    public float maxMP { get { return _maxMP; } }
-    public float mp
+    private Coroutine _drainRoutine;
+    private bool _activateDrain = false;
+    private bool _isDraining = false;
+    private MonoBehaviour coroutineStarter;
+    public float MaxMP { get { return _maxMP; } private set { } }
+    public float MP { get { return _mp; } private set => _mp = Mathf.Clamp(value, 0f, _maxMP); }
+
+    public Mana(MonoBehaviour mb)
     {
-        get { return _mp; }
-        private set => _mp = Mathf.Clamp(value, 0f, _maxMP);
+        MP = MaxMP;
+        coroutineStarter = mb;
     }
 
-    public Mana()
+    public void Spend(float amount) => MP -= amount;
+
+    /// <summary>
+    /// Restore a specified amount of Mana to the player.
+    /// </summary>
+    public void ManaRegain(float amount)
     {
+        if (_mp < _maxMP) MP += amount;
 
     }
 
-    protected virtual void Start() => _mp = _maxMP;
-
-    public virtual void ManaSpend(float amount)
+    /// <summary>
+    /// Reduce the player's maximum MP by a specified amount.
+    /// </summary>
+    /// <param name="amount">How much maxMP you want to take away from the player.</param>
+    public void ReduceMaxMP(float amount)
     {
-        mp -= amount;
+        if (amount >= _maxMP) _maxMP = 0;
+        else _maxMP -= amount;
     }
 
-    public virtual void ManaRegain(float amount)
+    public void SetMP(float amount) => MP = amount;
+    public void SetMaxMP(float amount) => MaxMP = amount;
+
+    IEnumerator DrainCoroutine(float amount)
     {
-        if (mp < maxMP)
+        if (_isDraining) yield break;
+        _isDraining = true;
+
+        while (_activateDrain)
         {
-            mp += amount;
-            mp = Mathf.Min(mp, maxMP); // Limita el mana al máximo
+            Spend(amount);
+            yield return new WaitForSeconds(1f);
+
+            if (MP <= amount)
+            {
+                _activateDrain = false;
+                _isDraining = false;
+            }
         }
 
+        _isDraining = false;
+    }
+
+    public void Drain(bool swtch, float amountPerSec)
+    {
+        _activateDrain = swtch;
+
+        if (swtch)
+        {
+            if (_drainRoutine == null && MP > amountPerSec) _drainRoutine = coroutineStarter.StartCoroutine(DrainCoroutine(amountPerSec));
+        }
+        else
+        {
+            if (_drainRoutine != null)
+            {
+                coroutineStarter.StopCoroutine(_drainRoutine);
+                _drainRoutine = null;
+            }
+            _isDraining = false;
+        }
     }
 }
+

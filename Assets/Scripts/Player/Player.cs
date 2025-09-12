@@ -2,20 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Life
+public class Player : MonoBehaviour
 {
-    [Header("Stats")]
-    [SerializeField] private float _speed = 3f;
+    [Header(" Stats ")]
+    [SerializeField] private Life _life;
+    [SerializeField] private Mana _mana;
+    [Tooltip("Sped")] [SerializeField] private float _speed = 3f;
     [Tooltip("Este es el incremento de velocidad cuando el jugador va a correr, no la velocidad a la que va a correr.")]
     [SerializeField] private float _runBoost = 5f;
     [SerializeField] private float _jumpForce = 3f;
-    
+
+    [Header(" Internal ")]
     [SerializeField] private float _mouseSensibility = 100f;
+    [Tooltip("El punto desde el que se van a instanciar los hechizos")]
+    public Transform spellCastPoint;
+
+    public GameObject fireInHand;
 
     private InputController _controller;
     private Movement _move;
     private PlayerAnimations _playerAnim;
     private Rigidbody _rb;
+    private SpellManager _spellManager;
+
+    // Cuando sea que se necesite hacerle daño al jugador, se usa Player.Life.TakeDamage(cantidad);
+    public Life Life => _life;
+    // Lo mismo para el mana, cuando sea que se necesite gastar mana, se usa Player.Mana.SpendMP(cantidad);
+    public Mana Mana => _mana;
     public float Speed => _speed;
     public float RunBoost => _runBoost;
     public InputController InputControl => _controller;
@@ -24,17 +37,21 @@ public class Player : Life
     {
         _rb = GetComponent<Rigidbody>();
 
-        _move = new Movement(transform, _rb, _jumpForce, _speed, _runBoost, this);
-        _controller = new(_move, _playerAnim);
+        _life = new();
+        _mana = new(this);
+        _move = new(transform, _rb, _jumpForce, _speed, _runBoost, this);
+        _spellManager = new(_mana, gameObject, spellCastPoint, this);
+        _controller = new(_move, _playerAnim, _mana, _spellManager);
     }
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
         _move.OnStart();
+        _spellManager.AddSpell(SpellType.FlameSpell);
+        _spellManager.AddSpell(SpellType.FireBall);
     }
 
-    protected virtual void Update()
+    private void Update()
     {
         _move.OnUpdate();
         _controller.OnUpdate();
@@ -45,4 +62,17 @@ public class Player : Life
     {
         _controller.OnFixedUpdate();
     }
+
+    private void OnEnable()
+    {
+        FlameSpell.OnFlameSwitch += LightFireInHand;
+        FlameSpell.OnFlameSwitch += _mana.Drain;
+    }
+    private void OnDisable()
+    {
+        FlameSpell.OnFlameSwitch -= LightFireInHand;
+        FlameSpell.OnFlameSwitch -= _mana.Drain;
+    }
+
+    private void LightFireInHand(bool isActive, float x) => fireInHand.SetActive(isActive);
 }

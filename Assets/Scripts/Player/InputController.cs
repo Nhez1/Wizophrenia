@@ -7,6 +7,8 @@ public class InputController
     private float _mouseX, _mouseY;
     private Movement _movement;
     private PlayerAnimations _animations;
+    private Mana _mana;
+    private SpellManager _spells;
     //private BasicGun _shotgun;
     //private InventoryPlayer _inventory;
     //private WeaponManager _weaponManager;
@@ -14,10 +16,12 @@ public class InputController
     public float MouseX => _mouseX;
     public float MouseY => _mouseY;
 
-    public InputController(Movement m, PlayerAnimations anim/*, BasicGun sg, InventoryPlayer inv, WeaponManager wM*/)
+    public InputController(Movement m, PlayerAnimations anim, Mana ma, SpellManager sM/*, BasicGun sg, InventoryPlayer inv, WeaponManager wM*/)
     {
         _movement = m;
         _animations = anim;
+        _mana = ma;
+        _spells = sM;
         //_grabBehaviour = gB;
         //_shotgun = sg;
         //_inventory = inv;
@@ -58,8 +62,9 @@ public class InputController
         //    _shotgun.gunActive = false;
         //}
 
-        ////Disparo
-        //if (Input.GetKeyDown(KeyCode.Mouse0) && _shotgun.gunActive) _shotgun.Shoot();
+        // Flame spell toggle
+        if (Input.GetKeyDown(KeyCode.F)) _spells.CastSpell(SpellType.FlameSpell);
+        if (Input.GetKeyDown(KeyCode.Mouse1)) _spells.CastSpell(SpellType.FireBall);
     }
 
     public void OnFixedUpdate()

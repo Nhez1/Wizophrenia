@@ -1,43 +1,38 @@
 using UnityEngine;
 using System;
 
-public class Life: MonoBehaviour, IDamageable
+[System.Serializable]
+public class Life: IDamageable
 {
     //public static event Action GameOverEvent;
+    [Tooltip("Maximum HP")]
+    [SerializeField] private float _maxHP = 100;
+    [Tooltip("Health Points")]
+    [SerializeField] private float _hp;
 
-    [Header("Stats")]
-    [SerializeField] [Range(10f, 200f)] protected float _maxHP = 100;
-    [SerializeField] protected float _hp;
+    public float MaxHP { get { return _maxHP; } private set { } }
+    public float HP { get { return _hp; } private set => _hp = Mathf.Clamp(value, 0f, _maxHP); }
 
-    public float maxHP { get { return _maxHP; } }
-    public float hp
+
+    public Life()
     {
-        get { return _hp; }
-        private set => _hp = Mathf.Clamp(value, 0f, _maxHP);
+        HP = MaxHP;
     }
 
-
-    protected virtual void Start() => _hp = _maxHP;
-
-    public virtual void TakeDamage(float amount)
+    public void TakeDamage(float amount)
     {
-        hp -= amount;
-        if (hp <= 0)
-        {
-            GameOver();
-            hp = 0;
-        }
+        HP -= amount;
+        if (HP <= 0) GameOver();
     }
 
-    public virtual void TakeHeal(float amount)
+    public void TakeHeal(float amount)
     {
-        if (hp < maxHP)
-        {
-            hp += amount;
-            hp = Mathf.Min(hp, maxHP); // Limita la vida al máximo
-        }
+        if (HP < MaxHP) HP += amount;
 
     }
+
+    public void SetHP(float amount) => HP = amount;
+    public void SetMaxHP(float amount) => MaxHP = amount;
 
     protected virtual void GameOver()
     {

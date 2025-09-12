@@ -1,7 +1,7 @@
 public interface IDamageable
 {
-    float maxHP { get; }
-    float hp { get; }
+    float MaxHP { get; }
+    float HP { get; }
 
     void TakeDamage(float amount);
 
