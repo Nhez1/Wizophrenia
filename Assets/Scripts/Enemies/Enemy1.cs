@@ -12,7 +12,7 @@ public class DisappearingSpirit : MonoBehaviour
     public float lookOffset = 0.8f;
     private float wanderTimer;
     private float wanderCooldown = 2f;
-    public MouseLook camera2;
+    public MouseLook cam;
 
     public bool willMove = true;
 
@@ -39,8 +39,8 @@ public class DisappearingSpirit : MonoBehaviour
 
     void LookingToSpirit()
     {
-        Vector3 dirToSpirit = (transform.position - camera2.transform.position).normalized;
-        float dot = Vector3.Dot(camera2.transform.forward, dirToSpirit);
+        Vector3 dirToSpirit = (transform.position - cam.transform.position).normalized;
+        float dot = Vector3.Dot(cam.transform.forward, dirToSpirit);
 
         if (dot > 0.8f) //cerca de el centro
         {

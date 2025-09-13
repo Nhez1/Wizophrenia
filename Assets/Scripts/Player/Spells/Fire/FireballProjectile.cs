@@ -21,16 +21,9 @@ public class FireballProjectile : MonoBehaviour
         transform.Translate(fireballSpeed * Time.deltaTime * Vector3.forward);
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (ImpactEffect != null)
-        {
-            if (!other.CompareTag("Player")) //Que no actúe si la tag es "Player".
-            {
-                Destroy(gameObject);
-            }
-        }
-        else return;
+        Destroy(gameObject);
     }
 
     private void OnDestroy() => Destroy(Instantiate(ImpactEffect, transform.position, Quaternion.identity), impactEffectLifeTime);
