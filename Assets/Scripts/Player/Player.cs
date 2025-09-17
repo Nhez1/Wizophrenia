@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [Tooltip("Este es el incremento de velocidad cuando el jugador va a correr, no la velocidad a la que va a correr.")]
     [SerializeField] private float _runBoost = 5f;
     [SerializeField] private float _jumpForce = 3f;
+    [SerializeField] private float _reach = 3f;
 
     [Header(" Internal ")]
     [SerializeField] private float _mouseSensibility = 100f;
@@ -19,9 +20,9 @@ public class Player : MonoBehaviour
 
     public GameObject fireInHand;
 
+    private PlayerInteraction _interacter;
     private InputController _controller;
     private Movement _move;
-    private PlayerAnimations _playerAnim;
     private Rigidbody _rb;
     private SpellManager _spellManager;
 
@@ -39,9 +40,10 @@ public class Player : MonoBehaviour
 
         _life = new();
         _mana = new(this);
+        _interacter = new();
         _move = new(transform, _rb, _jumpForce, _speed, _runBoost, this);
         _spellManager = new(_mana, gameObject, spellCastPoint, this);
-        _controller = new(_move, _playerAnim, _mana, _spellManager);
+        _controller = new(_move, _spellManager, _interacter);
     }
 
     private void Start()
@@ -53,9 +55,11 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        _interacter.HoverUpdate();
         _move.OnUpdate();
         _controller.OnUpdate();
         _controller.MouseSensibility = _mouseSensibility;
+        _interacter.PlayerReach = _reach;
     }
 
     private void FixedUpdate()

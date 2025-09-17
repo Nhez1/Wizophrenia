@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandsHandler : MonoBehaviour
+public class RightHandler : MonoBehaviour
 {
     public Animator animator;
 
