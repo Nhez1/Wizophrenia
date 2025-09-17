@@ -33,7 +33,11 @@ public class PlayerInteraction
         {
             if (hit.collider.TryGetComponent(out Interactable newInteractable))
             {
-                if (newInteractable.enabled) HoverOverNew(newInteractable);
+                if (newInteractable.enabled)
+                {
+                    if (newInteractable != currentInteractable) isHovering = false;
+                    HoverOverNew(newInteractable);
+                }
                 else HoverLeave(); // Si el nuevo interactuable no está activo
             }
             else HoverLeave(); // Si no es un objeto interactuable
@@ -44,7 +48,6 @@ public class PlayerInteraction
     void HoverOverNew(Interactable newInteractable) // Esto se ejecuta cuando se mira a un nuevo objeto.
     {
         currentInteractable = newInteractable;
-        Debug.Log("Hover over " + currentInteractable.gameObject.name);
 
         if (!isHovering) //This is hardcoded right now, but it will change in the future.
         {
@@ -57,7 +60,6 @@ public class PlayerInteraction
     {
         if (currentInteractable)
         {
-            Debug.Log("Stop hover");
             currentInteractable.OnHoverUpdate();
             currentInteractable = null;
             isHovering = false;

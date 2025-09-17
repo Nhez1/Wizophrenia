@@ -66,11 +66,11 @@ public class Mana
         _isDraining = false;
     }
 
-    public void Drain(bool swtch, float amountPerSec)
+    public void Drain(float amountPerSec)
     {
-        _activateDrain = swtch;
+        _activateDrain = !_activateDrain;
 
-        if (swtch)
+        if (_activateDrain)
         {
             if (_drainRoutine == null && MP > amountPerSec) _drainRoutine = coroutineStarter.StartCoroutine(DrainCoroutine(amountPerSec));
         }

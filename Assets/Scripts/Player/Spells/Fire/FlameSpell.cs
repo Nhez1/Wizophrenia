@@ -7,7 +7,7 @@ using System;
 
 public class FlameSpell : ISpell
 {
-    public static event Action<bool, float> OnFlameSwitch;
+    public static event Action<float> OnFlameSwitch;
 
     //Titulos
     private float _manaCostPerSecond = 1f;
@@ -29,8 +29,12 @@ public class FlameSpell : ISpell
         if (_mana == null) return;
         IsActive = !IsActive;
 
-        OnFlameSwitch?.Invoke(IsActive, ManaCost);
+        OnFlameSwitch?.Invoke(ManaCost);
     }
 
-    public void Cast() => ToggleSpell();
+    public void Cast()
+    {
+        if (_mana.MP >= ManaCost) ToggleSpell();
+        else return;
+    }
 }

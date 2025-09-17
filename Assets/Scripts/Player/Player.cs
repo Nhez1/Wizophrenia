@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     [Tooltip("El punto desde el que se van a instanciar los hechizos")]
     public Transform spellCastPoint;
 
+    private bool _isFlameActive = false;
     public GameObject fireInHand;
 
     private PlayerInteraction _interacter;
@@ -78,5 +79,9 @@ public class Player : MonoBehaviour
         FlameSpell.OnFlameSwitch -= _mana.Drain;
     }
 
-    private void LightFireInHand(bool isActive, float x) => fireInHand.SetActive(isActive);
+    private void LightFireInHand(float x)
+    {
+        _isFlameActive = !_isFlameActive;
+        fireInHand.SetActive(_isFlameActive);
+    }
 }

@@ -55,7 +55,7 @@ public class FireBall : MonoBehaviour, ISpell, IDisposable
             {
                 if (canShoot && !onCD)
                 {
-                    Instantiate(fireballPrefab, firePoint.position, firePoint.rotation); //prefab del fireball, posicion en la q aparece y direccion a la que mira
+                    Instantiate(fireballPrefab, firePoint.position, Camera.main.transform.rotation); //prefab del fireball, posicion en la q aparece y direccion a la que mira
                     Mana.Spend(ManaCost);
                     runner.StartCoroutine(FireballCooldown()); //esperas 2 segundos para volver a lanzarla
                 }
@@ -72,7 +72,7 @@ public class FireBall : MonoBehaviour, ISpell, IDisposable
         onCD = false;  //Se puede lanzar
     }
 
-    public void SwitchActive(bool swtch, float x) => canShoot = swtch;
+    public void SwitchActive(float x) => canShoot = !canShoot;
 
     public void Dispose() => FlameSpell.OnFlameSwitch -= SwitchActive;
 }
