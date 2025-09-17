@@ -16,6 +16,7 @@ public class Interactable : MonoBehaviour
     public bool CanInteract { get; set; }
 
     void Start() => CanInteract = true;
+
     public void Interact()
     {
         if (CanInteract) onInteraction?.Invoke();
