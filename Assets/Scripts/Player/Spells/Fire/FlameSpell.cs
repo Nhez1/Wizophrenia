@@ -5,9 +5,9 @@ using System;
 
 //Modificado por Fecu >:]
 
-public class FlameSpell : MonoBehaviour, ISpell
+public class FlameSpell : ISpell
 {
-    public static event Action<bool> OnFlameSwitch;
+    public static event Action<float> OnFlameSwitch;
 
     //Titulos
     private float _manaCostPerSecond = 1f;
@@ -18,21 +18,10 @@ public class FlameSpell : MonoBehaviour, ISpell
     public float ManaCost => _manaCostPerSecond;
     public bool IsActive { get; private set; }
 
-    public void Init(Mana m, GameObject prefab = null)
+    public void Init(Mana m, GameObject prefab = null, Transform castPoint = null, MonoBehaviour mb = null)
     {
         _mana = m;
         IsActive = false;
-    }
-
-    IEnumerator DrainMana()
-    {
-        while (IsActive && _mana.MP > ManaCost)   //Si el hechizo esta activo y el mana es superior al costo
-        {
-            _mana.SpendMana(ManaCost); //Resta mana
-            yield return new WaitForSeconds(1f); //cada un seg
-        }
-
-        if (_mana.MP <= ManaCost) ToggleSpell(); //Si el mana es menor al costo, se desactiva el hechizo
     }
 
     private void ToggleSpell()  //Alternar hechizo
@@ -40,17 +29,12 @@ public class FlameSpell : MonoBehaviour, ISpell
         if (_mana == null) return;
         IsActive = !IsActive;
 
-        if (IsActive)
-        {
-            OnFlameSwitch?.Invoke(IsActive);
-            StartCoroutine(DrainMana()); //Si esta activo consume mana
-        }
-        else
-        {
-            OnFlameSwitch?.Invoke(IsActive);
-            StopCoroutine(DrainMana()); //Si se desactiva, se para la corutina
-        }
+        OnFlameSwitch?.Invoke(ManaCost);
     }
 
-    public void Cast() => ToggleSpell();
+    public void Cast()
+    {
+        if (_mana.MP >= ManaCost) ToggleSpell();
+        else return;
+    }
 }
