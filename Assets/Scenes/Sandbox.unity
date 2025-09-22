@@ -1373,9 +1373,7 @@ MonoBehaviour:
   _speed: 3
   _runBoost: 3
   _jumpForce: 3
-  _reach: 5
   _mouseSensibility: 250
-  spellCastPoint: {fileID: 1576139816}
   fireInHand: {fileID: 901963003}
 --- !u!54 &915428806
 Rigidbody:
@@ -1505,7 +1503,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 06c4aa8c34a5f8d4e8b190f44e2c8f0c, type: 2}
+  - {fileID: 2100000, guid: af8311491b55d59468a68589d737845b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2032,7 +2030,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookOffset: 0.8
-  playerPos: {fileID: 0}
+  camera2: {fileID: 0}
   willMove: 1
 --- !u!136 &1751824772
 CapsuleCollider:
@@ -2239,7 +2237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 956165a6a211bf14bad0dcd3ac9088a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactMessage: {fileID: 1840823717}
+  interactMessage: {fileID: 0}
+  interactMessageSwitch: 0
 --- !u!1 &1840823716
 GameObject:
   m_ObjectHideFlags: 0
@@ -2574,7 +2573,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 06c4aa8c34a5f8d4e8b190f44e2c8f0c, type: 2}
+  - {fileID: 2100000, guid: d256f586385b41f469eb4ffd46b29d5e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

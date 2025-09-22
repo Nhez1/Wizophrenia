@@ -6,19 +6,17 @@ using UnityEngine.AI;
 public class DisappearingSpirit : MonoBehaviour
 {
     private float _speed = 2;
-
-    public Transform player; // se asigna en el inspector
     [Tooltip("Offset de qué tan directamente tiene que mirar el jugador al enemigo para que desaparezca")]
     public float lookOffset = 0.8f;
     private float wanderTimer;
     private float wanderCooldown = 2f;
-    public MouseLook camera2;
+    public Camera camera2;
 
     public bool willMove = true;
 
     void Start()
     {
-
+        camera2 = Camera.main;
         StartCoroutine(DeambulateTimer());
     }
 
@@ -28,8 +26,8 @@ public class DisappearingSpirit : MonoBehaviour
         wanderTimer += Time.deltaTime;
         if (wanderTimer > wanderCooldown)
         {
-            Vector3 target = player.position + Random.insideUnitSphere * 3f;
-            target.y = player.position.y + 1f;
+            Vector3 target = camera2.transform.position + Random.insideUnitSphere * 3f;
+            target.y = camera2.transform.position.y + 1f;
             wanderTimer = 0f;
         }
 
