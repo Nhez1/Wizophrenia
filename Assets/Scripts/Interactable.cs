@@ -26,3 +26,4 @@ public class Interactable : MonoBehaviour
         OnHover?.Invoke(interactMessage);
     }
 }
+// Marker
