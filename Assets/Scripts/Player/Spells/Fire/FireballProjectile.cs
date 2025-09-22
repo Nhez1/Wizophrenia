@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fireball : MonoBehaviour
+public class FireballProjectile : MonoBehaviour
 {
     public float fireballSpeed = 5f;
     public float fireballLifeTime = 8f;
+    public float impactEffectLifeTime = 2f;
     public GameObject ImpactEffect;
 
 
     void Start()
     {
-        Destroy (gameObject, fireballLifeTime);
+        Destroy(gameObject, fireballLifeTime);
     }
 
 
@@ -20,14 +21,11 @@ public class Fireball : MonoBehaviour
         transform.Translate(fireballSpeed * Time.deltaTime * Vector3.forward);
     }
 
-    void OnTriggerEnter (Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (ImpactEffect != null)
-        {
-            Instantiate (ImpactEffect, transform.position, Quaternion.identity);
-
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
+
+    private void OnDestroy() => Destroy(Instantiate(ImpactEffect, transform.position, Quaternion.identity), impactEffectLifeTime);
 }
 //Marker

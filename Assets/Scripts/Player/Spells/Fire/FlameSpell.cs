@@ -54,3 +54,4 @@ public class FlameSpell : MonoBehaviour, ISpell
 
     public void Cast() => ToggleSpell();
 }
+//Marker
