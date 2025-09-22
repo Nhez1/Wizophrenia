@@ -38,3 +38,4 @@ public class FlameSpell : ISpell
         else return;
     }
 }
+//Marker

@@ -28,3 +28,4 @@ public class FireballProjectile : MonoBehaviour
 
     private void OnDestroy() => Destroy(Instantiate(ImpactEffect, transform.position, Quaternion.identity), impactEffectLifeTime);
 }
+//Marker

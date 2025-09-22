@@ -76,3 +76,4 @@ public class FireBall : MonoBehaviour, ISpell, IDisposable
 
     public void Dispose() => FlameSpell.OnFlameSwitch -= SwitchActive;
 }
+//Marker
