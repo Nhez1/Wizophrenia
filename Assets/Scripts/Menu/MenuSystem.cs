@@ -5,9 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class MenuSystem : MonoBehaviour
 {
+    public string newGameScene = "Sandbox";
+
+    //Referenced in editor
    public void NewGame ()
    {
-    SceneManager.LoadScene("SampleScene");
+    SceneManager.LoadScene(newGameScene);
     Time.timeScale = 1;
    }
 
