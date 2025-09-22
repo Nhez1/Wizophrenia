@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     private PlayerAnimations _playerAnim;
     private Rigidbody _rb;
     private SpellManager _spellManager;
+    private PlayerInteraction _interacter;
 
     // Cuando sea que se necesite hacerle daño al jugador, se usa Player.Life.TakeDamage(cantidad);
     public Life Life => _life;
@@ -38,14 +39,15 @@ public class Player : MonoBehaviour
         _life = new();
         _mana = new();
         _move = new(transform, _rb, _jumpForce, _speed, _runBoost, this);
-        _spellManager = new(_mana, this.gameObject);
-        _controller = new(_move, _playerAnim, _mana, _spellManager);
+        _spellManager = new(_mana, gameObject);
+        _interacter = new();
+        _controller = new(_move, _spellManager, _interacter);
     }
 
     private void Start()
     {
         _move.OnStart();
-        _spellManager.AddSpell(Spells.FlameSpell);
+        _spellManager.AddSpell(SpellType.FlameSpell);
     }
 
     private void Update()

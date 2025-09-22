@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Spells
+public enum SpellType
 {
     FlameSpell,
     FireBall
@@ -11,7 +11,7 @@ public enum Spells
 
 public class SpellManager
 {
-    private static Dictionary<Spells, ISpell> _spells = new();
+    private static Dictionary<SpellType, ISpell> _spells = new();
     private Mana _mana;
     GameObject reference;
 
@@ -21,7 +21,7 @@ public class SpellManager
         reference = g;
     }
 
-    public void CastSpell(Spells spell)
+    public void CastSpell(SpellType spell)
     {
         if (_spells.ContainsKey(spell))
             _spells[spell].Cast();
@@ -29,19 +29,19 @@ public class SpellManager
             Debug.LogWarning($"Spell {spell} not found!");
     }
 
-    public void AddSpell(Spells spell)
+    public void AddSpell(SpellType spell)
     {
         if (_spells.ContainsKey(spell)) return;
         switch (spell)
         {
-            case Spells.FlameSpell:
+            case SpellType.FlameSpell:
                 //Se agrega el hechizo al diccionario
                 _spells.Add(spell, reference.AddComponent<FlameSpell>());
                 //Se lo inicializa dándole la referencia de mana
                 _spells[spell].Init(_mana);
                 Debug.Log("Added flame!");
                 break;
-            case Spells.FireBall:
+            case SpellType.FireBall:
                 _spells.Add(spell, reference.AddComponent<FireSpell>());
                 _spells[spell].Init(_mana, PrefabManager.GetPrefab(PrefabType.BallOfFire));
                 break;

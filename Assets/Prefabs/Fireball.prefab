@@ -4890,7 +4890,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 72bf0608e8a3d8c4eb5988884d98285d, type: 2}
+  - {fileID: 2100000, guid: 38fe89af73db7b64eabd9872ffff0efe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4942,7 +4942,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2219078451791018062}
-  - component: {fileID: 2496285145568000933}
   m_Layer: 6
   m_Name: Fireball
   m_TagString: Untagged
@@ -4968,23 +4967,6 @@ Transform:
   - {fileID: 4853404895768074029}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2496285145568000933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5626478503070893812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 881848d6d59f82041810732864685a7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireballSpeed: 8
-  fireballLifeTime: 5
-  impactEffectLifeTime: 2
-  ImpactEffect: {fileID: 7480827704108384566, guid: 25de5d0534a20e34dbaabd85de376fe4,
-    type: 3}
 --- !u!1 &8436539319746629761
 GameObject:
   m_ObjectHideFlags: 0
