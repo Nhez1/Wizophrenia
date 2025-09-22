@@ -6,17 +6,26 @@ public class InputController
     private float _xAxis, _zAxis;
     private float _mouseX, _mouseY;
     private Movement _movement;
+    private PlayerAnimations _animations;
+    private Mana _mana;
     private SpellManager _spells;
-    private PlayerInteraction _interacter;
+    //private BasicGun _shotgun;
+    //private InventoryPlayer _inventory;
+    //private WeaponManager _weaponManager;
 
     public float MouseX => _mouseX;
     public float MouseY => _mouseY;
 
-    public InputController(Movement m, SpellManager spellManager, PlayerInteraction interacter)
+    public InputController(Movement m, PlayerAnimations anim, Mana ma, SpellManager sM/*, BasicGun sg, InventoryPlayer inv, WeaponManager wM*/)
     {
         _movement = m;
-        _spells = spellManager;
-        _interacter = interacter;
+        _animations = anim;
+        _mana = ma;
+        _spells = sM;
+        //_grabBehaviour = gB;
+        //_shotgun = sg;
+        //_inventory = inv;
+        //_weaponManager = wM;
     }
 
     public void OnUpdate()
@@ -32,12 +41,29 @@ public class InputController
         //Salto
         if (Input.GetKeyDown(KeyCode.Space) && _movement.IsGrounded()) _movement.Jump();
 
-        // Flame spell toggle
-        if (Input.GetKeyDown(KeyCode.F)) _spells.CastSpell(SpellType.FlameSpell);
-        if (Input.GetKeyDown(KeyCode.Mouse1)) _spells.CastSpell(SpellType.FireBall);
+        //Animaciones
+        //_animations.CheckInputs(_xAxis, _zAxis);
 
-        // Interact
-        if (Input.GetKeyDown(KeyCode.E)) _interacter.CurrentInteractable.Interact();
+        //Uso de poción de vida
+        //if (Input.GetKeyDown(KeyCode.C) && _inventory.HasPotion<HealPotion>()) _inventory.UsePotionItem<HealPotion>();
+
+        //Uso de poción de velocidad
+        //if (Input.GetKeyDown(KeyCode.X) && _inventory.HasPotion<SpeedPotion>()) _inventory.UsePotionItem<SpeedPotion>();
+
+        //Cambio de armas//
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+        //    _weaponManager.EquipWeapon(0);
+        //    _shotgun.gunActive = true;
+        //}
+        //else if (Input.GetKeyDown(KeyCode.Alpha2))
+        //{
+        //    _weaponManager.EquipWeapon(1);
+        //    _shotgun.gunActive = false;
+        //}
+
+        //Disparo
+        if (Input.GetKeyDown(KeyCode.F)) _spells.CastSpell(Spells.FlameSpell);
     }
 
     public void OnFixedUpdate()

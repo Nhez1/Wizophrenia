@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 [System.Serializable]
@@ -9,20 +8,15 @@ public class Mana
     [Tooltip("Mana Points")]
     [SerializeField] private float _mp;
 
-    private Coroutine _drainRoutine;
-    private bool _activateDrain = false;
-    private bool _isDraining = false;
-    private MonoBehaviour coroutineStarter;
     public float MaxMP { get { return _maxMP; } private set { } }
     public float MP { get { return _mp; } private set => _mp = Mathf.Clamp(value, 0f, _maxMP); }
 
-    public Mana(MonoBehaviour mb)
+    public Mana()
     {
         MP = MaxMP;
-        coroutineStarter = mb;
     }
 
-    public void Spend(float amount) => MP -= amount;
+    public void SpendMana(float amount) => MP -= amount;
 
     /// <summary>
     /// Restore a specified amount of Mana to the player.
@@ -45,44 +39,4 @@ public class Mana
 
     public void SetMP(float amount) => MP = amount;
     public void SetMaxMP(float amount) => MaxMP = amount;
-
-    IEnumerator DrainCoroutine(float amount)
-    {
-        if (_isDraining) yield break;
-        _isDraining = true;
-
-        while (_activateDrain)
-        {
-            Spend(amount);
-            yield return new WaitForSeconds(1f);
-
-            if (MP <= amount)
-            {
-                _activateDrain = false;
-                _isDraining = false;
-            }
-        }
-
-        _isDraining = false;
-    }
-
-    public void Drain(float amountPerSec)
-    {
-        _activateDrain = !_activateDrain;
-
-        if (_activateDrain)
-        {
-            if (_drainRoutine == null && MP > amountPerSec) _drainRoutine = coroutineStarter.StartCoroutine(DrainCoroutine(amountPerSec));
-        }
-        else
-        {
-            if (_drainRoutine != null)
-            {
-                coroutineStarter.StopCoroutine(_drainRoutine);
-                _drainRoutine = null;
-            }
-            _isDraining = false;
-        }
-    }
 }
-

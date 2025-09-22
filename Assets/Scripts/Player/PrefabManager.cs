@@ -18,12 +18,15 @@ public class PrefabEntry
 
 public class PrefabManager : MonoBehaviour
 {
-    [SerializeField] private List<PrefabEntry> _prefabList = new(); //Se inicializa la lista de prefabs. Hay una lista y un diccionario de las mismas cosas porque el diccionario no se puede serializar.
-    private static Dictionary<PrefabType, GameObject> _prefabs = new(); //Se inicializa el diccionario
+    [SerializeField] private List<PrefabEntry> _prefabList;
+    private static Dictionary<PrefabType, GameObject> _prefabs;
 
     private void Awake()
     {
+        _prefabList = new(); //Se inicializa la lista de prefabs. Hay una lista y un diccionario de las mismas cosas porque el diccionario no se puede serializar.
+        _prefabs = new(); //Se inicializa el diccionario
         foreach (var entry in _prefabList) _prefabs[entry.type] = entry.prefab; //Acá se copia el contenido de _prefabList a _prefabs
+
     }
 
     public static GameObject GetPrefab(PrefabType type)
