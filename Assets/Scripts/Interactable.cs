@@ -15,11 +15,13 @@ public class Interactable : MonoBehaviour
 
     void Start() => CanInteract = true;
 
-    public void Interact()
+    public void TryInteract()
     {
-        if (CanInteract) onInteraction?.Invoke();
+        if (CanInteract) Interact();
         else Debug.LogWarning("Can't interact!");
     }
+
+    public void Interact() => onInteraction?.Invoke();
 
     public void OnHoverUpdate()
     {

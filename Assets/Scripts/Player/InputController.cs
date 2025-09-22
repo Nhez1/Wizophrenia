@@ -37,7 +37,7 @@ public class InputController
         if (Input.GetKeyDown(KeyCode.Mouse1)) _spells.CastSpell(SpellType.FireBall);
 
         // Interact
-        if (Input.GetKeyDown(KeyCode.E)) _interacter.CurrentInteractable.Interact();
+        if (Input.GetKeyDown(KeyCode.E)) _interacter.CurrentInteractable.TryInteract();
     }
 
     public void OnFixedUpdate()
