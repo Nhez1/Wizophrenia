@@ -1373,7 +1373,9 @@ MonoBehaviour:
   _speed: 3
   _runBoost: 3
   _jumpForce: 3
+  _reach: 3
   _mouseSensibility: 250
+  spellCastPoint: {fileID: 0}
   fireInHand: {fileID: 901963003}
 --- !u!54 &915428806
 Rigidbody:
@@ -2030,7 +2032,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookOffset: 0.8
-  camera2: {fileID: 0}
+  playerPos: {fileID: 0}
   willMove: 1
 --- !u!136 &1751824772
 CapsuleCollider:
@@ -2238,7 +2240,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactMessage: {fileID: 0}
-  interactMessageSwitch: 0
 --- !u!1 &1840823716
 GameObject:
   m_ObjectHideFlags: 0
