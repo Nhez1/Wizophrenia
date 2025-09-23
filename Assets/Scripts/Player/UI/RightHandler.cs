@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandsHandler : MonoBehaviour
+public class RightHandler : MonoBehaviour
 {
     public Animator animator;
+    private bool _activateFlame = false;
 
-    public void FlameSwitch(bool isActive) => animator.SetBool("isActive", isActive);
+    public void FlameSwitch(float x)
+    {
+        _activateFlame = !_activateFlame;
+        animator.SetBool("isActive", _activateFlame);
+    }
 
     private void OnEnable()
     {
