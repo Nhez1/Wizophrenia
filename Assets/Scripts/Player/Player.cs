@@ -4,24 +4,28 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [Header("Stats")]
+    [Header(" Stats ")]
     [SerializeField] private Life _life;
     [SerializeField] private Mana _mana;
-    [Tooltip("Sped")]
-    [SerializeField] private float _speed = 3f;
+    [Tooltip("Sped")] [SerializeField] private float _speed = 3f;
     [Tooltip("Este es el incremento de velocidad cuando el jugador va a correr, no la velocidad a la que va a correr.")]
     [SerializeField] private float _runBoost = 5f;
     [SerializeField] private float _jumpForce = 3f;
-    
-    [SerializeField] private float _mouseSensibility = 100f;
+    [SerializeField] private float _reach = 3f;
 
+    [Header(" Internal ")]
+    [SerializeField] private float _mouseSensibility = 100f;
+    [Tooltip("El punto desde el que se van a instanciar los hechizos")]
+    public Transform spellCastPoint;
+
+    private bool _isFlameActive = false;
     public GameObject fireInHand;
 
+    private PlayerInteraction _interacter;
     private InputController _controller;
     private Movement _move;
     private Rigidbody _rb;
     private SpellManager _spellManager;
-    private PlayerInteraction _interacter;
 
     // Cuando sea que se necesite hacerle daño al jugador, se usa Player.Life.TakeDamage(cantidad);
     public Life Life => _life;
@@ -36,23 +40,27 @@ public class Player : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
 
         _life = new();
-        _mana = new();
-        _move = new(transform, _rb, _jumpForce, _speed, _runBoost, this);
-        _spellManager = new(_mana, gameObject);
+        _mana = new(this);
         _interacter = new();
+        _move = new(transform, _rb, _jumpForce, _speed, _runBoost, this);
+        _spellManager = new(_mana, gameObject, spellCastPoint, this);
         _controller = new(_move, _spellManager, _interacter);
     }
 
     private void Start()
     {
         _move.OnStart();
+        _spellManager.AddSpell(SpellType.FlameSpell);
+        _spellManager.AddSpell(SpellType.FireBall);
     }
 
     private void Update()
     {
+        _interacter.HoverUpdate();
         _move.OnUpdate();
         _controller.OnUpdate();
         _controller.MouseSensibility = _mouseSensibility;
+        _interacter.PlayerReach = _reach;
     }
 
     private void FixedUpdate()
@@ -63,11 +71,17 @@ public class Player : MonoBehaviour
     private void OnEnable()
     {
         FlameSpell.OnFlameSwitch += LightFireInHand;
+        FlameSpell.OnFlameSwitch += _mana.Drain;
     }
     private void OnDisable()
     {
         FlameSpell.OnFlameSwitch -= LightFireInHand;
+        FlameSpell.OnFlameSwitch -= _mana.Drain;
     }
 
-    private void LightFireInHand(bool isActive) => fireInHand.SetActive(isActive);
+    private void LightFireInHand(float x)
+    {
+        _isFlameActive = !_isFlameActive;
+        fireInHand.SetActive(_isFlameActive);
+    }
 }

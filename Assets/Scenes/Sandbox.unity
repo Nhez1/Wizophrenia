@@ -2032,7 +2032,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookOffset: 0.8
-  playerPos: {fileID: 0}
+  camera2: {fileID: 0}
   willMove: 1
 --- !u!136 &1751824772
 CapsuleCollider:
