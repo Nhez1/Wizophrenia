@@ -19,6 +19,9 @@ public class SpellManager
     {
         _mana = m;
         reference = g;
+
+        AddSpell(SpellType.FlameSpell);
+        AddSpell(SpellType.FireBall);
     }
 
     public void CastSpell(SpellType spell)
@@ -43,7 +46,7 @@ public class SpellManager
                 break;
             case SpellType.FireBall:
                 _spells.Add(spell, reference.AddComponent<FireSpell>());
-                _spells[spell].Init(_mana, PrefabManager.GetPrefab(PrefabType.BallOfFire));
+                _spells[spell].Init(_mana, PrefabManager.GetPrefab(Prefab.BallOfFire));
                 break;
             default:
                 Debug.LogWarning($"There is no {spell} yet.");

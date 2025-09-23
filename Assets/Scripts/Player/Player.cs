@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
 
     private InputController _controller;
     private Movement _move;
-    private PlayerAnimations _playerAnim;
     private Rigidbody _rb;
     private SpellManager _spellManager;
     private PlayerInteraction _interacter;
@@ -47,7 +46,6 @@ public class Player : MonoBehaviour
     private void Start()
     {
         _move.OnStart();
-        _spellManager.AddSpell(SpellType.FlameSpell);
     }
 
     private void Update()

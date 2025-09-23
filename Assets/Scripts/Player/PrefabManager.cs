@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public enum PrefabType
+public enum Prefab
 {
     BallOfFire,
     ImpactEffect
@@ -12,14 +12,14 @@ public enum PrefabType
 [Serializable]
 public class PrefabEntry
 {
-    public PrefabType type;
+    public Prefab type;
     public GameObject prefab;
 }
 
 public class PrefabManager : MonoBehaviour
 {
     [SerializeField] private List<PrefabEntry> _prefabList;
-    private static Dictionary<PrefabType, GameObject> _prefabs;
+    private static Dictionary<Prefab, GameObject> _prefabs;
 
     private void Awake()
     {
@@ -29,7 +29,7 @@ public class PrefabManager : MonoBehaviour
 
     }
 
-    public static GameObject GetPrefab(PrefabType type)
+    public static GameObject GetPrefab(Prefab type)
     {
         if (_prefabs.TryGetValue(type, out var prefab)) return prefab;
 
