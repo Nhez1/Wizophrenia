@@ -8,6 +8,10 @@ public class FlameEffectSO : EffectSO
 {
     public static event Action<float> OnFlameSwitch;
 
-    public override void OnCast(GameObject x) => OnFlameSwitch?.Invoke(1f);
+    public override void OnCast(GameObject light, Transform lightPivot)
+    {
+         OnFlameSwitch?.Invoke(1f);
+
+    }
     // 1f is the manaCostPerSecond
 }

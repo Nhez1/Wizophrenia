@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd96c0b29b03c047b85718ded0416ae, type: 3}
-  m_Name: Flame
+  m_Script: {fileID: 11500000, guid: 65ef8ccc4150f3d478dcb60deb0b1238, type: 3}
+  m_Name: FlameSpell
   m_EditorClassIdentifier: 
   manaCost: 1
+  isActive: 0

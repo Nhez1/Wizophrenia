@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "ScriptableObjects/Spells")]
+[CreateAssetMenu(menuName = "ScriptableObjects/Spell")]
 public class SpellSO : ScriptableObject
 {
     public string spellName;
@@ -11,11 +11,11 @@ public class SpellSO : ScriptableObject
     public GameObject prefab;
     public List<EffectSO> effects = new();
 
-    public void Cast(Mana m)
+    public void Cast(Mana m, Transform spawnPoint)
     {
         foreach(var effect in effects)
         {
-            effect.OnCast(prefab);
+            effect.OnCast(prefab, spawnPoint);
             SpendMana(m);
         }
     }

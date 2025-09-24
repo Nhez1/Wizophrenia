@@ -11,7 +11,7 @@ public enum SpellType
 
 public class SpellManager
 {
-    private SpellSO flameSpell;
+    private FlameSpellSO flameSpell;
     private SpellSO fireSpell;
     // CHANGE LATER
 
@@ -21,7 +21,7 @@ public class SpellManager
     Transform castPoint;
     MonoBehaviour coroutineStarter;
 
-    public SpellManager(Mana m, GameObject g, Transform castPosition, MonoBehaviour mb, SpellSO flame, SpellSO fire)
+    public SpellManager(Mana m, GameObject g, Transform castPosition, MonoBehaviour mb, FlameSpellSO flame, SpellSO fire)
     {
         _mana = m;
         reference = g;
@@ -38,7 +38,10 @@ public class SpellManager
     public void CastSpell(SpellType spell)
     {
         if (_spells.ContainsKey(spell))
-            _spells[spell].Cast(_mana);
+        {
+            _spells[spell].Cast(_mana, castPoint);
+            //if(spell == SpellType.FlameSpell) flameSpell.FlameCast(_mana, reference);
+        }
         else
             Debug.LogWarning($"Spell {spell} not found!");
     }
@@ -55,7 +58,7 @@ public class SpellManager
         {
             case SpellType.FlameSpell:
                 //Se agrega el hechizo al diccionario
-                _spells.Add(spell, flameSpell);
+                _spells.Add(spell, null);
                 //Se lo inicializa dándole la referencia de mana
                 //_spells[spell].Init(_mana);
                 Debug.Log("The Wizard has learned Flame!");

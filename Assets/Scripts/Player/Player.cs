@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     public Transform spellCastPoint;
 
     [Header(" Spells ")]
-    public SpellSO flameSpell;
+    public FlameSpellSO flameSpell;
     public SpellSO fireSpell;
 
     private bool _isFlameActive = false;
@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
         _mana = new(this);
         _interacter = new();
         _move = new(transform, _rb, _jumpForce, _speed, _runBoost, this);
-        _spellManager = new(_mana, gameObject, spellCastPoint, this, flameSpell, fireSpell);
+        _spellManager = new(_mana, fireInHand, spellCastPoint, this, flameSpell, fireSpell);
         _controller = new(_move, _spellManager, _interacter);
     }
 

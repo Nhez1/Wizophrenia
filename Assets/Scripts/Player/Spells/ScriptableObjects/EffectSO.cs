@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class EffectSO : ScriptableObject
 {
-    public virtual void OnCast(GameObject prefab) { }
+    public virtual void OnCast(GameObject prefab, Transform spawnPoint) { }
 }
