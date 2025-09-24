@@ -15,11 +15,11 @@ public class RightHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        FlameSpell.OnFlameSwitch += FlameSwitch;
+        FlameEffectSO.OnFlameSwitch += FlameSwitch;
     }
 
     private void OnDisable()
     {
-        FlameSpell.OnFlameSwitch -= FlameSwitch;
+        FlameEffectSO.OnFlameSwitch -= FlameSwitch;
     }
 }

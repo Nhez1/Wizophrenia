@@ -1240,8 +1240,10 @@ MonoBehaviour:
   _runBoost: 3
   _jumpForce: 3
   _reach: 3
-  _mouseSensibility: 250
+  _mouseSensibility: 350
   spellCastPoint: {fileID: 1576139816}
+  flameSpell: {fileID: 11400000, guid: b132e8a5824d23e40bb9b2d000aa05b2, type: 2}
+  fireSpell: {fileID: 0}
   fireInHand: {fileID: 901963003}
 --- !u!54 &915428806
 Rigidbody:

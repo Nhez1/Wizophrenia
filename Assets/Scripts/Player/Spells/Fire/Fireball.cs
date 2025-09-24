@@ -5,7 +5,7 @@ using System;
 
 //Modificado por Jere, por las dudas revisar
 
-public class FireBall : MonoBehaviour, ISpell, IDisposable
+public class FireBall : MonoBehaviour, ISpell
 {
     private Mana _mana;
     private MonoBehaviour runner;
@@ -31,7 +31,7 @@ public class FireBall : MonoBehaviour, ISpell, IDisposable
         fireballPrefab = prefab;
         firePoint = castPoint;
         runner = mb;
-        FlameSpell.OnFlameSwitch += SwitchActive;
+        FlameEffectSO.OnFlameSwitch += SwitchActive;
     }
 
     //void Update()
@@ -74,7 +74,5 @@ public class FireBall : MonoBehaviour, ISpell, IDisposable
     }
 
     public void SwitchActive(float x) => canShoot = !canShoot;
-
-    public void Dispose() => FlameSpell.OnFlameSwitch -= SwitchActive;
 }
 //Marker

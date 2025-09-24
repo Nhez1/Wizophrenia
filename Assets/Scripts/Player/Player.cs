@@ -18,6 +18,10 @@ public class Player : MonoBehaviour
     [Tooltip("El punto desde el que se van a instanciar los hechizos")]
     public Transform spellCastPoint;
 
+    [Header(" Spells ")]
+    public SpellSO flameSpell;
+    public SpellSO fireSpell;
+
     private bool _isFlameActive = false;
     public GameObject fireInHand;
 
@@ -25,7 +29,7 @@ public class Player : MonoBehaviour
     private InputController _controller;
     private Movement _move;
     private Rigidbody _rb;
-    private SpellManager _spellManager;
+    [SerializeField] private SpellManager _spellManager;
 
     // Cuando sea que se necesite hacerle daño al jugador, se usa Player.Life.TakeDamage(cantidad);
     public Life Life => _life;
@@ -43,7 +47,7 @@ public class Player : MonoBehaviour
         _mana = new(this);
         _interacter = new();
         _move = new(transform, _rb, _jumpForce, _speed, _runBoost, this);
-        _spellManager = new(_mana, gameObject, spellCastPoint, this);
+        _spellManager = new(_mana, gameObject, spellCastPoint, this, flameSpell, fireSpell);
         _controller = new(_move, _spellManager, _interacter);
     }
 
@@ -70,13 +74,13 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
-        FlameSpell.OnFlameSwitch += LightFireInHand;
-        FlameSpell.OnFlameSwitch += _mana.Drain;
+        FlameEffectSO.OnFlameSwitch += LightFireInHand;
+        FlameEffectSO.OnFlameSwitch += _mana.Drain;
     }
     private void OnDisable()
     {
-        FlameSpell.OnFlameSwitch -= LightFireInHand;
-        FlameSpell.OnFlameSwitch -= _mana.Drain;
+        FlameEffectSO.OnFlameSwitch -= LightFireInHand;
+        FlameEffectSO.OnFlameSwitch -= _mana.Drain;
     }
 
     private void LightFireInHand(float x)

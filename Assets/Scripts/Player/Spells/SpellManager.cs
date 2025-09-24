@@ -11,18 +11,24 @@ public enum SpellType
 
 public class SpellManager
 {
-    private static Dictionary<SpellType, ISpell> _spells = new();
+    private SpellSO flameSpell;
+    private SpellSO fireSpell;
+    // CHANGE LATER
+
+    private static Dictionary<SpellType, SpellSO> _spells = new();
     private Mana _mana;
     GameObject reference;
     Transform castPoint;
     MonoBehaviour coroutineStarter;
 
-    public SpellManager(Mana m, GameObject g, Transform castPosition, MonoBehaviour mb)
+    public SpellManager(Mana m, GameObject g, Transform castPosition, MonoBehaviour mb, SpellSO flame, SpellSO fire)
     {
         _mana = m;
         reference = g;
         castPoint = castPosition;
         coroutineStarter = mb;
+        flameSpell = flame;
+        fireSpell = fire;
     }
 
     /// <summary>
@@ -32,7 +38,7 @@ public class SpellManager
     public void CastSpell(SpellType spell)
     {
         if (_spells.ContainsKey(spell))
-            _spells[spell].Cast();
+            _spells[spell].Cast(_mana);
         else
             Debug.LogWarning($"Spell {spell} not found!");
     }
@@ -49,14 +55,14 @@ public class SpellManager
         {
             case SpellType.FlameSpell:
                 //Se agrega el hechizo al diccionario
-                _spells.Add(spell, new FlameSpell());
+                _spells.Add(spell, flameSpell);
                 //Se lo inicializa dándole la referencia de mana
-                _spells[spell].Init(_mana);
+                //_spells[spell].Init(_mana);
                 Debug.Log("The Wizard has learned Flame!");
                 break;
             case SpellType.FireBall:
-                _spells.Add(spell, reference.AddComponent<FireBall>());
-                _spells[spell].Init(_mana, PrefabManager.GetPrefab(Prefab.BallOfFire), castPoint, coroutineStarter);
+                //_spells.Add(spell, reference.AddComponent<FireBall>());
+                //_spells[spell].Init(_mana, PrefabManager.GetPrefab(Prefab.BallOfFire), castPoint, coroutineStarter);
                 Debug.Log("The Wizard has learned Fire Ball!");
                 break;
             default:
