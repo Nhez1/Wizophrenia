@@ -65,6 +65,7 @@ public class Player : MonoBehaviour
         _controller.OnUpdate();
         _controller.MouseSensibility = _mouseSensibility;
         _interacter.PlayerReach = _reach;
+        _life.OnUpdate();
     }
 
     private void FixedUpdate()
