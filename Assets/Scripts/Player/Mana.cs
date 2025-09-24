@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 [System.Serializable]
 public class Mana
 {
+    public static event Action<float> OnManaChanged;
+
     [Tooltip("Maximum MP")]
     [SerializeField] private float _maxMP = 100;
     [Tooltip("Mana Points")]
@@ -22,7 +25,11 @@ public class Mana
         coroutineStarter = mb;
     }
 
-    public void Spend(float amount) => MP -= amount;
+    public void Spend(float amount)
+    {
+        MP -= amount;
+        UpdateMana(MP);
+    }
 
     /// <summary>
     /// Restore a specified amount of Mana to the player.
@@ -30,8 +37,10 @@ public class Mana
     public void ManaRegain(float amount)
     {
         if (_mp < _maxMP) MP += amount;
-
+        UpdateMana(MP);
     }
+
+    private void UpdateMana(float mP) => OnManaChanged(mP);
 
     /// <summary>
     /// Reduce the player's maximum MP by a specified amount.

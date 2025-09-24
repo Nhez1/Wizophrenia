@@ -5,6 +5,8 @@ using System;
 [System.Serializable]
 public class Life: IDamageable
 {
+    public static event Action<float> OnHealthChanged;
+
     //public static event Action GameOverEvent;
     [Tooltip("Maximum HP")]
     [SerializeField] private float _maxHP = 100;
@@ -26,13 +28,16 @@ public class Life: IDamageable
     {
         HP -= amount;
         if (HP <= 0) GameOver();
+        else UpdateHealth();
     }
 
     public void TakeHeal(float amount)
     {
         if (HP < MaxHP) HP += amount;
-
+        UpdateHealth();
     }
+
+    public void UpdateHealth() => OnHealthChanged?.Invoke(HP);
 
     public void SetHP(float amount) => HP = amount;
     public void SetMaxHP(float amount) => MaxHP = amount;
@@ -42,8 +47,8 @@ public class Life: IDamageable
         Debug.Log("Game Over");
     }
 
-    private void OnUpdate()
+    public void OnUpdate()
     {
-        lifeVisual.GetComponent<Slider>().value = HP;
+        //lifeVisual.GetComponent<Slider>().value = HP;
     }
 }
