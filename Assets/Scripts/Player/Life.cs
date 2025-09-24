@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 [System.Serializable]
@@ -13,6 +14,8 @@ public class Life: IDamageable
     public float MaxHP { get { return _maxHP; } private set { } }
     public float HP { get { return _hp; } private set => _hp = Mathf.Clamp(value, 0f, _maxHP); }
 
+    //Variable slider life
+    public Slider lifeVisual;
 
     public Life()
     {
@@ -37,5 +40,10 @@ public class Life: IDamageable
     protected virtual void GameOver()
     {
         Debug.Log("Game Over");
+    }
+
+    private void OnUpdate()
+    {
+        lifeVisual.GetComponent<Slider>().value = HP;
     }
 }
