@@ -4,10 +4,12 @@ using UnityEditor.ShaderGraph.Drawing.Inspector.PropertyDrawers;
 using UnityEngine;
 using UnityEngine.AI;
 
+//Creado por Jere, corregido por Fecu
+
 public class DisappearingSpirit : MonoBehaviour
 {
     private float _speed = 2;
-    [Tooltip("Offset de qué tan directamente tiene que mirar el jugador al enemigo para que desaparezca")]
+    [Tooltip("Offset de quï¿½ tan directamente tiene que mirar el jugador al enemigo para que desaparezca")]
     public float lookOffset = 0.8f;
     private float wanderTimer;
     private float wanderCooldown = 2f;
@@ -32,7 +34,7 @@ public class DisappearingSpirit : MonoBehaviour
             wanderTimer = 0f;
         }
 
-        // Ver si lo estás mirando
+        // Ver si lo estï¿½s mirando
         LookingToSpirit();
     }
 

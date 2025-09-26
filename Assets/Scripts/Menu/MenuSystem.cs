@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//Por Jere
+
 public class MenuSystem : MonoBehaviour
 {
     public string newGameScene = "Sandbox";
 
-    //Referenced in editor
+
    public void NewGame ()
    {
     SceneManager.LoadScene(newGameScene);
     Time.timeScale = 1;
    }
 
+//Cuando sepa hacer guardados voy a desarrollar el continue, por ahora queda deshabilitado 
 
    /* public void Continue ()
    {
