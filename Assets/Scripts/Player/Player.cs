@@ -19,11 +19,9 @@ public class Player : MonoBehaviour
     public Transform spellCastPoint;
 
     [Header(" Spells ")]
+    public GameObject fireInHand;
     public FlameSpellSO flameSpell;
     public SpellSO fireSpell;
-
-    private bool _isFlameActive = false;
-    public GameObject fireInHand;
 
     private PlayerInteraction _interacter;
     private InputController _controller;
@@ -65,7 +63,6 @@ public class Player : MonoBehaviour
         _controller.OnUpdate();
         _controller.MouseSensibility = _mouseSensibility;
         _interacter.PlayerReach = _reach;
-        _life.OnUpdate();
     }
 
     private void FixedUpdate()
@@ -75,18 +72,8 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
-        FlameEffectSO.OnFlameSwitch += LightFireInHand;
-        FlameEffectSO.OnFlameSwitch += _mana.Drain;
     }
     private void OnDisable()
     {
-        FlameEffectSO.OnFlameSwitch -= LightFireInHand;
-        FlameEffectSO.OnFlameSwitch -= _mana.Drain;
-    }
-
-    private void LightFireInHand(float x)
-    {
-        _isFlameActive = !_isFlameActive;
-        fireInHand.SetActive(_isFlameActive);
     }
 }

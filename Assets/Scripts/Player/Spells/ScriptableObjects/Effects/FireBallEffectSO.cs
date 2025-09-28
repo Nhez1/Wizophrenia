@@ -1,11 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "ScriptableObjects/Effects/FireBall")]
 public class FireBallEffectSO : EffectSO
 {
-    public override void OnCast(GameObject prefab, Transform s)
+    bool canShoot = false;
+
+    public override void Init() => FlameSpellSO.OnFlameSwitch += SwitchActive;
+
+    public override void OnCast(CastContext castContext)
     {
-        Instantiate(prefab);
+        if (canShoot) Instantiate(castContext.SpellPrefab, castContext.SpawnPoint.position, Camera.main.transform.rotation);
+        else return;
     }
+
+    void SwitchActive() => canShoot = !canShoot;
 }

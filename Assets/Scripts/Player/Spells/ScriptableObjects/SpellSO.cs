@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,18 +6,38 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/Spell")]
 public class SpellSO : ScriptableObject
 {
+    private MonoBehaviour _coroutineRunner;
+
+    [Header("Spell Data")]
     public string spellName;
     public float cooldown;
     public float manaCost;
+
+    [Header("Preferences")]
+    public bool spendsMana = true;
+    public bool canCast = true;
+
+    [Header("Extra")]
     public GameObject prefab;
     public List<EffectSO> effects = new();
 
-    public void Cast(Mana m, Transform spawnPoint)
+    public void Init(MonoBehaviour cR)
     {
-        foreach(var effect in effects)
+
+        _coroutineRunner = cR;
+        foreach (var effect in effects) effect.Init();
+    }
+
+    public void Cast(Mana m, Transform spawnPoint = null)
+    {
+        foreach (var effect in effects)
         {
-            effect.OnCast(prefab, spawnPoint);
-            SpendMana(m);
+            if (canCast)
+            {
+                effect.OnCast(new CastContext(_coroutineRunner, m, spawnPoint, prefab, this));
+
+                if(spendsMana) SpendMana(m);
+            }
         }
     }
 

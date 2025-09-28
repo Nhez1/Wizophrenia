@@ -11,7 +11,7 @@ public class DisappearingSpirit : MonoBehaviour
     public float lookOffset = 0.8f;
     private float wanderTimer;
     private float wanderCooldown = 2f;
-    public Camera camera2;
+    private Camera camera2;
 
     public bool willMove = true;
 
@@ -43,7 +43,6 @@ public class DisappearingSpirit : MonoBehaviour
 
         if (dot > 0.8f) //cerca de el centro
         {
-            Debug.Log("Looked");
             gameObject.SetActive(false);
         }
     }

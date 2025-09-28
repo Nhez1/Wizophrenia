@@ -7,7 +7,7 @@ public class RightHandler : MonoBehaviour
     public Animator animator;
     private bool _activateFlame = false;
 
-    public void FlameSwitch(float x)
+    public void FlameSwitch()
     {
         _activateFlame = !_activateFlame;
         animator.SetBool("isActive", _activateFlame);
@@ -15,11 +15,11 @@ public class RightHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        FlameEffectSO.OnFlameSwitch += FlameSwitch;
+        FlameSpellSO.OnFlameSwitch += FlameSwitch;
     }
 
     private void OnDisable()
     {
-        FlameEffectSO.OnFlameSwitch -= FlameSwitch;
+        FlameSpellSO.OnFlameSwitch -= FlameSwitch;
     }
 }

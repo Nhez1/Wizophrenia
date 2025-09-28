@@ -52,7 +52,6 @@ public class Plant : MonoBehaviour
     private void CheckPlantState()
     {
         _animator.SetInteger("plantState", (int)currentState);
-        Debug.Log("Current plant state is " + currentState);
     }
 
     IEnumerator Photosynthesis()

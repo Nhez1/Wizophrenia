@@ -17,14 +17,14 @@ public class SpellManager
 
     private static Dictionary<SpellType, SpellSO> _spells = new();
     private Mana _mana;
-    GameObject reference;
+    GameObject lightInHand;
     Transform castPoint;
     MonoBehaviour coroutineStarter;
 
     public SpellManager(Mana m, GameObject g, Transform castPosition, MonoBehaviour mb, FlameSpellSO flame, SpellSO fire)
     {
         _mana = m;
-        reference = g;
+        lightInHand = g;
         castPoint = castPosition;
         coroutineStarter = mb;
         flameSpell = flame;
@@ -39,8 +39,8 @@ public class SpellManager
     {
         if (_spells.ContainsKey(spell))
         {
+            if (spell == SpellType.FlameSpell) flameSpell.FlameCast(_mana, lightInHand);
             _spells[spell].Cast(_mana, castPoint);
-            //if(spell == SpellType.FlameSpell) flameSpell.FlameCast(_mana, reference);
         }
         else
             Debug.LogWarning($"Spell {spell} not found!");
@@ -57,15 +57,12 @@ public class SpellManager
         switch (spell)
         {
             case SpellType.FlameSpell:
-                //Se agrega el hechizo al diccionario
-                _spells.Add(spell, null);
-                //Se lo inicializa dándole la referencia de mana
-                //_spells[spell].Init(_mana);
+                _spells.Add(spell, flameSpell);
                 Debug.Log("The Wizard has learned Flame!");
                 break;
             case SpellType.FireBall:
-                //_spells.Add(spell, reference.AddComponent<FireBall>());
-                //_spells[spell].Init(_mana, PrefabManager.GetPrefab(Prefab.BallOfFire), castPoint, coroutineStarter);
+                _spells.Add(spell, fireSpell);
+                _spells[spell].Init(coroutineStarter);
                 Debug.Log("The Wizard has learned Fire Ball!");
                 break;
             default:

@@ -9,15 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65ef8ccc4150f3d478dcb60deb0b1238, type: 3}
-  m_Name: FlameSpell
+  m_Script: {fileID: 11500000, guid: b3171df051f993a4b9311a746ba2c28b, type: 3}
+  m_Name: FireBallEffect
   m_EditorClassIdentifier: 
-  spellName: Flame Spell
-  cooldown: 0
-  manaCost: 1
-  spendsMana: 0
-  hasCooldown: 0
-  canCast: 1
-  prefab: {fileID: 0}
-  effects: []
-  isActive: 0
