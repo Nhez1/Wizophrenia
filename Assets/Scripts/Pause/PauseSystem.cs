@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//Por Jere
+
 public class PauseSystem : MonoBehaviour
 {
     public GameObject menuPause;
@@ -28,7 +30,7 @@ public class PauseSystem : MonoBehaviour
     public void Resume ()
     {
         menuPause.SetActive(false);
-        Time.timeScale = 1;
+        Time.timeScale = 1;  //Importante, el tiempo se reanuda, de no aclarar esto la pantalla quedaria congelada
         pausedGame = false;
 
         Cursor.lockState = CursorLockMode.Locked;
