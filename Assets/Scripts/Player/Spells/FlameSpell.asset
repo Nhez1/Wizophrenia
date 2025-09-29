@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: FlameSpell
   m_EditorClassIdentifier: 
   spellName: Flame Spell
-  cooldown: 0
+  cooldown: 2
   manaCost: 1
   canCast: 1
   prefab: {fileID: 0}
   effects:
   - {fileID: 11400000, guid: f342056acbce21e41bceca404b32b6ab, type: 2}
-  isActive: 0
+  cd: {fileID: 11400000, guid: 54049ece65f185647871306a8cb63982, type: 2}
+  isActive: 1
