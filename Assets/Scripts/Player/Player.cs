@@ -45,15 +45,14 @@ public class Player : MonoBehaviour
         _mana = new(this);
         _interacter = new();
         _move = new(transform, _rb, _jumpForce, _speed, _runBoost, this);
-        _spellManager = new(_mana, fireInHand, spellCastPoint, this, flameSpell, fireSpell);
+        _spellManager = new(_mana, fireInHand, spellCastPoint, this, flameSpell);
         _controller = new(_move, _spellManager, _interacter);
     }
 
     private void Start()
     {
         _move.OnStart();
-        _spellManager.AddSpell(SpellType.FlameSpell);
-        _spellManager.AddSpell(SpellType.FireBall);
+        _spellManager.AddSpell(SpellType.FireBall, fireSpell);
     }
 
     private void Update()
@@ -75,5 +74,6 @@ public class Player : MonoBehaviour
     }
     private void OnDisable()
     {
+        _spellManager.SpellDispose();
     }
 }

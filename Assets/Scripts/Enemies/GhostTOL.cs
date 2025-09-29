@@ -1,9 +1,12 @@
 using UnityEngine;
+using System;
 
 // Por Jere
 
 public class GhostTOL : MonoBehaviour  //Ghost Turn Off Lights
 {
+    public static event Action ForceFlameOff;
+
     [Header("Movement")]
     public Transform target;  //Aca colocar la mano desde el inspector (usar firepoint de ser necesario)
     public float speed = 1.5f;
@@ -20,7 +23,7 @@ public class GhostTOL : MonoBehaviour  //Ghost Turn Off Lights
         float dist = Vector3.Distance(transform.position, target.position);
         if (dist <= stopDistance)
         {
-            Debug.Log(" El fantasma alcanzo la mano, destruyendo... ");
+            ForceFlameOff?.Invoke();
             Destroy(gameObject);
         }
     }

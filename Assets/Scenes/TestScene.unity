@@ -607,7 +607,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookOffset: 0.8
-  camera2: {fileID: 0}
   willMove: 1
 --- !u!136 &244737872
 CapsuleCollider:
@@ -3399,7 +3398,6 @@ MonoBehaviour:
   _life:
     _maxHP: 100
     _hp: 100
-    lifeVisual: {fileID: 49067513}
   _mana:
     _maxMP: 100
     _mp: 100
@@ -3410,6 +3408,8 @@ MonoBehaviour:
   _mouseSensibility: 250
   spellCastPoint: {fileID: 1576139816}
   fireInHand: {fileID: 901963003}
+  flameSpell: {fileID: 11400000, guid: 7a6ad4328a012e44cb6787773a83e308, type: 2}
+  fireSpell: {fileID: 11400000, guid: b132e8a5824d23e40bb9b2d000aa05b2, type: 2}
 --- !u!54 &915428806
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5686,7 +5686,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookOffset: 0.8
-  camera2: {fileID: 0}
   willMove: 1
 --- !u!136 &1680593850
 CapsuleCollider:
@@ -5956,7 +5955,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookOffset: 0.8
-  camera2: {fileID: 0}
   willMove: 1
 --- !u!136 &1751824772
 CapsuleCollider:

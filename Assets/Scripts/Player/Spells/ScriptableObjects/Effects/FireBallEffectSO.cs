@@ -3,9 +3,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/Effects/FireBall")]
 public class FireBallEffectSO : EffectSO
 {
-    bool canShoot = false;
+    bool canShoot;
 
-    public override void Init() => FlameSpellSO.OnFlameSwitch += SwitchActive;
+    public override void Init()
+    {
+        canShoot = false;
+        FlameSpellSO.OnFlameSwitch += SwitchActive;
+    }
 
     public override void OnCast(CastContext castContext)
     {
@@ -14,4 +18,6 @@ public class FireBallEffectSO : EffectSO
     }
 
     void SwitchActive() => canShoot = !canShoot;
+
+    public override void Dispose() => FlameSpellSO.OnFlameSwitch -= SwitchActive;
 }

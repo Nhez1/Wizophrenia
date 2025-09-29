@@ -2,24 +2,64 @@ using System;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/MainSpells/FlameSpell")]
-public class FlameSpellSO : SpellSO
+public class FlameSpellSO : SpellSO, IDisposable
 {
     public static event Action OnFlameSwitch;
-    public bool isActive = false;
+    public EffectSO cd;
+    public bool isActive;
 
-    public void FlameCast(Mana m, GameObject lightInHand)
+    GameObject lightInHand;
+    Mana mana;
+
+    public void FlameInit(Mana m, GameObject liH)
     {
-        OnFlameSwitch?.Invoke();
-        ActivateLight(lightInHand);
-        SpendMana(m);
+        isActive = false;
+        GhostTOL.ForceFlameOff += ForceOff;
+        Mana.OnManaChanged += CheckMana;
+        lightInHand = liH;
+        mana = m;
     }
 
-    void SpendMana(Mana mana) => mana.Drain(manaCost);
+    public void FlameCast()
+    {
+        if (canCast)
+        {
+            OnFlameSwitch?.Invoke();
+            LightSwitch(lightInHand);
+            Cast(mana); //Re pete que tenga que depender del script padre pero bueno, ya estoy re quemado, no quiero hacer más esto
+        }
+    }
 
-    void ActivateLight(GameObject lih)
+    void ForceOff()
+    {
+        if (isActive)
+        {
+            FlameCast();
+            cd.OnCast(new CastContext(_coroutineRunner, null, null, null, this)); // Bien hardocdeado como Dios manda
+        }
+        else return;
+    }
+
+    void LightSwitch(GameObject lih)
     {
         isActive = !isActive;
         Debug.Log("Set light to " + isActive);
         lih.SetActive(isActive);
+    }
+
+    void CheckMana(float mana)
+    {
+        if (mana <= manaCost)
+        {
+            canCast = false;
+            if (isActive) FlameCast();
+        }
+        else canCast = true;
+    }
+
+    public void FlameDispose()
+    {
+        GhostTOL.ForceFlameOff -= FlameCast;
+        Mana.OnManaChanged -= CheckMana;
     }
 }

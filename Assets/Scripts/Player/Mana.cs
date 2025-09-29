@@ -40,7 +40,7 @@ public class Mana
         UpdateMana(MP);
     }
 
-    private void UpdateMana(float mP) => OnManaChanged(mP);
+    private void UpdateMana(float mP) => OnManaChanged?.Invoke(mP);
 
     /// <summary>
     /// Reduce the player's maximum MP by a specified amount.

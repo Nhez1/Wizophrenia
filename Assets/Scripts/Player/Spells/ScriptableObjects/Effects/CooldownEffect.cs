@@ -12,6 +12,7 @@ public class CooldownEffect : EffectSO
     {
         spell = castContext.Spell;
         cooldown = castContext.Spell.cooldown;
+
         castContext.CoroutineRunner.StartCoroutine(Cooldown());
     }
 

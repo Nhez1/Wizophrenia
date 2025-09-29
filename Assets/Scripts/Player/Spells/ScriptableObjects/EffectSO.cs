@@ -4,6 +4,7 @@ public abstract class EffectSO : ScriptableObject
 {
     public virtual void Init() { }
     public virtual void OnCast(CastContext castContext = null) { }
+    public virtual void Dispose() { }
 }
 
 public class CastContext

@@ -6,16 +6,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/Spell")]
 public class SpellSO : ScriptableObject
 {
-    private MonoBehaviour _coroutineRunner;
+    protected MonoBehaviour _coroutineRunner;
 
     [Header("Spell Data")]
     public string spellName;
     public float cooldown;
     public float manaCost;
-
-    [Header("Preferences")]
-    public bool spendsMana = true;
-    public bool canCast = true;
+    public bool canCast;
 
     [Header("Extra")]
     public GameObject prefab;
@@ -23,7 +20,6 @@ public class SpellSO : ScriptableObject
 
     public void Init(MonoBehaviour cR)
     {
-
         _coroutineRunner = cR;
         foreach (var effect in effects) effect.Init();
     }
@@ -32,14 +28,12 @@ public class SpellSO : ScriptableObject
     {
         foreach (var effect in effects)
         {
-            if (canCast)
-            {
-                effect.OnCast(new CastContext(_coroutineRunner, m, spawnPoint, prefab, this));
-
-                if(spendsMana) SpendMana(m);
-            }
+            if (canCast) effect.OnCast(new CastContext(_coroutineRunner, m, spawnPoint, prefab, this));
         }
     }
 
-    void SpendMana(Mana mana) => mana.Spend(manaCost);
+    public void Dispose()
+    {
+        foreach (var effect in effects) effect.Dispose();
+    }
 }
