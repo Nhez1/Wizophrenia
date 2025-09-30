@@ -20,6 +20,7 @@ public class SpellSO : ScriptableObject
 
     public void Init(MonoBehaviour cR)
     {
+        canCast = true;
         _coroutineRunner = cR;
         foreach (var effect in effects) effect.Init();
     }
