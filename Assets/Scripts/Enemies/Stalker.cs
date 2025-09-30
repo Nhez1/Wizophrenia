@@ -22,24 +22,30 @@ public class Stalker : MonoBehaviour, IDamageable
 
     void Update()
     {
-        if (player == null) return;
-
-        Vector3 direction = (player.position - transform.position).normalized;
-
-        Vector3 toEnemy = (transform.position - player.position).normalized;
-        float dot = Vector3.Dot(player.forward, toEnemy);                      //ve si el player lo esta viendo
-
-        if (dot > 0.7f)  //si el jugador lo mira se queda quieto, similar al disappearing spirit
-        {
-            return;
-        }
-
         float distance = Vector3.Distance(transform.position, player.position);  //si no lo mira, se mueve
-        if (distance > stopDistance)
+
+        if (LookedAt()) return;
+        else
         {
-            transform.position += direction * speed * Time.deltaTime;
+            if (distance > stopDistance) Move();
         }
 
         transform.LookAt(player); //siempre mira al player
+    }
+
+    void Move()
+    {
+        Vector3 direction = (player.position - transform.position).normalized;
+        transform.position += speed * Time.deltaTime * direction;
+    }
+
+    bool LookedAt()
+    {
+        Vector3 toEnemy = (transform.position - player.position).normalized;
+        float dot = Vector3.Dot(player.forward, toEnemy); //ve si el player lo esta viendo
+
+        //si el jugador lo mira se queda quieto, similar al disappearing spirit
+        if (dot > 0.7f) return true;
+        else return false;
     }
 }
