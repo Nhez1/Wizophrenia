@@ -2052,7 +2052,7 @@ MonoBehaviour:
   _speed: 3
   _runBoost: 3
   _jumpForce: 3
-  _reach: 3
+  _reach: 2
   _mouseSensibility: 250
   spellCastPoint: {fileID: 1576139816}
   fireInHand: {fileID: 901963003}
