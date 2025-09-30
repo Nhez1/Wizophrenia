@@ -15,7 +15,7 @@ MonoBehaviour:
   spellName: Flame Spell
   cooldown: 2
   manaCost: 1
-  canCast: 0
+  canCast: 1
   prefab: {fileID: 0}
   effects:
   - {fileID: 11400000, guid: f342056acbce21e41bceca404b32b6ab, type: 2}

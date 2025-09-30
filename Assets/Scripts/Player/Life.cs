@@ -3,22 +3,28 @@ using UnityEngine.UI;
 using System;
 
 [System.Serializable]
-public class Life: IDamageable
+public class Life
 {
     public static event Action<float> OnHealthChanged;
 
     //public static event Action GameOverEvent;
     [Tooltip("Maximum HP")]
-    [SerializeField] private float _maxHP = 100;
+    [SerializeField] private float _maxHP = 100f;
     [Tooltip("Health Points")]
     [SerializeField] private float _hp;
 
     public float MaxHP { get { return _maxHP; } private set { } }
     public float HP { get { return _hp; } private set => _hp = Mathf.Clamp(value, 0f, _maxHP); }
 
-    public Life()
+    private bool p;
+    private GameObject _client;
+
+    public Life(bool isPlayer, GameObject gameObject = null)
     {
         HP = MaxHP;
+        p = isPlayer;
+
+        _client = gameObject;
     }
 
     public void TakeDamage(float amount)
@@ -34,13 +40,17 @@ public class Life: IDamageable
         UpdateHealth();
     }
 
-    public void UpdateHealth() => OnHealthChanged?.Invoke(HP);
+    public void UpdateHealth()
+    {
+        if (p) OnHealthChanged?.Invoke(HP);
+    }
 
     public void SetHP(float amount) => HP = amount;
     public void SetMaxHP(float amount) => MaxHP = amount;
 
-    protected virtual void GameOver()
+    void GameOver()
     {
-        Debug.Log("Game Over");
+        if (p) Debug.Log("Game Over");
+        else UnityEngine.Object.Destroy(_client);
     }
 }

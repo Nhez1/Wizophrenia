@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stalker : MonoBehaviour
+public class Stalker : MonoBehaviour, IDamageable
 {
+    [SerializeField] private Life _life;
     Transform player; //esta en private porque va a reconocer al player a traves del tag
     public float speed = 1.5f;
     public float stopDistance = 1f;
-
-    private Renderer rend;
+    public Life Life => _life;
 
     void Start()
     {
@@ -17,7 +17,7 @@ public class Stalker : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("Player").transform;
         }
 
-        rend = GetComponent<Renderer>();
+        _life = new(false, gameObject);
     }
 
     void Update()

@@ -3,14 +3,23 @@ using System;
 
 // Por Jere
 
-public class GhostTOL : MonoBehaviour  //Ghost Turn Off Lights
+public class GhostTOL : MonoBehaviour, IDamageable
 {
+    //Ghost Turn Off Lights
     public static event Action ForceFlameOff;
 
-    [Header("Movement")]
+    [SerializeField] private Life _life;
+
     public Transform target;  //Aca colocar la mano desde el inspector (usar firepoint de ser necesario)
     public float speed = 1.5f;
     public float stopDistance = 0.3f;
+
+    public Life Life => _life;
+
+    private void Start()
+    {
+        _life = new(false, gameObject);
+    }
 
     void Update()
     {
