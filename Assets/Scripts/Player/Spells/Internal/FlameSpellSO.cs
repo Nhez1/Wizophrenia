@@ -35,7 +35,8 @@ public class FlameSpellSO : SpellSO, IDisposable
         if (isActive)
         {
             FlameCast();
-            cd.OnCast(new CastContext(_coroutineRunner, null, null, null, this)); // Bien hardocdeado como Dios manda
+            cd.OnCast(new CastContext(_coroutineRunner, null, null, null, this)); 
+            // Bien hardocdeado como Dios manda
         }
         else return;
     }
@@ -49,12 +50,8 @@ public class FlameSpellSO : SpellSO, IDisposable
 
     void CheckMana(float mana)
     {
-        if (mana <= manaCost)
-        {
-            canCast = false;
-            if (isActive) FlameCast();
-        }
-        else canCast = true;
+        if (mana <= manaCost) ForceOff();
+        else return;
     }
 
     public void FlameDispose()
