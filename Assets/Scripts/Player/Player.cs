@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
 
-        _life = new();
+        _life = new(true);
         _mana = new(this);
         _interacter = new();
         _move = new(transform, _rb, _jumpForce, _speed, _runBoost, this);

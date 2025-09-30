@@ -23,9 +23,13 @@ public class FireballProjectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.TryGetComponent<IDamageable>(out var enemy)) DealDamage(enemy.Life);
+
         Destroy(gameObject);
     }
 
     private void OnDestroy() => Destroy(Instantiate(ImpactEffect, transform.position, Quaternion.identity), impactEffectLifeTime);
+
+    void DealDamage(Life enemy) => enemy.TakeDamage(50f);
 }
 //Marker
