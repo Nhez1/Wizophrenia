@@ -9,20 +9,22 @@ public class Life
 
     //public static event Action GameOverEvent;
     [Tooltip("Maximum HP")]
-    [SerializeField] private float _maxHP = 100f;
+    [SerializeField] private float _maxHP;
     [Tooltip("Health Points")]
     [SerializeField] private float _hp;
 
-    public float MaxHP { get { return _maxHP; } private set { } }
+    public float MaxHP { get { return _maxHP; } private set { _maxHP = value; } }
     public float HP { get { return _hp; } private set => _hp = Mathf.Clamp(value, 0f, _maxHP); }
 
     private bool p;
     private GameObject _client;
 
-    public Life(bool isPlayer, GameObject gameObject = null)
+    public Life(bool isPlayer, float maxHP, GameObject gameObject = null)
     {
+        MaxHP = maxHP;
         HP = MaxHP;
         p = isPlayer;
+
 
         _client = gameObject;
     }

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4480cc654010b54e8ddb63b27eb89b4, type: 3}
+  m_Name: ExorciseSpell
+  m_EditorClassIdentifier: 
+  spellName: Exorcise
+  cooldown: 5
+  manaCost: 5
+  canCast: 0
+  prefab: {fileID: 1207290375828544991, guid: 334083c3b2e0353479585d42a68323da, type: 3}
+  effects:
+  - {fileID: 11400000, guid: e66b7cd3755796e46982147cc12a8cbb, type: 2}
+  - {fileID: 11400000, guid: cf0c5ccc424a7c042b56d08093500bfa, type: 2}
+  - {fileID: 11400000, guid: 54049ece65f185647871306a8cb63982, type: 2}

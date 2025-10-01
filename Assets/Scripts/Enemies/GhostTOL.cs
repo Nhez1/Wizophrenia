@@ -8,7 +8,9 @@ public class GhostTOL : MonoBehaviour, IDamageable
     //Ghost Turn Off Lights
     public static event Action ForceFlameOff;
 
+    public float maxHP = 50f;
     [SerializeField] private Life _life;
+    [SerializeField] private float _dmg = 10f;
 
     public Transform target;  //Aca colocar la mano desde el inspector (usar firepoint de ser necesario)
     public float speed = 1.5f;
@@ -18,7 +20,7 @@ public class GhostTOL : MonoBehaviour, IDamageable
 
     private void Start()
     {
-        _life = new(false, gameObject);
+        _life = new(false, maxHP, gameObject);
     }
 
     void Update()
@@ -34,6 +36,18 @@ public class GhostTOL : MonoBehaviour, IDamageable
         {
             ForceFlameOff?.Invoke();
             Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Player collision");
+            if(other.gameObject.TryGetComponent<IDamageable>(out var player))
+            {
+                player.Life.TakeDamage(_dmg);
+            }
         }
     }
 }

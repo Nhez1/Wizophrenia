@@ -44,14 +44,13 @@ public class FlameSpellSO : SpellSO, IDisposable
     void LightSwitch(GameObject lih)
     {
         isActive = !isActive;
-        Debug.Log("Set light to " + isActive);
         lih.SetActive(isActive);
     }
 
     void CheckMana(float mana)
     {
         if (mana <= manaCost) ForceOff();
-        else return;
+        else canCast = true;
     }
 
     public void FlameDispose()

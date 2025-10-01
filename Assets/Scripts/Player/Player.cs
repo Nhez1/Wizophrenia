@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     [Header(" Stats ")]
     [SerializeField] private Life _life;
@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     public GameObject fireInHand;
     public FlameSpellSO flameSpell;
     public SpellSO fireSpell;
+    public SpellSO exorciseSpell;
 
     private PlayerInteraction _interacter;
     private InputController _controller;
@@ -41,7 +42,7 @@ public class Player : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
 
-        _life = new(true);
+        _life = new(true, 100f);
         _mana = new(this);
         _interacter = new();
         _move = new(transform, _rb, _jumpForce, _speed, _runBoost, this);
@@ -53,6 +54,7 @@ public class Player : MonoBehaviour
     {
         _move.OnStart();
         _spellManager.AddSpell(SpellType.FireBall, fireSpell);
+        _spellManager.AddSpell(SpellType.Exorcise, exorciseSpell);
     }
 
     private void Update()
@@ -71,9 +73,11 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
+        InputController.RefillMana += _mana.ManaRegain;
     }
     private void OnDisable()
     {
+        InputController.RefillMana -= _mana.ManaRegain;
         _spellManager.SpellDispose();
     }
 }

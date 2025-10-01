@@ -5099,3 +5099,5 @@ MonoBehaviour:
   impactEffectLifeTime: 2
   ImpactEffect: {fileID: 7480827704108384566, guid: 25de5d0534a20e34dbaabd85de376fe4,
     type: 3}
+  knockBackForce: 5
+  knockBackTime: 0.2

@@ -1,7 +1,10 @@
 using UnityEngine;
+using System;
 
 public class InputController
 {
+    public static event Action<float> RefillMana;
+
     public float MouseSensibility { get; set; }
     private float _xAxis, _zAxis;
     private float _mouseX, _mouseY;
@@ -32,20 +35,24 @@ public class InputController
         //Salto
         if (Input.GetKeyDown(KeyCode.Space) && _movement.IsGrounded()) _movement.Jump();
 
-        // Flame spell toggle
+        // Cast Flame Spell
         if (Input.GetKeyDown(KeyCode.F)) _spells.CastSpell(SpellType.FlameSpell);
+
+        // Cast Fire Ball
         if (Input.GetKeyDown(KeyCode.Mouse1)) _spells.CastSpell(SpellType.FireBall);
+
+        if (Input.GetKeyDown(KeyCode.Q)) _spells.CastSpell(SpellType.Exorcise);
 
         // Interact
         if (Input.GetKeyDown(KeyCode.E)) _interacter.CurrentInteractable.TryInteract();
+
+        // Refill mana
+        if (Input.GetKeyDown(KeyCode.R)) RefillMana?.Invoke(20f);
     }
 
     public void OnFixedUpdate()
     {
-        if (_xAxis != 0 || _zAxis != 0)
-        {
-            _movement.Move(_xAxis, _zAxis);
-        }
+        if (_xAxis != 0 || _zAxis != 0) _movement.Move(_xAxis, _zAxis);
 
         //Run
         if (Input.GetKey(KeyCode.LeftShift)) _movement.Run();

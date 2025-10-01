@@ -1315,7 +1315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6039216, g: 0, b: 0, a: 0.7254902}
+  m_Color: {r: 0.6039216, g: 0, b: 0, a: 0.27450982}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2147,6 +2147,7 @@ MonoBehaviour:
   fireInHand: {fileID: 901963003}
   flameSpell: {fileID: 11400000, guid: 7a6ad4328a012e44cb6787773a83e308, type: 2}
   fireSpell: {fileID: 11400000, guid: b132e8a5824d23e40bb9b2d000aa05b2, type: 2}
+  exorciseSpell: {fileID: 11400000, guid: 312c3e5f6b86c624abb4d1ae082406da, type: 2}
 --- !u!54 &915428806
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2300,7 +2301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6039216, g: 0, b: 0, a: 0.83137256}
+  m_Color: {r: 0.6039216, g: 0, b: 0, a: 0.5529412}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2450,7 +2451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6039216, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.6039216, g: 0, b: 0, a: 0.5882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2835,7 +2836,7 @@ PrefabInstance:
     - target: {fileID: 47172731233702267, guid: 25de5d0534a20e34dbaabd85de376fe4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -16.04
       objectReference: {fileID: 0}
     - target: {fileID: 47172731233702267, guid: 25de5d0534a20e34dbaabd85de376fe4,
         type: 3}
@@ -3565,7 +3566,7 @@ Transform:
   m_GameObject: {fileID: 1576139815}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.2, y: 0.20000005, z: 1.059}
+  m_LocalPosition: {x: 0.2, y: 0.20000005, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4198,7 +4199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11e988087a306a940a5010964d4662e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactMessage: Fuck yourself
+  interactMessage: Grab message
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -4523,6 +4524,74 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1001 &1428479317857256235
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2008835757218868611, guid: 3ec9589641a4b8841863cfa0782a9f51,
+        type: 3}
+      propertyPath: m_Name
+      value: GenericFlyingEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5622626034301749497, guid: 3ec9589641a4b8841863cfa0782a9f51,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 5622626034301749497, guid: 3ec9589641a4b8841863cfa0782a9f51,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 5622626034301749497, guid: 3ec9589641a4b8841863cfa0782a9f51,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 26.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 5622626034301749497, guid: 3ec9589641a4b8841863cfa0782a9f51,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5622626034301749497, guid: 3ec9589641a4b8841863cfa0782a9f51,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5622626034301749497, guid: 3ec9589641a4b8841863cfa0782a9f51,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5622626034301749497, guid: 3ec9589641a4b8841863cfa0782a9f51,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5622626034301749497, guid: 3ec9589641a4b8841863cfa0782a9f51,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5622626034301749497, guid: 3ec9589641a4b8841863cfa0782a9f51,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5622626034301749497, guid: 3ec9589641a4b8841863cfa0782a9f51,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3ec9589641a4b8841863cfa0782a9f51, type: 3}
 --- !u!1001 &5451855364247590299
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4591,6 +4660,79 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a51185de7bb8ad45b00a38776fe282f, type: 3}
+--- !u!1001 &8072094192436320549
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1174965292422200639, guid: 334083c3b2e0353479585d42a68323da,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1174965292422200639, guid: 334083c3b2e0353479585d42a68323da,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 1174965292422200639, guid: 334083c3b2e0353479585d42a68323da,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1174965292422200639, guid: 334083c3b2e0353479585d42a68323da,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1174965292422200639, guid: 334083c3b2e0353479585d42a68323da,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1174965292422200639, guid: 334083c3b2e0353479585d42a68323da,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1174965292422200639, guid: 334083c3b2e0353479585d42a68323da,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1174965292422200639, guid: 334083c3b2e0353479585d42a68323da,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1174965292422200639, guid: 334083c3b2e0353479585d42a68323da,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1174965292422200639, guid: 334083c3b2e0353479585d42a68323da,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1174965292422200639, guid: 334083c3b2e0353479585d42a68323da,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207290375828544991, guid: 334083c3b2e0353479585d42a68323da,
+        type: 3}
+      propertyPath: m_Name
+      value: ExpansiveWave
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 334083c3b2e0353479585d42a68323da, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -4612,3 +4754,5 @@ SceneRoots:
   - {fileID: 850640585}
   - {fileID: 1471883105}
   - {fileID: 5451855364247590299}
+  - {fileID: 1428479317857256235}
+  - {fileID: 8072094192436320549}

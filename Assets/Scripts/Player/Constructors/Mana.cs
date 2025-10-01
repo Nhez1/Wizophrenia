@@ -40,8 +40,6 @@ public class Mana
         UpdateMana(MP);
     }
 
-    private void UpdateMana(float mP) => OnManaChanged?.Invoke(mP);
-
     /// <summary>
     /// Reduce the player's maximum MP by a specified amount.
     /// </summary>
@@ -54,6 +52,25 @@ public class Mana
 
     public void SetMP(float amount) => MP = amount;
     public void SetMaxMP(float amount) => MaxMP = amount;
+
+    public void Drain(float amountPerSec)
+    {
+        _activateDrain = !_activateDrain;
+
+        if (_activateDrain)
+        {
+            if (_drainRoutine == null && MP > amountPerSec) _drainRoutine = coroutineStarter.StartCoroutine(DrainCoroutine(amountPerSec));
+        }
+        else
+        {
+            if (_drainRoutine != null)
+            {
+                coroutineStarter.StopCoroutine(_drainRoutine);
+                _drainRoutine = null;
+            }
+            _isDraining = false;
+        }
+    }
 
     IEnumerator DrainCoroutine(float amount)
     {
@@ -75,23 +92,7 @@ public class Mana
         _isDraining = false;
     }
 
-    public void Drain(float amountPerSec)
-    {
-        _activateDrain = !_activateDrain;
+    private void UpdateMana(float mP) => OnManaChanged?.Invoke(mP);
 
-        if (_activateDrain)
-        {
-            if (_drainRoutine == null && MP > amountPerSec) _drainRoutine = coroutineStarter.StartCoroutine(DrainCoroutine(amountPerSec));
-        }
-        else
-        {
-            if (_drainRoutine != null)
-            {
-                coroutineStarter.StopCoroutine(_drainRoutine);
-                _drainRoutine = null;
-            }
-            _isDraining = false;
-        }
-    }
 }
 

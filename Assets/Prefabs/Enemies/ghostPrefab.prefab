@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 5483431889600350240}
   - component: {fileID: 2437610024890070150}
   - component: {fileID: 648800092779400197}
-  - component: {fileID: 3596057355279936478}
+  - component: {fileID: -2628721126820086215}
   - component: {fileID: 3516554227901068153}
   m_Layer: 0
   m_Name: ghostPrefab
-  m_TagString: Enemy
+  m_TagString: GhostEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
+  - {fileID: 2100000, guid: 88bee957cd999bc4fa87d1a13275692e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -101,24 +101,39 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.8
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3596057355279936478
-MonoBehaviour:
+--- !u!54 &-2628721126820086215
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9156424781977257812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 916aad80529696d4e86acf7a042326d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &3516554227901068153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,9 +146,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ec799526e4a0e4a9b785dc0eee7e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 50
   _life:
     _maxHP: 50
-    _hp: 100
-  target: {fileID: 909592367327432274, guid: d130f6a0c38c9314bb522132fd8b0b1f, type: 3}
+    _hp: 50
+  _dmg: 10
+  target: {fileID: 0}
   speed: 1.5
   stopDistance: 0.1

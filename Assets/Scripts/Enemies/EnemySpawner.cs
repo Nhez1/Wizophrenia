@@ -57,7 +57,7 @@ public class EnemySpawner : MonoBehaviour
         Vector3 spawnPos = playerHand.position + dir.normalized * spawnDistance;
 
         GameObject s = Instantiate(stalkerPrefab, spawnPos, Quaternion.identity);
-        Stalker stalkerScript = s.GetComponent<Stalker>();
+        _ = s.GetComponent<Stalker>();
 
 
         Debug.Log("Stalker spawneado en " + spawnPos);

@@ -6,7 +6,8 @@ using UnityEngine;
 public enum SpellType
 {
     FlameSpell,
-    FireBall
+    FireBall,
+    Exorcise
 }
 
 public class SpellManager
