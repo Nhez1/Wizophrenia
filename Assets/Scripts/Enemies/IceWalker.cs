@@ -1,0 +1,96 @@
+using UnityEngine;
+using UnityEngine.AI;
+
+public class IceWalker : MonoBehaviour
+{
+    [Header("Aura Settings")]
+    public float auraRadius = 5f;
+    public float damagePerSecond = 3f;
+
+    [Header("Movement Settings")]
+    public float moveRadius = 5f;
+    public float moveSpeed = 3f;
+
+    private bool playerInside = false;
+    private Player player;
+    private IceOverlay iceOverlay;
+
+    private NavMeshAgent agent;
+    private Vector3 startPos;
+
+    void Start()
+    {
+        // Configurar aura
+        SphereCollider aura = gameObject.AddComponent<SphereCollider>();
+        aura.isTrigger = true;
+        aura.radius = auraRadius;
+
+        // Buscar overlay
+        iceOverlay = FindObjectOfType<IceOverlay>();
+
+        // Guardar posición inicial
+        startPos = transform.position;
+
+        // Configurar NavMeshAgent
+        agent = GetComponent<NavMeshAgent>();
+        if (agent != null)
+        {
+            agent.speed = moveSpeed;
+            agent.stoppingDistance = 0.1f;
+
+            if (agent.isOnNavMesh)
+                SetNewDestination();
+        }
+        else
+        {
+            Debug.LogWarning("IceWalker requiere un NavMeshAgent en el GameObject.");
+        }
+    }
+
+    void Update()
+    {
+        // Deambulación
+        if (agent != null && agent.isOnNavMesh)
+        {
+            if (!agent.pathPending && agent.remainingDistance < 0.5f)
+                SetNewDestination();
+        }
+
+        // Aplicar daño al jugador mientras está en el aura
+        if (playerInside && player != null)
+        {
+            player.Life.TakeDamage(damagePerSecond * Time.deltaTime);
+        }
+    }
+
+    void SetNewDestination()
+    {
+        if (agent == null || !agent.isOnNavMesh) return;
+
+        Vector2 randomCircle = Random.insideUnitCircle * moveRadius;
+        Vector3 target = startPos + new Vector3(randomCircle.x, 0, randomCircle.y);
+        agent.SetDestination(target);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        Player p = other.GetComponent<Player>();
+        if (p != null)
+        {
+            playerInside = true;
+            player = p;
+            iceOverlay?.ShowIceOverlay(true);
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        Player p = other.GetComponent<Player>();
+        if (p != null && p == player)
+        {
+            playerInside = false;
+            iceOverlay?.ShowIceOverlay(false);
+            player = null;
+        }
+    }
+}
