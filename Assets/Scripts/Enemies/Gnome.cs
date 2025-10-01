@@ -1,0 +1,114 @@
+using UnityEngine;
+using UnityEngine.AI;
+using System.Collections;
+
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(Rigidbody))]
+public class Gnome : MonoBehaviour
+{
+    [Header("Stats")]
+    public float damage = 15f;
+    public float visionRange = 5f;       // Distancia para detectar al jugador
+    public float activationDelay = 3f;   // Tiempo que debe verte antes de moverse
+    public float moveSpeed = 3f;         // Velocidad de acercamiento
+
+    private Transform playerTransform;
+    private Player playerScript;
+    private NavMeshAgent agent;
+
+    private bool isChasing = false;
+    private bool hasKicked = false;
+
+    void Start()
+    {
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+        {
+            playerTransform = playerObj.transform;
+            playerScript = playerObj.GetComponent<Player>();
+        }
+
+        agent = GetComponent<NavMeshAgent>();
+        agent.speed = moveSpeed;
+        agent.isStopped = true;   // comienza quieto
+        agent.stoppingDistance = 0.5f;
+
+        // Configurar Rigidbody y Collider para triggers
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.isKinematic = true;
+
+        Collider col = GetComponent<Collider>();
+        col.isTrigger = true;
+
+        // Asegurar que el gnomo esté sobre NavMesh
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(transform.position, out hit, 2f, NavMesh.AllAreas))
+        {
+            transform.position = hit.position;
+        }
+        else
+        {
+            Debug.LogWarning("El gnomo no está sobre un NavMesh válido");
+        }
+    }
+
+    void Update()
+    {
+        if (playerTransform == null || agent == null || !agent.isOnNavMesh) return;
+
+        if (!isChasing && !hasKicked)
+        {
+            float distance = Vector3.Distance(transform.position, playerTransform.position);
+            if (distance <= visionRange)
+            {
+                StartCoroutine(ActivateAfterDelay());
+            }
+        }
+
+        if (isChasing && !hasKicked)
+        {
+            // Moverse hacia el jugador
+            agent.SetDestination(playerTransform.position);
+        }
+    }
+
+    private IEnumerator ActivateAfterDelay()
+    {
+        yield return new WaitForSeconds(activationDelay);
+
+        if (agent.isOnNavMesh)
+        {
+            isChasing = true;
+            agent.isStopped = false;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (hasKicked) return;
+
+        if (other.CompareTag("Player"))
+        {
+            // Hacer daño
+            if (playerScript != null)
+            {
+                playerScript.Life.TakeDamage(damage);
+                Debug.Log("¡Patada del gnomo! Vida del jugador: " + playerScript.Life.HP);
+            }
+
+            hasKicked = true;
+            agent.isStopped = true;
+
+            // Desaparecer en humo
+            StartCoroutine(VanishEffect());
+        }
+    }
+
+    private IEnumerator VanishEffect()
+    {
+        // Aquí podés agregar partículas de humo
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
+    }
+}

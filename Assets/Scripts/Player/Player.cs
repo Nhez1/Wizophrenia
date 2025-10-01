@@ -7,7 +7,7 @@ public class Player : MonoBehaviour, IDamageable
     [Header(" Stats ")]
     [SerializeField] private Life _life;
     [SerializeField] private Mana _mana;
-    [Tooltip("Sped")] [SerializeField] private float _speed = 3f;
+    [Tooltip("Sped")][SerializeField] private float _speed = 3f;
     [Tooltip("Este es el incremento de velocidad cuando el jugador va a correr, no la velocidad a la que va a correr.")]
     [SerializeField] private float _runBoost = 5f;
     [SerializeField] private float _jumpForce = 3f;
@@ -30,7 +30,7 @@ public class Player : MonoBehaviour, IDamageable
     private Rigidbody _rb;
     [SerializeField] private SpellManager _spellManager;
 
-    // Cuando sea que se necesite hacerle daño al jugador, se usa Player.Life.TakeDamage(cantidad);
+    // Cuando sea que se necesite hacerle daï¿½o al jugador, se usa Player.Life.TakeDamage(cantidad);
     public Life Life => _life;
     // Lo mismo para el mana, cuando sea que se necesite gastar mana, se usa Player.Mana.SpendMP(cantidad);
     public Mana Mana => _mana;
@@ -75,9 +75,16 @@ public class Player : MonoBehaviour, IDamageable
     {
         InputController.RefillMana += _mana.ManaRegain;
     }
-    private void OnDisable()
+    
+    /*private void OnDisable()
     {
         InputController.RefillMana -= _mana.ManaRegain;
         _spellManager.SpellDispose();
+    }*/
+
+    private void OnDisable()
+    {
+        if (_spellManager != null)
+            _spellManager.SpellDispose();   //SALTABA ERROR, ASI QUE LO CORREGI
     }
 }
