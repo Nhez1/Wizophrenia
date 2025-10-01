@@ -1,13 +1,17 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using System;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(Rigidbody))]
-public class Gnome : MonoBehaviour
+public class Gnome : MonoBehaviour, IDamageable, IKnockbackable
 {
+    private Life _life;
+
     [Header("Stats")]
+    public float maxHP = 50f;
     public float damage = 15f;
     public float visionRange = 5f;       // Distancia para detectar al jugador
     public float activationDelay = 3f;   // Tiempo que debe verte antes de moverse
@@ -20,8 +24,12 @@ public class Gnome : MonoBehaviour
     private bool isChasing = false;
     private bool hasKicked = false;
 
+    public Life Life => _life;
+
     void Start()
     {
+        _life = new(false, maxHP);
+
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
         {
@@ -110,5 +118,22 @@ public class Gnome : MonoBehaviour
         // Aquí podés agregar partículas de humo
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
+    }
+    public void Knockback(Vector3 source, float force, float duration)
+    {
+        StartCoroutine(KnockbackRoutine(source, force, duration));
+    }
+
+    IEnumerator KnockbackRoutine(Vector3 source, float force, float duration)
+    {
+        Vector3 knockDir = (transform.position - source).normalized;
+        float time = 0f;
+
+        while (time < duration)
+        {
+            transform.position += (force / duration) * Time.deltaTime * knockDir;
+            time += Time.deltaTime;
+            yield return null;
+        }
     }
 }

@@ -74,6 +74,7 @@ public class Player : MonoBehaviour, IDamageable
     private void OnEnable()
     {
         InputController.RefillMana += _mana.ManaRegain;
+        InputController.RefillHP += _life.TakeHeal;
     }
     
     /*private void OnDisable()

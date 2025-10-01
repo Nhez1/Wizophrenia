@@ -1,8 +1,12 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 
-public class IceWalker : MonoBehaviour
+public class IceWalker : MonoBehaviour, IDamageable, IKnockbackable
 {
+    private float maxHP;
+    public Life _life;
+
     [Header("Aura Settings")]
     public float auraRadius = 5f;
     public float damagePerSecond = 3f;
@@ -18,8 +22,12 @@ public class IceWalker : MonoBehaviour
     private NavMeshAgent agent;
     private Vector3 startPos;
 
+    public Life Life => _life;
+
     void Start()
     {
+        _life = new(false, maxHP);
+
         // Configurar aura
         SphereCollider aura = gameObject.AddComponent<SphereCollider>();
         aura.isTrigger = true;
@@ -91,6 +99,24 @@ public class IceWalker : MonoBehaviour
             playerInside = false;
             iceOverlay?.ShowIceOverlay(false);
             player = null;
+        }
+    }
+
+    public void Knockback(Vector3 source, float force, float duration)
+    {
+        StartCoroutine(KnockbackRoutine(source, force, duration));
+    }
+
+    IEnumerator KnockbackRoutine(Vector3 source, float force, float duration)
+    {
+        Vector3 knockDir = (transform.position - source).normalized;
+        float time = 0f;
+
+        while (time < duration)
+        {
+            transform.position += (force / duration) * Time.deltaTime * knockDir;
+            time += Time.deltaTime;
+            yield return null;
         }
     }
 }
