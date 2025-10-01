@@ -4,7 +4,7 @@ using System.Collections;
 
 public class IceWalker : MonoBehaviour, IDamageable, IKnockbackable
 {
-    private float maxHP;
+    public float maxHP;
     public Life _life;
 
     [Header("Aura Settings")]

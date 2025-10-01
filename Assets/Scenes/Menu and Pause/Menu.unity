@@ -1191,7 +1191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4de3637eece939d4baa6c5c55ab5b1c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newGameScene: Sandbox
+  newGameScene: TestScene2
 --- !u!95 &1497216990
 Animator:
   serializedVersion: 5

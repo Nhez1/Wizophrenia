@@ -8,7 +8,7 @@ public class GenericFlyingEnemy : MonoBehaviour, IDamageable, IKnockbackable
     [SerializeField] private Life _life;
     Transform player; //esta en private porque va a reconocer al player a traves del tag
     public float speed = 1.5f;
-    public float stopDistance = 1f;
+    public float stopDistance = 5f;
     public Life Life => _life;
 
     void Start()

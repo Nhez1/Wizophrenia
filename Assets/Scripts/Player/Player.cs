@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -64,6 +65,14 @@ public class Player : MonoBehaviour, IDamageable
         _controller.OnUpdate();
         _controller.MouseSensibility = _mouseSensibility;
         _interacter.PlayerReach = _reach;
+
+        if (Input.GetKeyDown(KeyCode.Y)) SceneManager.LoadScene("TestScene2");
+
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            fireSpell.canCast = true;
+            exorciseSpell.canCast = true; 
+        }
     }
 
     private void FixedUpdate()

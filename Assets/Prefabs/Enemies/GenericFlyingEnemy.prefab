@@ -124,5 +124,5 @@ MonoBehaviour:
   _life:
     _maxHP: 0
     _hp: 0
-  speed: 3
+  speed: 2
   stopDistance: 1

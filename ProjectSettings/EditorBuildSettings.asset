@@ -15,9 +15,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu and Pause/Credits.unity
     guid: 5dda68f885359f848b6763641417c6bc
   - enabled: 1
+    path: Assets/Scenes/TestScene2.unity
+    guid: 8d7397fafdbc3de439d5fb292a8f8688
+  - enabled: 0
     path: Assets/Scenes/TestScene.unity
     guid: 015a2171dc1137147a2d6cb987ea0b95
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Sandbox.unity
     guid: dee87f76331203f44a6360b6c3086557
   m_configObjects: {}
