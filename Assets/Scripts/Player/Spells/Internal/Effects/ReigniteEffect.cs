@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Effects/ExpansiveWave")]
-public class ExpansiveWaveEffect : EffectSO
+public class ReigniteEffect : EffectSO
 {
     public override  void OnCast(CastContext castContext)
     {

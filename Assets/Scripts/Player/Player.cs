@@ -17,7 +17,7 @@ public class Player : MonoBehaviour, IDamageable
     [Header(" Internal ")]
     [SerializeField] private float _mouseSensibility = 100f;
     [Tooltip("El punto desde el que se van a instanciar los hechizos")]
-    public Transform spellCastPoint;
+    [SerializeField] private Transform spellCastPoint;
 
     [Header(" Spells ")]
     public GameObject fireInHand;
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour, IDamageable
     private InputController _controller;
     private Movement _move;
     private Rigidbody _rb;
-    [SerializeField] private SpellManager _spellManager;
+    private SpellManager _spellManager;
 
     // Cuando sea que se necesite hacerle da�o al jugador, se usa Player.Life.TakeDamage(cantidad);
     public Life Life => _life;
@@ -83,7 +83,7 @@ public class Player : MonoBehaviour, IDamageable
     private void OnEnable()
     {
         InputController.RefillMana += _mana.ManaRegain;
-        InputController.RefillHP += _life.TakeHeal;
+        InputController.RefillHP += _life.Heal;
     }
     
     /*private void OnDisable()

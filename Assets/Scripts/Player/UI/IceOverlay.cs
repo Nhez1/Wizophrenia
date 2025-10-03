@@ -6,8 +6,5 @@ public class IceOverlay : MonoBehaviour
 {
     public GameObject iceOverlayUI;
 
-    public void ShowIceOverlay(bool active)
-    {
-        iceOverlayUI.SetActive(active);
-    }
+    public void ShowIceOverlay(bool active) => iceOverlayUI.SetActive(active);
 }

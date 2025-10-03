@@ -36,7 +36,7 @@ public class Life
         else UpdateHealth();
     }
 
-    public void TakeHeal(float amount)
+    public void Heal(float amount)
     {
         if (HP < MaxHP) HP += amount;
         UpdateHealth();
