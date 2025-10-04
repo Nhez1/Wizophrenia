@@ -10,5 +10,5 @@ public abstract class ItemSO : ScriptableObject
 
 public enum ItemType
 {
-    Plant
+    Herb
 }

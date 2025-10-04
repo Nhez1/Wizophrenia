@@ -24,7 +24,8 @@ public class Stalker : MonoBehaviour, IDamageable, IKnockbackable
 
     void Update()
     {
-        float distance = Vector3.Distance(transform.position, player.position);  //si no lo mira, se mueve
+        float distance = Vector3.Distance(transform.position, player.position);  
+        //si no lo mira, se mueve
 
         if (LookedAt()) return;
         else
@@ -44,7 +45,7 @@ public class Stalker : MonoBehaviour, IDamageable, IKnockbackable
     bool LookedAt()
     {
         Vector3 toEnemy = (transform.position - player.position).normalized;
-        float dot = Vector3.Dot(player.forward, toEnemy); //ve si el player lo esta viendo
+        float dot = Vector3.Dot(Camera.main.transform.forward, toEnemy); //ve si el player lo esta viendo
 
         //si el jugador lo mira se queda quieto, similar al disappearing spirit
         if (dot > 0.7f) return true;

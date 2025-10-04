@@ -67,7 +67,7 @@ public class IceWalker : MonoBehaviour, IDamageable, IKnockbackable
         // Aplicar daño al jugador mientras está en el aura
         if (playerInside && player != null)
         {
-            player.Life.TakeDamage(damagePerSecond * Time.deltaTime);
+            player.Life.Damage(damagePerSecond * Time.deltaTime);
         }
     }
 

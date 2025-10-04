@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/Herb")]
 public class HerbSO : ItemSO
 {
-    public List<float> healthModifiers = new();
-    public List<float> manaModifiers = new();
-    public List<float> sanityModifiers = new();
+    public float healthModifier;
+    public float manaModifier;
+    public float sanityModifier;
 }

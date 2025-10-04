@@ -29,7 +29,7 @@ public class Life
         _client = gameObject;
     }
 
-    public void TakeDamage(float amount)
+    public void Damage(float amount)
     {
         HP -= amount;
         if (HP <= 0) GameOver();

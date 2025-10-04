@@ -20,6 +20,6 @@ public class ExpansiveWave : MonoBehaviour
         }
     }
 
-    void DealDamage(Life enemy) => enemy.TakeDamage(100f);
+    void DealDamage(Life enemy) => enemy.Damage(100f);
 }
 //Marker

@@ -34,7 +34,7 @@ public class Mana
     /// <summary>
     /// Restore a specified amount of Mana to the player.
     /// </summary>
-    public void ManaRegain(float amount)
+    public void Restore(float amount)
     {
         if (_mp < _maxMP) MP += amount;
         UpdateMana(MP);

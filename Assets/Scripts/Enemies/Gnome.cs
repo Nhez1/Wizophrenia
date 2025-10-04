@@ -100,7 +100,7 @@ public class Gnome : MonoBehaviour, IDamageable, IKnockbackable
         {
             if (other.TryGetComponent<Player>(out var player))
             {
-                player.Life.TakeDamage(damage);
+                player.Life.Damage(damage);
                 Debug.Log("¡Patada del gnomo! Vida del jugador: " + player.Life.HP);
             }
             // Hacer daño

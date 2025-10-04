@@ -82,7 +82,7 @@ public class Player : MonoBehaviour, IDamageable
 
     private void OnEnable()
     {
-        InputController.RefillMana += _mana.ManaRegain;
+        InputController.RefillMana += _mana.Restore;
         InputController.RefillHP += _life.Heal;
     }
     

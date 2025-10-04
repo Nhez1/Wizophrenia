@@ -46,7 +46,7 @@ public class GhostTOL : MonoBehaviour, IDamageable
             Debug.Log("Player collision");
             if(other.gameObject.TryGetComponent<IDamageable>(out var player))
             {
-                player.Life.TakeDamage(_dmg);
+                player.Life.Damage(_dmg);
             }
         }
     }

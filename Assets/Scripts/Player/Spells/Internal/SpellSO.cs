@@ -27,9 +27,9 @@ public class SpellSO : ScriptableObject
 
     public void Cast(Mana m, Transform spawnPoint = null)
     {
-        foreach (var effect in effects)
+        if (canCast)
         {
-            if (canCast) effect.OnCast(new CastContext(_coroutineRunner, m, spawnPoint, prefab, this));
+            foreach (var effect in effects) effect.OnCast(new CastContext(_coroutineRunner, m, spawnPoint, prefab, this));
         }
     }
 

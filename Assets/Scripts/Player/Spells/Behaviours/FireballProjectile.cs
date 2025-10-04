@@ -44,6 +44,6 @@ public class FireballProjectile : MonoBehaviour
 
     private void OnDestroy() => Destroy(Instantiate(ImpactEffect, transform.position, Quaternion.identity), impactEffectLifeTime);
 
-    void DealDamage(Life enemy) => enemy.TakeDamage(50f);
+    void DealDamage(Life enemy) => enemy.Damage(50f);
 }
 //Marker

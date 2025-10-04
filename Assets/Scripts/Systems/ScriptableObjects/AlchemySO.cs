@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class AlchemySO : ScriptableObject
 {
-    private ItemSO potionResult;
+    public PotionSO potionResult;
 
     public HerbSO firstHerb;
     public HerbSO secondHerb;
 
     public void Mix()
     {
-
+        potionResult.healthModifier = firstHerb.healthModifier + secondHerb.healthModifier;
+        potionResult.manaModifier = firstHerb.manaModifier + secondHerb.manaModifier;
     }
+
+
 }
