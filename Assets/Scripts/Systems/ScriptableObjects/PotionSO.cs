@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "ScriptableObjects/Potion")]
+[CreateAssetMenu(fileName = "New Potion", menuName = "ScriptableObjects/Potion")]
 public class PotionSO : ItemSO
 {
     [Tooltip("Insert a positive number to heal and a negative number to damage.")]
