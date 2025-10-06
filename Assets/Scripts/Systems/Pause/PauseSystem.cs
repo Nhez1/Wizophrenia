@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseSystem : MonoBehaviour
 {
-    public GameObject menuPause;
+    public GameObject pauseMenu;
     public bool pausedGame = false;
   
 
@@ -29,7 +29,7 @@ public class PauseSystem : MonoBehaviour
 
     public void Resume ()
     {
-        menuPause.SetActive(false);
+        pauseMenu.SetActive(false);
         Time.timeScale = 1;  //Importante, el tiempo se reanuda, de no aclarar esto la pantalla quedaria congelada
         pausedGame = false;
 
@@ -39,7 +39,7 @@ public class PauseSystem : MonoBehaviour
 
     public void Pause ()
     {
-        menuPause.SetActive(true);
+        pauseMenu.SetActive(true);
         Time.timeScale = 0;
         pausedGame = true;
 
@@ -49,7 +49,7 @@ public class PauseSystem : MonoBehaviour
 
     public void ExitToMainMenu ()
     {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void Settings()
