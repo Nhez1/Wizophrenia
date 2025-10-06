@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory<T> where T : ItemSO
+public class InventoryController<T> where T : ItemSO
 {
     private Dictionary<string, T> _items = new();
 

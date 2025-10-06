@@ -25,7 +25,7 @@ public class Player : MonoBehaviour, IDamageable
     public SpellSO fireSpell;
     public SpellSO exorciseSpell;
 
-    private Inventory<ItemSO> _inventory;
+    private InventoryController<ItemSO> _inventory;
     private PlayerInteraction _interacter;
     private InputController _controller;
     private Movement _move;
