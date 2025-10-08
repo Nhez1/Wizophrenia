@@ -15,11 +15,11 @@ public class RightHandler : MonoBehaviour
         _view = new(animator);
 
         ShadowHand.ForceFlameOff += _view.ShadowHandOff;
-        FlameSO.OnFlameSwitchOff += FlameSwitchOff;
-        FlameSO.OnFlameSwitchOn += FlameSwitchOn;
+        FlameEffectSO.OnFlameSwitchOff += FlameSwitchOff;
+        FlameEffectSO.OnFlameSwitchOn += FlameSwitchOn;
     }
 
-    public void FlameSwitchOff()
+    void FlameSwitchOff()
     {
         _activateFlame = false;
         _view.SwitchFlameSpell(_activateFlame);
@@ -34,7 +34,7 @@ public class RightHandler : MonoBehaviour
     private void OnDisable()
     {
         ShadowHand.ForceFlameOff -= _view.ShadowHandOff;
-        FlameSO.OnFlameSwitchOff -= FlameSwitchOff;
-        FlameSO.OnFlameSwitchOn -= FlameSwitchOn;
+        FlameEffectSO.OnFlameSwitchOff -= FlameSwitchOff;
+        FlameEffectSO.OnFlameSwitchOn -= FlameSwitchOn;
     }
 }

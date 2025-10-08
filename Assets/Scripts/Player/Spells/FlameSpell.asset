@@ -16,7 +16,7 @@ MonoBehaviour:
   cooldown: 2
   manaCost: 1
   canCast: 1
+  type: 0
   prefab: {fileID: 0}
   effects:
   - {fileID: 11400000, guid: 20379f1544d810948abb1330669c4279, type: 2}
-  - {fileID: 11400000, guid: f342056acbce21e41bceca404b32b6ab, type: 2}

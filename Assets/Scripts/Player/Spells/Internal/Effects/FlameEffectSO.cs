@@ -4,22 +4,21 @@ using UnityEngine;
 using System;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/MainSpells/Flame")]
-public class FlameSO : EffectSO
+public class FlameEffectSO : EffectSO
 {
     public static event Action OnFlameSwitchOn;
     public static event Action OnFlameSwitchOff;
 
-    public CooldownEffect cooldown;
-    private GameObject lightInHand;
-    private SpellSO root;
     public float manaCost;
-    bool flameSwitch = true;
+    public CooldownEffect cooldown;
+    private CastContext _castContext;
+    bool flameSwitch;
 
     public override void Init(CastContext castContext)
     {
+        flameSwitch = false;
         cooldown.Init(castContext);
-        root = castContext.Spell;
-        lightInHand = castContext.SpellPrefab;
+        _castContext = castContext;
         ShadowHand.ForceFlameOff += ForceOff;
         Mana.OnManaChanged += CheckMana;
     }
@@ -35,23 +34,36 @@ public class FlameSO : EffectSO
         Mana.OnManaChanged -= CheckMana;
     }
 
+    void DrainMana()
+    {
+        _castContext.Mana.Drain(manaCost);
+    }
+
     void SwitchFlame()
     {
         flameSwitch = !flameSwitch;
+        Debug.Log("Set flame " + flameSwitch);
+
         if (flameSwitch) FlameOn();
         else FlameOff();
     }
 
-    public void FlameOn()
+    void FlameOn()
     {
+        Debug.Log("Flame on");
         OnFlameSwitchOn?.Invoke();
-        lightInHand.SetActive(true);
-    }
+        _castContext.SpellPrefab.SetActive(true);
+        // Set Light in Hand active
 
-    public void FlameOff()
+        DrainMana();
+    }
+    void FlameOff()
     {
         OnFlameSwitchOff?.Invoke();
-        lightInHand.SetActive(false);
+        _castContext.SpellPrefab.SetActive(false);
+        // Set Light in Hand off
+
+        DrainMana();
     }
 
     void ForceOff()
@@ -65,8 +77,8 @@ public class FlameSO : EffectSO
         if (mana <= manaCost)
         {
             FlameOff();
-            root.canCast = false;
+            _castContext.Spell.canCast = false;
         }
-        else root.canCast = true;
+        else _castContext.Spell.canCast = true;
     }
 }

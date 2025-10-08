@@ -28,11 +28,6 @@ public class SpellManager
         _mana = m;
         castPoint = castPosition;
         coroutineStarter = mb;
-
-        // Este hechizo se inicializa aparte, va a ser la única excepción a la lista.
-        //flameSpell = flame;
-        //flameSpell.Init(mb);
-        //flameSpell.FlameInit(m, lightInHand);
     }
 
     /// <summary>
@@ -50,7 +45,6 @@ public class SpellManager
     /// <summary>
     /// Unlock a spell for the Wizard.
     /// </summary>
-    /// <param name="spellType">The SpellType you want to add. Keep in mind that for your spell to be in SpellTypes, you need to add it manually to the SpellManager script.</param>
     /// <param name="spell">This is the SpellSO containing the spell you want to give the Wizard. Keep in mind that every spell needs to be a SpellSO.</param>
     public void AddSpell(SpellSO spell)
     {

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -2628721126820086215}
   - component: {fileID: 6061202708790218904}
   m_Layer: 0
-  m_Name: ghostPrefab
+  m_Name: ShadowHand
   m_TagString: GhostEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
