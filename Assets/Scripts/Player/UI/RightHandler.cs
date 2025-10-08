@@ -5,21 +5,36 @@ using UnityEngine;
 public class RightHandler : MonoBehaviour
 {
     public Animator animator;
+    private HandsView _view;
     private bool _activateFlame = false;
 
-    public void FlameSwitch()
+    private void Start()
     {
-        _activateFlame = !_activateFlame;
-        animator.SetBool("isActive", _activateFlame);
+        if (animator == null) animator = GetComponent<Animator>();
+
+        _view = new(animator);
+
+        ShadowHand.ForceFlameOff += _view.ShadowHandOff;
+        FlameSO.OnFlameSwitchOff += FlameSwitchOff;
+        FlameSO.OnFlameSwitchOn += FlameSwitchOn;
     }
 
-    private void OnEnable()
+    public void FlameSwitchOff()
     {
-        FlameSpellSO.OnFlameSwitch += FlameSwitch;
+        _activateFlame = false;
+        _view.SwitchFlameSpell(_activateFlame);
+    }
+
+    void FlameSwitchOn()
+    {
+        _activateFlame = true;
+        _view.SwitchFlameSpell(_activateFlame);
     }
 
     private void OnDisable()
     {
-        FlameSpellSO.OnFlameSwitch -= FlameSwitch;
+        ShadowHand.ForceFlameOff -= _view.ShadowHandOff;
+        FlameSO.OnFlameSwitchOff -= FlameSwitchOff;
+        FlameSO.OnFlameSwitchOn -= FlameSwitchOn;
     }
 }

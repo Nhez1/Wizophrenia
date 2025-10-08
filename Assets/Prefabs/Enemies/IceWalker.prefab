@@ -12,10 +12,8 @@ GameObject:
   - component: {fileID: 4161429237757948821}
   - component: {fileID: 8658392396677745802}
   - component: {fileID: 127743358192164942}
-  - component: {fileID: 6974353417506296541}
-  - component: {fileID: 721548129930013386}
-  - component: {fileID: 896447362789647233}
   - component: {fileID: 6831016189067462216}
+  - component: {fileID: 721548129930013386}
   m_Layer: 0
   m_Name: IceWalker
   m_TagString: Enemy
@@ -111,60 +109,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &6974353417506296541
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5513002578144324708}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 9.50463
-  m_Center: {x: 0, y: 0, z: -0.19340038}
---- !u!114 &721548129930013386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5513002578144324708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fe526b33242c6c43873badef747711a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 150
-  _life:
-    _maxHP: 0
-    _hp: 0
-  auraRadius: 10
-  damagePerSecond: 3
-  moveRadius: 5
-  moveSpeed: 3
---- !u!114 &896447362789647233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5513002578144324708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 032e9542f06cf69428d1e37d2896fb14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iceOverlayUI: {fileID: 0}
 --- !u!195 &6831016189067462216
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -187,3 +131,23 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &721548129930013386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5513002578144324708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fe526b33242c6c43873badef747711a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 150
+  _life:
+    _maxHP: 0
+    _hp: 0
+  auraRadius: 10
+  damagePerSecond: 3
+  moveRadius: 5
+  moveSpeed: 3

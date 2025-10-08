@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class InventoryController<T> where T : ItemSO
 {
-    private Dictionary<string, T> _items = new();
+    private List<T> _items = new();
 
-    public void AddItem(T item, string itemName) => _items.Add(itemName, item);
+    public void AddItem(T item) => _items.Add(item);
 
-    public void RemoveItem(string item)
+    public void RemoveItem(T item)
     {
-        if (_items.ContainsKey(item)) _items.Remove(item);
+        if (_items.Contains(item)) _items.Remove(item);
     }
 
-    public Dictionary<string, T> GetAllItems()
+    public List<T> GetAllItems()
     {
-        return new Dictionary<string, T>(_items); // Retorna una copia para evitar manipulación directa
+        return new List<T>(_items); // Retorna una copia para evitar manipulación directa
     }
 }

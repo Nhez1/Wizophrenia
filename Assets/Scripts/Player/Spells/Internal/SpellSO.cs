@@ -6,8 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/Spell")]
 public class SpellSO : ScriptableObject
 {
-    protected MonoBehaviour _coroutineRunner;
-
     [Header("Spell Data")]
     public string spellName;
     public float cooldown;
@@ -18,18 +16,17 @@ public class SpellSO : ScriptableObject
     public GameObject prefab;
     public List<EffectSO> effects = new();
 
-    public void Init(MonoBehaviour cR)
+    public void Init(MonoBehaviour cR, Mana m, Transform handPos, GameObject gameObject = null)
     {
         canCast = true;
-        _coroutineRunner = cR;
-        foreach (var effect in effects) effect.Init();
+        foreach (var effect in effects) effect.Init(new CastContext(cR, m, handPos, gameObject, this));
     }
 
-    public void Cast(Mana m, Transform spawnPoint = null)
+    public void Cast()
     {
         if (canCast)
         {
-            foreach (var effect in effects) effect.OnCast(new CastContext(_coroutineRunner, m, spawnPoint, prefab, this));
+            foreach (var effect in effects) effect.OnCast();
         }
     }
 

@@ -8,13 +8,16 @@ public class CooldownEffect : EffectSO
     SpellSO spell;
     float cooldown;
 
-    public override void OnCast(CastContext castContext = null)
+    MonoBehaviour coroutineRunner;
+
+    public override void Init(CastContext castContext = null)
     {
         spell = castContext.Spell;
         cooldown = castContext.Spell.cooldown;
-
-        castContext.CoroutineRunner.StartCoroutine(Cooldown());
+        coroutineRunner = castContext.CoroutineRunner;
     }
+
+    public override void OnCast() => coroutineRunner.StartCoroutine(Cooldown());
 
     IEnumerator Cooldown()
     {

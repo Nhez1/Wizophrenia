@@ -38,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
         Vector3 spawnPos = playerHand.position + dir.normalized * spawnDistance;
 
         GameObject g = Instantiate(ghostPrefab, spawnPos, Quaternion.identity);
-        GhostTOL ghostScript = g.GetComponent<GhostTOL>();
+        ShadowHand ghostScript = g.GetComponent<ShadowHand>();
 
         if (ghostScript != null)
         {

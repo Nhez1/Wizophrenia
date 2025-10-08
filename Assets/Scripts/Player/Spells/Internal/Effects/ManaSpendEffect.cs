@@ -10,10 +10,14 @@ public class ManaSpendEffect : EffectSO
     Mana m;
     float c;
 
-    public override void OnCast(CastContext castContext)
+    public override void Init(CastContext castContext)
     {
         c = castContext.Spell.manaCost;
         m = castContext.Mana;
+    }
+
+    public override void OnCast()
+    {
         if (isDrain) m.Drain(c);
         else m.Spend(c);
         // Soy re capo

@@ -14,20 +14,28 @@ public class SpellManager
 {
     FlameSpellSO flameSpell;
     private static Dictionary<SpellType, SpellSO> _spells = new();
+    private GameObject gameObject;
     private Mana _mana;
     Transform castPoint;
     MonoBehaviour coroutineStarter;
+    private Dictionary<SpellType, GameObject> _spellPrefabs = new();
 
-    public SpellManager(Mana m, GameObject lightInHand, Transform castPosition, MonoBehaviour mb, FlameSpellSO flame)
+    public void RegisterSpellPrefab(SpellType type, GameObject prefab)
+    {
+        _spellPrefabs[type] = prefab;
+    }
+
+    public SpellManager(Mana m, GameObject lightInHand, Transform castPosition, MonoBehaviour mb)
     {
         _mana = m;
         castPoint = castPosition;
         coroutineStarter = mb;
+        gameObject = lightInHand;
 
         // Este hechizo se inicializa aparte, va a ser la única excepción a la lista.
-        flameSpell = flame;
-        flameSpell.Init(mb);
-        flameSpell.FlameInit(m, lightInHand);
+        //flameSpell = flame;
+        //flameSpell.Init(mb);
+        //flameSpell.FlameInit(m, lightInHand);
     }
 
     /// <summary>
@@ -36,14 +44,10 @@ public class SpellManager
     /// <param name="spell">The SpellType you want to cast. Keep in mind you have to unlock the spell for the Wizard using AddSpell before being able to use this.</param>
     public void CastSpell(SpellType spell)
     {
-        if (spell == SpellType.FlameSpell) flameSpell.FlameCast();
+        if (_spells.ContainsKey(spell))
+            _spells[spell].Cast();
         else
-        {
-            if (_spells.ContainsKey(spell))
-                _spells[spell].Cast(_mana, castPoint);
-            else
-                Debug.LogWarning($"Spell {spell} not found!");
-        }
+            Debug.LogWarning($"Spell {spell} not found!");
     }
 
     /// <summary>
@@ -56,14 +60,13 @@ public class SpellManager
         if (_spells.ContainsKey(spellType)) return;
 
         _spells.Add(spellType, spell);
-        _spells[spellType].Init(coroutineStarter);
+        var prefab = _spellPrefabs.TryGetValue(spellType, out var p) ? p : null;
+        _spells[spellType].Init(coroutineStarter, _mana, castPoint, prefab);
         Debug.Log("The Wizard has learned " + spellType.ToString());
     }
 
     public void SpellDispose()
     {
-        flameSpell.FlameDispose();
-        
-        foreach(var spell in _spells.Values) spell.Dispose();
+        foreach (var spell in _spells.Values) spell.Dispose();
     }
 }

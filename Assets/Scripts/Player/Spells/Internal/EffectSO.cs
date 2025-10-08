@@ -2,8 +2,8 @@ using UnityEngine;
 
 public abstract class EffectSO : ScriptableObject
 {
-    public virtual void Init() { }
-    public virtual void OnCast(CastContext castContext = null) { }
+    public virtual void Init(CastContext castContext = null) { }
+    public virtual void OnCast() { }
     public virtual void Dispose() { }
 }
 

@@ -3,7 +3,7 @@ using System;
 
 // Por Jere
 
-public class GhostTOL : MonoBehaviour, IDamageable
+public class ShadowHand : MonoBehaviour, IDamageable
 {
     //Ghost Turn Off Lights
     public static event Action ForceFlameOff;

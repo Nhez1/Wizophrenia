@@ -3,21 +3,31 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/Effects/FireBall")]
 public class FireBallEffectSO : EffectSO
 {
+    GameObject prefab;
+    Transform spawnPoint;
     bool canShoot;
 
-    public override void Init()
+    public override void Init(CastContext castContext)
     {
         canShoot = false;
-        FlameSpellSO.OnFlameSwitch += SwitchActive;
+        spawnPoint = castContext.SpawnPoint;
+        prefab = castContext.SpellPrefab;
+        FlameSO.OnFlameSwitchOff += SwitchOff;
+        FlameSO.OnFlameSwitchOn += SwitchOn;
     }
 
-    public override void OnCast(CastContext castContext)
+    public override void OnCast()
     {
-        if (canShoot) Instantiate(castContext.SpellPrefab, castContext.SpawnPoint.position, Camera.main.transform.rotation);
+        if (canShoot) Instantiate(prefab, spawnPoint.position, Camera.main.transform.rotation);
         else return;
     }
 
-    void SwitchActive() => canShoot = !canShoot;
+    void SwitchOff() => canShoot = false;
+    void SwitchOn() => canShoot = true;
 
-    public override void Dispose() => FlameSpellSO.OnFlameSwitch -= SwitchActive;
+    public override void Dispose()
+    {
+        FlameSO.OnFlameSwitchOff -= SwitchOff;
+        FlameSO.OnFlameSwitchOn -= SwitchOn;
+    }
 }

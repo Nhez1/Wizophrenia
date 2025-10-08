@@ -570,7 +570,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 091dfe824095856419a44bd6d853d8de, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: a04986bf9c8d5ca429ec7423afd2d8b9, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &66689099
 GameObject:
@@ -1025,7 +1025,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &402552411
 Transform:
   m_ObjectHideFlags: 0
@@ -1458,7 +1458,6 @@ GameObject:
   - component: {fileID: 495509468}
   - component: {fileID: 495509467}
   - component: {fileID: 495509466}
-  - component: {fileID: 495509465}
   m_Layer: 0
   m_Name: Grabbable Cube
   m_TagString: Untagged
@@ -1466,34 +1465,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &495509465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 495509464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11e988087a306a940a5010964d4662e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactMessage: Grab
-  onInteraction:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 495509464}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!65 &495509466
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2535,7 +2506,7 @@ MonoBehaviour:
   _mouseSensibility: 250
   spellCastPoint: {fileID: 1576139816}
   fireInHand: {fileID: 901963003}
-  flameSpell: {fileID: 11400000, guid: 7a6ad4328a012e44cb6787773a83e308, type: 2}
+  flameSpell: {fileID: 11400000, guid: 9b2fad25443b9784da4d516fdbc55b5e, type: 2}
   fireSpell: {fileID: 11400000, guid: b132e8a5824d23e40bb9b2d000aa05b2, type: 2}
   exorciseSpell: {fileID: 11400000, guid: 312c3e5f6b86c624abb4d1ae082406da, type: 2}
 --- !u!54 &915428806
@@ -3129,7 +3100,7 @@ GameObject:
   - component: {fileID: 1141215827}
   - component: {fileID: 1141215826}
   m_Layer: 5
-  m_Name: Snow
+  m_Name: Ice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3206,7 +3177,6 @@ GameObject:
   - component: {fileID: 1190581445}
   - component: {fileID: 1190581443}
   - component: {fileID: 1190581444}
-  - component: {fileID: 1190581449}
   m_Layer: 0
   m_Name: Plant
   m_TagString: Untagged
@@ -3247,9 +3217,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 930c8007c594eee46a095906f353e08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactMessage: 
+  onInteraction:
+    m_PersistentCalls:
+      m_Calls: []
   currentState: 0
   growTime: 5
-  _canHarvest: 0
+  player: {fileID: 0}
+  yield: {fileID: 0}
 --- !u!136 &1190581445
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3338,34 +3313,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1190581449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1190581442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11e988087a306a940a5010964d4662e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactMessage: Harvest
-  onInteraction:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1190581442}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1207750346
 GameObject:
   m_ObjectHideFlags: 0
@@ -4142,6 +4089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f2e2448a8e7094b97cb0dffd288767, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   slots:
   - {fileID: 2055304005}
   - {fileID: 1529385068}
@@ -4237,7 +4185,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1342388718}
-  - component: {fileID: 1342388719}
   m_Layer: 5
   m_Name: Blood
   m_TagString: Untagged
@@ -4267,21 +4214,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1342388719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1342388717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 544a55a1705939a498db02ac2a181ef1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blood30: {fileID: 0}
-  blood50: {fileID: 0}
-  blood80: {fileID: 0}
 --- !u!1001 &1398372110
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5448,6 +5380,7 @@ GameObject:
   - component: {fileID: 1836368887}
   - component: {fileID: 1836368886}
   - component: {fileID: 1836368890}
+  - component: {fileID: 1836368891}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -5562,6 +5495,22 @@ MonoBehaviour:
   healthBar: {fileID: 49067513}
   manaBar: {fileID: 2042242041}
   interactMessage: {fileID: 1840823717}
+--- !u!114 &1836368891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836368885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544a55a1705939a498db02ac2a181ef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iceOverlay: {fileID: 1141215824}
+  blood30: {fileID: 1291378485}
+  blood50: {fileID: 985249246}
+  blood80: {fileID: 1283450358}
 --- !u!1 &1840823716
 GameObject:
   m_ObjectHideFlags: 0
@@ -5819,7 +5768,6 @@ GameObject:
   - component: {fileID: 1901423205}
   - component: {fileID: 1901423204}
   - component: {fileID: 1901423203}
-  - component: {fileID: 1901423202}
   m_Layer: 0
   m_Name: Grabbable Cube (1)
   m_TagString: Untagged
@@ -5827,34 +5775,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1901423202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1901423201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11e988087a306a940a5010964d4662e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactMessage: Fuck yourself
-  onInteraction:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1901423201}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!65 &1901423203
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6836,7 +6756,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: IceWalker
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 896447362789647233, guid: 833e4f70bc99f7247ba8d1d75191a2d5, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

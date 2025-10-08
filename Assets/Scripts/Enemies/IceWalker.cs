@@ -1,9 +1,13 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using System;
+using Random = UnityEngine.Random;
 
 public class IceWalker : MonoBehaviour, IDamageable, IKnockbackable
 {
+    public static event Action<bool> OnIceArea;
+
     public float maxHP;
     public Life _life;
 
@@ -17,7 +21,6 @@ public class IceWalker : MonoBehaviour, IDamageable, IKnockbackable
 
     private bool playerInside = false;
     private Player player;
-    private IceOverlay iceOverlay;
 
     private NavMeshAgent agent;
     private Vector3 startPos;
@@ -32,9 +35,6 @@ public class IceWalker : MonoBehaviour, IDamageable, IKnockbackable
         SphereCollider aura = gameObject.AddComponent<SphereCollider>();
         aura.isTrigger = true;
         aura.radius = auraRadius;
-
-        // Buscar overlay
-        iceOverlay = FindObjectOfType<IceOverlay>();
 
         // Guardar posición inicial
         startPos = transform.position;
@@ -87,7 +87,7 @@ public class IceWalker : MonoBehaviour, IDamageable, IKnockbackable
         {
             playerInside = true;
             player = p;
-            iceOverlay?.ShowIceOverlay(true);
+            OnIceArea?.Invoke(true);
         }
     }
 
@@ -97,8 +97,8 @@ public class IceWalker : MonoBehaviour, IDamageable, IKnockbackable
         if (p != null && p == player)
         {
             playerInside = false;
-            iceOverlay?.ShowIceOverlay(false);
             player = null;
+            OnIceArea?.Invoke(false);
         }
     }
 

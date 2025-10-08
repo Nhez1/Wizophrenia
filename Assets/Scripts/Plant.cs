@@ -11,33 +11,32 @@ public enum State
     Grown
 }
 
-public class Plant : MonoBehaviour
+public class Plant : Interactable
 {
     [Header(" Plant Characteristics ")]
     public State currentState;
     public int growTime;
-    [SerializeField] private bool _canHarvest = false;
 
-    private Interactable _interactor;
+    public Player player;
+    public HerbSO yield;
+
     private Animator _animator;
     private Coroutine growCycleCoroutine;
 
     void Start()
     {
+        CanInteract = false;
         currentState = State.Seed;
-        _interactor = GetComponent<Interactable>();
         _animator = GetComponent<Animator>();
 
         growCycleCoroutine = StartCoroutine(Photosynthesis());
     }
 
-    private void Update() => _interactor.CanInteract = _canHarvest;
-
     public void Grow()
     {
-        if ((int)currentState >= Enum.GetValues(typeof(State)).Length - 1) // Si el estado actual de la planta es mayor o igual al estado final (-1 porque cuenta al 0), que pare de crecer.
+        if (currentState == State.Grown) // Si el estado actual de la planta es mayor o igual al estado final (-1 porque cuenta al 0), que pare de crecer.
         {
-            _canHarvest = true;
+            CanInteract = true;
             return;
         }
         else // Si no, que crezca.
@@ -47,6 +46,12 @@ public class Plant : MonoBehaviour
 
             growCycleCoroutine = StartCoroutine(Photosynthesis());
         }
+    }
+
+    public override void Interact()
+    {
+        player.Inventory.AddItem(yield);
+        base.Interact();
     }
 
     private void CheckPlantState()

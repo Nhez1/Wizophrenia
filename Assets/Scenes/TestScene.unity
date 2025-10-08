@@ -1923,7 +1923,6 @@ GameObject:
   - component: {fileID: 495509468}
   - component: {fileID: 495509467}
   - component: {fileID: 495509466}
-  - component: {fileID: 495509465}
   m_Layer: 0
   m_Name: Grabbable Cube
   m_TagString: Untagged
@@ -1931,34 +1930,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &495509465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 495509464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11e988087a306a940a5010964d4662e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactMessage: Grab
-  onInteraction:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 495509464}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!65 &495509466
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3086,7 +3057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6926046b47bfc114a8070d1b49b68c10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuPause: {fileID: 82776974}
+  pauseMenu: {fileID: 0}
   pausedGame: 0
 --- !u!4 &796746715
 Transform:
@@ -3410,6 +3381,7 @@ MonoBehaviour:
   fireInHand: {fileID: 901963003}
   flameSpell: {fileID: 11400000, guid: 7a6ad4328a012e44cb6787773a83e308, type: 2}
   fireSpell: {fileID: 11400000, guid: b132e8a5824d23e40bb9b2d000aa05b2, type: 2}
+  exorciseSpell: {fileID: 0}
 --- !u!54 &915428806
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4233,7 +4205,6 @@ GameObject:
   - component: {fileID: 1190581445}
   - component: {fileID: 1190581443}
   - component: {fileID: 1190581444}
-  - component: {fileID: 1190581449}
   m_Layer: 0
   m_Name: Plant
   m_TagString: Untagged
@@ -4274,9 +4245,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 930c8007c594eee46a095906f353e08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactMessage: 
+  onInteraction:
+    m_PersistentCalls:
+      m_Calls: []
   currentState: 0
   growTime: 5
-  _canHarvest: 0
+  player: {fileID: 0}
+  yield: {fileID: 0}
 --- !u!136 &1190581445
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4365,34 +4341,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1190581449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1190581442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11e988087a306a940a5010964d4662e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactMessage: Harvest
-  onInteraction:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1190581442}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1199998610
 GameObject:
   m_ObjectHideFlags: 0
@@ -6779,7 +6727,6 @@ GameObject:
   - component: {fileID: 1901423205}
   - component: {fileID: 1901423204}
   - component: {fileID: 1901423203}
-  - component: {fileID: 1901423202}
   m_Layer: 0
   m_Name: Grabbable Cube (1)
   m_TagString: Untagged
@@ -6787,34 +6734,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1901423202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1901423201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11e988087a306a940a5010964d4662e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactMessage: Fuck yourself
-  onInteraction:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1901423201}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!65 &1901423203
 BoxCollider:
   m_ObjectHideFlags: 0

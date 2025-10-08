@@ -4,17 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class InventoryView : MonoBehaviour
+public class InventoryInteractor : MonoBehaviour
 {
-    public static InventoryView Singleton;
+    public static InventoryInteractor Singleton;
     public static InventoryItem carriedItem;
+    public Player player;
     
     [SerializeField] InventorySlot[] slots;
 
     [SerializeField] Transform draggablesTransform;
 
     [Header("Item List")]
-    [SerializeField] ItemSO[] items;
+    [SerializeField] List<ItemSO> items;
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class InventoryView : MonoBehaviour
     private void Update()
     {
         if (carriedItem == null) return;
+        items = player.Inventory.GetAllItems();
 
         carriedItem.transform.position = Input.mousePosition;
     }

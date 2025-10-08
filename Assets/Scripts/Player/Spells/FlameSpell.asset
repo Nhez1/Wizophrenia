@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65ef8ccc4150f3d478dcb60deb0b1238, type: 3}
+  m_Script: {fileID: 11500000, guid: d4480cc654010b54e8ddb63b27eb89b4, type: 3}
   m_Name: FlameSpell
   m_EditorClassIdentifier: 
   spellName: Flame Spell
@@ -18,6 +18,5 @@ MonoBehaviour:
   canCast: 1
   prefab: {fileID: 0}
   effects:
+  - {fileID: 11400000, guid: 20379f1544d810948abb1330669c4279, type: 2}
   - {fileID: 11400000, guid: f342056acbce21e41bceca404b32b6ab, type: 2}
-  cd: {fileID: 11400000, guid: 54049ece65f185647871306a8cb63982, type: 2}
-  isActive: 0

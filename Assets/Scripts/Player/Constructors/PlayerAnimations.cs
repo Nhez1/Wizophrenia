@@ -19,7 +19,6 @@ public class PlayerAnimations
         animator.SetFloat(xAxisName, xAxis);
         animator.SetFloat(zAxisName, zAxis);
         animator.SetBool(animBoolName, IsMoving(xAxis, zAxis));
-
     }
 
     private bool IsMoving(float x, float z)

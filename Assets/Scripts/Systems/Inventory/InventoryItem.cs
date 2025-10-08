@@ -28,6 +28,6 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left) InventoryView.Singleton.SetCarriedItem(this);
+        if (eventData.button == PointerEventData.InputButton.Left) InventoryInteractor.Singleton.SetCarriedItem(this);
     }
 }

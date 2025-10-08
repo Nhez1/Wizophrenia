@@ -1,7 +1,11 @@
 using UnityEngine;
+using System;
 
-public class BloodOverlay : MonoBehaviour
+public class StateOverlay : MonoBehaviour
 {
+    [Header("Overlay de Hielo")]
+    public GameObject iceOverlay;
+
     [Header("Overlays de Sangre")]
     public GameObject blood30;
     public GameObject blood50;
@@ -10,11 +14,13 @@ public class BloodOverlay : MonoBehaviour
     private void OnEnable()
     {
         Life.OnHealthChanged += UpdateBloodOverlay;
+        IceWalker.OnIceArea += ShowIceOverlay;
     }
 
     private void OnDisable()
     {
         Life.OnHealthChanged -= UpdateBloodOverlay;
+        IceWalker.OnIceArea -= ShowIceOverlay;
     }
 
     private void UpdateBloodOverlay(float currentHP)
@@ -27,4 +33,6 @@ public class BloodOverlay : MonoBehaviour
         else if (currentHP <= 50) blood50.SetActive(true);
         else if (currentHP <= 80) blood80.SetActive(true);
     }
+
+    private void ShowIceOverlay(bool active) => iceOverlay.SetActive(active);
 }

@@ -21,7 +21,7 @@ public class Player : MonoBehaviour, IDamageable
 
     [Header(" Spells ")]
     public GameObject fireInHand;
-    public FlameSpellSO flameSpell;
+    public SpellSO flameSpell;
     public SpellSO fireSpell;
     public SpellSO exorciseSpell;
 
@@ -39,6 +39,7 @@ public class Player : MonoBehaviour, IDamageable
     public float Speed => _speed;
     public float RunBoost => _runBoost;
     public InputController InputControl => _controller;
+    public InventoryController<ItemSO> Inventory => _inventory;
 
     private void Awake()
     {
@@ -48,13 +49,17 @@ public class Player : MonoBehaviour, IDamageable
         _mana = new(this);
         _interacter = new();
         _move = new(transform, _rb, _jumpForce, _speed, _runBoost, this);
-        _spellManager = new(_mana, fireInHand, spellCastPoint, this, flameSpell);
+        _spellManager = new(_mana, fireInHand, spellCastPoint, this);
         _controller = new(_move, _spellManager, _interacter);
     }
 
     private void Start()
     {
         _move.OnStart();
+        _spellManager.RegisterSpellPrefab(SpellType.FlameSpell, fireInHand);
+        _spellManager.RegisterSpellPrefab(SpellType.FireBall, fireSpell.prefab);
+
+        _spellManager.AddSpell(SpellType.FlameSpell, flameSpell);
         _spellManager.AddSpell(SpellType.FireBall, fireSpell);
         _spellManager.AddSpell(SpellType.Exorcise, exorciseSpell);
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using System;
 
-public class Interactable : MonoBehaviour
+public abstract class Interactable : MonoBehaviour
 {
     public static event Action<string> OnHover;
 
@@ -13,15 +13,13 @@ public class Interactable : MonoBehaviour
 
     public bool CanInteract { get; set; }
 
-    void Start() => CanInteract = true;
-
-    public void TryInteract()
+    public virtual void TryInteract()
     {
         if (CanInteract) Interact();
         else Debug.LogWarning("Can't interact!");
     }
 
-    public void Interact() => onInteraction?.Invoke();
+    public virtual void Interact() => onInteraction?.Invoke();
 
     public void OnHoverUpdate()
     {

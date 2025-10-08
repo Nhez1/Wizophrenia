@@ -9,7 +9,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
 
     public void SetItem(InventoryItem item)
     {
-        InventoryView.carriedItem = null;
+        InventoryInteractor.carriedItem = null;
 
         // Reset old slot
         item.activeSlot.myItem = null;
@@ -25,8 +25,8 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            if (InventoryView.carriedItem == null) return;
-            SetItem(InventoryView.carriedItem);
+            if (InventoryInteractor.carriedItem == null) return;
+            SetItem(InventoryInteractor.carriedItem);
         }
     }
 }
