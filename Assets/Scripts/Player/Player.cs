@@ -49,7 +49,7 @@ public class Player : MonoBehaviour, IDamageable
         _mana = new(this);
         _interacter = new();
         _move = new(transform, _rb, _jumpForce, _speed, _runBoost, this);
-        _spellManager = new(_mana, fireInHand, spellCastPoint, this);
+        _spellManager = new(_mana, spellCastPoint, this);
         _controller = new(_move, _spellManager, _interacter);
     }
 
@@ -58,10 +58,11 @@ public class Player : MonoBehaviour, IDamageable
         _move.OnStart();
         _spellManager.RegisterSpellPrefab(SpellType.FlameSpell, fireInHand);
         _spellManager.RegisterSpellPrefab(SpellType.FireBall, fireSpell.prefab);
+        _spellManager.RegisterSpellPrefab(SpellType.Exorcise, exorciseSpell.prefab);
 
-        _spellManager.AddSpell(SpellType.FlameSpell, flameSpell);
-        _spellManager.AddSpell(SpellType.FireBall, fireSpell);
-        _spellManager.AddSpell(SpellType.Exorcise, exorciseSpell);
+        _spellManager.AddSpell(flameSpell);
+        _spellManager.AddSpell(fireSpell);
+        _spellManager.AddSpell(exorciseSpell);
     }
 
     private void Update()
@@ -91,15 +92,10 @@ public class Player : MonoBehaviour, IDamageable
         InputController.RefillMana += _mana.Restore;
         InputController.RefillHP += _life.Heal;
     }
-    
-    /*private void OnDisable()
-    {
-        InputController.RefillMana -= _mana.ManaRegain;
-        _spellManager.SpellDispose();
-    }*/
 
     private void OnDisable()
     {
+        InputController.RefillMana -= _mana.Restore;
         if (_spellManager != null)
             _spellManager.SpellDispose();   //SALTABA ERROR, ASI QUE LO CORREGI
     }

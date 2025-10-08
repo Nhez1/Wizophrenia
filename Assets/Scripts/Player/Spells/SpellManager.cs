@@ -12,9 +12,7 @@ public enum SpellType
 
 public class SpellManager
 {
-    FlameSpellSO flameSpell;
     private static Dictionary<SpellType, SpellSO> _spells = new();
-    private GameObject gameObject;
     private Mana _mana;
     Transform castPoint;
     MonoBehaviour coroutineStarter;
@@ -25,12 +23,11 @@ public class SpellManager
         _spellPrefabs[type] = prefab;
     }
 
-    public SpellManager(Mana m, GameObject lightInHand, Transform castPosition, MonoBehaviour mb)
+    public SpellManager(Mana m, Transform castPosition, MonoBehaviour mb)
     {
         _mana = m;
         castPoint = castPosition;
         coroutineStarter = mb;
-        gameObject = lightInHand;
 
         // Este hechizo se inicializa aparte, va a ser la única excepción a la lista.
         //flameSpell = flame;
@@ -55,14 +52,14 @@ public class SpellManager
     /// </summary>
     /// <param name="spellType">The SpellType you want to add. Keep in mind that for your spell to be in SpellTypes, you need to add it manually to the SpellManager script.</param>
     /// <param name="spell">This is the SpellSO containing the spell you want to give the Wizard. Keep in mind that every spell needs to be a SpellSO.</param>
-    public void AddSpell(SpellType spellType, SpellSO spell)
+    public void AddSpell(SpellSO spell)
     {
-        if (_spells.ContainsKey(spellType)) return;
+        if (_spells.ContainsKey(spell.type)) return;
 
-        _spells.Add(spellType, spell);
-        var prefab = _spellPrefabs.TryGetValue(spellType, out var p) ? p : null;
-        _spells[spellType].Init(coroutineStarter, _mana, castPoint, prefab);
-        Debug.Log("The Wizard has learned " + spellType.ToString());
+        _spells.Add(spell.type, spell);
+        var prefab = _spellPrefabs.TryGetValue(spell.type, out var p) ? p : null;
+        _spells[spell.type].Init(coroutineStarter, _mana, castPoint, prefab);
+        Debug.Log("The Wizard has learned " + spell.type.ToString());
     }
 
     public void SpellDispose()

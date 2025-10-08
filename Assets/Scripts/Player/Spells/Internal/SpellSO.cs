@@ -11,6 +11,7 @@ public class SpellSO : ScriptableObject
     public float cooldown;
     public float manaCost;
     public bool canCast;
+    public SpellType type;
 
     [Header("Extra")]
     public GameObject prefab;
