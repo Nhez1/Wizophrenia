@@ -6,7 +6,7 @@ using System;
 [CreateAssetMenu(menuName = "ScriptableObjects/Effects/FlameEffectOFF")]
 public class FlameOffEffect : EffectSO
 {
-    public FlameSO flame;
+    public FlameEffectSO flame;
     private GameObject _lightInHand;
 
     public override void Init(CastContext castContext)

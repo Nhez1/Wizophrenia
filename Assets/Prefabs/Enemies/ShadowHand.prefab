@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -2628721126820086215}
   - component: {fileID: 6061202708790218904}
   m_Layer: 0
-  m_Name: ghostPrefab
+  m_Name: ShadowHand
   m_TagString: GhostEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,5 +152,5 @@ MonoBehaviour:
     _hp: 0
   _dmg: 10
   target: {fileID: 0}
-  speed: 1.5
+  speed: 3
   stopDistance: 0.3

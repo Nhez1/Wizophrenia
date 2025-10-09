@@ -12,8 +12,8 @@ public class FireBallEffectSO : EffectSO
         canShoot = false;
         spawnPoint = castContext.SpawnPoint;
         prefab = castContext.SpellPrefab;
-        FlameSO.OnFlameSwitchOff += SwitchOff;
-        FlameSO.OnFlameSwitchOn += SwitchOn;
+        FlameEffectSO.OnFlameSwitchOff += SwitchOff;
+        FlameEffectSO.OnFlameSwitchOn += SwitchOn;
     }
 
     public override void OnCast()
@@ -27,7 +27,7 @@ public class FireBallEffectSO : EffectSO
 
     public override void Dispose()
     {
-        FlameSO.OnFlameSwitchOff -= SwitchOff;
-        FlameSO.OnFlameSwitchOn -= SwitchOn;
+        FlameEffectSO.OnFlameSwitchOff -= SwitchOff;
+        FlameEffectSO.OnFlameSwitchOn -= SwitchOn;
     }
 }

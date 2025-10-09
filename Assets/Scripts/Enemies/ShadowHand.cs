@@ -15,8 +15,21 @@ public class ShadowHand : MonoBehaviour, IDamageable
     public Transform target;  //Aca colocar la mano desde el inspector (usar firepoint de ser necesario)
     public float speed = 1.5f;
     public float stopDistance = 0.3f;
+    bool isFollowing;
 
     public Life Life => _life;
+
+    private void OnEnable()
+    {
+        FlameEffectSO.OnFlameSwitchOff += OnFlameOff;
+        FlameEffectSO.OnFlameSwitchOn += OnFlameOn;
+    }
+
+    private void OnDisable()
+    {
+        FlameEffectSO.OnFlameSwitchOff -= OnFlameOff;
+        FlameEffectSO.OnFlameSwitchOn -= OnFlameOn;
+    }
 
     private void Start()
     {
@@ -28,11 +41,24 @@ public class ShadowHand : MonoBehaviour, IDamageable
         if (target == null) return;
 
         // Mover directo hacia la mano
-        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        if(isFollowing) Move();
 
         // Revisar distancia
+        CheckDistance();
+    }
+
+    void OnFlameOff() => isFollowing = false;
+    void OnFlameOn() => isFollowing = true;
+
+    void Move()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+    }
+
+    void CheckDistance()
+    {
         float dist = Vector3.Distance(transform.position, target.position);
-        if (dist <= stopDistance)
+        if (isFollowing && dist <= stopDistance)
         {
             ForceFlameOff?.Invoke();
             Destroy(gameObject);
@@ -43,8 +69,7 @@ public class ShadowHand : MonoBehaviour, IDamageable
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player collision");
-            if(other.gameObject.TryGetComponent<IDamageable>(out var player))
+            if(isFollowing && other.gameObject.TryGetComponent<IDamageable>(out var player))
             {
                 player.Life.Damage(_dmg);
             }
