@@ -152,5 +152,5 @@ MonoBehaviour:
     _hp: 0
   _dmg: 10
   target: {fileID: 0}
-  speed: 1.5
+  speed: 3
   stopDistance: 0.3

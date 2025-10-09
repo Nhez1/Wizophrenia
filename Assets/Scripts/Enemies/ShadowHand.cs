@@ -69,7 +69,6 @@ public class ShadowHand : MonoBehaviour, IDamageable
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player collision");
             if(isFollowing && other.gameObject.TryGetComponent<IDamageable>(out var player))
             {
                 player.Life.Damage(_dmg);

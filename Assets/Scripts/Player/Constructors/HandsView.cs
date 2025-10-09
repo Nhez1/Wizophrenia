@@ -11,6 +11,8 @@ public class HandsView
 
     public void ShadowHandOff()
     {
+        // Cancel any current transitions first
+        _anim.ResetTrigger("shadowHandTrigger");
         _anim.SetTrigger("shadowHandTrigger");
     }
 

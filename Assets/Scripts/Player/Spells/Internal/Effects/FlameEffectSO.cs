@@ -42,7 +42,6 @@ public class FlameEffectSO : EffectSO
     void SwitchFlame()
     {
         flameSwitch = !flameSwitch;
-        Debug.Log("Set flame " + flameSwitch);
 
         if (flameSwitch) FlameOn();
         else FlameOff();
@@ -50,25 +49,26 @@ public class FlameEffectSO : EffectSO
 
     void FlameOn()
     {
-        Debug.Log("Flame on");
         OnFlameSwitchOn?.Invoke();
         _castContext.SpellPrefab.SetActive(true);
         // Set Light in Hand active
 
         DrainMana();
     }
+
     void FlameOff()
     {
         OnFlameSwitchOff?.Invoke();
-        _castContext.SpellPrefab.SetActive(false);
-        // Set Light in Hand off
+        _castContext.SpellPrefab.SetActive(false); // Set Light in Hand off
 
         DrainMana();
     }
 
     void ForceOff()
     {
-        FlameOff();
+        flameSwitch = false;
+        _castContext.SpellPrefab.SetActive(false); // Set Light in Hand off
+        DrainMana();
         cooldown.OnCast();
     }
 
