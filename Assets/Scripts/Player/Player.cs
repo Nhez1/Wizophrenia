@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour, IDamageable
 {
     [Header(" Stats ")]
     [SerializeField] private Life _life;
     [SerializeField] private Mana _mana;
-    [Tooltip("Sped")][SerializeField] private float _speed = 3f;
+    [Tooltip("Sped")] [SerializeField] private float _speed = 3f;
     [Tooltip("Este es el incremento de velocidad cuando el jugador va a correr, no la velocidad a la que va a correr.")]
     [SerializeField] private float _runBoost = 5f;
     [SerializeField] private float _jumpForce = 3f;
@@ -72,14 +69,6 @@ public class Player : MonoBehaviour, IDamageable
         _controller.OnUpdate();
         _controller.MouseSensibility = _mouseSensibility;
         _interacter.PlayerReach = _reach;
-
-        if (Input.GetKeyDown(KeyCode.Y)) SceneManager.LoadScene("TestScene2");
-
-        if(Input.GetKeyDown(KeyCode.M))
-        {
-            fireSpell.canCast = true;
-            exorciseSpell.canCast = true; 
-        }
     }
 
     private void FixedUpdate()

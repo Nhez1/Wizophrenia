@@ -1,5 +1,6 @@
-using UnityEngine;
 using System;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InputController
 {
@@ -50,6 +51,8 @@ public class InputController
         // Refill mana
         if (Input.GetKeyDown(KeyCode.R)) RefillMana?.Invoke(20f);
         if (Input.GetKeyDown(KeyCode.T)) RefillHP?.Invoke(20f);
+
+        if (Input.GetKeyDown(KeyCode.Y)) SceneManager.LoadScene("TestScene2");
     }
 
     public void OnFixedUpdate()
