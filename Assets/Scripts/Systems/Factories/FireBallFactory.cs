@@ -10,7 +10,7 @@ public class FireBallFactory : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        _pool = new Pool<FireballProjectile>(CreateObject, TurnOn, TurnOff, 5);
+        _pool = new Pool<FireballProjectile>(CreateObject, TurnOn, TurnOff, 5, transform);
     }
 
     FireballProjectile CreateObject()

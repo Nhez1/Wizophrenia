@@ -9,7 +9,7 @@ public class Pool<T> where T : MonoBehaviour
     Action<T> _turnOffCallBack; //Turn off gameObject
     List<T> _currentStock; //Object pool stock
 
-    public Pool(Func<T> factoryMethod, Action<T> turnOnCallBack, Action<T> turnOffCallBack, int initialAmount)
+    public Pool(Func<T> factoryMethod, Action<T> turnOnCallBack, Action<T> turnOffCallBack, int initialAmount, Transform parent = null)
     {
         _factoryMethod = factoryMethod;
         _turnOnCallBack = turnOnCallBack;
@@ -20,6 +20,7 @@ public class Pool<T> where T : MonoBehaviour
         for (int i = 0; i < initialAmount; i++)
         {
             var createdObject = _factoryMethod();
+            if (parent != null) createdObject.transform.parent = parent;
             _turnOffCallBack(createdObject);
             _currentStock.Add(createdObject);
         }

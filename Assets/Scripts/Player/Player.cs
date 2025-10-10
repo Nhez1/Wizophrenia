@@ -85,6 +85,7 @@ public class Player : MonoBehaviour, IDamageable
     private void OnDisable()
     {
         InputController.RefillMana -= _mana.Restore;
+        InputController.RefillHP -= _life.Heal;
         if (_spellManager != null)
             _spellManager.SpellDispose();   //SALTABA ERROR, ASI QUE LO CORREGI
     }
