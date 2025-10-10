@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FireballProjectile : MonoBehaviour
@@ -18,7 +17,7 @@ public class FireballProjectile : MonoBehaviour
     void Start()
     {
         spawnPos = transform.position;
-        Destroy(gameObject, fireballLifeTime);
+        StartCoroutine(ReturnToPoolAfterLifeTime());
     }
 
 
@@ -39,10 +38,22 @@ public class FireballProjectile : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Player")) return;
 
-        Destroy(gameObject);
+        OnImpact();
     }
 
-    private void OnDestroy() => Destroy(Instantiate(ImpactEffect, transform.position, Quaternion.identity), impactEffectLifeTime);
+    private IEnumerator ReturnToPoolAfterLifeTime()
+    {
+        yield return new WaitForSeconds(fireballLifeTime);
+        OnImpact();
+    }
+
+    private void OnImpact()
+    {
+        //Returns FireBall to item pool
+        FireBallFactory.Instance.ReturnFireBall(this); 
+        //Spawns Impact particles
+        Destroy(Instantiate(ImpactEffect, transform.position, Quaternion.identity), impactEffectLifeTime); 
+    }
 
     void DealDamage(Life enemy) => enemy.Damage(50f);
 }
