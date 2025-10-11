@@ -1,31 +1,31 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class FireballProjectile : MonoBehaviour
+public class FireballProjectile : Bullet
 {
     public float fireballSpeed = 5f;
-    public float fireballLifeTime = 8f;
-    public float impactEffectLifeTime = 2f;
-    public GameObject ImpactEffect;
     Vector3 spawnPos;
 
     [Tooltip("The amount of force it will apply on to the object")]
     public float knockBackForce;
     [Tooltip("For how much time the enemy will be knocked back")]
     public float knockBackTime;
+    [field: SerializeField]
+    public float Dmg { get; private set; }
 
     void Start()
     {
         spawnPos = transform.position;
-        Destroy(gameObject, fireballLifeTime);
+        StartCoroutine(ReturnToPoolAfterLifeTime());
     }
 
 
     void Update()
     {
-        transform.Translate(fireballSpeed * Time.deltaTime * Vector3.forward);
+        Move();
     }
+
+    void Move() => transform.Translate(fireballSpeed * Time.deltaTime * Vector3.forward);
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -39,11 +39,23 @@ public class FireballProjectile : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Player")) return;
 
-        Destroy(gameObject);
+        OnImpact();
     }
 
-    private void OnDestroy() => Destroy(Instantiate(ImpactEffect, transform.position, Quaternion.identity), impactEffectLifeTime);
+    protected override IEnumerator ReturnToPoolAfterLifeTime()
+    {
+        yield return new WaitForSeconds(lifeTime);
+        OnImpact();
+    }
 
-    void DealDamage(Life enemy) => enemy.Damage(50f);
+    private void OnImpact()
+    {
+        //Returns FireBall to item pool
+        FireBallFactory.Instance.ReturnFireBall(this);
+        //Spawns Impact particles
+        var sparks = SparksFactory.Instance.GetSparks();
+        sparks.transform.position = transform.position;
+    }
+
+    void DealDamage(Life enemy) => enemy.Damage(Dmg);
 }
-//Marker

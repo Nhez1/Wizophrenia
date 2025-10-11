@@ -1,10 +1,12 @@
-using UnityEngine;
 using System;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InputController
 {
     public static event Action<float> RefillMana;
     public static event Action<float> RefillHP;
+    public static event Action OnPause;
 
     public float MouseSensibility { get; set; }
     private float _xAxis, _zAxis;
@@ -50,6 +52,10 @@ public class InputController
         // Refill mana
         if (Input.GetKeyDown(KeyCode.R)) RefillMana?.Invoke(20f);
         if (Input.GetKeyDown(KeyCode.T)) RefillHP?.Invoke(20f);
+
+        if (Input.GetKeyDown(KeyCode.Y)) SceneManager.LoadScene("TestScene2");
+
+        if (Input.GetKeyDown(KeyCode.P)) OnPause?.Invoke();
     }
 
     public void OnFixedUpdate()

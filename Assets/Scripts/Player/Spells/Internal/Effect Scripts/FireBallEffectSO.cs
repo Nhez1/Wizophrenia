@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/Effects/FireBall")]
 public class FireBallEffectSO : EffectSO
 {
-    GameObject prefab;
+    FireBallFactory factory;
     Transform spawnPoint;
     bool canShoot;
 
@@ -11,14 +11,17 @@ public class FireBallEffectSO : EffectSO
     {
         canShoot = false;
         spawnPoint = castContext.SpawnPoint;
-        prefab = castContext.SpellPrefab;
         FlameEffectSO.OnFlameSwitchOff += SwitchOff;
         FlameEffectSO.OnFlameSwitchOn += SwitchOn;
     }
 
     public override void OnCast()
     {
-        if (canShoot) Instantiate(prefab, spawnPoint.position, Camera.main.transform.rotation);
+        if (canShoot)
+        {
+            var fireBall = FireBallFactory.Instance.GetFireBall();
+            fireBall.transform.SetPositionAndRotation(spawnPoint.position, Camera.main.transform.rotation);
+        }
         else return;
     }
 

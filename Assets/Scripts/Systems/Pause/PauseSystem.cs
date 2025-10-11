@@ -8,23 +8,17 @@ using UnityEngine.SceneManagement;
 public class PauseSystem : MonoBehaviour
 {
     public GameObject pauseMenu;
+    public GameObject settingsMenu;
     public bool pausedGame = false;
-  
 
-    private void Update()
+    private void OnEnable()
     {
-        if (Input.GetKeyDown (KeyCode.P))
-        {
-            if (pausedGame)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
-        }
-        
+        InputController.OnPause += Pause;
+    }
+
+    private void OnDisable()
+    {
+        InputController.OnPause -= Pause;
     }
 
     public void Resume ()
@@ -47,13 +41,5 @@ public class PauseSystem : MonoBehaviour
         Cursor.visible = true; 
     }
 
-    public void ExitToMainMenu ()
-    {
-        SceneManager.LoadScene("MainMenu");
-    }
-
-    public void Settings()
-    {
-        SceneManager.LoadScene("Settings");
-    }
+    public void ExitToMainMenu () => SceneManager.LoadScene("MainMenu");
 }

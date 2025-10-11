@@ -1,14 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ExpansiveWave : MonoBehaviour
+public class ExpansiveWave : Bullet
 {
-    public float lifeTime = 2f;
-
     void Start()
     {
-        Destroy(gameObject, lifeTime);
+        StartCoroutine(ReturnToPoolAfterLifeTime());
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -21,5 +18,17 @@ public class ExpansiveWave : MonoBehaviour
     }
 
     void DealDamage(Life enemy) => enemy.Damage(100f);
+
+    protected override IEnumerator ReturnToPoolAfterLifeTime()
+    {
+        yield return new WaitForSeconds(lifeTime);
+        OnImpact();
+    }
+
+    private void OnImpact()
+    {
+        //Returns FireBall to item pool
+        ExpansiveWaveFactory.Instance.ReturnExpansiveWave(this);
+    }
 }
 //Marker
