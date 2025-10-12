@@ -5,12 +5,12 @@ public class ExpansiveWaveFactory : MonoBehaviour
     public static ExpansiveWaveFactory Instance { get; private set; }
 
     [SerializeField] private ExpansiveWave _expansiveWavePrefab;
-    Pool<ExpansiveWave> _pool;
+    ObjectPool<ExpansiveWave> _pool;
 
     private void Awake()
     {
         Instance = this;
-        _pool = new Pool<ExpansiveWave>(CreateObject, TurnOn, TurnOff, 5, transform);
+        _pool = new ObjectPool<ExpansiveWave>(CreateObject, TurnOn, TurnOff, 5, transform);
     }
 
     ExpansiveWave CreateObject()

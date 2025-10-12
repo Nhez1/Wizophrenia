@@ -1784,6 +1784,7 @@ GameObject:
   - component: {fileID: 495509468}
   - component: {fileID: 495509467}
   - component: {fileID: 495509466}
+  - component: {fileID: 495509470}
   m_Layer: 0
   m_Name: Grabbable Cube
   m_TagString: Untagged
@@ -1877,6 +1878,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &495509470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495509464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11e988087a306a940a5010964d4662e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <InteractMessage>k__BackingField: Homosexual
 --- !u!1001 &499351924
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3895,7 +3909,7 @@ GameObject:
   - component: {fileID: 1190581446}
   - component: {fileID: 1190581445}
   - component: {fileID: 1190581443}
-  - component: {fileID: 1190581444}
+  - component: {fileID: 1190581449}
   m_Layer: 0
   m_Name: Plant
   m_TagString: Untagged
@@ -3924,26 +3938,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1190581444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1190581442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 930c8007c594eee46a095906f353e08a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactMessage: 
-  onInteraction:
-    m_PersistentCalls:
-      m_Calls: []
-  currentState: 0
-  growTime: 5
-  player: {fileID: 0}
-  yield: {fileID: 0}
 --- !u!136 &1190581445
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4032,6 +4026,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1190581449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190581442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 930c8007c594eee46a095906f353e08a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+  growTime: 5
+  player: {fileID: 915428805}
+  yield: {fileID: 11400000, guid: 1b3d6d41b3fa1c440a12f7c3b086e877, type: 2}
+  <InteractMessage>k__BackingField: 
 --- !u!1 &1207750346
 GameObject:
   m_ObjectHideFlags: 0
@@ -6791,7 +6802,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -60}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1849335212
 GameObject:
@@ -6916,6 +6927,7 @@ GameObject:
   - component: {fileID: 1901423205}
   - component: {fileID: 1901423204}
   - component: {fileID: 1901423203}
+  - component: {fileID: 1901423207}
   m_Layer: 0
   m_Name: Grabbable Cube (1)
   m_TagString: Untagged
@@ -7009,6 +7021,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1901423207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901423201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11e988087a306a940a5010964d4662e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <InteractMessage>k__BackingField: Gay
 --- !u!1 &1910146424
 GameObject:
   m_ObjectHideFlags: 0

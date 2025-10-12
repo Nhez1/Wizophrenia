@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
+using System.Collections;
+using UnityEngine;
 
-public enum State
+public enum PlantState
 {
     Seed,
     Sapling,
@@ -11,52 +10,51 @@ public enum State
     Grown
 }
 
-public class Plant : Interactable
+public class Plant : MonoBehaviour, IInteractable
 {
     [Header(" Plant Characteristics ")]
-    public State currentState;
-    public int growTime;
+    public PlantState currentState;
+    public int growTime = 5;
+    private bool _canHarvest;
 
     public Player player;
     public HerbSO yield;
 
-    private Animator _animator;
+    private Animator _anim;
     private Coroutine growCycleCoroutine;
+
+    [field: SerializeField]
+    public string InteractMessage { get; set; }
+    public bool IsActive => gameObject.activeSelf;
 
     void Start()
     {
-        CanInteract = false;
-        currentState = State.Seed;
-        _animator = GetComponent<Animator>();
+        SetDefault();
+        _anim = GetComponent<Animator>();
 
         growCycleCoroutine = StartCoroutine(Photosynthesis());
     }
 
     public void Grow()
     {
-        if (currentState == State.Grown) // Si el estado actual de la planta es mayor o igual al estado final (-1 porque cuenta al 0), que pare de crecer.
-        {
-            CanInteract = true;
-            return;
-        }
-        else // Si no, que crezca.
-        {
-            currentState++;
-            CheckPlantState();
-
-            growCycleCoroutine = StartCoroutine(Photosynthesis());
-        }
-    }
-
-    public override void Interact()
-    {
-        player.Inventory.AddItem(yield);
-        base.Interact();
+        currentState++;
+        _anim.SetInteger("plantState", (int)currentState);
+        CheckPlantState();
     }
 
     private void CheckPlantState()
     {
-        _animator.SetInteger("plantState", (int)currentState);
+        if (currentState == PlantState.Grown) //Si la planta está 'Crecida', que pare de crecer.
+        {
+            InteractMessage = "Harvest";
+            _canHarvest = true;
+            return;
+        }
+        else //Si no, que crezca.
+        {
+            InteractMessage = "Can't harvest yet!";
+            growCycleCoroutine = StartCoroutine(Photosynthesis());
+        }
     }
 
     IEnumerator Photosynthesis()
@@ -65,6 +63,37 @@ public class Plant : Interactable
         Grow();
 
         growCycleCoroutine = null;
+    }
+
+    public void Interact()
+    {
+        if (_canHarvest)
+        {
+            player.Inventory.AddItem(yield);
+            gameObject.SetActive(false);
+        }
+    }
+
+    public void OnHoverEnter()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnHoverStay()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnHoverExit()
+    {
+        throw new NotImplementedException();
+    }
+
+    void SetDefault()
+    {
+        currentState = PlantState.Seed;
+        _canHarvest = false;
+        InteractMessage = "Can't harvest yet!";
     }
 }
 // Marker

@@ -5,12 +5,12 @@ public class FireBallFactory : MonoBehaviour
     public static FireBallFactory Instance { get; private set; }
 
     [SerializeField] private FireballProjectile _fireBallPrefab;
-    Pool<FireballProjectile> _pool;
+    ObjectPool<FireballProjectile> _pool;
 
     private void Awake()
     {
         Instance = this;
-        _pool = new Pool<FireballProjectile>(CreateObject, TurnOn, TurnOff, 5, transform);
+        _pool = new ObjectPool<FireballProjectile>(CreateObject, TurnOn, TurnOff, 5, transform);
     }
 
     FireballProjectile CreateObject()

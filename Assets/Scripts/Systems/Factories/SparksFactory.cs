@@ -5,12 +5,12 @@ public class SparksFactory : MonoBehaviour
     public static SparksFactory Instance { get; private set; }
 
     [SerializeField] private SparksEffect _expansiveWavePrefab;
-    Pool<SparksEffect> _pool;
+    ObjectPool<SparksEffect> _pool;
 
     private void Awake()
     {
         Instance = this;
-        _pool = new Pool<SparksEffect>(CreateObject, TurnOn, TurnOff, 5, transform);
+        _pool = new ObjectPool<SparksEffect>(CreateObject, TurnOn, TurnOff, 5, transform);
     }
 
     SparksEffect CreateObject()

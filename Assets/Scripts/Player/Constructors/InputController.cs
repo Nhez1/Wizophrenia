@@ -47,7 +47,7 @@ public class InputController
         if (Input.GetKeyDown(KeyCode.Q)) _spells.CastSpell(SpellType.Exorcise);
 
         // Interact
-        if (Input.GetKeyDown(KeyCode.E)) _interacter.CurrentInteractable.TryInteract();
+        if (Input.GetKeyDown(KeyCode.E)) _interacter.CurrentInteractable.Interact();
 
         // Refill mana
         if (Input.GetKeyDown(KeyCode.R)) RefillMana?.Invoke(20f);

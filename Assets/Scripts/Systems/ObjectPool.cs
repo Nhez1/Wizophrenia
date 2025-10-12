@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pool<T> where T : MonoBehaviour
+public class ObjectPool<T> where T : MonoBehaviour
 {
     Func<T> _factoryMethod; //How to create object
     Action<T> _turnOnCallBack; //Turn on gameObject
     Action<T> _turnOffCallBack; //Turn off gameObject
     List<T> _currentStock; //Object pool stock
 
-    public Pool(Func<T> factoryMethod, Action<T> turnOnCallBack, Action<T> turnOffCallBack, int initialAmount, Transform parent = null)
+    public ObjectPool(Func<T> factoryMethod, Action<T> turnOnCallBack, Action<T> turnOffCallBack, int initialAmount, Transform parent = null)
     {
         _factoryMethod = factoryMethod;
         _turnOnCallBack = turnOnCallBack;
