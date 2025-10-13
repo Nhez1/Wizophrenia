@@ -81,26 +81,39 @@ public class IceWalker : MonoBehaviour, IDamageable, IKnockbackable
     }
 
     void OnTriggerEnter(Collider other)
+{
+    Player p = other.GetComponent<Player>();
+    if (p != null)
     {
-        Player p = other.GetComponent<Player>();
-        if (p != null)
-        {
-            playerInside = true;
-            player = p;
-            OnIceArea?.Invoke(true);
-        }
+        playerInside = true;
+        player = p;
+        OnIceArea?.Invoke(true);
+
+        // Mostrar mensaje temporal en pantalla
+        DialogueData data = new DialogueData();
+        data.lines = new string[] { "Te estás congelando..." };
+        DialogueManager.Instance.StartDialogue(data);
     }
+}
 
     void OnTriggerExit(Collider other)
+{
+    Player p = other.GetComponent<Player>();
+    if (p != null && p == player)
     {
-        Player p = other.GetComponent<Player>();
-        if (p != null && p == player)
-        {
-            playerInside = false;
-            player = null;
-            OnIceArea?.Invoke(false);
-        }
+        playerInside = false;
+        player = null;
+
+        // Desactiva el texto
+        DialogueManager.Instance.ClearDialogueText();
+
+        // Oculta también el panel o fondo helado
+        DialogueManager.Instance.dialoguePanel.SetActive(false);
+
+        OnIceArea?.Invoke(false);
     }
+}
+
 
     public void Knockback(Vector3 source, float force, float duration)
     {
