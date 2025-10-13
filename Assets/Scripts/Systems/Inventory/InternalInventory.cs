@@ -1,12 +1,16 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System;
 
-public class InventoryController<T> where T : ItemSO
+public class InternalInventory<T> where T : ItemSO
 {
+    public static event Action<T> OnItemAdded;
     private List<T> _items = new();
 
-    public void AddItem(T item) => _items.Add(item);
+    public void AddItem(T item)
+    {
+        _items.Add(item);
+        OnItemAdded?.Invoke(item);
+    }
 
     public void RemoveItem(T item)
     {

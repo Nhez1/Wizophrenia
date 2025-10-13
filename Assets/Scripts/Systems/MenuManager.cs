@@ -9,15 +9,10 @@ public class MenuManager : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1.0f;
+
         if (allMenus.Length > 0)
         {
-            /*for (int i = 0; i < allMenus.Length; i++)
-            {
-                if (wantedActiveMenu != null && wantedActiveMenu != allMenus[i])
-                {
-                    allMenus[i].SetActive(false);
-                }
-            }*/
             foreach (var menu in allMenus)
             {
                 menu.gameObject.SetActive(false);

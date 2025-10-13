@@ -22,7 +22,7 @@ public class Player : MonoBehaviour, IDamageable
     public SpellSO fireSpell;
     public SpellSO exorciseSpell;
 
-    private InventoryController<ItemSO> _inventory;
+    private InternalInventory<ItemSO> _inventory;
     private PlayerInteraction _interacter;
     private InputController _controller;
     private Movement _move;
@@ -36,7 +36,7 @@ public class Player : MonoBehaviour, IDamageable
     public float Speed => _speed;
     public float RunBoost => _runBoost;
     public InputController InputControl => _controller;
-    public InventoryController<ItemSO> Inventory => _inventory;
+    public InternalInventory<ItemSO> Inventory => _inventory;
 
     private void Awake()
     {
@@ -48,6 +48,7 @@ public class Player : MonoBehaviour, IDamageable
         _move = new(transform, _rb, _jumpForce, _speed, _runBoost, this);
         _spellManager = new(_mana, spellCastPoint, this);
         _controller = new(_move, _spellManager, _interacter);
+        _inventory = new();
     }
 
     private void Start()

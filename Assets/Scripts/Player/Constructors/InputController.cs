@@ -7,6 +7,7 @@ public class InputController
     public static event Action<float> RefillMana;
     public static event Action<float> RefillHP;
     public static event Action OnPause;
+    public static event Action OnBagOpen;
 
     public float MouseSensibility { get; set; }
     private float _xAxis, _zAxis;
@@ -53,9 +54,14 @@ public class InputController
         if (Input.GetKeyDown(KeyCode.R)) RefillMana?.Invoke(20f);
         if (Input.GetKeyDown(KeyCode.T)) RefillHP?.Invoke(20f);
 
+        // Reset scene
         if (Input.GetKeyDown(KeyCode.Y)) SceneManager.LoadScene("TestScene2");
 
+        // Pause game
         if (Input.GetKeyDown(KeyCode.P)) OnPause?.Invoke();
+
+        // Open inventory
+        if (Input.GetKeyDown(KeyCode.B)) OnBagOpen?.Invoke();
     }
 
     public void OnFixedUpdate()
