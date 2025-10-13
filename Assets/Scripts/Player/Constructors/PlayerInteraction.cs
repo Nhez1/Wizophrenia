@@ -1,42 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class PlayerInteraction
 {
-    public float PlayerReach { get; set; }
-    private Interactable currentInteractable;
-    private bool isHovering = false;
+    public static event Action<IInteractable> OnHoverEnter;
+    public static event Action<IInteractable> OnHoverExit;
 
-    public Interactable CurrentInteractable
+    public float PlayerReach { get; set; }
+    private IInteractable currentInteractable;
+    public IInteractable CurrentInteractable
     {
         get
         {
             if (currentInteractable != null) return currentInteractable;
             else
             {
-                Debug.LogWarning("No interactable object in range");
+                Debug.LogWarning("No interactable object in range.");
                 return null;
             }
         }
         private set { }
     }
 
-    public PlayerInteraction()
-    {
-    }
+    public PlayerInteraction() { }
 
     public void HoverUpdate()
     {
         Ray ray = new(Camera.main.transform.position, Camera.main.transform.forward); // Si el jugador mira
-        if (Physics.Raycast(ray, out RaycastHit hit, PlayerReach))                   // Un objeto interactuable
+        if (Physics.Raycast(ray, out RaycastHit hit, PlayerReach))                   // Un objeto interactuable dentro de su rango de interacción
         {
-            if (hit.collider.TryGetComponent(out Interactable newInteractable))
+            if (hit.collider.TryGetComponent(out IInteractable newInteractable))
             {
-                if (newInteractable.enabled)
+                if (newInteractable.IsActive)
                 {
-                    if (newInteractable != currentInteractable) isHovering = false;
-                    HoverOverNew(newInteractable);
+                    if (newInteractable != currentInteractable) HoverOverNew(newInteractable);
                 }
                 else HoverLeave(); // Si el nuevo interactuable no está activo
             }
@@ -45,24 +42,18 @@ public class PlayerInteraction
         else HoverLeave(); // Si no hay nada al alcance
     }
 
-    void HoverOverNew(Interactable newInteractable) // Esto se ejecuta cuando se mira a un nuevo objeto.
+    void HoverOverNew(IInteractable newInteractable) // Esto se ejecuta cuando se mira a un nuevo objeto.
     {
         currentInteractable = newInteractable;
-
-        if (!isHovering) //This is hardcoded right now, but it will change in the future.
-        {
-            currentInteractable.OnHoverUpdate();
-            isHovering = true;
-        }
+        OnHoverEnter?.Invoke(currentInteractable);
     }
 
     void HoverLeave() // Esto se ejecuta cuando se deja de mirar hacia un objeto.
     {
-        if (currentInteractable)
+        if (currentInteractable != null)
         {
-            currentInteractable.OnHoverUpdate();
+            OnHoverExit?.Invoke(currentInteractable);
             currentInteractable = null;
-            isHovering = false;
         }
     }
 }

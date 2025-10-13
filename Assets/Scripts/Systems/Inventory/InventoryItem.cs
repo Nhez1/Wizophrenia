@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class InventoryItem : MonoBehaviour, IPointerClickHandler
 {
@@ -28,6 +26,6 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left) InventoryInteractor.Singleton.SetCarriedItem(this);
+        if (eventData.button == PointerEventData.InputButton.Left) Inventory.Singleton.SetCarriedItem(this);
     }
 }

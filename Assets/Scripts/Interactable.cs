@@ -1,29 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
 using System;
+using UnityEngine;
 
-public abstract class Interactable : MonoBehaviour
+public class Interactable : MonoBehaviour, IInteractable
 {
-    public static event Action<string> OnHover;
+    [field: SerializeField]
+    public string InteractMessage { get; set; }
+    public bool IsActive => gameObject.activeSelf;
+    public ItemSO item;
+    public Player player;
 
-    public string interactMessage;
-    public UnityEvent onInteraction;
-
-    public bool CanInteract { get; set; }
-
-    public virtual void TryInteract()
+    public void Interact()
     {
-        if (CanInteract) Interact();
-        else Debug.LogWarning("Can't interact!");
+        player.Inventory.AddItem(item);
+        gameObject.SetActive(false);
     }
 
-    public virtual void Interact() => onInteraction?.Invoke();
-
-    public void OnHoverUpdate()
+    public void OnHoverEnter()
     {
-        OnHover?.Invoke(interactMessage);
+        throw new NotImplementedException();
+    }
+
+    public void OnHoverExit()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnHoverStay()
+    {
+        throw new NotImplementedException();
     }
 }
 // Marker

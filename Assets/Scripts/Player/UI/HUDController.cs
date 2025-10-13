@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
-using TMPro;
 
 public class HUDController : MonoBehaviour
 {
@@ -19,21 +16,13 @@ public class HUDController : MonoBehaviour
         else Debug.LogWarning("Interact message reference not applied in the inspector.");
     }
 
-    private void UpdateInteractMessage(string newInteractMessage)
+    public void OnInteractableHoverEnter(IInteractable interactable)
     {
-        interactMessageSwitch = !interactMessageSwitch;
-
-        if (interactMessageSwitch) EnableInteractionText(newInteractMessage);
-        else DisableInteractionText();
-    }
-
-    public void EnableInteractionText(string txt)
-    {
-        interactMessage.text = txt + " (E)";
+        interactMessage.text = interactable.InteractMessage + " (E)";
         interactMessage.gameObject.SetActive(true);
     }
 
-    public void DisableInteractionText()
+    public void OnInteractableHoverExit(IInteractable interactable)
     {
         interactMessage.gameObject.SetActive(false);
     }
@@ -43,14 +32,16 @@ public class HUDController : MonoBehaviour
 
     private void OnEnable()
     {
-        Interactable.OnHover += UpdateInteractMessage;
+        PlayerInteraction.OnHoverEnter += OnInteractableHoverEnter;
+        PlayerInteraction.OnHoverExit += OnInteractableHoverExit;
         Life.OnHealthChanged += UpdateHealthBar;
         Mana.OnManaChanged += UpdateManaBar;
     }
 
     private void OnDisable()
     {
-        Interactable.OnHover -= UpdateInteractMessage;
+        PlayerInteraction.OnHoverEnter -= OnInteractableHoverEnter;
+        PlayerInteraction.OnHoverExit -= OnInteractableHoverExit;
         Life.OnHealthChanged -= UpdateHealthBar;
         Mana.OnManaChanged -= UpdateManaBar;
     }

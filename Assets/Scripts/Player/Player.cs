@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour, IDamageable
 {
     [Header(" Stats ")]
     [SerializeField] private Life _life;
     [SerializeField] private Mana _mana;
-    [Tooltip("Sped")][SerializeField] private float _speed = 3f;
+    [Tooltip("Sped")] [SerializeField] private float _speed = 3f;
     [Tooltip("Este es el incremento de velocidad cuando el jugador va a correr, no la velocidad a la que va a correr.")]
     [SerializeField] private float _runBoost = 5f;
     [SerializeField] private float _jumpForce = 3f;
@@ -25,7 +22,7 @@ public class Player : MonoBehaviour, IDamageable
     public SpellSO fireSpell;
     public SpellSO exorciseSpell;
 
-    private InventoryController<ItemSO> _inventory;
+    private InternalInventory<ItemSO> _inventory;
     private PlayerInteraction _interacter;
     private InputController _controller;
     private Movement _move;
@@ -39,7 +36,7 @@ public class Player : MonoBehaviour, IDamageable
     public float Speed => _speed;
     public float RunBoost => _runBoost;
     public InputController InputControl => _controller;
-    public InventoryController<ItemSO> Inventory => _inventory;
+    public InternalInventory<ItemSO> Inventory => _inventory;
 
     private void Awake()
     {
@@ -51,6 +48,7 @@ public class Player : MonoBehaviour, IDamageable
         _move = new(transform, _rb, _jumpForce, _speed, _runBoost, this);
         _spellManager = new(_mana, spellCastPoint, this);
         _controller = new(_move, _spellManager, _interacter);
+        _inventory = new();
     }
 
     private void Start()
@@ -72,14 +70,6 @@ public class Player : MonoBehaviour, IDamageable
         _controller.OnUpdate();
         _controller.MouseSensibility = _mouseSensibility;
         _interacter.PlayerReach = _reach;
-
-        if (Input.GetKeyDown(KeyCode.Y)) SceneManager.LoadScene("TestScene2");
-
-        if(Input.GetKeyDown(KeyCode.M))
-        {
-            fireSpell.canCast = true;
-            exorciseSpell.canCast = true; 
-        }
     }
 
     private void FixedUpdate()
@@ -96,6 +86,7 @@ public class Player : MonoBehaviour, IDamageable
     private void OnDisable()
     {
         InputController.RefillMana -= _mana.Restore;
+        InputController.RefillHP -= _life.Heal;
         if (_spellManager != null)
             _spellManager.SpellDispose();   //SALTABA ERROR, ASI QUE LO CORREGI
     }

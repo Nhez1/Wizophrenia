@@ -5094,10 +5094,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 881848d6d59f82041810732864685a7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifeTime: 8
   fireballSpeed: 8
-  fireballLifeTime: 8
-  impactEffectLifeTime: 2
-  ImpactEffect: {fileID: 7480827704108384566, guid: 25de5d0534a20e34dbaabd85de376fe4,
-    type: 3}
   knockBackForce: 5
   knockBackTime: 0.2
+  <Dmg>k__BackingField: 50
