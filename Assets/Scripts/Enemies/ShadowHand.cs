@@ -2,7 +2,6 @@ using UnityEngine;
 using System;
 
 // Por Jere
-
 public class ShadowHand : MonoBehaviour, IDamageable
 {
     //Ghost Turn Off Lights
@@ -12,7 +11,8 @@ public class ShadowHand : MonoBehaviour, IDamageable
     [SerializeField] private Life _life;
     [SerializeField] private float _dmg = 10f;
 
-    public Transform target;  //Aca colocar la mano desde el inspector (usar firepoint de ser necesario)
+    public Player player;  //Aca colocar la mano desde el inspector (usar firepoint de ser necesario)
+    private Vector3 _targetPos;
     public float speed = 1.5f;
     public float stopDistance = 0.3f;
     bool isFollowing;
@@ -38,10 +38,13 @@ public class ShadowHand : MonoBehaviour, IDamageable
 
     void Update()
     {
-        if (target == null) return;
+        if (player == null) return;
+        _targetPos = player.transform.position;
+        // Se iguala la Y del targetPos a 0 para que se mantenga pegado al piso.
+        _targetPos.y = .1f;
 
         // Mover directo hacia la mano
-        if(isFollowing) Move();
+        if (isFollowing) Move();
 
         // Revisar distancia
         CheckDistance();
@@ -50,29 +53,18 @@ public class ShadowHand : MonoBehaviour, IDamageable
     void OnFlameOff() => isFollowing = false;
     void OnFlameOn() => isFollowing = true;
 
-    void Move()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-    }
+    void Move() => transform.position = Vector3.MoveTowards(transform.position, _targetPos, speed * Time.deltaTime);
 
     void CheckDistance()
     {
-        float dist = Vector3.Distance(transform.position, target.position);
-        if (isFollowing && dist <= stopDistance)
-        {
-            ForceFlameOff?.Invoke();
-            Destroy(gameObject);
-        }
+        float dist = Vector3.Distance(transform.position, _targetPos);
+        if (isFollowing && dist <= stopDistance) StealFlame();
     }
 
-    private void OnTriggerEnter(Collider other)
+    void StealFlame()
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            if(isFollowing && other.gameObject.TryGetComponent<IDamageable>(out var player))
-            {
-                player.Life.Damage(_dmg);
-            }
-        }
+        ForceFlameOff?.Invoke();
+        player.Life.Damage(_dmg);
+        Destroy(gameObject);
     }
 }

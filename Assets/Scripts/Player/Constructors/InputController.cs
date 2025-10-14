@@ -55,7 +55,7 @@ public class InputController
         if (Input.GetKeyDown(KeyCode.T)) RefillHP?.Invoke(20f);
 
         // Reset scene
-        if (Input.GetKeyDown(KeyCode.Y)) SceneManager.LoadScene("TestScene2");
+        if (Input.GetKeyDown(KeyCode.Y)) UnityEngine.SceneManagement.SceneManager.LoadScene("Sandbox");
 
         // Pause game
         if (Input.GetKeyDown(KeyCode.P)) OnPause?.Invoke();

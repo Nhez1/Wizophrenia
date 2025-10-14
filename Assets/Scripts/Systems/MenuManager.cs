@@ -1,11 +1,15 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using System;
 
 public class MenuManager : MonoBehaviour
 {
+    [Header(" Main Menu ")]
     public Canvas[] allMenus;
     public Canvas wantedActiveMenu;
+
+    [Header(" Game ")]
+    public GameObject pauseMenu;
+    public GameObject settingsMenu;
+    public GameObject inventoryMenu;
 
     void Start()
     {
@@ -21,27 +25,14 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    public void ChangeSceneByNumber(int index)
-    {
-        SceneManager.LoadScene(index);
-    }
+    void ActivatePauseMenu() => pauseMenu.SetActive(true);
 
-    public void ChangeSceneByName(string name)
+    private void OnEnable()
     {
-        SceneManager.LoadScene(name);
+        InputController.OnPause += ActivatePauseMenu;
     }
-
-    public void RestartLevel()
+    private void OnDisable()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void ExitGame()
-    {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+        InputController.OnPause -= ActivatePauseMenu;
     }
 }

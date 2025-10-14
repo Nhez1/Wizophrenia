@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,10 +16,9 @@ public class GameEvent : ScriptableObject
     }
 
     //cosas para gestionar los listeners
-
     public void RegisterListener(EventListener listener)
     {
-        if (listeners.Contains(listener))
+        if (!listeners.Contains(listener))
         {
             listeners.Add(listener);
         }
@@ -29,8 +27,7 @@ public class GameEvent : ScriptableObject
     {
         if (listeners.Contains(listener))
         {
-            listeners.Add(listener);
+            listeners.Remove(listener);
         }
     }
-
 }

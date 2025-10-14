@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,7 +8,6 @@ public class CustomGameEvent : UnityEvent<Component, object> { }
 public class EventListener : MonoBehaviour
 {
     public GameEvent gameEvent;
-
     public CustomGameEvent response;
 
     private void OnEnable()

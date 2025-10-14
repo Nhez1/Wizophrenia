@@ -3,7 +3,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/Effects/FireBall")]
 public class FireBallEffectSO : EffectSO
 {
-    FireBallFactory factory;
     Transform spawnPoint;
     bool canShoot;
 
