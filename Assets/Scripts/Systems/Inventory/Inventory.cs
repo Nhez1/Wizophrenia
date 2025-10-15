@@ -5,15 +5,11 @@ public class Inventory : MonoBehaviour
 {
     public static Inventory Singleton;
     public static InventoryItem carriedItem;
-    public Player player;
 
     [SerializeField] InventorySlot[] slots;
 
     [SerializeField] Transform draggablesTransform;
     [SerializeField] InventoryItem itemPrefab;
-
-    [Header("Item List")]
-    [SerializeField] List<ItemSO> items;
 
     private void Awake()
     {
@@ -23,7 +19,6 @@ public class Inventory : MonoBehaviour
     private void Update()
     {
         if (carriedItem == null) return;
-        items = player.Inventory.GetAllItems();
 
         carriedItem.transform.position = Input.mousePosition;
     }
