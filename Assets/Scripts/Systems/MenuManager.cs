@@ -11,6 +11,9 @@ public class MenuManager : MonoBehaviour
     public GameObject settingsMenu;
     public GameObject inventoryMenu;
 
+    public PauseSystem pause;
+    bool sweetch;
+
     void Start()
     {
         Time.timeScale = 1.0f;
@@ -25,14 +28,25 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    void ActivateInventory()
+    {
+        sweetch = !sweetch;
+
+        inventoryMenu.SetActive(sweetch);
+        if (sweetch) pause.Pause();
+        else pause.Unpause();
+    }
+
     void ActivatePauseMenu() => pauseMenu.SetActive(true);
 
     private void OnEnable()
     {
         InputController.OnPause += ActivatePauseMenu;
+        InputController.OnBagOpen += ActivateInventory;
     }
     private void OnDisable()
     {
         InputController.OnPause -= ActivatePauseMenu;
+        InputController.OnBagOpen -= ActivateInventory;
     }
 }

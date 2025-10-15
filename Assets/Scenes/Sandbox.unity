@@ -4069,6 +4069,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 1105246077}
   settingsMenu: {fileID: 843827255}
   inventoryMenu: {fileID: 2073930764}
+  pause: {fileID: 1018374375}
 --- !u!1 &1036513996
 GameObject:
   m_ObjectHideFlags: 0

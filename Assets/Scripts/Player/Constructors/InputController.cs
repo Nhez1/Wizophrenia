@@ -28,15 +28,15 @@ public class InputController
 
     public void OnUpdate()
     {
-        //Mouse input
+        // Mouse input
         _mouseX = Input.GetAxis("Mouse X") * MouseSensibility * Time.deltaTime;
         _mouseY = Input.GetAxis("Mouse Y") * MouseSensibility * Time.deltaTime;
 
-        //Movimiento
+        // Movimiento
         _xAxis = Input.GetAxisRaw("Horizontal");
         _zAxis = Input.GetAxisRaw("Vertical");
 
-        //Salto
+        // Salto
         if (Input.GetKeyDown(KeyCode.Space) && _movement.IsGrounded()) _movement.Jump();
 
         // Cast Flame Spell
