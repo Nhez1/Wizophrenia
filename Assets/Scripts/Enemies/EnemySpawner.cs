@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [Header("Prefabs y referencias")]
-    public GameObject ghostPrefab;   
+    public GameObject shadowHandPrefab;   
     public GameObject stalkerPrefab;
     public Player playerRef;     
 
@@ -22,25 +22,25 @@ public class EnemySpawner : MonoBehaviour
     {
         while (true)
         {
-            SpawnGhost();
-            SpawnStalker();
+            SpawnHand();
+            //SpawnStalker();
             yield return new WaitForSeconds(spawnInterval);
         }
     }
 
-    void SpawnGhost()
+    void SpawnHand()
     {
-        if (ghostPrefab == null || playerRef == null) return;
+        if (shadowHandPrefab == null || playerRef == null) return;
 
         Vector3 dir = Random.onUnitSphere;
         dir.y = Mathf.Abs(dir.y); // evita spawnear bajo el escenario
         Vector3 spawnPos = playerRef.transform.position + dir.normalized * spawnDistance;
+        spawnPos.y = 0.5f;
 
-        GameObject g = Instantiate(ghostPrefab, spawnPos, Quaternion.identity);
+        GameObject g = Instantiate(shadowHandPrefab, spawnPos, Quaternion.identity);
         ShadowHand shadowHand = g.GetComponent<ShadowHand>();
 
         if (shadowHand != null) shadowHand.player = playerRef;
-        Debug.Log("Fantasma spawneado en " + spawnPos);
     }
 
     void SpawnStalker()

@@ -9,10 +9,10 @@ public class MenuManager : MonoBehaviour
     [Header(" Game ")]
     public GameObject pauseMenu;
     public GameObject settingsMenu;
-    public GameObject inventoryMenu;
+    public CanvasGroup inventoryMenu;
 
     public PauseSystem pause;
-    bool sweetch;
+    bool invSwitch;
 
     void Start()
     {
@@ -30,11 +30,10 @@ public class MenuManager : MonoBehaviour
 
     void ActivateInventory()
     {
-        sweetch = !sweetch;
+        invSwitch = !invSwitch;
 
-        inventoryMenu.SetActive(sweetch);
-        if (sweetch) pause.Pause();
-        else pause.Unpause();
+        if (invSwitch) inventoryMenu.alpha = 1.0f;
+        else inventoryMenu.alpha = 0f;
     }
 
     void ActivatePauseMenu() => pauseMenu.SetActive(true);
