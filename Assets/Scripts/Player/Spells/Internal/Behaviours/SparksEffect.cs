@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SparksEffect : Bullet
@@ -7,6 +6,8 @@ public class SparksEffect : Bullet
     void Start()
     {
         lifeTime = 2f;
+
+        StartCoroutine(ReturnToPoolAfterLifeTime());
     }
 
     protected override IEnumerator ReturnToPoolAfterLifeTime()
