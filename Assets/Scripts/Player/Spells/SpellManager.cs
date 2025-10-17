@@ -38,7 +38,7 @@ public class SpellManager
 
         if (_spells.ContainsKey(spellToCast))
         {
-            if (spell.canCast && _mana.MP > spell.manaCost) spell.Cast();
+            if (spell.canCast && !spell.onCD && _mana.MP > spell.manaCost) spell.Cast();
         }
         else
             Debug.LogWarning($"Spell {spellToCast} not found!");

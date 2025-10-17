@@ -9,7 +9,7 @@ public class SpellSO : ScriptableObject
     public float cooldown;
     public float manaCost;
     public bool canCast;
-    public bool onCD = false;
+    public bool onCD;
     public SpellType type;
 
     [Header("Extra")]
@@ -18,6 +18,7 @@ public class SpellSO : ScriptableObject
 
     public void Init(MonoBehaviour cR, Mana m, Transform handPos, GameObject gameObject = null)
     {
+        onCD = false;
         foreach (var effect in effects) effect.Init(new CastContext(cR, m, handPos, gameObject, this));
     }
 
