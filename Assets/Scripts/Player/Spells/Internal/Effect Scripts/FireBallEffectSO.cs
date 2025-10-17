@@ -4,32 +4,37 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/Effects/FireBall")]
 public class FireBallEffectSO : EffectSO
 {
-    public float cooldown;
-    CastContext _context;
-    bool _canShoot;
+    MonoBehaviour _cRunner;
+    Vector3 _spawnPos;
+    SpellSO _self;
+    Mana _mana;
+    float _cd;
 
     public override void Init(CastContext castContext)
     {
-        _context = castContext;
-        _context.Spell.canCast = false;
-        _canShoot = true;
+        _mana = castContext.Mana;
+        _self = castContext.Spell;
+        _cd = castContext.Spell.cooldown;
+        _cRunner = castContext.CoroutineRunner;
+        _spawnPos = castContext.SpawnPoint.position;
+        castContext.Spell.canCast = false;
+
         FlameEffectSO.OnFlameSwitchOff += SwitchOff;
         FlameEffectSO.OnFlameSwitchOn += SwitchOn;
     }
 
     public override void OnCast()
     {
-        if (_canShoot)
-        {
-            var fireBall = FireBallFactory.Instance.GetFireBall();
-            fireBall.transform.SetPositionAndRotation(_context.SpawnPoint.position, Camera.main.transform.rotation);
-            _context.CoroutineRunner.StartCoroutine(Cooldown());
-        }
-        else return;
+        
+        var fireBall = FireBallFactory.Instance.GetFireBall();
+        fireBall.transform.SetPositionAndRotation(_spawnPos, Camera.main.transform.rotation);
+        _mana.Spend(_self.manaCost);
+
+        _cRunner.StartCoroutine(Cooldown());
     }
 
-    void SwitchOff() => _context.Spell.canCast = false;
-    void SwitchOn() => _context.Spell.canCast = true;
+    void SwitchOff() => _self.canCast = false;
+    void SwitchOn() => _self.canCast = true;
 
     public override void Dispose()
     {
@@ -39,8 +44,10 @@ public class FireBallEffectSO : EffectSO
 
     IEnumerator Cooldown()
     {
-        _canShoot = false;
-        yield return new WaitForSeconds(cooldown);
-        _canShoot = true;
+        _self.onCD = true;
+
+        yield return new WaitForSeconds(_cd);
+
+        _self.onCD = false;
     }
 }

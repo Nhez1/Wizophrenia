@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +13,7 @@ public class SpellManager
     private static Dictionary<SpellType, SpellSO> _spells = new();
     private Mana _mana;
     Transform castPoint;
-    MonoBehaviour coroutineStarter;
+    MonoBehaviour _coroutineStarter;
     private Dictionary<SpellType, GameObject> _spellPrefabs = new();
 
     public void RegisterSpellPrefab(SpellType type, GameObject prefab)
@@ -27,19 +25,23 @@ public class SpellManager
     {
         _mana = m;
         castPoint = castPosition;
-        coroutineStarter = mb;
+        _coroutineStarter = mb;
     }
 
     /// <summary>
     /// Cast spell with indicated SpellType.
     /// </summary>
-    /// <param name="spell">The SpellType you want to cast. Keep in mind you have to unlock the spell for the Wizard using AddSpell before being able to use this.</param>
-    public void CastSpell(SpellType spell)
+    /// <param name="spellToCast">The SpellType you want to cast. Keep in mind you have to unlock the spell for the Wizard using AddSpell before being able to use this.</param>
+    public void CastSpell(SpellType spellToCast)
     {
-        if (_spells.ContainsKey(spell))
-            _spells[spell].Cast();
+        var spell = _spells[spellToCast];
+
+        if (_spells.ContainsKey(spellToCast))
+        {
+            if (spell.canCast && _mana.MP > spell.manaCost) spell.Cast();
+        }
         else
-            Debug.LogWarning($"Spell {spell} not found!");
+            Debug.LogWarning($"Spell {spellToCast} not found!");
     }
 
     /// <summary>
@@ -52,7 +54,7 @@ public class SpellManager
 
         _spells.Add(spell.type, spell);
         var prefab = _spellPrefabs.TryGetValue(spell.type, out var p) ? p : null;
-        _spells[spell.type].Init(coroutineStarter, _mana, castPoint, prefab);
+        _spells[spell.type].Init(_coroutineStarter, _mana, castPoint, prefab);
         Debug.Log("The Wizard has learned " + spell.type.ToString());
     }
 

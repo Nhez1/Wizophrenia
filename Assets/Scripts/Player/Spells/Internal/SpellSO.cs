@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +9,7 @@ public class SpellSO : ScriptableObject
     public float cooldown;
     public float manaCost;
     public bool canCast;
+    public bool onCD = false;
     public SpellType type;
 
     [Header("Extra")]
@@ -19,16 +18,12 @@ public class SpellSO : ScriptableObject
 
     public void Init(MonoBehaviour cR, Mana m, Transform handPos, GameObject gameObject = null)
     {
-        canCast = true;
         foreach (var effect in effects) effect.Init(new CastContext(cR, m, handPos, gameObject, this));
     }
 
     public void Cast()
     {
-        if (canCast)
-        {
-            foreach (var effect in effects) effect.OnCast();
-        }
+        foreach (var effect in effects) effect.OnCast();
     }
 
     public void Dispose()

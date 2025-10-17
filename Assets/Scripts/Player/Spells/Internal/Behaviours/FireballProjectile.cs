@@ -4,8 +4,8 @@ using UnityEngine;
 public class FireballProjectile : Bullet
 {
     public float fireballSpeed = 5f;
-    Vector3 spawnPos;
 
+    Vector3 _spawnPos;
     [Tooltip("The amount of force it will apply on to the object")]
     public float knockBackForce;
     [Tooltip("For how much time the enemy will be knocked back")]
@@ -15,7 +15,7 @@ public class FireballProjectile : Bullet
 
     void Start()
     {
-        spawnPos = transform.position;
+        _spawnPos = transform.position;
         StartCoroutine(ReturnToPoolAfterLifeTime());
     }
 
@@ -34,7 +34,7 @@ public class FireballProjectile : Bullet
             if (collision.gameObject.TryGetComponent<IDamageable>(out var enemy))
             {
                 DealDamage(enemy.Life);
-                if (collision.gameObject.TryGetComponent<IKnockbackable>(out var knockbackable)) knockbackable.Knockback(spawnPos, knockBackForce, knockBackTime);
+                if (collision.gameObject.TryGetComponent<IKnockbackable>(out var knockbackable)) knockbackable.Knockback(_spawnPos, knockBackForce, knockBackTime);
             }
         }
         else if (collision.gameObject.CompareTag("Player")) return;
