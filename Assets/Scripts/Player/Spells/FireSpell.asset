@@ -15,10 +15,9 @@ MonoBehaviour:
   spellName: Fire Ball
   cooldown: 2
   manaCost: 10
-  canCast: 1
+  canCast: 0
   type: 1
   prefab: {fileID: 7511394233317655324, guid: 6a51185de7bb8ad45b00a38776fe282f, type: 3}
   effects:
   - {fileID: 11400000, guid: 325cd98f18c89914a97a8cd2a47a2865, type: 2}
   - {fileID: 11400000, guid: cf0c5ccc424a7c042b56d08093500bfa, type: 2}
-  - {fileID: 11400000, guid: 5e261dc87f1c7cf4fbde59b1e83fcb4b, type: 2}

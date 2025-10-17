@@ -61,6 +61,8 @@ public class Player : MonoBehaviour, IDamageable
         _spellManager.AddSpell(flameSpell);
         _spellManager.AddSpell(fireSpell);
         _spellManager.AddSpell(exorciseSpell);
+        _controller.MouseSensibility = _mouseSensibility;
+        _interacter.PlayerReach = _reach;
     }
 
     private void Update()
@@ -68,8 +70,6 @@ public class Player : MonoBehaviour, IDamageable
         _interacter.HoverUpdate();
         _move.OnUpdate();
         _controller.OnUpdate();
-        _controller.MouseSensibility = _mouseSensibility;
-        _interacter.PlayerReach = _reach;
     }
 
     private void FixedUpdate()
