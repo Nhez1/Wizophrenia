@@ -1,18 +1,51 @@
+using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Effects/ExpansiveWave")]
 public class ReigniteEffect : EffectSO
 {
-    Transform _spawnPoint;
+    MonoBehaviour _cRunner;
+    CastContext _context;
+    SpellSO _self;
 
     public override void Init(CastContext castContext)
     {
-        _spawnPoint = castContext.SpawnPoint;
+        _cRunner = castContext.CoroutineRunner;
+        _self = castContext.Spell;
+        _context = castContext;
+
+        FlameEffectSO.OnFlameSwitchOn += SwitchOn;
+        FlameEffectSO.OnFlameSwitchOff += SwitchOff;
+        ShadowHand.ForceFlameOff += SwitchOff;
     }
 
     public override  void OnCast()
     {
+        _context.Mana.Spend(_self.manaCost);
+
+        var spawnPoint = _context.SpawnPoint.position;
         var wave = ExpansiveWaveFactory.Instance.GetExpansiveWave();
-        wave.transform.SetPositionAndRotation(_spawnPoint.position, Camera.main.transform.rotation);
+        wave.transform.SetPositionAndRotation(spawnPoint, Camera.main.transform.rotation);
+
+        _cRunner.StartCoroutine(Cooldown());
+    }
+
+    public override void Dispose()
+    {
+        FlameEffectSO.OnFlameSwitchOn -= SwitchOn;
+        FlameEffectSO.OnFlameSwitchOff -= SwitchOff;
+        ShadowHand.ForceFlameOff -= SwitchOff;
+    }
+
+    void SwitchOff() => _self.canCast = false;
+    void SwitchOn() => _self.canCast = true;
+
+    IEnumerator Cooldown()
+    {
+        _self.onCD = true;
+
+        yield return new WaitForSeconds(_self.cooldown);
+
+        _self.onCD = false;
     }
 }
