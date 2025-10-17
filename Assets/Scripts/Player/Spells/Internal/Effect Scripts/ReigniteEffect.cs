@@ -4,13 +4,11 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/Effects/ExpansiveWave")]
 public class ReigniteEffect : EffectSO
 {
-    MonoBehaviour _cRunner;
     CastContext _context;
     SpellSO _self;
 
     public override void Init(CastContext castContext)
     {
-        _cRunner = castContext.CoroutineRunner;
         _self = castContext.Spell;
         _context = castContext;
 
@@ -21,13 +19,9 @@ public class ReigniteEffect : EffectSO
 
     public override  void OnCast()
     {
-        _context.Mana.Spend(_self.manaCost);
-
         var spawnPoint = _context.SpawnPoint.position;
         var wave = ExpansiveWaveFactory.Instance.GetExpansiveWave();
         wave.transform.SetPositionAndRotation(spawnPoint, Camera.main.transform.rotation);
-
-        _cRunner.StartCoroutine(Cooldown());
     }
 
     public override void Dispose()
@@ -39,13 +33,4 @@ public class ReigniteEffect : EffectSO
 
     void SwitchOff() => _self.canCast = false;
     void SwitchOn() => _self.canCast = true;
-
-    IEnumerator Cooldown()
-    {
-        _self.onCD = true;
-
-        yield return new WaitForSeconds(_self.cooldown);
-
-        _self.onCD = false;
-    }
 }

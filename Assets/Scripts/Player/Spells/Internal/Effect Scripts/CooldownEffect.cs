@@ -1,30 +1,29 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Effects/Cooldown")]
 public class CooldownEffect : EffectSO
 {
-    SpellSO spell;
-    float cooldown;
+    SpellSO _spell;
+    float _cd;
 
-    MonoBehaviour coroutineRunner;
+    MonoBehaviour _cRunner;
 
     public override void Init(CastContext castContext = null)
     {
-        spell = castContext.Spell;
-        cooldown = castContext.Spell.cooldown;
-        coroutineRunner = castContext.CoroutineRunner;
+        _cRunner = castContext.CoroutineRunner;
+        _cd = castContext.Spell.cooldown;
+        _spell = castContext.Spell;
     }
 
-    public override void OnCast() => coroutineRunner.StartCoroutine(Cooldown());
+    public override void OnCast() => _cRunner.StartCoroutine(Cooldown());
 
     IEnumerator Cooldown()
     {
-        spell.canCast = false;
+        _spell.onCD = true;
 
-        yield return new WaitForSeconds(cooldown);
+        yield return new WaitForSeconds(_cd);
 
-        spell.canCast = true;
+        _spell.onCD = false;
     }
 }

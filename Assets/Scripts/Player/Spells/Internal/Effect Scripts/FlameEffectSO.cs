@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
+using UnityEngine;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/MainSpells/Flame")]
 public class FlameEffectSO : EffectSO
@@ -9,16 +7,22 @@ public class FlameEffectSO : EffectSO
     public static event Action OnFlameSwitchOn;
     public static event Action OnFlameSwitchOff;
 
-    public float manaCost;
+    private SpellSO _self;
+    private CastContext _context;
     public CooldownEffect cooldown;
-    private CastContext _castContext;
-    bool flameSwitch;
+    public ManaSpendEffect drain;
+    bool _switch;
 
     public override void Init(CastContext castContext)
     {
-        flameSwitch = false;
-        cooldown.Init(castContext);
-        _castContext = castContext;
+        _switch = false;
+        _context = castContext;
+        _self = castContext.Spell;
+        _self.canCast = true;
+
+        cooldown.Init(_context);
+        drain.Init(_context);
+
         ShadowHand.ForceFlameOff += ForceOff;
         Mana.OnManaChanged += CheckMana;
     }
@@ -34,51 +38,47 @@ public class FlameEffectSO : EffectSO
         Mana.OnManaChanged -= CheckMana;
     }
 
-    void DrainMana()
-    {
-        _castContext.Mana.Drain(manaCost);
-    }
-
     void SwitchFlame()
     {
-        flameSwitch = !flameSwitch;
+        _switch = !_switch;
 
-        if (flameSwitch) FlameOn();
+        if (_switch) FlameOn();
         else FlameOff();
     }
 
     void FlameOn()
     {
         OnFlameSwitchOn?.Invoke();
-        _castContext.SpellPrefab.SetActive(true);
+        _context.SpellPrefab.SetActive(true);
         // Set Light in Hand active
 
-        DrainMana();
+        drain.OnCast();
     }
 
     void FlameOff()
     {
         OnFlameSwitchOff?.Invoke();
-        _castContext.SpellPrefab.SetActive(false); // Set Light in Hand off
+        _context.SpellPrefab.SetActive(false); // Set Light in Hand off
 
-        DrainMana();
+        drain.OnCast();
     }
 
     void ForceOff()
     {
-        flameSwitch = false;
-        _castContext.SpellPrefab.SetActive(false); // Set Light in Hand off
-        DrainMana();
+        _switch = false;
+        _context.SpellPrefab.SetActive(false); // Set Light in Hand off
+
+        drain.OnCast();
         cooldown.OnCast();
     }
 
     void CheckMana(float mana)
     {
-        if (mana <= manaCost)
+        if (mana <= _self.manaCost)
         {
             FlameOff();
-            _castContext.Spell.canCast = false;
+            _context.Spell.canCast = false;
         }
-        else _castContext.Spell.canCast = true;
+        else return;
     }
 }
