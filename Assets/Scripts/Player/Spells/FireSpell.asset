@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: FireSpell
   m_EditorClassIdentifier: 
   spellName: Fire Ball
-  cooldown: 5
+  cooldown: 3
   manaCost: 10
-  canCast: 1
+  canCast: 0
   onCD: 0
   type: 1
   prefab: {fileID: 7511394233317655324, guid: 6a51185de7bb8ad45b00a38776fe282f, type: 3}
   effects:
   - {fileID: 11400000, guid: 325cd98f18c89914a97a8cd2a47a2865, type: 2}
   - {fileID: 11400000, guid: cf0c5ccc424a7c042b56d08093500bfa, type: 2}
+  - {fileID: 11400000, guid: 340877f74b61424459a66d85edb7c854, type: 2}

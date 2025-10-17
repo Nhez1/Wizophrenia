@@ -15,7 +15,8 @@ MonoBehaviour:
   spellName: Reignite
   cooldown: 5
   manaCost: 5
-  canCast: 1
+  canCast: 0
+  onCD: 0
   type: 2
   prefab: {fileID: 1207290375828544991, guid: 334083c3b2e0353479585d42a68323da, type: 3}
   effects:
