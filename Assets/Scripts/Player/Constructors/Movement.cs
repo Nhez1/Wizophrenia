@@ -9,17 +9,17 @@ public class Movement
 
     //Stats
     public float Speed { get; private set; }
-    float baseSpeed = 5f;
-    float speedMin = 2f;
-    float speedCap = 15f;
-    float runBoost;
-    float jumpForce;
+    float _baseSpeed = 5f;
+    float _speedMin = 2f;
+    float _speedCap = 15f;
+    float _runBoost;
+    float _jumpForce;
 
     //Internal
-    Transform transform;
-    Rigidbody rb;
-    MonoBehaviour monoBehaviour;
-    Player player;
+    Transform _transform;
+    Rigidbody _rb;
+    MonoBehaviour _cRunner;
+    Player _player;
     public bool isRunning = false;
 
     //Secondary
@@ -28,16 +28,16 @@ public class Movement
 
     public Movement(Transform t, Rigidbody r, float jF, float s, float rS, MonoBehaviour MB)
     {
-        transform = t;
-        rb = r;
+        _transform = t;
+        _rb = r;
         Speed = s;
-        runBoost = rS;
-        jumpForce = jF;
-        monoBehaviour = MB;
-        player = MB as Player;
+        _runBoost = rS;
+        _jumpForce = jF;
+        _cRunner = MB;
+        _player = MB as Player;
     }
 
-    public void OnStart() => baseSpeed = Speed;
+    public void OnStart() => _baseSpeed = Speed;
 
     public void OnUpdate()
     {
@@ -46,20 +46,20 @@ public class Movement
             if (runApplied)
             {
                 //Si el jugador no está corriendo y tiene aplicado el buff de correr, removérselo.
-                DebuffSpeed(runBoost);
+                DebuffSpeed(_runBoost);
                 runApplied = false;
             }
         }
-        baseSpeed = player.Speed;   //
-        runBoost = player.RunBoost; //Estas dos líneas están para que los cambios en el editor sobre la velocidad se apliquen inmediatamente.
+        _baseSpeed = _player.Speed;   //
+        _runBoost = _player.RunBoost; //Estas dos líneas están para que los cambios en el editor sobre la velocidad se apliquen inmediatamente.
     }
 
     //-------------------------------------------------------------------------------- Movimiento
     public void Move(float _xAxis, float _zAxis)
     {
-        Vector3 dir = (transform.right * _xAxis + transform.forward * _zAxis).normalized;
+        Vector3 dir = (_transform.right * _xAxis + _transform.forward * _zAxis).normalized;
 
-        rb.MovePosition(transform.position + Speed * Time.fixedDeltaTime * dir);
+        _rb.MovePosition(_transform.position + Speed * Time.fixedDeltaTime * dir);
     }
 
     //-------------------------------------------------------------------------------- Correr
@@ -68,20 +68,20 @@ public class Movement
         if (!runApplied)
         {
             //Si el buff de correr ya no está aplicado, aplicárselo.
-            BuffSpeed(runBoost);
+            BuffSpeed(_runBoost);
             runApplied = true;
         }
         isRunning = true;
     }
 
     //-------------------------------------------------------------------------------- Salto
-    public void Jump() => rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+    public void Jump() => _rb.AddForce(_transform.up * _jumpForce, ForceMode.Impulse);
 
     //--------------------------------------------------------------------------------
     private void UpdateSpeed()
     {
-        float walkSpeed = Mathf.Clamp(baseSpeed + potionModifier, speedMin, speedCap);
-        Speed = isRunning ? walkSpeed + runBoost : walkSpeed;
+        float walkSpeed = Mathf.Clamp(_baseSpeed + potionModifier, _speedMin, _speedCap);
+        Speed = isRunning ? walkSpeed + _runBoost : walkSpeed;
         //Si el jugador está corriendo, Speed = walkSpeed + runBoost. Si no, Speed = walkSpeed.
     }
 
@@ -89,7 +89,7 @@ public class Movement
     public bool IsGrounded()
     {
         //Devuelve si el jugador está tocando el piso. El último  (v) parámetro hay que actualizarlo con la altura del jugador, 1.85f es un default.
-        return !Physics.Raycast(transform.position, -Vector3.up, 1.85f);
+        return !Physics.Raycast(_transform.position, -Vector3.up, 1.85f);
     }
 
     //-------------------------------------------------------------------------------- Buff de velocidad
@@ -119,7 +119,7 @@ public class Movement
     }
 
     //--------------------------------------------------------------------------------
-    public void CallSpeedBoostCoroutine(float sI, float t) => monoBehaviour.StartCoroutine(TimedSpeedBoost(sI, t));
+    public void CallSpeedBoostCoroutine(float sI, float t) => _cRunner.StartCoroutine(TimedSpeedBoost(sI, t));
     //Acá estoy llamando a la corutina a través de MonoBehaviour porque esta clase no tiene y es necesario para hacerlo
     //También, lo encierro en un método que después voy a utilizar para pasárselo al evento de la poción.
     //

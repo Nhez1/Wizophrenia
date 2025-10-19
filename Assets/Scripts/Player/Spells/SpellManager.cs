@@ -5,7 +5,7 @@ public enum SpellType
 {
     FlameSpell,
     FireBall,
-    Exorcise
+    Reignite
 }
 
 public class SpellManager

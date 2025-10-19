@@ -4,12 +4,13 @@ using UnityEngine;
 
 public abstract class ItemSO : ScriptableObject, IItem
 {
-    [SerializeField] private string _itemName;
+    [field: SerializeField]
+    public string Name { get; set; }
+
     public readonly float amount;
     public Sprite icon;
     public ItemType type;
 
-    public string Name => _itemName;
     public float Amount => amount;
     public string Description => throw new System.NotImplementedException();
 }

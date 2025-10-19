@@ -1,5 +1,5 @@
-using System.Collections;
 using UnityEngine;
+using System;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Effects/FireBall")]
 public class FireBallEffectSO : EffectSO
@@ -21,7 +21,7 @@ public class FireBallEffectSO : EffectSO
     public override void OnCast()
     {
         var spawnPos = _context.SpawnPoint.position;
-        
+
         var fireBall = FireBallFactory.Instance.GetFireBall();
         fireBall.transform.SetPositionAndRotation(spawnPos, Camera.main.transform.rotation);
     }

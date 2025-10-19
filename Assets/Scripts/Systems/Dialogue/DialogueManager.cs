@@ -6,12 +6,15 @@ using TMPro;
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;  // Singleton (una sola instancia)
+
     [Header("UI References")]
     public GameObject dialoguePanel;
     public TMP_Text dialogueText;
+    [Tooltip("The amount of time the dialogue will be up.")]
+    public float dialogueTime;
 
-    private Queue<string> lines = new Queue<string>();
-    private bool isTyping = false;
+    private Queue<string> _lines = new();
+    private bool _isTyping = false;
 
     void Awake()
     {
@@ -23,34 +26,34 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(DialogueData data)
     {
-        if (data == null || data.lines == null || data.lines.Length == 0) return;
+        if (data.lines == null || data.lines.Length == 0) return;
 
         dialoguePanel.SetActive(true);
-        lines.Clear();
+        _lines.Clear();
 
         foreach (var line in data.lines)
-            lines.Enqueue(line);
+            _lines.Enqueue(line);
 
         DisplayNextLine();
     }
 
     public void DisplayNextLine()
     {
-        if (isTyping) return;
+        if (_isTyping) return;
 
-        if (lines.Count == 0)
+        if (_lines.Count == 0)
         {
             EndDialogue();
             return;
         }
 
-        string nextLine = lines.Dequeue();
+        string nextLine = _lines.Dequeue();
         StartCoroutine(TypeLine(nextLine));
     }
 
     private IEnumerator TypeLine(string line)
     {
-        isTyping = true;
+        _isTyping = true;
         dialogueText.text = "";
 
         foreach (char c in line.ToCharArray())
@@ -59,7 +62,7 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitForSeconds(0.02f);
         }
 
-        isTyping = false;
+        _isTyping = false;
     }
 
     public void EndDialogue()

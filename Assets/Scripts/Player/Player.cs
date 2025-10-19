@@ -56,7 +56,7 @@ public class Player : MonoBehaviour, IDamageable
         _move.OnStart();
         _spellManager.RegisterSpellPrefab(SpellType.FlameSpell, fireInHand);
         _spellManager.RegisterSpellPrefab(SpellType.FireBall, fireSpell.prefab);
-        _spellManager.RegisterSpellPrefab(SpellType.Exorcise, exorciseSpell.prefab);
+        _spellManager.RegisterSpellPrefab(SpellType.Reignite, exorciseSpell.prefab);
 
         _spellManager.AddSpell(flameSpell);
         _spellManager.AddSpell(fireSpell);

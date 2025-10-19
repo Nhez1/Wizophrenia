@@ -49,7 +49,7 @@ public class InputController
             // Cast Fire Ball
             if (Input.GetKeyDown(KeyCode.Mouse1)) _spells.CastSpell(SpellType.FireBall);
 
-            if (Input.GetKeyDown(KeyCode.Q)) _spells.CastSpell(SpellType.Exorcise);
+            if (Input.GetKeyDown(KeyCode.Q)) _spells.CastSpell(SpellType.Reignite);
 
             // Interact
             if (Input.GetKeyDown(KeyCode.E))

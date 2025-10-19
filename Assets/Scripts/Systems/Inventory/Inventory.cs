@@ -6,10 +6,12 @@ public class Inventory : MonoBehaviour
     public static Inventory Singleton;
     public static InventoryItem carriedItem;
 
-    [SerializeField] InventorySlot[] slots;
+    [SerializeField] InventorySlot[] _slots;
 
-    [SerializeField] Transform draggablesTransform;
-    [SerializeField] InventoryItem itemPrefab;
+    [SerializeField] Transform _draggablesTransform;
+    [SerializeField] InventoryItem _itemPrefab;
+
+    [SerializeField] DialogueData _itemGetMsg;
 
     private void Awake()
     {
@@ -29,29 +31,37 @@ public class Inventory : MonoBehaviour
 
         carriedItem = item;
         carriedItem.canvasGroup.blocksRaycasts = false;
-        item.transform.SetParent(draggablesTransform);
+        item.transform.SetParent(_draggablesTransform);
     }
 
     void AddItem(ItemSO item)
     {
-        for (int i = 0; i < slots.Length; i++)
+        for (int i = 0; i < _slots.Length; i++)
         {
             //Check if the slot is empty
-            if (slots[i].myItem == null)
+            if (_slots[i].myItem == null)
             {
-                Instantiate(itemPrefab, slots[i].transform).Initialize(item, slots[i]);
+                Instantiate(_itemPrefab, _slots[i].transform).Initialize(item, _slots[i]);
                 break;
             }
         }
     }
 
+    void GetItemHeadsUp(ItemSO item)
+    {
+        _itemGetMsg.lines[0] = $"Picked up {item.Name}";
+        DialogueManager.Instance.StartDialogue(_itemGetMsg);
+    }
+
     private void OnEnable()
     {
         InternalInventory<ItemSO>.OnItemAdded += AddItem;
+        InternalInventory<ItemSO>.OnItemAdded += GetItemHeadsUp;
     }
 
     private void OnDisable()
     {
         InternalInventory<ItemSO>.OnItemAdded -= AddItem;
+        InternalInventory<ItemSO>.OnItemAdded -= GetItemHeadsUp;
     }
 }
