@@ -5,6 +5,7 @@ public class Player : MonoBehaviour, IDamageable
     [Header(" Stats ")]
     [SerializeField] private Life _life;
     [SerializeField] private Mana _mana;
+    [SerializeField] private Sanity _sanity;
     [Tooltip("Sped")] [SerializeField] private float _speed = 3f;
     [Tooltip("Este es el incremento de velocidad cuando el jugador va a correr, no la velocidad a la que va a correr.")]
     [SerializeField] private float _runBoost = 5f;
@@ -33,6 +34,7 @@ public class Player : MonoBehaviour, IDamageable
     public Life Life => _life;
     // Lo mismo para el mana, cuando sea que se necesite gastar mana, se usa Player.Mana.SpendMP(cantidad);
     public Mana Mana => _mana;
+    public Sanity Sanity => _sanity;
     public float Speed => _speed;
     public float RunBoost => _runBoost;
     public InputController InputControl => _controller;
@@ -42,6 +44,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         _rb = GetComponent<Rigidbody>();
 
+        _sanity = new();
         _life = new(true, 100f);
         _mana = new(this);
         _interacter = new();

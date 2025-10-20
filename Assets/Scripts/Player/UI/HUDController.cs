@@ -15,6 +15,8 @@ public class HUDController : MonoBehaviour
     public Slider healthBar;
     public Slider manaBar;
 
+    [Tooltip("Warning: Not assigning these will result in cooldowns not working for some reason")]
+    [Header(" Cooldowns ")]
     [SerializeField] private CooldownUI _fireBallCD;
     [SerializeField] private CooldownUI _flameCD;
     [SerializeField] private CooldownUI _reigniteCD;

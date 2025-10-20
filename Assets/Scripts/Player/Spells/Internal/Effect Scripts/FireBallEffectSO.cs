@@ -4,8 +4,8 @@ using System;
 [CreateAssetMenu(menuName = "ScriptableObjects/Effects/FireBall")]
 public class FireBallEffectSO : EffectSO
 {
-    CastContext _context;
-    SpellSO _self;
+    private CastContext _context;
+    private SpellSO _self;
 
     public override void Init(CastContext castContext)
     {

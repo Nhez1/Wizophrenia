@@ -8,8 +8,8 @@ public class CooldownEffect : EffectSO
     public static event Action<SpellSO> OnCooldownStart;
     public static event Action<SpellSO> OnCooldownOver;
 
-    SpellSO _self;
-    float _cd;
+    private SpellSO _self;
+    private float _cd;
 
     MonoBehaviour _cRunner;
 

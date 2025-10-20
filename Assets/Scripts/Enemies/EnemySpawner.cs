@@ -52,7 +52,7 @@ public class EnemySpawner : MonoBehaviour
         Vector3 spawnPos = playerRef.transform.position + dir.normalized * spawnDistance;
 
         GameObject s = Instantiate(stalkerPrefab, spawnPos, Quaternion.identity);
-        _ = s.GetComponent<Stalker>();
+        _ = s.GetComponent<EyeDeer>();
 
         Debug.Log("Stalker spawneado en " + spawnPos);
     }

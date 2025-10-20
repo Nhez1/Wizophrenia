@@ -20,6 +20,7 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler
     {
         activeSlot = parent;
         activeSlot.myItem = this;
+        //transform.position = activeSlot.transform.position;
         myItem = item;
         itemIcon.sprite = item.icon;
     }

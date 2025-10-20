@@ -3,19 +3,30 @@ using UnityEngine;
 public class Billboard : MonoBehaviour
 {
     // This script is for 2D objects to be rendered properly inside a 3D space.
-    [SerializeField] private float xRotation = 0f;
-    [SerializeField] private float yRotation = 180f;
-    [SerializeField] private float zRotation = 0f;
+    [SerializeField] private bool _lockXRotation;
+    [SerializeField] private bool _lockYRotation;
+    [SerializeField] private bool _lockZRotation;
+
+    [SerializeField] private Vector3 _rotationOffset = new(0f, 0f, 0f);
 
     private void LateUpdate()
     {
-        Vector3 cameraPos = Camera.main.transform.position;
+        var cam = Camera.main;
+        if (!cam) return;
 
-        // Rotate only on Y axis.
-        cameraPos.y = transform.position.y;
-        // Make the sprite face the camera.
-        transform.LookAt(cameraPos);
-        // Rotate 180 on Y because of how SpriteRenderer works.
-        transform.Rotate(xRotation, yRotation, zRotation);
+        // Get direction toward camera
+        Vector3 dir = transform.position - cam.transform.position;
+        dir.y = 0;
+
+        Quaternion targetRot = Quaternion.LookRotation(dir);
+
+        Vector3 euler = targetRot.eulerAngles + _rotationOffset;
+        Vector3 current = transform.eulerAngles;
+
+        if (_lockXRotation) euler.x = current.x;
+        if (_lockYRotation) euler.y = current.y;
+        if (_lockZRotation) euler.z = current.z;
+
+        transform.rotation = Quaternion.Euler(euler);
     }
 }

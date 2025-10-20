@@ -1,6 +1,5 @@
-using UnityEngine;
-using UnityEngine.UI;
 using System;
+using UnityEngine;
 
 [System.Serializable]
 public class Life
@@ -16,14 +15,14 @@ public class Life
     public float MaxHP { get { return _maxHP; } private set { _maxHP = value; } }
     public float HP { get { return _hp; } private set => _hp = Mathf.Clamp(value, 0f, _maxHP); }
 
-    private bool p;
+    private bool _isP;
     private GameObject _client;
 
     public Life(bool isPlayer, float maxHP, GameObject gameObject = null)
     {
         MaxHP = maxHP;
         HP = MaxHP;
-        p = isPlayer;
+        _isP = isPlayer;
 
 
         _client = gameObject;
@@ -39,20 +38,18 @@ public class Life
     public void Heal(float amount)
     {
         if (HP < MaxHP) HP += amount;
-        UpdateHealth();
+
+        if (_isP) UpdateHealth();
     }
 
-    public void UpdateHealth()
-    {
-        if (p) OnHealthChanged?.Invoke(HP);
-    }
+    public void UpdateHealth() => OnHealthChanged?.Invoke(HP);
 
     public void SetHP(float amount) => HP = amount;
     public void SetMaxHP(float amount) => MaxHP = amount;
 
     void GameOver()
     {
-        if (p) Debug.Log("Game Over");
+        if (_isP) Debug.Log("Wizard dead");
         else UnityEngine.Object.Destroy(_client);
     }
 }

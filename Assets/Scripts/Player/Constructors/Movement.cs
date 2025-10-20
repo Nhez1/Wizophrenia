@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Movement
@@ -9,22 +8,22 @@ public class Movement
 
     //Stats
     public float Speed { get; private set; }
-    float _baseSpeed = 5f;
-    float _speedMin = 2f;
-    float _speedCap = 15f;
-    float _runBoost;
-    float _jumpForce;
+    private float _baseSpeed = 5f;
+    private float _speedMin = 2f;
+    private float _speedCap = 15f;
+    private float _runBoost;
+    private float _jumpForce;
 
     //Internal
-    Transform _transform;
-    Rigidbody _rb;
-    MonoBehaviour _cRunner;
-    Player _player;
+    private Transform _transform;
+    private Rigidbody _rb;
+    private MonoBehaviour _cRunner;
+    private Player _player;
     public bool isRunning = false;
 
     //Secondary
-    float potionModifier = 0;
-    bool runApplied = false;
+    private float _potionModifier = 0;
+    private bool _runApplied = false;
 
     public Movement(Transform t, Rigidbody r, float jF, float s, float rS, MonoBehaviour MB)
     {
@@ -43,11 +42,11 @@ public class Movement
     {
         if (!isRunning)
         {
-            if (runApplied)
+            if (_runApplied)
             {
                 //Si el jugador no está corriendo y tiene aplicado el buff de correr, removérselo.
                 DebuffSpeed(_runBoost);
-                runApplied = false;
+                _runApplied = false;
             }
         }
         _baseSpeed = _player.Speed;   //
@@ -65,11 +64,11 @@ public class Movement
     //-------------------------------------------------------------------------------- Correr
     public void Run()
     {
-        if (!runApplied)
+        if (!_runApplied)
         {
             //Si el buff de correr ya no está aplicado, aplicárselo.
             BuffSpeed(_runBoost);
-            runApplied = true;
+            _runApplied = true;
         }
         isRunning = true;
     }
@@ -80,7 +79,7 @@ public class Movement
     //--------------------------------------------------------------------------------
     private void UpdateSpeed()
     {
-        float walkSpeed = Mathf.Clamp(_baseSpeed + potionModifier, _speedMin, _speedCap);
+        float walkSpeed = Mathf.Clamp(_baseSpeed + _potionModifier, _speedMin, _speedCap);
         Speed = isRunning ? walkSpeed + _runBoost : walkSpeed;
         //Si el jugador está corriendo, Speed = walkSpeed + runBoost. Si no, Speed = walkSpeed.
     }
@@ -95,15 +94,15 @@ public class Movement
     //-------------------------------------------------------------------------------- Buff de velocidad
     public void BuffSpeed(float inc)
     {
-        potionModifier += inc;
+        _potionModifier += inc;
         UpdateSpeed();
     }
 
     //-------------------------------------------------------------------------------- Debuff de velocidad
     public void DebuffSpeed(float dec)
     {
-        potionModifier -= dec;
-        potionModifier = Mathf.Max(potionModifier, 0f);
+        _potionModifier -= dec;
+        _potionModifier = Mathf.Max(_potionModifier, 0f);
         UpdateSpeed();
     }
 
