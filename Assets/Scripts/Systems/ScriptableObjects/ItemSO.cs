@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class ItemSO : ScriptableObject, IItem
@@ -7,11 +5,11 @@ public abstract class ItemSO : ScriptableObject, IItem
     [field: SerializeField]
     public string Name { get; set; }
 
-    public readonly float amount;
     public Sprite icon;
     public ItemType type;
+    private float _amount;
 
-    public float Amount => amount;
+    public float Amount => _amount;
     public string Description => throw new System.NotImplementedException();
 }
 

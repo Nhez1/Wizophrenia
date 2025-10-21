@@ -6,13 +6,11 @@ public class AlchemySO : ScriptableObject
 {
     public PotionSO potionResult;
 
-    public HerbSO firstHerb;
-    public HerbSO secondHerb;
-
-    public void Mix()
+    public void Mix(HerbSO firstHerb, HerbSO secondHerb)
     {
         potionResult.healthModifier = firstHerb.healthModifier + secondHerb.healthModifier;
         potionResult.manaModifier = firstHerb.manaModifier + secondHerb.manaModifier;
+        potionResult.sanityModifier = firstHerb.sanityModifier + secondHerb.sanityModifier;
     }
 
 

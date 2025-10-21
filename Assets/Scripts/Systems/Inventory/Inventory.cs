@@ -4,12 +4,12 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public static Inventory Singleton;
-    public static InventoryItem carriedItem;
+    public static UIItem carriedItem;
 
-    [SerializeField] InventorySlot[] _slots;
+    [SerializeField] ItemSlot[] _slots;
 
     [SerializeField] Transform _draggablesTransform;
-    [SerializeField] InventoryItem _itemPrefab;
+    [SerializeField] UIItem _itemPrefab;
 
     [SerializeField] DialogueData _itemGetMsg;
 
@@ -25,12 +25,12 @@ public class Inventory : MonoBehaviour
         carriedItem.transform.position = Input.mousePosition;
     }
 
-    public void SetCarriedItem(InventoryItem item)
+    public void SetCarriedItem(UIItem item)
     {
-        if (carriedItem != null) item.activeSlot.SetItem(carriedItem);
+        if (carriedItem != null) item.ActiveSlot.SetItem(carriedItem);
 
         carriedItem = item;
-        carriedItem.canvasGroup.blocksRaycasts = false;
+        carriedItem.CanvasGroup.blocksRaycasts = false;
         item.transform.SetParent(_draggablesTransform);
     }
 
@@ -39,7 +39,7 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < _slots.Length; i++)
         {
             //Check if the slot is empty
-            if (_slots[i].myItem == null)
+            if (_slots[i].UIItem == null)
             {
                 Instantiate(_itemPrefab, _slots[i].transform).Initialize(item, _slots[i]);
                 break;

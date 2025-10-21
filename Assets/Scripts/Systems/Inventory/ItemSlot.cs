@@ -1,24 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class InventorySlot : MonoBehaviour, IPointerClickHandler
+public class ItemSlot : MonoBehaviour, IPointerClickHandler
 {
-    public InventoryItem myItem { get; set; }
+    public UIItem UIItem { get; set; }
 
-    public void SetItem(InventoryItem item)
+    public void SetItem(UIItem item)
     {
         Inventory.carriedItem = null;
 
         // Reset old slot
-        item.activeSlot.myItem = null;
+        item.ActiveSlot.UIItem = null;
 
         // Set current slot
-        myItem = item;
-        myItem.activeSlot = this;
-        myItem.transform.SetParent(transform);
-        myItem.canvasGroup.blocksRaycasts = true;
+        UIItem = item;
+        UIItem.ActiveSlot = this;
+        UIItem.transform.SetParent(transform);
+        UIItem.CanvasGroup.blocksRaycasts = true;
     }
 
     public void OnPointerClick(PointerEventData eventData)
