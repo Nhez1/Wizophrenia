@@ -47,21 +47,21 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    void GetItemHeadsUp(ItemSO item)
-    {
-        _itemGetMsg.lines[0] = $"Picked up {item.Name}";
-        DialogueManager.Instance.StartDialogue(_itemGetMsg);
-    }
+    //void GetItemHeadsUp(ItemSO item)
+    //{
+    //    _itemGetMsg.lines[0] = $"Picked up {item.Name}";
+    //    DialogueManager.Instance.StartDialogue(_itemGetMsg);
+    //}
 
     private void OnEnable()
     {
         InternalInventory<ItemSO>.OnItemAdded += AddItem;
-        InternalInventory<ItemSO>.OnItemAdded += GetItemHeadsUp;
+        //InternalInventory<ItemSO>.OnItemAdded += GetItemHeadsUp;
     }
 
     private void OnDisable()
     {
         InternalInventory<ItemSO>.OnItemAdded -= AddItem;
-        InternalInventory<ItemSO>.OnItemAdded -= GetItemHeadsUp;
+        //InternalInventory<ItemSO>.OnItemAdded -= GetItemHeadsUp;
     }
 }

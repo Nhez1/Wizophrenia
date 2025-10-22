@@ -54,7 +54,7 @@ public class InputController
             // Interact
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if (_interacter.CurrentInteractable != null) _interacter.CurrentInteractable.Interact();
+                _interacter.CurrentInteractable?.Interact();
             }
 
             // Refill mana

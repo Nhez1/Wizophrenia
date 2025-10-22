@@ -45,7 +45,7 @@ public class EyeDeer : MonoBehaviour
         float dot = Vector3.Dot(Camera.main.transform.forward, toEnemy); //ve si el player lo esta viendo
 
         //si el jugador lo mira se queda quieto, similar al disappearing spirit
-        if (dot > 0.7f) return true;
+        if (dot > .2f) return true;
         else return false;
     }
 }
