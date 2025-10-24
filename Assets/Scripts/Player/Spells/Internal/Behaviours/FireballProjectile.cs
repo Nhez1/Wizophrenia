@@ -3,22 +3,38 @@ using UnityEngine;
 
 public class FireballProjectile : Bullet
 {
+    [Header("Fireball Settings")]
     public float fireballSpeed = 5f;
+    public float knockBackForce;
+    public float knockBackTime;
+    [field: SerializeField] public float Dmg { get; private set; }
+
+    [Header("Audio")]
+    public AudioClip launchSound;
+    public AudioClip impactSound;
 
     Vector3 _spawnPos;
-    [Tooltip("The amount of force it will apply on to the object")]
-    public float knockBackForce;
-    [Tooltip("For how much time the enemy will be knocked back")]
-    public float knockBackTime;
-    [field: SerializeField]
-    public float Dmg { get; private set; }
+    AudioSource _audioSource;
 
     void Start()
     {
         _spawnPos = transform.position;
+
+        // Agregamos o usamos un AudioSource local
+        _audioSource = GetComponent<AudioSource>();
+        if (_audioSource == null)
+            _audioSource = gameObject.AddComponent<AudioSource>();
+
+        _audioSource.playOnAwake = false;
+        _audioSource.spatialBlend = 1f; // 3D
+        _audioSource.volume = 0.8f;
+
+        // Sonido de lanzamiento
+        if (launchSound != null)
+            _audioSource.PlayOneShot(launchSound);
+
         StartCoroutine(ReturnToPoolAfterLifeTime());
     }
-
 
     void Update()
     {
@@ -34,11 +50,12 @@ public class FireballProjectile : Bullet
             if (collision.gameObject.TryGetComponent<IDamageable>(out var enemy))
             {
                 DealDamage(enemy.Life);
-                if (collision.gameObject.TryGetComponent<IKnockbackable>(out var knockbackable)) knockbackable.Knockback(_spawnPos, knockBackForce, knockBackTime);
+                if (collision.gameObject.TryGetComponent<IKnockbackable>(out var knockbackable))
+                    knockbackable.Knockback(_spawnPos, knockBackForce, knockBackTime);
             }
         }
-        else if (collision.gameObject.CompareTag("Player")) return;
 
+        // Sonido de impacto y retorno inmediato al pool
         OnImpact();
     }
 
@@ -50,11 +67,19 @@ public class FireballProjectile : Bullet
 
     private void OnImpact()
     {
-        //Returns FireBall to item pool
-        FireBallFactory.Instance.ReturnFireBall(this);
-        //Spawns Impact particles
+        // Evita múltiples impactos
+        if (!gameObject.activeSelf) return;
+
+        // Reproduce sonido de impacto
+        if (impactSound != null)
+            AudioSource.PlayClipAtPoint(impactSound, transform.position, 0.8f);
+
+        // Partículas de impacto
         var sparks = SparksFactory.Instance.GetSparks();
         sparks.transform.position = transform.position;
+
+        // Devuelve al pool inmediatamente
+        FireBallFactory.Instance.ReturnFireBall(this);
     }
 
     void DealDamage(Life enemy) => enemy.Damage(Dmg);

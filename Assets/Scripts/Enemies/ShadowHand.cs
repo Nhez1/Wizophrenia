@@ -19,6 +19,11 @@ public class ShadowHand : MonoBehaviour, IDamageable
 
     public Life Life => _life;
 
+    // 🎧 Nuevo: sonido al robar el fuego
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip stealSound;
+
     private void OnEnable()
     {
         FlameEffectSO.OnFlameSwitchOff += OnFlameOff;
@@ -34,19 +39,23 @@ public class ShadowHand : MonoBehaviour, IDamageable
     private void Start()
     {
         _life = new(false, maxHP, gameObject);
+
+        // Si no hay AudioSource asignado, agregar uno al vuelo
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.playOnAwake = false;
+            audioSource.spatialBlend = 1f; // 3D sound
+        }
     }
 
     void Update()
     {
         if (player == null) return;
         _targetPos = player.transform.position;
-        // Se iguala la Y del targetPos a 0 para que se mantenga pegado al piso.
         _targetPos.y = .1f;
 
-        // Mover directo hacia la mano
         if (isFollowing) Move();
-
-        // Revisar distancia
         CheckDistance();
     }
 
@@ -63,6 +72,12 @@ public class ShadowHand : MonoBehaviour, IDamageable
 
     void StealFlame()
     {
+        // 🔥 Reproduce el sonido antes de destruirse
+        if (stealSound != null && audioSource != null)
+        {
+            AudioSource.PlayClipAtPoint(stealSound, transform.position);
+        }
+
         ForceFlameOff?.Invoke();
         player.Life.Damage(_dmg);
         Destroy(gameObject);

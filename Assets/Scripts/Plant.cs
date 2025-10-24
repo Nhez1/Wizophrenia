@@ -27,6 +27,8 @@ public class Plant : MonoBehaviour, IInteractable
     public string InteractMessage { get; set; }
     public bool IsActive => gameObject.activeSelf;
 
+   public AudioClip harvestClip;
+
     void Start()
     {
         SetDefault();
@@ -44,7 +46,7 @@ public class Plant : MonoBehaviour, IInteractable
 
     private void CheckPlantState()
     {
-        if (currentState == PlantState.Grown) //Si la planta está 'Crecida', que pare de crecer.
+        if (currentState == PlantState.Grown) //Si la planta estï¿½ 'Crecida', que pare de crecer.
         {
             InteractMessage = "Harvest";
             _canHarvest = true;
@@ -70,6 +72,7 @@ public class Plant : MonoBehaviour, IInteractable
         if (_canHarvest)
         {
             player.Inventory.AddItem(yield);
+            AudioSource.PlayClipAtPoint(harvestClip, transform.position);
             gameObject.SetActive(false);
         }
     }
