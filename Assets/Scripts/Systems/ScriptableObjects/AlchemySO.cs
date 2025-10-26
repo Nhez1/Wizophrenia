@@ -12,6 +12,4 @@ public class AlchemySO : ScriptableObject
         potionResult.manaModifier = firstHerb.manaModifier + secondHerb.manaModifier;
         potionResult.sanityModifier = firstHerb.sanityModifier + secondHerb.sanityModifier;
     }
-
-
 }

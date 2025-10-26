@@ -305,7 +305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 50
-  speed: 1.5
+  speed: 3
   stopDistance: 5
 --- !u!1 &9113752545924766028
 GameObject:

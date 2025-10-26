@@ -7,7 +7,7 @@ public class InputController
     public static event Action<float> RefillMana;
     public static event Action<float> RefillHP;
     public static event Action OnPause;
-    public static event Action OnBagOpen;
+    public static event Action OnBagToggle;
 
     public float MouseSensibility { get; set; }
     private float _xAxis, _zAxis;
@@ -72,7 +72,7 @@ public class InputController
             }
 
             // Open inventory
-            if (Input.GetKeyDown(KeyCode.B)) OnBagOpen?.Invoke();
+            if (Input.GetKeyDown(KeyCode.B)) OnBagToggle?.Invoke();
         }
 
         PauseSystem.OnUnpause += () => _paused = false;

@@ -4,16 +4,14 @@ using UnityEngine.UI;
 
 public class UIItem : MonoBehaviour, IPointerClickHandler
 {
-    Image itemIcon;
-    public CanvasGroup CanvasGroup { get; private set; }
+    private Image _itemIcon;
 
     public ItemSO Item { get; set; }
     public ItemSlot ActiveSlot { get; set; }
 
     private void Awake()
     {
-        CanvasGroup = GetComponent<CanvasGroup>();
-        itemIcon = GetComponent<Image>();
+        _itemIcon = GetComponent<Image>();
     }
 
     public void Initialize(ItemSO item, ItemSlot parent)
@@ -21,11 +19,33 @@ public class UIItem : MonoBehaviour, IPointerClickHandler
         ActiveSlot = parent;
         ActiveSlot.UIItem = this;
         Item = item;
-        itemIcon.sprite = item.icon;
+        _itemIcon.sprite = item.icon;
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left) Inventory.Singleton.SetCarriedItem(this);
+        UIItem item = UICursor.Instance.CurrentItem;
+
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            if (item == null)
+            {
+                UICursor.Instance.PickUp(this);
+            }
+            else
+            {
+                item.ActiveSlot.SetItem(item);
+                UICursor.Instance.PickUp(this);
+            }
+        }
+    }
+
+    public HerbSO PullHerb()
+    {
+        if (Item is HerbSO herb)
+        {
+            return herb;
+        }
+        else return null;
     }
 }

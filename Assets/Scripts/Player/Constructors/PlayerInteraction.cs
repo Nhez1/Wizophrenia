@@ -48,7 +48,7 @@ public class PlayerInteraction
         OnHoverEnter?.Invoke(currentInteractable);
     }
 
-    void HoverLeave() // Esto se ejecuta cuando se deja de mirar hacia un objeto.
+    public void HoverLeave() // Esto se ejecuta cuando se deja de mirar hacia un objeto.
     {
         if (currentInteractable != null)
         {

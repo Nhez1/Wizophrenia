@@ -8,7 +8,6 @@ public class Inventory : MonoBehaviour
 
     [SerializeField] ItemSlot[] _slots;
 
-    [SerializeField] Transform _draggablesTransform;
     [SerializeField] UIItem _itemPrefab;
 
     [SerializeField] DialogueData _itemGetMsg;
@@ -18,20 +17,12 @@ public class Inventory : MonoBehaviour
         Singleton = this;
     }
 
-    private void Update()
-    {
-        if (carriedItem == null) return;
-
-        carriedItem.transform.position = Input.mousePosition;
-    }
-
     public void SetCarriedItem(UIItem item)
     {
+        // If clicking an item while carrying another item, return the latter to its slot.
         if (carriedItem != null) item.ActiveSlot.SetItem(carriedItem);
 
         carriedItem = item;
-        carriedItem.CanvasGroup.blocksRaycasts = false;
-        item.transform.SetParent(_draggablesTransform);
     }
 
     void AddItem(ItemSO item)

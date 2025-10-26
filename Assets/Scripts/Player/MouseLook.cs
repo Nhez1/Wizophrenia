@@ -1,33 +1,60 @@
 using UnityEngine;
+using System;
 
 public class MouseLook : MonoBehaviour
 {
-    Transform parentTransform;
-    InputController _input;
-    Player player;
-    float xRotation = 45f;
+    public static event Action OnCameraLock;
+    public static event Action OnCameraUnlock;
 
-    public InputController InputControl => InputControl;
+    private Transform _parentTransform;
+    private InputController _input;
+    private Player _player;
+    private float _xRotation = 45f;
 
+    [field: SerializeField]
+    public bool CameraLocked { get; private set; }
 
     private void Start()
     {
-        parentTransform = transform.parent;
-        player = GetComponentInParent<Player>();
+        UnlockCamera();
 
-        _input = player.InputControl;
+        _parentTransform = transform.parent;
+        _player = GetComponentInParent<Player>();
 
-        Cursor.lockState = CursorLockMode.Locked;
+        _input = _player.InputControl;
     }
 
     private void Update()
     {
-        parentTransform.Rotate(Vector3.up * _input.MouseX);
+        if (!CameraLocked) MoveCamera();
+    }
 
-        xRotation -= _input.MouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+    private void MoveCamera()
+    {
+        _parentTransform.Rotate(Vector3.up * _input.MouseX);
 
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        _xRotation -= _input.MouseY;
+        _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
+
+        transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
+    }
+
+    /// <summary>
+    /// Camera locked = camera doesn't move, custom cursor is unlocked to move around.
+    /// </summary>
+    public void LockCamera()
+    {
+        CameraLocked = true;
+        OnCameraLock?.Invoke();
+    }
+
+    /// <summary>
+    /// Unlock the camera, default playing mode.
+    /// </summary>
+    public void UnlockCamera()
+    {
+        CameraLocked = false;
+        OnCameraUnlock?.Invoke();
     }
 }
 

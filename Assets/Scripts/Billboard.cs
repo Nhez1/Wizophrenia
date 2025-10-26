@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Billboard : MonoBehaviour
 {
-    // This script is for 2D objects to be rendered properly inside a 3D space.
+    // This script is for 2D objects to always look at the Camera
     [SerializeField] private bool _lockXRotation;
     [SerializeField] private bool _lockYRotation;
     [SerializeField] private bool _lockZRotation;

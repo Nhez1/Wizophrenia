@@ -9,10 +9,11 @@ public class MenuManager : MonoBehaviour
     [Header(" Game ")]
     public GameObject pauseMenu;
     public GameObject settingsMenu;
+    public GameObject alchemyMenu;
     public CanvasGroup inventoryMenu;
 
     public PauseSystem pause;
-    bool invSwitch;
+    public MouseLook mouse;
 
     void Start()
     {
@@ -28,24 +29,73 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    #region Inventory
+    private bool _invSwitch = false;
+
     void ActivateInventory()
     {
-        invSwitch = !invSwitch;
+        inventoryMenu.alpha = 1f;
 
-        if (invSwitch) inventoryMenu.alpha = 1.0f;
-        else inventoryMenu.alpha = 0f;
+        mouse.LockCamera();
+    }
+    void DeactivateInventory()
+    {
+        mouse.UnlockCamera();
+
+        inventoryMenu.alpha = 0f;
     }
 
-    void ActivatePauseMenu() => pauseMenu.SetActive(true);
+    void SwitchInventory()
+    {
+        _invSwitch = !_invSwitch;
+
+        if (_invSwitch) ActivateInventory();
+        else DeactivateInventory();
+    }
+    #endregion
+
+    #region Alchemy
+    private bool _alchSwitch = false;
+
+    public void ActivateAlchemyMenu()
+    {
+        alchemyMenu.SetActive(true);
+
+        ActivateInventory();
+    }
+    public void DeactivateAlchemyMenu()
+    {
+        alchemyMenu.SetActive(false);
+
+        DeactivateInventory();
+    }
+
+    private void SwitchAlchemy()
+    {
+        _alchSwitch = !_alchSwitch;
+
+        if (_alchSwitch) ActivateAlchemyMenu();
+        else DeactivateAlchemyMenu();
+    }
+    #endregion
+
+    void ActivatePauseMenu()
+    {
+        pauseMenu.SetActive(true);
+
+        mouse.LockCamera();
+    }
 
     private void OnEnable()
     {
         InputController.OnPause += ActivatePauseMenu;
-        InputController.OnBagOpen += ActivateInventory;
+        InputController.OnBagToggle += SwitchInventory;
+        CraftingManager.OnAlchemyToggle += SwitchAlchemy;
     }
     private void OnDisable()
     {
         InputController.OnPause -= ActivatePauseMenu;
-        InputController.OnBagOpen -= ActivateInventory;
+        InputController.OnBagToggle -= ActivateInventory;
+        CraftingManager.OnAlchemyToggle -= SwitchAlchemy;
     }
 }

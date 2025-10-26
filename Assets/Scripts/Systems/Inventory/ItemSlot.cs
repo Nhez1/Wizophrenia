@@ -7,24 +7,29 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
     public void SetItem(UIItem item)
     {
-        Inventory.carriedItem = null;
-
         // Reset old slot
         item.ActiveSlot.UIItem = null;
 
         // Set current slot
         UIItem = item;
         UIItem.ActiveSlot = this;
+        UIItem.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
         UIItem.transform.SetParent(transform);
-        UIItem.CanvasGroup.blocksRaycasts = true;
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        UIItem item = UICursor.Instance.CurrentItem;
+
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            if (Inventory.carriedItem == null) return;
-            SetItem(Inventory.carriedItem);
+            if (item != null)
+            {
+                if (UIItem == null) SetItem(item);
+                else item.ActiveSlot.SetItem(item);
+
+                UICursor.Instance.ClearHeldItem();
+            }
         }
     }
 }
