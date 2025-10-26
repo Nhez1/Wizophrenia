@@ -142,8 +142,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 930c8007c594eee46a095906f353e08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
-  growTime: 5
+  _currentState: 0
+  _growTime: 5
   player: {fileID: 4233118460745921005, guid: 4baad1060dfdbcf4a8216f4153c67126, type: 3}
-  yield: {fileID: 11400000, guid: ebc90ffd191313342875f7bd05b9e3a1, type: 2}
+  _yield: {fileID: 11400000, guid: ebc90ffd191313342875f7bd05b9e3a1, type: 2}
   <InteractMessage>k__BackingField: 
+  _harvestClip: {fileID: 8300000, guid: e32485b0c14de5643b7e7b85cdfc6f4e, type: 3}

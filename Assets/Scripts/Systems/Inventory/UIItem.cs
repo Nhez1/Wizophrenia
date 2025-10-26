@@ -6,6 +6,7 @@ public class UIItem : MonoBehaviour, IPointerClickHandler
 {
     private Image _itemIcon;
 
+    [field: SerializeField]
     public ItemSO Item { get; set; }
     public ItemSlot ActiveSlot { get; set; }
 

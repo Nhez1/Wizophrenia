@@ -16,6 +16,7 @@ public class CraftingManager : MonoBehaviour, IInteractable
     private HerbSO _herb3;
 
     public ItemSlot[] craftingSlots;
+    public ItemSlot resultSlot;
 
     public string InteractMessage => _interactMessage;
     public bool IsActive { get; set; }

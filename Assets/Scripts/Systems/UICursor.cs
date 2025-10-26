@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UICursor : MonoBehaviour
@@ -24,10 +21,8 @@ public class UICursor : MonoBehaviour
 
     public void ClearHeldItem()
     {
-        if (_currentItem == null) return;
-
-        _currentItem = null;
-        CustomCursor.gameObject.SetActive(false);
+        if (_currentItem != null) _currentItem = null;
+        else return;
     }
 
     private void Awake()
