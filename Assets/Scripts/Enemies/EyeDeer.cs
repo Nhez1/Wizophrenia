@@ -1,13 +1,17 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class EyeDeer : MonoBehaviour
 {
-    private Transform _player; //esta en private porque va a reconocer al player a traves del tag
     public float maxHP;
-    public float speed = 1.5f;
-    public float stopDistance = 5f;
+    private Transform _player; //esta en private porque va a reconocer al player a traves del tag
+    [SerializeField] private float _speed = 1.5f;
+    [SerializeField] private float _stopDistance = 5f;
 
     private EnemyProximityAnimator _proximityBehaviour;
+
+    [SerializeField] private Volume _vignette;
 
     void Start()
     {
@@ -27,16 +31,18 @@ public class EyeDeer : MonoBehaviour
         if (LookedAt()) return;
         else
         {
-            if (distance > stopDistance) Move();
+            if (distance > _stopDistance) Move();
         }
 
         _proximityBehaviour.OnUpdate();
+
+        if (Input.GetKeyDown(KeyCode.U)) Debug.Log("Turn on Vignette");
     }
 
     void Move()
     {
         Vector3 direction = (_player.position - transform.position).normalized;
-        transform.position += speed * Time.deltaTime * direction;
+        transform.position += _speed * Time.deltaTime * direction;
     }
 
     bool LookedAt()
@@ -47,5 +53,20 @@ public class EyeDeer : MonoBehaviour
         //si el jugador lo mira se queda quieto, similar al disappearing spirit
         if (dot > .2f) return true;
         else return false;
+    }
+
+    void DrainSanity()
+    {
+        var s = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().Sanity;
+    }
+
+    IEnumerator DrainSanityOverTime(Sanity playerSanity)
+    {
+
+        while (Vector3.Distance(transform.position, _player.position) <= _stopDistance)
+        {
+            playerSanity.Reduce(2);
+            yield return new WaitForSeconds(1);
+        }
     }
 }
