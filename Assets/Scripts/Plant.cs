@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public enum PlantState
@@ -15,6 +16,7 @@ public class Plant : MonoBehaviour, IInteractable
     [Header(" Plant Characteristics ")]
     //[SerializeField] private PlantState _currentState;
     //[SerializeField] private int _growTime = 5;
+    [SerializeField] private Sprite _brokenSprite;
     private bool _canHarvest;
 
     public Player player;
@@ -25,7 +27,7 @@ public class Plant : MonoBehaviour, IInteractable
 
     [field: SerializeField]
     public string InteractMessage { get; set; }
-    public bool IsActive => gameObject.activeSelf;
+    public bool IsActive => _canHarvest;
 
     [SerializeField] private AudioClip _harvestClip;
 
@@ -70,8 +72,14 @@ public class Plant : MonoBehaviour, IInteractable
         if (_canHarvest)
         {
             player.Inventory.AddItem(_yield);
+            _yield = null;
             AudioSource.PlayClipAtPoint(_harvestClip, transform.position);
-            gameObject.SetActive(false);
+            if (_brokenSprite != null)
+            {
+                GetComponent<SpriteRenderer>().sprite = _brokenSprite;
+            }
+            else gameObject.SetActive(false);
+            _canHarvest = false;
         }
     }
 

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f22a8fa6eeb55044487abdde3c79d7b6, type: 3}
   m_Name: Herb 1
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: herb
-  icon: {fileID: 21300000, guid: f99c1db898cf83c40a756484a5e0eb85, type: 3}
+  <Name>k__BackingField: Herb 1
+  icon: {fileID: 21300000, guid: 6d3a39eb6af21bf4ab881a78876c1240, type: 3}
   type: 0
-  healthModifier: -20
-  manaModifier: 0
+  healthModifier: 0
+  manaModifier: 20
   sanityModifier: 0

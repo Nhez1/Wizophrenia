@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 930c8007c594eee46a095906f353e08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _brokenSprite: {fileID: 21300000, guid: fb33762cd24fa5e45adcf55f7ce3154b, type: 3}
   player: {fileID: 4233118460745921005, guid: 4baad1060dfdbcf4a8216f4153c67126, type: 3}
   _yield: {fileID: 11400000, guid: 1b3d6d41b3fa1c440a12f7c3b086e877, type: 2}
   <InteractMessage>k__BackingField: Harvest
