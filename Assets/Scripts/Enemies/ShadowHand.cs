@@ -13,8 +13,8 @@ public class ShadowHand : MonoBehaviour, IDamageable
 
     public Player player;  //Aca colocar la mano desde el inspector (usar firepoint de ser necesario)
     private Vector3 _targetPos;
-    public float speed = 1.5f;
-    public float stopDistance = 0.3f;
+    [SerializeField] private float _speed = 3f;
+    [SerializeField] private float _stopDistance = 1.5f;
     bool isFollowing;
 
     public Life Life => _life;
@@ -62,12 +62,12 @@ public class ShadowHand : MonoBehaviour, IDamageable
     void OnFlameOff() => isFollowing = false;
     void OnFlameOn() => isFollowing = true;
 
-    void Move() => transform.position = Vector3.MoveTowards(transform.position, _targetPos, speed * Time.deltaTime);
+    void Move() => transform.position = Vector3.MoveTowards(transform.position, _targetPos, _speed * Time.deltaTime);
 
     void CheckDistance()
     {
         float dist = Vector3.Distance(transform.position, _targetPos);
-        if (isFollowing && dist <= stopDistance) StealFlame();
+        if (isFollowing && dist <= _stopDistance) StealFlame();
     }
 
     void StealFlame()
