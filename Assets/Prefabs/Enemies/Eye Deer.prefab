@@ -305,8 +305,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 50
-  speed: 7
-  stopDistance: 5
+  _speed: 1.5
+  _stopDistance: 5
+  _vignette: {fileID: 0}
 --- !u!1 &9113752545924766028
 GameObject:
   m_ObjectHideFlags: 0
