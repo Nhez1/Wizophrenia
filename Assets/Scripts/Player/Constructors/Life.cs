@@ -30,10 +30,20 @@ public class Life
 
     public void Damage(float amount)
     {
+        if (_maxHP <= 0f)
+        {
+            Debug.LogWarning("Life not initialized properly!");
+            return;
+        }
+
         HP -= amount;
-        if (HP <= 0) GameOver();
-        else UpdateHealth();
+        if (HP <= 0)
+            GameOver();
+        else if (_isP)
+            UpdateHealth();
     }
+
+
 
     public void Heal(float amount)
     {

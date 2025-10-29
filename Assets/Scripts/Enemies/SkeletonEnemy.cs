@@ -81,19 +81,32 @@ public class SkeletonEnemy : MonoBehaviour, IDamageable, IKnockbackable
 
     void Attack()
     {
-        Debug.Log($"{name} ataca al jugador e inflige {attackDamage} daño");
+        if (player == null)
+        {
+            Debug.LogWarning($"{name} no tiene jugador asignado para atacar.");
+            return;
+        }
 
-        Player playerScript = player.GetComponent<Player>();
-        if (playerScript != null)
+        // Buscar el script Player en el objeto detectado o en sus padres
+        Player playerScript = player.GetComponentInParent<Player>();
+        if (playerScript == null)
+        {
+            Debug.LogWarning($"{name}: No se encontró el componente Player en el jugador o su jerarquía.");
+            return;
+        }
+
+        // Aplicar daño usando la instancia de Life del jugador
+        if (playerScript.Life != null)
         {
             playerScript.Life.Damage(attackDamage);
-            Debug.Log($" Player recibió {attackDamage} daño (vida restante: {playerScript.Life.HP})");
+            Debug.Log($"{name} atacó al jugador e inflige {attackDamage} daño. Vida restante: {playerScript.Life.HP}");
         }
         else
         {
-            Debug.LogWarning(" No se encontró el componente Player en el objeto del jugador.");
+            Debug.LogWarning($"{name}: El jugador no tiene Life asignado.");
         }
     }
+
 
 
     public void Damage(float amount)

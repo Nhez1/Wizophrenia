@@ -18,7 +18,27 @@ public class VignetteEffectRenderer : ScriptableRendererFeature
 
             var cmd = CommandBufferPool.Get(kTag);
             material.SetFloat("_Intensity", settings.intensity.value);
+            if (material == null)
+            {
+                Debug.LogWarning($"{kTag}: material es null, se omite el efecto.");
+                return;
+            }
+
+            // Evita textura null interna
+            if (material.HasProperty("_MainTex") && material.GetTexture("_MainTex") == null)
+            {
+                material.SetTexture("_MainTex", Texture2D.blackTexture);
+            }
+
+            // Seguridad extra: evita blit con RTHandle nulos
+            if (renderingData.cameraData.renderer.cameraColorTargetHandle.rt == null)
+            {
+                Debug.LogWarning($"{kTag}: RTHandle de la cámara es null, se omite el blit.");
+                return;
+            }
+
             Blit(cmd, ref renderingData, material, 0);
+
             context.ExecuteCommandBuffer(cmd);
             CommandBufferPool.Release(cmd);
         }
