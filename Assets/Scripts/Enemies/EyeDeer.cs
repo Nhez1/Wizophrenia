@@ -69,7 +69,6 @@ public class EyeDeer : MonoBehaviour
         }
     }
 
-    // --- Este método lo llama el ExpansiveWave ---
     public void HitByExpansiveWave()
     {
         if (!_isDying)
@@ -93,7 +92,6 @@ public class EyeDeer : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    // --- Opcional: para debug, ver colisiones con la onda ---
     void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<ExpansiveWave>(out var wave))
