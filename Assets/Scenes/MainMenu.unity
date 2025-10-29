@@ -1105,7 +1105,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: New Scene
+          m_StringArgument: GameScene1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &965667774
@@ -1338,8 +1338,10 @@ MonoBehaviour:
   wantedActiveMenu: {fileID: 1940473354}
   pauseMenu: {fileID: 0}
   settingsMenu: {fileID: 0}
+  alchemyMenu: {fileID: 0}
   inventoryMenu: {fileID: 0}
   pause: {fileID: 0}
+  mouse: {fileID: 0}
 --- !u!114 &1103104134
 MonoBehaviour:
   m_ObjectHideFlags: 0

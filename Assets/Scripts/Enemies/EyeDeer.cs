@@ -6,39 +6,41 @@ public class EyeDeer : MonoBehaviour
 {
     [Header("Stats")]
     public float maxHP = 100f;
-
     [SerializeField] private float _speed = 1.5f;
     [SerializeField] private float _stopDistance = 5f;
 
+    private Animator _anim;
     private Transform _player;
     private EnemyProximityAnimator _proximityBehaviour;
 
     [Header("Effects")]
     [SerializeField] private Volume _vignette;
-
-    private bool _isDying = false;
+    private VignetteEffect _visualEffect;
+    private bool _isDraining = false;
+    private bool _isHidden = false;
 
     void Start()
     {
+        if(Application.isPlaying) _vignette.profile.TryGet(out _visualEffect);
+        _anim = GetComponent<Animator>();
+
         if (_player == null)
             _player = GameObject.FindGameObjectWithTag("Player").transform;
 
-        _proximityBehaviour = new EnemyProximityAnimator(GetComponent<Animator>(), _player, transform);
+        _proximityBehaviour = new(_anim, _player, transform);
     }
 
     void Update()
     {
-        if (_isDying) return;
-
         float distance = Vector3.Distance(transform.position, _player.position);
 
-        if (!LookedAt() && distance > _stopDistance)
+        if (!LookedAt() && distance > _stopDistance && !_isHidden)
+        {
             Move();
-
-        _proximityBehaviour.OnUpdate();
-
-        if (Input.GetKeyDown(KeyCode.U))
-            Debug.Log("Turn on Vignette");
+            _proximityBehaviour.OnUpdate();
+        }
+        
+        if (distance <= _stopDistance && !_isHidden) DrainSanity();
     }
 
     void Move()
@@ -55,48 +57,49 @@ public class EyeDeer : MonoBehaviour
         return dot > 0.2f;
     }
 
+    #region DrainSanityBehaviour
     void DrainSanity()
     {
-        var s = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().Sanity;
+        if (_isDraining) return;
+        _isDraining = true;
+
+        EnableVisualEffect(true);
+        //var s = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().Sanity;
+        StartCoroutine(DrainSanityOverTime(null));
     }
 
     IEnumerator DrainSanityOverTime(Sanity playerSanity)
     {
         while (Vector3.Distance(transform.position, _player.position) <= _stopDistance)
         {
-            playerSanity.Reduce(2);
+            //playerSanity.Reduce(2);
             yield return new WaitForSeconds(1f);
         }
+
+        _isDraining = false;
+        EnableVisualEffect(false);
     }
 
-    public void HitByExpansiveWave()
+    void EnableVisualEffect(bool on)
     {
-        if (!_isDying)
-        {
-            StartCoroutine(Die());
-        }
+        if (_visualEffect != null) _visualEffect.intensity.value = on ? 1f : 0f;
     }
+    #endregion
 
-    IEnumerator Die()
+    public void GetBlindedByFlame()
     {
-        _isDying = true;
-        _speed = 0;
-
-        Animator anim = GetComponent<Animator>();
-        if (anim != null)
-            anim.SetTrigger("Die");
-
-        // Espera la duración de la animación
-        yield return new WaitForSeconds(0.2f);
-
-        gameObject.SetActive(false);
+        _proximityBehaviour.StopBehaviour();
+        _anim.speed = 1;
+        _anim.Play("Hide");
+        EnableVisualEffect(false);
+        _isHidden = true;
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<ExpansiveWave>(out var wave))
+        if (other.GetComponent<ExpansiveWave>())
         {
-            HitByExpansiveWave();
+            GetBlindedByFlame();
         }
     }
 }

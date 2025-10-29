@@ -3,6 +3,7 @@ using UnityEngine;
 [System.Serializable]
 public class EnemyProximityAnimator
 {
+    private bool _isStop = false;
     private Animator _anim;
     private Transform _player;
     private Transform _enemy;
@@ -21,11 +22,16 @@ public class EnemyProximityAnimator
 
     public void OnUpdate()
     {
-        float dist = Vector3.Distance(_player.position, _enemy.position);
-        float t = Mathf.InverseLerp(_minAnimDistance, _maxAnimDistance, dist);
-        t = Mathf.Clamp01(1f - t);
+        if (!_isStop)
+        {
+            float dist = Vector3.Distance(_player.position, _enemy.position);
+            float t = Mathf.InverseLerp(_minAnimDistance, _maxAnimDistance, dist);
+            t = Mathf.Clamp01(1f - t);
 
-        _anim.Play(_stateName, 0, t);
-        _anim.speed = 0;
+            _anim.Play(_stateName, 0, t);
+            _anim.speed = 0;
+        }
     }
+
+    public void StopBehaviour() => _isStop = true;
 }

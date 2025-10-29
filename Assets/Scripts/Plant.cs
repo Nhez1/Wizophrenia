@@ -18,9 +18,13 @@ public class Plant : MonoBehaviour, IInteractable
     //[SerializeField] private int _growTime = 5;
     [SerializeField] private Sprite _brokenSprite;
     private bool _canHarvest;
+    public bool isLotus;
 
     public Player player;
     [SerializeField] private HerbSO _yield;
+
+    public PauseSystem pause;
+    public GameObject winCanvas;
 
     //private Animator _anim;
     //private Coroutine _growCycleCoroutine;
@@ -79,6 +83,13 @@ public class Plant : MonoBehaviour, IInteractable
                 GetComponent<SpriteRenderer>().sprite = _brokenSprite;
             }
             else gameObject.SetActive(false);
+
+            if (isLotus)
+            {
+                pause.Pause();
+                UICursor.Instance.ActivateCursor();
+                winCanvas.SetActive(true);
+            }
             _canHarvest = false;
         }
     }

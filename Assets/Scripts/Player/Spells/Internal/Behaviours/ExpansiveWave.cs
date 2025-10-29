@@ -10,7 +10,6 @@ public class ExpansiveWave : Bullet
 
     private void OnTriggerEnter(Collider collision)
     {
-        Debug.Log("Collided ");
         if (collision.gameObject.CompareTag("GhostEnemy"))
         {
             if (collision.TryGetComponent<IDamageable>(out var opp)) DealDamage(opp.Life);

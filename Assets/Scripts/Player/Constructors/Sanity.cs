@@ -6,7 +6,7 @@ public class Sanity
     public static event Action<float> OnSanityChanged;
 
     [Tooltip("Maximum sanity")]
-    [SerializeField] private float _maxSP;
+    [SerializeField] private float _maxSP = 1000f;
     [Tooltip("Current sanity")]
     [SerializeField] private float _sanity;
 

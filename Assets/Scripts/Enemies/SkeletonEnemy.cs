@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -16,11 +15,13 @@ public class SkeletonEnemy : MonoBehaviour, IDamageable, IKnockbackable
     public float attackCooldown = 1.5f;
 
     private float lastAttackTime;
+    [SerializeField] private float _detectArea = 8f;
 
     [Header("References")]
     [SerializeField] private Life _life;
     private Transform player;
     private CharacterController controller;
+    private Animator _anim;
 
     private Vector3 knockbackVelocity;
     private float knockbackTime;
@@ -29,9 +30,9 @@ public class SkeletonEnemy : MonoBehaviour, IDamageable, IKnockbackable
 
     void Start()
     {
+        _anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
-        Debug.Log($"Skeleton encontró al jugador: {player != null}");
 
         _life = new Life(false, maxHP, gameObject);
     }
@@ -40,9 +41,17 @@ public class SkeletonEnemy : MonoBehaviour, IDamageable, IKnockbackable
     {
         if (player == null || _life.HP <= 0) return;
 
-        HandleMovement();
-        HandleKnockback();
-        TryAttack();
+        var disToPlayer = Vector3.Distance(transform.position, player.transform.position);
+
+        if (disToPlayer <= _detectArea)
+        {
+            HandleMovement();
+            HandleKnockback();
+            TryAttack();
+            _anim.SetBool("IsFollowing", true);
+        }
+
+            _anim.SetBool("IsFollowing", false);
     }
 
     void HandleMovement()
@@ -55,9 +64,9 @@ public class SkeletonEnemy : MonoBehaviour, IDamageable, IKnockbackable
         transform.rotation = Quaternion.LookRotation(moveDir);
 
         if (distance > stopDistance)
-            controller.Move(moveDir * speed * Time.deltaTime);
+            controller.Move(speed * Time.deltaTime * moveDir);
 
-        controller.Move(Vector3.up * gravity * Time.deltaTime);
+        controller.Move(gravity * Time.deltaTime * Vector3.up);
     }
 
     void TryAttack()
@@ -71,20 +80,20 @@ public class SkeletonEnemy : MonoBehaviour, IDamageable, IKnockbackable
     }
 
     void Attack()
-{
-    Debug.Log($"{name} ataca al jugador e inflige {attackDamage} daño");
+    {
+        Debug.Log($"{name} ataca al jugador e inflige {attackDamage} daño");
 
-    Player playerScript = player.GetComponent<Player>();
-    if (playerScript != null)
-    {
-        playerScript.Life.Damage(attackDamage);
-        Debug.Log($" Player recibió {attackDamage} daño (vida restante: {playerScript.Life.HP})");
+        Player playerScript = player.GetComponent<Player>();
+        if (playerScript != null)
+        {
+            playerScript.Life.Damage(attackDamage);
+            Debug.Log($" Player recibió {attackDamage} daño (vida restante: {playerScript.Life.HP})");
+        }
+        else
+        {
+            Debug.LogWarning(" No se encontró el componente Player en el objeto del jugador.");
+        }
     }
-    else
-    {
-        Debug.LogWarning(" No se encontró el componente Player en el objeto del jugador.");
-    }
-}
 
 
     public void Damage(float amount)

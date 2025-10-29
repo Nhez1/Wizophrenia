@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-3448363389429101070
+--- !u!114 &-7791709231279247858
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,14 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d613f08f173d4dd895bb07b3230baa9, type: 3}
-  m_Name: Vignette
+  m_Script: {fileID: 11500000, guid: 224d77a782b09ea4ba8b93979b37e3b8, type: 3}
+  m_Name: VignetteEffectRenderer
   m_EditorClassIdentifier: 
-  m_Active: 0
-  passMaterial: {fileID: 2100000, guid: fb5814b14cab50a4891db28bab1a21e8, type: 2}
-  injectionPoint: 600
-  requirements: 4
-  passIndex: 0
+  m_Active: 1
+  vignetteMaterial: {fileID: 2100000, guid: fb5814b14cab50a4891db28bab1a21e8, type: 2}
 --- !u!114 &-1878332245247344467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,9 +68,9 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: -1878332245247344467}
   - {fileID: 7893615094261053477}
-  - {fileID: -3448363389429101070}
+  - {fileID: -7791709231279247858}
   - {fileID: 8614887899533516361}
-  m_RendererFeatureMap: adc0de57c6d2eee5257817271bc18b6df2cd9d7cc4f324d0499e81a7e63a8e77
+  m_RendererFeatureMap: adc0de57c6d2eee5257817271bc18b6d0eee7784bc49de93499e81a7e63a8e77
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -128,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d613f08f173d4dd895bb07b3230baa9, type: 3}
   m_Name: Pixelate Screen
   m_EditorClassIdentifier: 
-  m_Active: 0
+  m_Active: 1
   passMaterial: {fileID: 2100000, guid: 76d44e4053e823d49b52096a035b324a, type: 2}
   injectionPoint: 600
   requirements: 4
@@ -145,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d613f08f173d4dd895bb07b3230baa9, type: 3}
   m_Name: Volumetric Fog
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   passMaterial: {fileID: 2100000, guid: 2f1555e8ed5a43844882ed664fda95f2, type: 2}
   injectionPoint: 600
   requirements: 4

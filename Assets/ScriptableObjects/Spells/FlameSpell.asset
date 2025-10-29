@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: FlameSpell
   m_EditorClassIdentifier: 
   spellName: Flame Spell
-  cooldown: 2
+  cooldown: 4
   manaCost: 1
   canCast: 1
+  onCD: 0
   type: 0
   prefab: {fileID: 0}
   effects:
