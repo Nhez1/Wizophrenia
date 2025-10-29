@@ -4,39 +4,41 @@ using UnityEngine.Rendering;
 
 public class EyeDeer : MonoBehaviour
 {
-    public float maxHP;
-    private Transform _player; //esta en private porque va a reconocer al player a traves del tag
+    [Header("Stats")]
+    public float maxHP = 100f;
+
     [SerializeField] private float _speed = 1.5f;
     [SerializeField] private float _stopDistance = 5f;
 
+    private Transform _player;
     private EnemyProximityAnimator _proximityBehaviour;
 
+    [Header("Effects")]
     [SerializeField] private Volume _vignette;
+
+    private bool _isDying = false;
 
     void Start()
     {
         if (_player == null)
-        {
             _player = GameObject.FindGameObjectWithTag("Player").transform;
-        }
 
-        _proximityBehaviour = new(GetComponent<Animator>(), _player, transform);
+        _proximityBehaviour = new EnemyProximityAnimator(GetComponent<Animator>(), _player, transform);
     }
 
     void Update()
     {
-        float distance = Vector3.Distance(transform.position, _player.position);
-        //si no lo mira, se mueve
+        if (_isDying) return;
 
-        if (LookedAt()) return;
-        else
-        {
-            if (distance > _stopDistance) Move();
-        }
+        float distance = Vector3.Distance(transform.position, _player.position);
+
+        if (!LookedAt() && distance > _stopDistance)
+            Move();
 
         _proximityBehaviour.OnUpdate();
 
-        if (Input.GetKeyDown(KeyCode.U)) Debug.Log("Turn on Vignette");
+        if (Input.GetKeyDown(KeyCode.U))
+            Debug.Log("Turn on Vignette");
     }
 
     void Move()
@@ -48,11 +50,9 @@ public class EyeDeer : MonoBehaviour
     bool LookedAt()
     {
         Vector3 toEnemy = (transform.position - _player.position).normalized;
-        float dot = Vector3.Dot(Camera.main.transform.forward, toEnemy); //ve si el player lo esta viendo
+        float dot = Vector3.Dot(Camera.main.transform.forward, toEnemy);
 
-        //si el jugador lo mira se queda quieto, similar al disappearing spirit
-        if (dot > .2f) return true;
-        else return false;
+        return dot > 0.2f;
     }
 
     void DrainSanity()
@@ -62,11 +62,43 @@ public class EyeDeer : MonoBehaviour
 
     IEnumerator DrainSanityOverTime(Sanity playerSanity)
     {
-
         while (Vector3.Distance(transform.position, _player.position) <= _stopDistance)
         {
             playerSanity.Reduce(2);
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
+    // --- Este método lo llama el ExpansiveWave ---
+    public void HitByExpansiveWave()
+    {
+        if (!_isDying)
+        {
+            StartCoroutine(Die());
+        }
+    }
+
+    IEnumerator Die()
+    {
+        _isDying = true;
+        _speed = 0;
+
+        Animator anim = GetComponent<Animator>();
+        if (anim != null)
+            anim.SetTrigger("Die");
+
+        // Espera la duración de la animación
+        yield return new WaitForSeconds(0.2f);
+
+        gameObject.SetActive(false);
+    }
+
+    // --- Opcional: para debug, ver colisiones con la onda ---
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<ExpansiveWave>(out var wave))
+        {
+            HitByExpansiveWave();
         }
     }
 }
