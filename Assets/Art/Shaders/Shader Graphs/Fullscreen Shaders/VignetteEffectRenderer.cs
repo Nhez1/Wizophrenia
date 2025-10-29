@@ -33,7 +33,6 @@ public class VignetteEffectRenderer : ScriptableRendererFeature
             // Seguridad extra: evita blit con RTHandle nulos
             if (renderingData.cameraData.renderer.cameraColorTargetHandle.rt == null)
             {
-                Debug.LogWarning($"{kTag}: RTHandle de la cámara es null, se omite el blit.");
                 return;
             }
 
