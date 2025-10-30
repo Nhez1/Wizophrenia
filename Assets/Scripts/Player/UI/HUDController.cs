@@ -41,8 +41,7 @@ public class HUDController : MonoBehaviour
         else Debug.LogWarning("Interact message reference not applied in the inspector.");
     }
 
-    //-------------------------------------------------------------------------------- Interactables
-
+    #region Interactables
     public void OnInteractableHoverEnter(IInteractable interactable)
     {
         _interactMessage.text = interactable.InteractMessage + " (E)";
@@ -53,14 +52,12 @@ public class HUDController : MonoBehaviour
     {
         _interactMessage.gameObject.SetActive(false);
     }
-
-    //-------------------------------------------------------------------------------- Health & Mana 
-
+    #endregion
+    #region Health & Mana
     private void UpdateHealthBar(float hp) => healthBar.value = hp;
     private void UpdateManaBar(float mp) => manaBar.value = mp;
-
-    //-------------------------------------------------------------------------------- Cooldowns
-
+    #endregion
+    #region Cooldowns
     private void CooldownOn(SpellSO spell) 
     {
         _cdIcons[spell.type].onImage.gameObject.SetActive(false);
@@ -72,9 +69,8 @@ public class HUDController : MonoBehaviour
         _cdIcons[spell.type].offImage.gameObject.SetActive(false);
         _cdIcons[spell.type].onImage.gameObject.SetActive(true);
     }
-
-    //-------------------------------------------------------------------------------- Events
-
+    #endregion
+    #region Events
     private void OnEnable()
     {
         CooldownEffect.OnCooldownStart += CooldownOn;
@@ -94,4 +90,5 @@ public class HUDController : MonoBehaviour
         Life.OnHealthChanged -= UpdateHealthBar;
         Mana.OnManaChanged -= UpdateManaBar;
     }
+    #endregion
 }

@@ -4,17 +4,17 @@ using UnityEngine;
 public class FireballProjectile : Bullet
 {
     [Header("Fireball Settings")]
-    public float fireballSpeed = 5f;
-    public float knockBackForce;
-    public float knockBackTime;
+    [SerializeField] private float _fireballSpeed = 5f;
+    [SerializeField] private float _knockBackForce = 5f;
+    [SerializeField] private float _knockBackTime = .2f;
     [field: SerializeField] public float Dmg { get; private set; }
 
     [Header("Audio")]
-    public AudioClip launchSound;
-    public AudioClip impactSound;
+    [SerializeField] private AudioClip _launchSound;
+    [SerializeField] private AudioClip _impactSound;
 
-    Vector3 _spawnPos;
-    AudioSource _audioSource;
+    private Vector3 _spawnPos;
+    private AudioSource _audioSource;
 
     void Start()
     {
@@ -30,8 +30,8 @@ public class FireballProjectile : Bullet
         _audioSource.volume = 0.8f;
 
         // Sonido de lanzamiento
-        if (launchSound != null)
-            _audioSource.PlayOneShot(launchSound);
+        if (_launchSound != null)
+            _audioSource.PlayOneShot(_launchSound);
 
         StartCoroutine(ReturnToPoolAfterLifeTime());
     }
@@ -41,7 +41,7 @@ public class FireballProjectile : Bullet
         Move();
     }
 
-    void Move() => transform.Translate(fireballSpeed * Time.deltaTime * Vector3.forward);
+    void Move() => transform.Translate(_fireballSpeed * Time.deltaTime * Vector3.forward);
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -51,7 +51,7 @@ public class FireballProjectile : Bullet
             {
                 DealDamage(enemy.Life);
                 if (collision.gameObject.TryGetComponent<IKnockbackable>(out var knockbackable))
-                    knockbackable.Knockback(_spawnPos, knockBackForce, knockBackTime);
+                    knockbackable.Knockback(_spawnPos, _knockBackForce, _knockBackTime);
             }
         }
 
@@ -71,8 +71,8 @@ public class FireballProjectile : Bullet
         if (!gameObject.activeSelf) return;
 
         // Reproduce sonido de impacto
-        if (impactSound != null)
-            AudioSource.PlayClipAtPoint(impactSound, transform.position, 0.8f);
+        if (_impactSound != null)
+            AudioSource.PlayClipAtPoint(_impactSound, transform.position, 0.8f);
 
         // Partículas de impacto
         var sparks = SparksFactory.Instance.GetSparks();

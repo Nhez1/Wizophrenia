@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
+// DISCLAIMER: MADE BY AI //
 public class VignetteEffectRenderer : ScriptableRendererFeature
 {
     class Pass : ScriptableRenderPass

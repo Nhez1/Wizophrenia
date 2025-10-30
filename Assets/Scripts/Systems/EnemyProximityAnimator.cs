@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// DISCLAIMER: MADE BY AI //
 [System.Serializable]
 public class EnemyProximityAnimator
 {

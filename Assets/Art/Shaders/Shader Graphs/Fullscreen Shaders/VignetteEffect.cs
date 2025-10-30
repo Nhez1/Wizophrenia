@@ -1,6 +1,7 @@
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
+// DISCLAIMER: MADE BY AI //
 [System.Serializable, VolumeComponentMenu("Custom/VignetteEffect")]
 public class VignetteEffect : VolumeComponent, IPostProcessComponent
 {

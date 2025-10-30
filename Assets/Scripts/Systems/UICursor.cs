@@ -5,11 +5,9 @@ public class UICursor : MonoBehaviour
 {
     public static UICursor Instance;
 
-    [SerializeField] private Image _customCursor;
     private UIItem _currentItem;
 
     public UIItem CurrentItem => _currentItem;
-    public Image CustomCursor => _customCursor;
 
     public void PickUp(UIItem item)
     {
@@ -31,7 +29,6 @@ public class UICursor : MonoBehaviour
         _currentItem = null;
 
         UpdateCursorPos();
-        _customCursor.transform.position = Input.mousePosition;
     }
 
     void Update() => UpdateCursorPos();
@@ -40,12 +37,10 @@ public class UICursor : MonoBehaviour
     public void ActivateCursor()
     {
         Cursor.lockState = CursorLockMode.Confined;
-        if (CustomCursor != null) CustomCursor.gameObject.SetActive(true);
     }
     public void DeactivateCursor()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        if (CustomCursor != null) CustomCursor.gameObject.SetActive(false);
     }
 
     private void OnEnable()
