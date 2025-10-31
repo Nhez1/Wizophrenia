@@ -19,6 +19,8 @@ public class MenuManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
 
+        if (inventoryMenu = null) GetComponentInChildren<CanvasGroup>(true);
+
         if (allMenus.Length > 0)
         {
             foreach (var menu in allMenus)

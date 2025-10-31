@@ -169,8 +169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 881848d6d59f82041810732864685a7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 5
-  _fireballSpeed: 5
+  lifeTime: 3
+  _fireballSpeed: 6
   _knockBackForce: 5
   _knockBackTime: 0.2
   <Dmg>k__BackingField: 50
