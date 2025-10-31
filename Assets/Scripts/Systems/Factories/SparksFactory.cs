@@ -27,5 +27,8 @@ public class SparksFactory : MonoBehaviour
         return _pool.GetObject();
     }
 
-    public void ReturnSparks(SparksEffect f) => _pool.ReturnObjectToPool(f);
+    public void ReturnSparks(SparksEffect f)
+    {
+        _pool.ReturnObjectToPool(f);
+    }
 }

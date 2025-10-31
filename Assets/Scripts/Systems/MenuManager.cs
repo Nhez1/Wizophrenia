@@ -2,33 +2,24 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
-    [Header(" Main Menu ")]
-    public Canvas[] allMenus;
-    public Canvas wantedActiveMenu;
+    [Header(" Game Menus ")]
+    [SerializeField] private GameObject _pauseMenu;
+    [SerializeField] private GameObject _settingsMenu;
+    [SerializeField] private GameObject _alchemyMenu;
+    [SerializeField] private GameObject _inventoryMenu;
+    private CanvasGroup _inventory;
 
-    [Header(" Game ")]
-    public GameObject pauseMenu;
-    public GameObject settingsMenu;
-    public GameObject alchemyMenu;
-    public CanvasGroup inventoryMenu;
+    private PauseSystem _pause;
+    private MouseLook _mouse;
 
-    public PauseSystem pause;
-    public MouseLook mouse;
-
-    void Start()
+    private void Start()
     {
         Time.timeScale = 1.0f;
 
-        if (inventoryMenu = null) GetComponentInChildren<CanvasGroup>(true);
+        _pause = GetComponent<PauseSystem>();
+        _mouse = Camera.main.GetComponent<MouseLook>();
 
-        if (allMenus.Length > 0)
-        {
-            foreach (var menu in allMenus)
-            {
-                menu.gameObject.SetActive(false);
-                if (wantedActiveMenu != null) wantedActiveMenu.gameObject.SetActive(true);
-            }
-        }
+        _inventory = _inventoryMenu.GetComponent<CanvasGroup>();
     }
 
     #region Inventory
@@ -36,15 +27,15 @@ public class MenuManager : MonoBehaviour
 
     void ActivateInventory()
     {
-        inventoryMenu.alpha = 1f;
+        _inventory.alpha = 1f;
 
-        mouse.LockCamera();
+        _mouse.LockCamera();
     }
     void DeactivateInventory()
     {
-        mouse.UnlockCamera();
+        _mouse.UnlockCamera();
 
-        inventoryMenu.alpha = 0f;
+        _inventory.alpha = 0f;
     }
 
     void SwitchInventory()
@@ -61,13 +52,13 @@ public class MenuManager : MonoBehaviour
 
     public void ActivateAlchemyMenu()
     {
-        alchemyMenu.SetActive(true);
+        _alchemyMenu.SetActive(true);
 
         ActivateInventory();
     }
     public void DeactivateAlchemyMenu()
     {
-        alchemyMenu.SetActive(false);
+        _alchemyMenu.SetActive(false);
 
         DeactivateInventory();
     }
@@ -83,9 +74,9 @@ public class MenuManager : MonoBehaviour
 
     void ActivatePauseMenu()
     {
-        pauseMenu.SetActive(true);
+        _pauseMenu.SetActive(true);
 
-        mouse.LockCamera();
+        _mouse.LockCamera();
     }
 
     private void OnEnable()

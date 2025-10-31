@@ -1226,7 +1226,7 @@ GameObject:
   - component: {fileID: 1103104131}
   - component: {fileID: 1103104130}
   - component: {fileID: 1103104129}
-  - component: {fileID: 1103104133}
+  - component: {fileID: 1103104135}
   - component: {fileID: 1103104134}
   m_Layer: 5
   m_Name: Canvas
@@ -1320,28 +1320,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1103104133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1103104128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4de3637eece939d4baa6c5c55ab5b1c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  allMenus:
-  - {fileID: 1493111272}
-  - {fileID: 870444893}
-  wantedActiveMenu: {fileID: 1940473354}
-  pauseMenu: {fileID: 0}
-  settingsMenu: {fileID: 0}
-  alchemyMenu: {fileID: 0}
-  inventoryMenu: {fileID: 0}
-  pause: {fileID: 0}
-  mouse: {fileID: 0}
 --- !u!114 &1103104134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1354,6 +1332,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6654340f3eb900348a5956f0ba05998a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1103104135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103104128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f0e76f6a13da454eaf2a94aa694a346, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allMenus:
+  - {fileID: 1940473354}
+  - {fileID: 1493111272}
+  - {fileID: 870444893}
+  wantedActiveMenu: {fileID: 1940473354}
 --- !u!1 &1220576525
 GameObject:
   m_ObjectHideFlags: 0

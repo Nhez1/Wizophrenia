@@ -43,7 +43,7 @@ Material:
     - _MinDistance: 5
     - _MinOpacity: 0.904
     m_Colors:
-    - _Color: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 0}
+    - _Color: {r: 0.084905684, g: 0.084905684, b: 0.084905684, a: 0}
     - _Offset: {r: 0, g: 0.075, b: 0, a: 0}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []

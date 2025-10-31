@@ -3,11 +3,18 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
 
-    [SerializeField] ItemSlot[] _slots;
+    [SerializeField] private ItemSlot[] _slots;
 
-    [SerializeField] UIItem _itemPrefab;
+    [SerializeField] private UIItem _itemPrefab;
 
-    [SerializeField] DialogueData _itemGetMsg;
+    [SerializeField] private DialogueData _itemGetMsg;
+
+    [SerializeField] private CanvasGroup _self;
+
+    private void Start()
+    {
+        _self = GetComponent<CanvasGroup>();
+    }
 
     void AddItem(ItemSO item)
     {

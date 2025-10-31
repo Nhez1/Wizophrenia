@@ -16,14 +16,15 @@ public class FireballProjectile : Bullet
     private Vector3 _spawnPos;
     private AudioSource _audioSource;
 
-    void Start()
+    private float _timer;
+
+    private void OnEnable()
     {
+        _timer = 0f;
         _spawnPos = transform.position;
 
         // Agregamos o usamos un AudioSource local
-        _audioSource = GetComponent<AudioSource>();
-        if (_audioSource == null)
-            _audioSource = gameObject.AddComponent<AudioSource>();
+        if (!TryGetComponent(out _audioSource)) _audioSource = gameObject.AddComponent<AudioSource>();
 
         _audioSource.playOnAwake = false;
         _audioSource.spatialBlend = 1f; // 3D
@@ -32,13 +33,12 @@ public class FireballProjectile : Bullet
         // Sonido de lanzamiento
         if (_launchSound != null)
             _audioSource.PlayOneShot(_launchSound);
-
-        StartCoroutine(ReturnToPoolAfterLifeTime());
     }
 
     void Update()
     {
         Move();
+        ReturnAfterLifeTime();
     }
 
     void Move() => transform.Translate(_fireballSpeed * Time.deltaTime * Vector3.forward);
@@ -59,10 +59,10 @@ public class FireballProjectile : Bullet
         OnImpact();
     }
 
-    protected override IEnumerator ReturnToPoolAfterLifeTime()
+    private void ReturnAfterLifeTime()
     {
-        yield return new WaitForSeconds(lifeTime);
-        OnImpact();
+        _timer += Time.deltaTime;
+        if (_timer >= lifeTime) OnImpact();
     }
 
     private void OnImpact()

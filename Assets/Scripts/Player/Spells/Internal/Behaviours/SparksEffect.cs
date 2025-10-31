@@ -3,16 +3,17 @@ using UnityEngine;
 
 public class SparksEffect : Bullet
 {
-    void Start()
-    {
-        lifeTime = 2f;
+    private float _timer;
 
-        StartCoroutine(ReturnToPoolAfterLifeTime());
+    private void OnEnable()
+    {
+        _timer = 0f;
+        ReturnAfterLifeTime();
     }
 
-    protected override IEnumerator ReturnToPoolAfterLifeTime()
+    private void ReturnAfterLifeTime()
     {
-        yield return new WaitForSeconds(lifeTime);
-        SparksFactory.Instance.ReturnSparks(this);
+        _timer += Time.deltaTime;
+        if (_timer >= lifeTime) SparksFactory.Instance.ReturnSparks(this);
     }
 }

@@ -3,9 +3,12 @@ using UnityEngine;
 
 public class ExpansiveWave : Bullet
 {
-    void Start()
+    private float _timer;
+
+    private void OnEnable()
     {
-        StartCoroutine(ReturnToPoolAfterLifeTime());
+        _timer = 0f;
+        ReturnAfterLifeTime();
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -18,10 +21,10 @@ public class ExpansiveWave : Bullet
 
     void DealDamage(Life enemy) => enemy.Damage(100f);
 
-    protected override IEnumerator ReturnToPoolAfterLifeTime()
+    private void ReturnAfterLifeTime()
     {
-        yield return new WaitForSeconds(lifeTime);
-        OnImpact();
+        _timer += Time.deltaTime;
+        if (_timer >= lifeTime) OnImpact();
     }
 
     private void OnImpact()
