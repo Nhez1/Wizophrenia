@@ -7,9 +7,8 @@ public class Life
     public static event Action<float> OnHealthChanged;
 
     //public static event Action GameOverEvent;
-    [Tooltip("Maximum HP")]
-    [SerializeField] private float _maxHP;
     [Tooltip("Health Points")]
+    private float _maxHP;
     [SerializeField] private float _hp;
 
     public float MaxHP { get { return _maxHP; } private set { _maxHP = value; } }
@@ -42,8 +41,6 @@ public class Life
         else if (_isP)
             UpdateHealth();
     }
-
-
 
     public void Heal(float amount)
     {

@@ -16,7 +16,6 @@ public class Billboard : MonoBehaviour
 
         // Get direction toward camera
         Vector3 dir = transform.position - cam.transform.position;
-        dir.y = 0;
 
         Quaternion targetRot = Quaternion.LookRotation(dir);
 

@@ -7,21 +7,18 @@ public class FireballProjectile : Bullet
     [SerializeField] private float _fireballSpeed = 5f;
     [SerializeField] private float _knockBackForce = 5f;
     [SerializeField] private float _knockBackTime = .2f;
+    private float _timer;
     [field: SerializeField] public float Dmg { get; private set; }
 
     [Header("Audio")]
     [SerializeField] private AudioClip _launchSound;
     [SerializeField] private AudioClip _impactSound;
 
-    private Vector3 _spawnPos;
     private AudioSource _audioSource;
-
-    private float _timer;
 
     private void OnEnable()
     {
         _timer = 0f;
-        _spawnPos = transform.position;
 
         // Agregamos o usamos un AudioSource local
         if (!TryGetComponent(out _audioSource)) _audioSource = gameObject.AddComponent<AudioSource>();
@@ -51,7 +48,7 @@ public class FireballProjectile : Bullet
             {
                 DealDamage(enemy.Life);
                 if (collision.gameObject.TryGetComponent<IKnockbackable>(out var knockbackable))
-                    knockbackable.Knockback(_spawnPos, _knockBackForce, _knockBackTime);
+                    knockbackable.Knockback(transform.position, _knockBackForce, _knockBackTime);
             }
         }
 
@@ -82,5 +79,5 @@ public class FireballProjectile : Bullet
         FireBallFactory.Instance.ReturnFireBall(this);
     }
 
-    void DealDamage(Life enemy) => enemy.Damage(Dmg);
+    void DealDamage(Life target) => target.Damage(Dmg);
 }
