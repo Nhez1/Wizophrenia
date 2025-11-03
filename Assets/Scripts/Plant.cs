@@ -16,15 +16,11 @@ public class Plant : MonoBehaviour, IInteractable
     [Header(" Plant Characteristics ")]
     //[SerializeField] private PlantState _currentState;
     //[SerializeField] private int _growTime = 5;
+    [SerializeField] private HerbSO _yield;
     [SerializeField] private Sprite _brokenSprite;
     private bool _canHarvest;
-    public bool isLotus;
 
-    public Player player;
-    [SerializeField] private HerbSO _yield;
-
-    public PauseSystem pause;
-    public GameObject winCanvas;
+    private Player _player;
 
     //private Animator _anim;
     //private Coroutine _growCycleCoroutine;
@@ -38,6 +34,7 @@ public class Plant : MonoBehaviour, IInteractable
     void Start()
     {
         _canHarvest = true;
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         //_anim = GetComponent<Animator>();
     }
 
@@ -75,7 +72,7 @@ public class Plant : MonoBehaviour, IInteractable
     {
         if (_canHarvest)
         {
-            player.Inventory.AddItem(_yield);
+            if(_player) _player.Inventory.AddItem(_yield);
             _yield = null;
             AudioSource.PlayClipAtPoint(_harvestClip, transform.position);
             if (_brokenSprite != null)
@@ -84,12 +81,6 @@ public class Plant : MonoBehaviour, IInteractable
             }
             else gameObject.SetActive(false);
 
-            if (isLotus)
-            {
-                pause.Pause();
-                UICursor.Instance.ActivateCursor();
-                winCanvas.SetActive(true);
-            }
             _canHarvest = false;
         }
     }

@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85ca41bb2c9aac44c90538429f0f331e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lockXRotation: 0
+  _lockXRotation: 1
   _lockYRotation: 0
-  _lockZRotation: 0
+  _lockZRotation: 1
   _rotationOffset: {x: 0, y: 0, z: 0}

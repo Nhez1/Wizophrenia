@@ -89,4 +89,10 @@ public class Skeleton : MonoBehaviour, IDamageable, IKnockbackable
 
         _canAttack = true;
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = new Color(1, 0, 0, 0.5f);
+        Gizmos.DrawSphere(transform.position, _detectArea);
+    }
 }
