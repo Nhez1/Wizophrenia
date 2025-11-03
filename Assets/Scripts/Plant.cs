@@ -34,7 +34,7 @@ public class Plant : MonoBehaviour, IInteractable
     void Start()
     {
         _canHarvest = true;
-        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        _player = FindObjectOfType<Player>();
         //_anim = GetComponent<Animator>();
     }
 

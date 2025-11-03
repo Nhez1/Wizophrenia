@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.014407376, g: 0.05795964, b: 0.10584588, a: 1}
+  m_IndirectSpecularColor: {r: 0.01440346, g: 0.05788061, b: 0.10578639, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -853,6 +853,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a47638138e98784ca16c3c538d42ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _clearHandSlot: {fileID: 0}
+  _onHandSlotFillEvent: {fileID: 0}
+  <IsHandSlot>k__BackingField: 0
 --- !u!1 &11294694
 GameObject:
   m_ObjectHideFlags: 0
@@ -14242,6 +14245,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a47638138e98784ca16c3c538d42ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _clearHandSlot: {fileID: 0}
+  _onHandSlotFillEvent: {fileID: 0}
+  <IsHandSlot>k__BackingField: 0
 --- !u!4 &206166428 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 838496326001704678, guid: 0798faaa12f2f844cbea681bd33782e9,
@@ -26586,6 +26592,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a47638138e98784ca16c3c538d42ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _clearHandSlot: {fileID: 0}
+  _onHandSlotFillEvent: {fileID: 0}
+  <IsHandSlot>k__BackingField: 0
 --- !u!1 &407877210
 GameObject:
   m_ObjectHideFlags: 0
@@ -32140,6 +32149,98 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 477721595}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &479413345
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 479413346}
+  - component: {fileID: 479413349}
+  - component: {fileID: 479413348}
+  - component: {fileID: 479413347}
+  m_Layer: 5
+  m_Name: HandSlot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &479413346
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479413345}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 943345127}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 107, y: -379}
+  m_SizeDelta: {x: 60, y: 60}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &479413347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479413345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a47638138e98784ca16c3c538d42ecf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clearHandSlot: {fileID: 11400000, guid: 442f3ba95a95e6044968e30ec6293dc0, type: 2}
+  _onHandSlotFillEvent: {fileID: 11400000, guid: 6ebe90ec14a7b2944bbfb6088c8add27,
+    type: 2}
+  <IsHandSlot>k__BackingField: 1
+--- !u!114 &479413348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479413345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.56078434, g: 0.3137255, b: 0.18431373, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &479413349
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479413345}
+  m_CullTransparentMesh: 1
 --- !u!1001 &480460339
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37100,6 +37201,8 @@ GameObject:
   - component: {fileID: 568273761}
   - component: {fileID: 568273760}
   - component: {fileID: 568273759}
+  - component: {fileID: 568273763}
+  - component: {fileID: 568273764}
   m_Layer: 5
   m_Name: Right Hand
   m_TagString: Untagged
@@ -37139,7 +37242,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6110ebf03f5eeaa45843eb2a6a9d36a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 568273760}
+  _leftHand: {fileID: 328816236}
+  _anim: {fileID: 0}
 --- !u!95 &568273760
 Animator:
   serializedVersion: 5
@@ -37199,6 +37303,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 568273757}
   m_CullTransparentMesh: 1
+--- !u!114 &568273763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568273757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc41437f3d095004db67640cd28f6a12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameEvent: {fileID: 11400000, guid: 6ebe90ec14a7b2944bbfb6088c8add27, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 568273759}
+        m_TargetAssemblyTypeName: RightHandler, Assembly-CSharp
+        m_MethodName: OccupyHandSlot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: ItemSO, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &568273764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568273757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc41437f3d095004db67640cd28f6a12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameEvent: {fileID: 11400000, guid: 442f3ba95a95e6044968e30ec6293dc0, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 568273759}
+        m_TargetAssemblyTypeName: RightHandler, Assembly-CSharp
+        m_MethodName: ClearHandSlot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &568988216
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42886,6 +43046,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a47638138e98784ca16c3c538d42ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _clearHandSlot: {fileID: 0}
+  _onHandSlotFillEvent: {fileID: 0}
+  <IsHandSlot>k__BackingField: 0
 --- !u!114 &676961906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49911,6 +50074,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a47638138e98784ca16c3c538d42ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _clearHandSlot: {fileID: 0}
+  _onHandSlotFillEvent: {fileID: 0}
+  <IsHandSlot>k__BackingField: 0
 --- !u!114 &801842632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58370,7 +58536,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &925556173
 Light:
   m_ObjectHideFlags: 0
@@ -59107,12 +59273,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1543499327}
+  - {fileID: 479413346}
   m_Father: {fileID: 1371262039}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 677.32825, y: 1.2810059}
-  m_SizeDelta: {x: -1707, y: -679.551}
+  m_AnchoredPosition: {x: 675, y: 0}
+  m_SizeDelta: {x: -1710, y: -680}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &943345128
 MonoBehaviour:
@@ -59126,6 +59293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f2e2448a8e7094b97cb0dffd288767, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onHandSlotFillEvent: {fileID: 0}
   _slots:
   - {fileID: 1271590643}
   - {fileID: 1037635972}
@@ -59136,7 +59304,6 @@ MonoBehaviour:
   _itemPrefab: {fileID: 1711610455610333848, guid: e3ad515fbe7f92e45bf1f171180e1541,
     type: 3}
   _itemGetMsg: {fileID: 11400000, guid: 46e663ce698702e489e926eecf7b3bf2, type: 2}
-  _self: {fileID: 0}
 --- !u!114 &943345129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61843,6 +62010,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a47638138e98784ca16c3c538d42ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _clearHandSlot: {fileID: 0}
+  _onHandSlotFillEvent: {fileID: 0}
+  <IsHandSlot>k__BackingField: 0
 --- !u!114 &994409501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64014,6 +64184,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a47638138e98784ca16c3c538d42ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _clearHandSlot: {fileID: 0}
+  _onHandSlotFillEvent: {fileID: 0}
+  <IsHandSlot>k__BackingField: 0
 --- !u!114 &1037635973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76334,7 +76507,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 270, y: -58.391205}
+  m_AnchoredPosition: {x: 270, y: -58.391113}
   m_SizeDelta: {x: 427.88684, y: 80.782776}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1233223354
@@ -78469,6 +78642,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a47638138e98784ca16c3c538d42ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _clearHandSlot: {fileID: 0}
+  _onHandSlotFillEvent: {fileID: 0}
+  <IsHandSlot>k__BackingField: 0
 --- !u!114 &1271590644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93128,6 +93304,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a47638138e98784ca16c3c538d42ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _clearHandSlot: {fileID: 0}
+  _onHandSlotFillEvent: {fileID: 0}
+  <IsHandSlot>k__BackingField: 0
 --- !u!114 &1503090236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94945,10 +95124,10 @@ RectTransform:
   - {fileID: 676961904}
   m_Father: {fileID: 943345127}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 4.5, y: -5}
-  m_SizeDelta: {x: -9, y: -10}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 3, y: 0}
+  m_SizeDelta: {x: 200, y: 380}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1543499328
 MonoBehaviour:
@@ -97206,6 +97385,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a47638138e98784ca16c3c538d42ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _clearHandSlot: {fileID: 0}
+  _onHandSlotFillEvent: {fileID: 0}
+  <IsHandSlot>k__BackingField: 0
 --- !u!114 &1578788635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119984,15 +120166,15 @@ RectTransform:
   m_GameObject: {fileID: 1953440514}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.8062087, y: 1.8062087, z: 1.8062087}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1371262039}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 677.3282, y: 1.2810059}
-  m_SizeDelta: {x: -1707, y: -679.551}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &1953440516
 CanvasGroup:

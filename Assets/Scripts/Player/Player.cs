@@ -23,7 +23,6 @@ public class Player : MonoBehaviour, IDamageable
     public SpellSO fireSpell;
     public SpellSO exorciseSpell;
 
-    private InternalInventory<ItemSO> _inventory;
     private PlayerInteraction _interacter;
     private InputController _controller;
     private Movement _move;
@@ -38,7 +37,7 @@ public class Player : MonoBehaviour, IDamageable
     public float Speed => _speed;
     public float RunBoost => _runBoost;
     public InputController InputControl => _controller;
-    public InternalInventory<ItemSO> Inventory => _inventory;
+    public Inventory Inventory { get; private set; }
 
     private void Awake()
     {
@@ -51,7 +50,7 @@ public class Player : MonoBehaviour, IDamageable
         _move = new(transform, _rb, _jumpForce, _speed, _runBoost, this);
         _spellManager = new(_mana, spellCastPoint, this);
         _controller = new(_move, _spellManager, _interacter);
-        _inventory = new();
+        Inventory = FindObjectOfType<Inventory>();
     }
 
     private void Start()
@@ -92,7 +91,6 @@ public class Player : MonoBehaviour, IDamageable
         CraftingManager.OnAlchemyToggle -= _interacter.HoverLeave;
         InputController.RefillMana -= _mana.Restore;
         InputController.RefillHP -= _life.Heal;
-        if (_spellManager != null)
-            _spellManager.SpellDispose();   //SALTABA ERROR, ASI QUE LO CORREGI
+        _spellManager?.SpellDispose();   //SALTABA ERROR, ASI QUE LO CORREGI
     }
 }

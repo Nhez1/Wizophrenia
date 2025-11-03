@@ -7,7 +7,7 @@ public class GameEvent : ScriptableObject
     public List<EventListener> listeners = new();
 
     //transmitir el evento, los listeners lo van a recivir como una señal de radio
-    public void Raise(Component sender, object data) //se le suele decir raise, al parecer, pero siento que "broadcast" seria mas correcto lol
+    public void Raise(object sender, object data) //se le suele decir raise, al parecer, pero siento que "broadcast" seria mas correcto lol
     {
         for (int i = 0; i < listeners.Count; i++)
         {

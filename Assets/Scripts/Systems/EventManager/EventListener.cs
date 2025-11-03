@@ -3,24 +3,24 @@ using UnityEngine.Events;
 
 //creo nuestro propio tipo de game event para poder mandar mas parametros
 [System.Serializable]
-public class CustomGameEvent : UnityEvent<Component, object> { }
+public class CustomGameEvent : UnityEvent<object, object> { }
 
 public class EventListener : MonoBehaviour
 {
-    public GameEvent gameEvent;
-    public CustomGameEvent response;
+    [SerializeField] private GameEvent _gameEvent;
+    [SerializeField] private CustomGameEvent _response;
 
     private void OnEnable()
     {
-        gameEvent.RegisterListener(this);
+        _gameEvent.RegisterListener(this);
     }
     private void OnDisable()
     {
-        gameEvent.UnregisterListener(this);
+        _gameEvent.UnregisterListener(this);
     }
 
-    public void OnEventRaised(Component sender, object data)
+    public void OnEventRaised(object sender, object data)
     {
-        response.Invoke(sender, data);
+        _response.Invoke(sender, data);
     }
 }

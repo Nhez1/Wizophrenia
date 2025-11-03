@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class RightHandler : MonoBehaviour
 {
-    public Animator animator;
-    private HandsView _view;
+    [SerializeField] private GameObject _leftHand;
+    [SerializeField] private Animator _anim;
+    private HandsAnimator _view;
 
     private void Start()
     {
-        if (animator == null) animator = GetComponent<Animator>();
+        if (_anim == null) _anim = GetComponent<Animator>();
 
-        _view = new(animator);
+        _view = new(_anim);
 
         ShadowHand.ForceFlameOff += _view.ShadowHandOff;
         FlameEffectSO.OnFlameSwitchOff += FlameSwitchOff;
@@ -20,6 +21,13 @@ public class RightHandler : MonoBehaviour
 
     public void FlameSwitchOff() => _view.SwitchFlameSpell(false);
     public void FlameSwitchOn() =>_view.SwitchFlameSpell(true);
+    
+    public void OccupyHandSlot()
+    {
+        _leftHand.SetActive(true);
+    }
+
+    public void ClearHandSlot() => _leftHand.SetActive(false);
 
     private void OnDisable()
     {
