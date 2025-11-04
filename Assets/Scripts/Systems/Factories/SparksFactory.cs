@@ -4,7 +4,7 @@ public class SparksFactory : MonoBehaviour
 {
     public static SparksFactory Instance { get; private set; }
 
-    [SerializeField] private SparksEffect _expansiveWavePrefab;
+    [SerializeField] private SparksEffect _sparksPrefab;
     ObjectPool<SparksEffect> _pool;
 
     private void Awake()
@@ -15,7 +15,7 @@ public class SparksFactory : MonoBehaviour
 
     SparksEffect CreateObject()
     {
-        var result = Instantiate(_expansiveWavePrefab);
+        var result = Instantiate(_sparksPrefab);
         return result;
     }
 
