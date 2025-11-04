@@ -5,11 +5,9 @@ public class ExpansiveWave : Bullet
 {
     private float _timer;
 
-    private void OnEnable()
-    {
-        _timer = 0f;
-        ReturnAfterLifeTime();
-    }
+    private void OnEnable() => _timer = 0f;
+
+    private void Update() => ReturnAfterLifeTime();
 
     private void OnTriggerEnter(Collider collision)
     {

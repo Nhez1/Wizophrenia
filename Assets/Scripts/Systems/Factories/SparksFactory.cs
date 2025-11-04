@@ -4,18 +4,20 @@ public class SparksFactory : MonoBehaviour
 {
     public static SparksFactory Instance { get; private set; }
 
+    [SerializeField] private int _instancesAmount;
     [SerializeField] private SparksEffect _sparksPrefab;
     ObjectPool<SparksEffect> _pool;
 
     private void Awake()
     {
         Instance = this;
-        _pool = new ObjectPool<SparksEffect>(CreateObject, TurnOn, TurnOff, 5, transform);
+        _pool = new ObjectPool<SparksEffect>(CreateObject, TurnOn, TurnOff, _instancesAmount, transform);
     }
 
     SparksEffect CreateObject()
     {
         var result = Instantiate(_sparksPrefab);
+        result.transform.parent = transform;
         return result;
     }
 
