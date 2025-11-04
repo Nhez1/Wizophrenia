@@ -3,7 +3,6 @@ using System;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] private GameEvent _onHandSlotFillEvent;
     [SerializeField] private ItemSlot[] _slots;
 
     [SerializeField] private UIItem _itemPrefab;
@@ -17,7 +16,6 @@ public class Inventory : MonoBehaviour
             //Check if the slot is empty
             if (_slots[i].UIItem == null)
             {
-                if (_slots[i].IsHandSlot) _onHandSlotFillEvent.Raise(this, null);
                 Instantiate(_itemPrefab, _slots[i].transform).Initialize(item, _slots[i]);
                 break;
             }

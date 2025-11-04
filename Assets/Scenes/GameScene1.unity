@@ -854,7 +854,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _clearHandSlot: {fileID: 0}
-  _onHandSlotFillEvent: {fileID: 0}
+  _fillHandSlot: {fileID: 0}
   <IsHandSlot>k__BackingField: 0
 --- !u!1 &11294694
 GameObject:
@@ -14246,7 +14246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _clearHandSlot: {fileID: 0}
-  _onHandSlotFillEvent: {fileID: 0}
+  _fillHandSlot: {fileID: 0}
   <IsHandSlot>k__BackingField: 0
 --- !u!4 &206166428 stripped
 Transform:
@@ -26593,7 +26593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _clearHandSlot: {fileID: 0}
-  _onHandSlotFillEvent: {fileID: 0}
+  _fillHandSlot: {fileID: 0}
   <IsHandSlot>k__BackingField: 0
 --- !u!1 &407877210
 GameObject:
@@ -32200,8 +32200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _clearHandSlot: {fileID: 11400000, guid: 442f3ba95a95e6044968e30ec6293dc0, type: 2}
-  _onHandSlotFillEvent: {fileID: 11400000, guid: 6ebe90ec14a7b2944bbfb6088c8add27,
-    type: 2}
+  _fillHandSlot: {fileID: 11400000, guid: 6ebe90ec14a7b2944bbfb6088c8add27, type: 2}
   <IsHandSlot>k__BackingField: 1
 --- !u!114 &479413348
 MonoBehaviour:
@@ -37322,14 +37321,14 @@ MonoBehaviour:
       - m_Target: {fileID: 568273759}
         m_TargetAssemblyTypeName: RightHandler, Assembly-CSharp
         m_MethodName: OccupyHandSlot
-        m_Mode: 2
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: ItemSO, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &568273764
 MonoBehaviour:
@@ -37350,7 +37349,7 @@ MonoBehaviour:
       - m_Target: {fileID: 568273759}
         m_TargetAssemblyTypeName: RightHandler, Assembly-CSharp
         m_MethodName: ClearHandSlot
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -43046,8 +43045,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a47638138e98784ca16c3c538d42ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clearHandSlot: {fileID: 0}
-  _onHandSlotFillEvent: {fileID: 0}
+  _clearHandSlot: {fileID: 11400000, guid: 442f3ba95a95e6044968e30ec6293dc0, type: 2}
+  _fillHandSlot: {fileID: 11400000, guid: 6ebe90ec14a7b2944bbfb6088c8add27, type: 2}
   <IsHandSlot>k__BackingField: 0
 --- !u!114 &676961906
 MonoBehaviour:
@@ -50074,8 +50073,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a47638138e98784ca16c3c538d42ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clearHandSlot: {fileID: 0}
-  _onHandSlotFillEvent: {fileID: 0}
+  _clearHandSlot: {fileID: 11400000, guid: 442f3ba95a95e6044968e30ec6293dc0, type: 2}
+  _fillHandSlot: {fileID: 11400000, guid: 6ebe90ec14a7b2944bbfb6088c8add27, type: 2}
   <IsHandSlot>k__BackingField: 0
 --- !u!114 &801842632
 MonoBehaviour:
@@ -59293,7 +59292,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f2e2448a8e7094b97cb0dffd288767, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onHandSlotFillEvent: {fileID: 0}
   _slots:
   - {fileID: 1271590643}
   - {fileID: 1037635972}
@@ -62010,8 +62008,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a47638138e98784ca16c3c538d42ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clearHandSlot: {fileID: 0}
-  _onHandSlotFillEvent: {fileID: 0}
+  _clearHandSlot: {fileID: 11400000, guid: 442f3ba95a95e6044968e30ec6293dc0, type: 2}
+  _fillHandSlot: {fileID: 11400000, guid: 6ebe90ec14a7b2944bbfb6088c8add27, type: 2}
   <IsHandSlot>k__BackingField: 0
 --- !u!114 &994409501
 MonoBehaviour:
@@ -64184,8 +64182,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a47638138e98784ca16c3c538d42ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clearHandSlot: {fileID: 0}
-  _onHandSlotFillEvent: {fileID: 0}
+  _clearHandSlot: {fileID: 11400000, guid: 442f3ba95a95e6044968e30ec6293dc0, type: 2}
+  _fillHandSlot: {fileID: 11400000, guid: 6ebe90ec14a7b2944bbfb6088c8add27, type: 2}
   <IsHandSlot>k__BackingField: 0
 --- !u!114 &1037635973
 MonoBehaviour:
@@ -78642,8 +78640,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a47638138e98784ca16c3c538d42ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clearHandSlot: {fileID: 0}
-  _onHandSlotFillEvent: {fileID: 0}
+  _clearHandSlot: {fileID: 11400000, guid: 442f3ba95a95e6044968e30ec6293dc0, type: 2}
+  _fillHandSlot: {fileID: 11400000, guid: 6ebe90ec14a7b2944bbfb6088c8add27, type: 2}
   <IsHandSlot>k__BackingField: 0
 --- !u!114 &1271590644
 MonoBehaviour:
@@ -93304,8 +93302,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a47638138e98784ca16c3c538d42ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clearHandSlot: {fileID: 0}
-  _onHandSlotFillEvent: {fileID: 0}
+  _clearHandSlot: {fileID: 11400000, guid: 442f3ba95a95e6044968e30ec6293dc0, type: 2}
+  _fillHandSlot: {fileID: 11400000, guid: 6ebe90ec14a7b2944bbfb6088c8add27, type: 2}
   <IsHandSlot>k__BackingField: 0
 --- !u!114 &1503090236
 MonoBehaviour:
@@ -97386,7 +97384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _clearHandSlot: {fileID: 0}
-  _onHandSlotFillEvent: {fileID: 0}
+  _fillHandSlot: {fileID: 0}
   <IsHandSlot>k__BackingField: 0
 --- !u!114 &1578788635
 MonoBehaviour:

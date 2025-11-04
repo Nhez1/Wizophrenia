@@ -20,14 +20,20 @@ public class RightHandler : MonoBehaviour
     }
 
     public void FlameSwitchOff() => _view.SwitchFlameSpell(false);
-    public void FlameSwitchOn() =>_view.SwitchFlameSpell(true);
-    
-    public void OccupyHandSlot()
+    public void FlameSwitchOn() => _view.SwitchFlameSpell(true);
+
+    public void OccupyHandSlot(object sender, object data)
     {
-        _leftHand.SetActive(true);
+        if (data is ItemSO item)
+        {
+            if (item.type == ItemType.Herb) _leftHand.SetActive(true);
+        }
     }
 
-    public void ClearHandSlot() => _leftHand.SetActive(false);
+    public void ClearHandSlot(object sender, object data)
+    {
+        _leftHand.SetActive(false);
+    }
 
     private void OnDisable()
     {

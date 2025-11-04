@@ -4,7 +4,8 @@ using UnityEngine.EventSystems;
 public class ItemSlot : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private GameEvent _clearHandSlot;
-    [SerializeField] private GameEvent _onHandSlotFillEvent;
+    [SerializeField] private GameEvent _fillHandSlot;
+    public GameEvent OnHandSlotClearEvent => _clearHandSlot;
 
     public UIItem UIItem { get; set; }
     [field: SerializeField]
@@ -20,7 +21,6 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         UIItem.ActiveSlot = this;
         UIItem.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
         UIItem.transform.SetParent(transform);
-        if (IsHandSlot && _onHandSlotFillEvent != null) _onHandSlotFillEvent.Raise(this, null);
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -31,12 +31,14 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         {
             if (item != null)
             {
-                if (UIItem == null) SetItem(item);
+                if (UIItem == null)
+                {
+                    SetItem(item);
+                    if (item.ActiveSlot.IsHandSlot) _fillHandSlot.Raise(this, item.Item);
+                }
                 else item.ActiveSlot.SetItem(item);
 
                 UICursor.Instance.ClearHeldItem();
-
-                if (item.ActiveSlot.IsHandSlot) _clearHandSlot.Raise(this, null);
             }
         }
     }

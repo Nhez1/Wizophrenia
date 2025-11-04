@@ -32,6 +32,7 @@ public class UIItem : MonoBehaviour, IPointerClickHandler
             if (item == null)
             {
                 UICursor.Instance.PickUp(this);
+                if (ActiveSlot.IsHandSlot) ActiveSlot.OnHandSlotClearEvent.Raise(this, null);
             }
             else
             {
