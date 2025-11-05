@@ -63,7 +63,7 @@ GameObject:
   - component: {fileID: 5624757786965420452}
   - component: {fileID: 4275577768731148994}
   - component: {fileID: 1453127356104547171}
-  - component: {fileID: 8233155110416815178}
+  - component: {fileID: -6279200225242987033}
   m_Layer: 0
   m_Name: EyeDeer
   m_TagString: Untagged
@@ -224,7 +224,7 @@ MonoBehaviour:
   _lockYRotation: 0
   _lockZRotation: 0
   _rotationOffset: {x: 0, y: 0, z: 0}
---- !u!114 &8233155110416815178
+--- !u!114 &-6279200225242987033
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -237,6 +237,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 100
-  _speed: 5
+  _speed: 1.5
   _stopDistance: 5
-  _vignette: {fileID: 7784544980735460075}
+  _vignette: {fileID: 0}
+  respawnNodes: []
+  respawnDelay: 20
+  minDistanceFromPlayer: 15
