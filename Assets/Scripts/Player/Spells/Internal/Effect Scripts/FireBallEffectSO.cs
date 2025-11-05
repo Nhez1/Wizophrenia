@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-[CreateAssetMenu(menuName = "ScriptableObjects/Effects/FireBall")]
+[CreateAssetMenu(menuName = "ScriptableObjects/Spell Effects/FireBall")]
 public class FireBallEffectSO : EffectSO
 {
     private CastContext _context;
@@ -12,10 +12,6 @@ public class FireBallEffectSO : EffectSO
         _context = castContext;
         _self = castContext.Spell;
         castContext.Spell.canCast = false;
-
-        ShadowHand.ForceFlameOff += SwitchOff;
-        FlameEffectSO.OnFlameSwitchOff += SwitchOff;
-        FlameEffectSO.OnFlameSwitchOn += SwitchOn;
     }
 
     public override void OnCast()
@@ -26,13 +22,6 @@ public class FireBallEffectSO : EffectSO
         fireBall.transform.SetPositionAndRotation(spawnPos, Camera.main.transform.rotation);
     }
 
-    void SwitchOff() => _self.canCast = false;
-    void SwitchOn() => _self.canCast = true;
-
-    public override void Dispose()
-    {
-        ShadowHand.ForceFlameOff -= SwitchOff;
-        FlameEffectSO.OnFlameSwitchOff -= SwitchOff;
-        FlameEffectSO.OnFlameSwitchOn -= SwitchOn;
-    }
+    public void SwitchOff() => _self.canCast = false;
+    public void SwitchOn() => _self.canCast = true;
 }

@@ -1,32 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class UIAlchemy : MonoBehaviour, IPointerClickHandler
+public class UIAlchemy : MonoBehaviour
 {
-    public ItemSlot itemSlot1;
-    public ItemSlot itemSlot2;
+    [Header(" Crafting Slots ")]
+    [SerializeField] private ItemSlot _itemSlot1;
+    [SerializeField] private ItemSlot _itemSlot2;
+    [SerializeField] private ItemSlot _itemSlot3;
 
-    public AlchemySO alch;
+    [Header(" System ")]
+    [SerializeField] private AlchemySO _alchemy;
 
-    void DoAlchemy()
+    [Header(" Result ")]
+    [SerializeField] private ItemSlot _resultSlot;
+    [SerializeField] private Sprite _resultIcon;
+
+
+    public void DoAlchemy()
     {
-        if (itemSlot1.UIItem != null & itemSlot2.UIItem != null)
+        if (_itemSlot1.UIItem != null && _itemSlot2.UIItem != null && _itemSlot3.UIItem != null)
         {
-        }
-    }
+            var herbA = _itemSlot1.UIItem.Item as HerbSO;
+            var herbB = _itemSlot2.UIItem.Item as HerbSO;
+            var herbC = _itemSlot3.UIItem.Item as HerbSO;
 
-    void FilterItems()
-    {
-        if (itemSlot1.UIItem.Item.type != ItemType.Herb)
-        {
-            // Impedir que se ponga el item
-        }
-    }
+            var result = _alchemy.Mix(herbA, herbB, herbC);
+            UIItemFactory.Instance.CreateItem(result, _resultSlot, _resultIcon);
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        throw new System.NotImplementedException();
+            Destroy(_itemSlot1.UIItem.gameObject);
+            Destroy(_itemSlot2.UIItem.gameObject);
+            Destroy(_itemSlot3.UIItem.gameObject);
+        }
     }
 }

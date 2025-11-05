@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "ScriptableObjects/Herb")]
+[CreateAssetMenu(menuName = "ScriptableObjects/Items/Herb")]
 public class HerbSO : ItemSO
 {
     [field: SerializeField]

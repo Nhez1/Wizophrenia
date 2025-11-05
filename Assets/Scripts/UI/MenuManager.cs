@@ -83,12 +83,12 @@ public class MenuManager : MonoBehaviour
     {
         InputController.OnPause += ActivatePauseMenu;
         InputController.OnBagToggle += SwitchInventory;
-        CraftingManager.OnAlchemyToggle += SwitchAlchemy;
+        CauldronObject.OnAlchemyToggle += SwitchAlchemy;
     }
     private void OnDisable()
     {
         InputController.OnPause -= ActivatePauseMenu;
         InputController.OnBagToggle -= ActivateInventory;
-        CraftingManager.OnAlchemyToggle -= SwitchAlchemy;
+        CauldronObject.OnAlchemyToggle -= SwitchAlchemy;
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using System;
 
-[CreateAssetMenu(menuName = "ScriptableObjects/Effects/Cooldown")]
+[CreateAssetMenu(menuName = "ScriptableObjects/Spell Effects/Cooldown")]
 public class CooldownEffect : EffectSO
 {
     public static event Action<SpellSO> OnCooldownStart;

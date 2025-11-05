@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 4927939344508890094}
   - component: {fileID: 6061202708790218904}
   - component: {fileID: 4995948649011452201}
+  - component: {fileID: 2702828917486764157}
+  - component: {fileID: 159309257844930959}
   - component: {fileID: 7766461936226441487}
   m_Layer: 0
   m_Name: ShadowHand
@@ -123,12 +125,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 50
   _life:
-    _maxHP: 50
     _hp: 0
   _dmg: 10
   player: {fileID: 4233118460745921005, guid: 4baad1060dfdbcf4a8216f4153c67126, type: 3}
-  speed: 3
-  stopDistance: 1.5
+  _speed: 3
+  _stopDistance: 1.5
+  _isFollowing: 0
   audioSource: {fileID: 7766461936226441487}
   stealSound: {fileID: 8300000, guid: 98d76429228077b4b958f448ec0d5ddb, type: 3}
 --- !u!114 &4995948649011452201
@@ -143,10 +145,66 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85ca41bb2c9aac44c90538429f0f331e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lockXRotation: 0
+  _lockXRotation: 1
   _lockYRotation: 0
-  _lockZRotation: 0
+  _lockZRotation: 1
   _rotationOffset: {x: 90, y: 0, z: 0}
+--- !u!114 &2702828917486764157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9156424781977257812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc41437f3d095004db67640cd28f6a12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameEvent: {fileID: 11400000, guid: 4aae0c86fccfdaa4685c16eac58d1f03, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6061202708790218904}
+        m_TargetAssemblyTypeName: ShadowHand, Assembly-CSharp
+        m_MethodName: OnFlameOn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &159309257844930959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9156424781977257812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc41437f3d095004db67640cd28f6a12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameEvent: {fileID: 11400000, guid: 1d8312944c973664ead8495add2a6f0b, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6061202708790218904}
+        m_TargetAssemblyTypeName: ShadowHand, Assembly-CSharp
+        m_MethodName: OnFlameOff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!82 &7766461936226441487
 AudioSource:
   m_ObjectHideFlags: 0

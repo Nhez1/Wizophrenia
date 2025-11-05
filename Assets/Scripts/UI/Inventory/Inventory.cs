@@ -16,7 +16,7 @@ public class Inventory : MonoBehaviour
             //Check if the slot is empty
             if (_slots[i].UIItem == null)
             {
-                Instantiate(_itemPrefab, _slots[i].transform).Initialize(item, _slots[i]);
+                UIItemFactory.Instance.CreateItem(item, _slots[i]);
                 break;
             }
         }

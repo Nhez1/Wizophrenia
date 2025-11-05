@@ -9,16 +9,6 @@ public class ExpansiveWave : Bullet
 
     private void Update() => ReturnAfterLifeTime();
 
-    private void OnTriggerEnter(Collider collision)
-    {
-        if (collision.gameObject.CompareTag("GhostEnemy"))
-        {
-            if (collision.TryGetComponent<IDamageable>(out var opp)) DealDamage(opp.Life);
-        }
-    }
-
-    void DealDamage(Life enemy) => enemy.Damage(100f);
-
     private void ReturnAfterLifeTime()
     {
         _timer += Time.deltaTime;

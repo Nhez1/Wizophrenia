@@ -15,7 +15,7 @@ public class ShadowHand : MonoBehaviour, IDamageable
     private Vector3 _targetPos;
     [SerializeField] private float _speed = 3f;
     [SerializeField] private float _stopDistance = 1.5f;
-    bool isFollowing;
+    [SerializeField] private bool _isFollowing;
 
     public Life Life => _life;
 
@@ -23,18 +23,6 @@ public class ShadowHand : MonoBehaviour, IDamageable
     [Header("Audio")]
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip stealSound;
-
-    private void OnEnable()
-    {
-        FlameEffectSO.OnFlameSwitchOff += OnFlameOff;
-        FlameEffectSO.OnFlameSwitchOn += OnFlameOn;
-    }
-
-    private void OnDisable()
-    {
-        FlameEffectSO.OnFlameSwitchOff -= OnFlameOff;
-        FlameEffectSO.OnFlameSwitchOn -= OnFlameOn;
-    }
 
     private void Start()
     {
@@ -55,19 +43,19 @@ public class ShadowHand : MonoBehaviour, IDamageable
         _targetPos = player.transform.position;
         _targetPos.y = .1f;
 
-        if (isFollowing) Move();
+        if (_isFollowing) Move();
         CheckDistance();
     }
 
-    void OnFlameOff() => isFollowing = false;
-    void OnFlameOn() => isFollowing = true;
+    public void OnFlameOff() => _isFollowing = false;
+    public void OnFlameOn() => _isFollowing = true;
 
     void Move() => transform.position = Vector3.MoveTowards(transform.position, _targetPos, _speed * Time.deltaTime);
 
     void CheckDistance()
     {
         float dist = Vector3.Distance(transform.position, _targetPos);
-        if (isFollowing && dist <= _stopDistance) StealFlame();
+        if (_isFollowing && dist <= _stopDistance) StealFlame();
     }
 
     void StealFlame()

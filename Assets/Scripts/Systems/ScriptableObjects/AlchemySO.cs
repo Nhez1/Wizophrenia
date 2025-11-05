@@ -1,15 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "ScriptableObjects/Alchemy")]
 public class AlchemySO : ScriptableObject
 {
-    public PotionSO potionResult;
-
-    public void Mix(HerbSO firstHerb, HerbSO secondHerb)
+    public PotionSO Mix(HerbSO firstHerb, HerbSO secondHerb, HerbSO thirdHerb)
     {
-        potionResult.healthModifier = firstHerb.healthModifier + secondHerb.healthModifier;
-        potionResult.manaModifier = firstHerb.manaModifier + secondHerb.manaModifier;
-        potionResult.sanityModifier = firstHerb.sanityModifier + secondHerb.sanityModifier;
+        PotionSO potion = CreateInstance<PotionSO>();
+
+        potion.healthModifier = firstHerb.healthModifier + secondHerb.healthModifier + thirdHerb.healthModifier;
+        potion.manaModifier = firstHerb.manaModifier + secondHerb.manaModifier + thirdHerb.manaModifier;
+        potion.sanityModifier = firstHerb.sanityModifier + secondHerb.sanityModifier + thirdHerb.sanityModifier;
+
+        return potion;
     }
 }
