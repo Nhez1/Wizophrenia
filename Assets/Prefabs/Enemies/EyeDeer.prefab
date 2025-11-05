@@ -237,9 +237,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 100
-  _speed: 1.5
+  _speed: 5
   _stopDistance: 5
-  _vignette: {fileID: 0}
-  respawnNodes: []
+  _vignette: {fileID: 7784544980735460075}
+  respawnNodes:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   respawnDelay: 20
   minDistanceFromPlayer: 15

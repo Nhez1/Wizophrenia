@@ -553,7 +553,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _life:
-    _maxHP: 100
     _hp: 100
   _mana:
     _maxMP: 100
