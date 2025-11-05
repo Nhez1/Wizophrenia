@@ -15,12 +15,14 @@ public class UIItem : MonoBehaviour, IPointerClickHandler
         _itemIcon = GetComponent<Image>();
     }
 
-    public void Initialize(ItemSO item, ItemSlot parent)
+    public void Initialize(ItemSO item, ItemSlot parent, Sprite icon = null)
     {
         ActiveSlot = parent;
         ActiveSlot.UIItem = this;
         Item = item;
-        _itemIcon.sprite = item.icon;
+
+        if (icon != null) _itemIcon.sprite = icon;
+        else _itemIcon.sprite = item.icon;
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -32,7 +34,7 @@ public class UIItem : MonoBehaviour, IPointerClickHandler
             if (item == null)
             {
                 UICursor.Instance.PickUp(this);
-                if (ActiveSlot.IsHandSlot) ActiveSlot.OnHandSlotClearEvent.Raise(this, null);
+                if (ActiveSlot.IsHandSlot && ActiveSlot.OnHandSlotClearEvent != null) ActiveSlot.OnHandSlotClearEvent.Raise(this, null);
             }
             else
             {
@@ -40,14 +42,5 @@ public class UIItem : MonoBehaviour, IPointerClickHandler
                 UICursor.Instance.PickUp(this);
             }
         }
-    }
-
-    public HerbSO PullHerb()
-    {
-        if (Item is HerbSO herb)
-        {
-            return herb;
-        }
-        else return null;
     }
 }

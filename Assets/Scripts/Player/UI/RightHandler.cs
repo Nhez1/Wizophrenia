@@ -13,14 +13,17 @@ public class RightHandler : MonoBehaviour
         if (_anim == null) _anim = GetComponent<Animator>();
 
         _view = new(_anim);
-
-        ShadowHand.ForceFlameOff += _view.ShadowHandOff;
-        FlameEffectSO.OnFlameSwitchOff += FlameSwitchOff;
-        FlameEffectSO.OnFlameSwitchOn += FlameSwitchOn;
     }
 
-    public void FlameSwitchOff() => _view.SwitchFlameSpell(false);
+    public void FlameOff(object sender, object data)
+    {
+        string mode = data as string;
+
+        if (mode is "TurnOff") HUDFlameOff();
+        else if (mode is "ForceOff") _view.ShadowHandOff();
+    }
     public void FlameSwitchOn() => _view.SwitchFlameSpell(true);
+    public void HUDFlameOff() => _view.SwitchFlameSpell(false);
 
     public void OccupyHandSlot(object sender, object data)
     {
@@ -30,15 +33,8 @@ public class RightHandler : MonoBehaviour
         }
     }
 
-    public void ClearHandSlot(object sender, object data)
+    public void ClearHandSlot()
     {
         _leftHand.SetActive(false);
-    }
-
-    private void OnDisable()
-    {
-        ShadowHand.ForceFlameOff -= _view.ShadowHandOff;
-        FlameEffectSO.OnFlameSwitchOff -= FlameSwitchOff;
-        FlameEffectSO.OnFlameSwitchOn -= FlameSwitchOn;
     }
 }

@@ -34,7 +34,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
                 if (UIItem == null)
                 {
                     SetItem(item);
-                    if (item.ActiveSlot.IsHandSlot) _fillHandSlot.Raise(this, item.Item);
+                    if (item.ActiveSlot.IsHandSlot && _fillHandSlot != null) _fillHandSlot.Raise(this, item.Item);
                 }
                 else item.ActiveSlot.SetItem(item);
 

@@ -83,12 +83,12 @@ public class Player : MonoBehaviour, IDamageable
     {
         InputController.RefillMana += _mana.Restore;
         InputController.RefillHP += _life.Heal;
-        CraftingManager.OnAlchemyToggle += _interacter.HoverLeave;
+        CauldronObject.OnAlchemyToggle += _interacter.HoverLeave;
     }
 
     private void OnDisable()
     {
-        CraftingManager.OnAlchemyToggle -= _interacter.HoverLeave;
+        CauldronObject.OnAlchemyToggle -= _interacter.HoverLeave;
         InputController.RefillMana -= _mana.Restore;
         InputController.RefillHP -= _life.Heal;
         _spellManager?.SpellDispose();   //SALTABA ERROR, ASI QUE LO CORREGI

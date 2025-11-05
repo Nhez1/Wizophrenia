@@ -21,5 +21,5 @@ MonoBehaviour:
   prefab: {fileID: 1207290375828544991, guid: 334083c3b2e0353479585d42a68323da, type: 3}
   effects:
   - {fileID: 11400000, guid: e66b7cd3755796e46982147cc12a8cbb, type: 2}
-  - {fileID: 11400000, guid: cf0c5ccc424a7c042b56d08093500bfa, type: 2}
+  - {fileID: 11400000, guid: bd0649ee7748f8445aa748f0412ab733, type: 2}
   - {fileID: 11400000, guid: c7cbed0b3bb347b4f8489ff97e2a89ee, type: 2}
