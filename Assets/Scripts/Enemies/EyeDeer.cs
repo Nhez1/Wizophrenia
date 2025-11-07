@@ -11,7 +11,7 @@ public class EyeDeer : MonoBehaviour
     [SerializeField] private float _stopDistance = 5f;
 
     private Animator _anim;
-    private Transform _player;
+    private Player _player;
     private EnemyProximityAnimator _proximityBehaviour;
 
     [Header("Effects")]
@@ -21,7 +21,7 @@ public class EyeDeer : MonoBehaviour
     private bool _isHidden = false;
 
     [Header("Respawn Settings")]
-    [SerializeField] private List<GameObject> respawnNodes = new List<GameObject>();
+    [SerializeField] private List<GameObject> respawnNodes = new();
     [SerializeField] private float respawnDelay = 20f;
     [SerializeField] private float minDistanceFromPlayer = 15f;
 
@@ -33,14 +33,14 @@ public class EyeDeer : MonoBehaviour
         _anim = GetComponent<Animator>();
 
         if (_player == null)
-            _player = GameObject.FindGameObjectWithTag("Player").transform;
+            _player = GameObject.FindGameObjectWithTag("Player").GetComponentInParent<Player>();
 
-        _proximityBehaviour = new(_anim, _player, transform);
+        _proximityBehaviour = new(_anim, _player.transform, transform);
     }
 
     void Update()
     {
-        float distance = Vector3.Distance(transform.position, _player.position);
+        float distance = Vector3.Distance(transform.position, _player.transform.position);
 
         if (!LookedAt() && distance > _stopDistance && !_isHidden)
         {
@@ -54,13 +54,13 @@ public class EyeDeer : MonoBehaviour
 
     void Move()
     {
-        Vector3 direction = (_player.position - transform.position).normalized;
+        Vector3 direction = (_player.transform.position - transform.position).normalized;
         transform.position += _speed * Time.deltaTime * direction;
     }
 
     bool LookedAt()
     {
-        Vector3 toEnemy = (transform.position - _player.position).normalized;
+        Vector3 toEnemy = (transform.position - _player.transform.position).normalized;
         float dot = Vector3.Dot(Camera.main.transform.forward, toEnemy);
         return dot > 0.2f;
     }
@@ -72,13 +72,15 @@ public class EyeDeer : MonoBehaviour
         _isDraining = true;
 
         EnableVisualEffect(true);
-        StartCoroutine(DrainSanityOverTime(null));
+        StartCoroutine(DrainSanityOverTime(_player.Sanity));
     }
 
     IEnumerator DrainSanityOverTime(Sanity playerSanity)
     {
-        while (Vector3.Distance(transform.position, _player.position) <= _stopDistance)
+        while (Vector3.Distance(transform.position, _player.transform.position) <= _stopDistance)
         {
+            playerSanity.Reduce(10f);
+
             yield return new WaitForSeconds(1f);
         }
 
@@ -128,9 +130,9 @@ public class EyeDeer : MonoBehaviour
         foreach (var node in respawnNodes)
         {
             if (node == null) continue;
-            float distance = Vector3.Distance(node.transform.position, _player.position);
+            float distance = Vector3.Distance(node.transform.position, _player.transform.position);
 
-            Vector3 dirToNode = (node.transform.position - _player.position).normalized;
+            Vector3 dirToNode = (node.transform.position - _player.transform.position).normalized;
             float dot = Vector3.Dot(Camera.main.transform.forward, dirToNode);
 
             if (distance > minDistanceFromPlayer && dot < 0.2f)

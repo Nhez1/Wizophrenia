@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[System.Serializable]
 public class Sanity
 {
     public static event Action<float> OnSanityChanged;
@@ -13,7 +14,11 @@ public class Sanity
     public float MaxSP { get { return _maxSP; } private set { _maxSP = value; } }
     public float CurrentSanity { get { return _sanity; } private set => _sanity = Mathf.Clamp(value, 0f, _maxSP); }
 
-    public Sanity() { }
+    public Sanity() 
+    {
+        _sanity = 700f;
+        OnSanityChanged?.Invoke(CurrentSanity);
+    }
 
     public void Reduce(float amount)
     {

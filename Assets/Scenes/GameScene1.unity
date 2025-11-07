@@ -4386,7 +4386,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &55270475
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4419,8 +4419,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flameImage: {fileID: 55270477}
-  _flameIntensity: 1
-  _baseScale: {x: 3, y: 3, z: 3}
+  _flameIntensity: 0.5
+  _baseScale: {x: 4, y: 4, z: 4}
 --- !u!114 &55270477
 MonoBehaviour:
   m_ObjectHideFlags: 0

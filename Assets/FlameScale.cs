@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class FlameScale : MonoBehaviour
 {
     [SerializeField] private Image _flameImage; // assign in inspector
-    [SerializeField, Range(0f, 1f)] private float _flameIntensity = 1f;
+    [SerializeField, Range(.2f, .8f)] private float _flameIntensity = 1f;
     [SerializeField] private Vector3 _baseScale = Vector3.one;
 
     private RectTransform _rect;
@@ -18,6 +18,8 @@ public class FlameScale : MonoBehaviour
 
     private void Update()
     {
+        Mathf.Clamp(_flameIntensity, .2f, .8f);
+
         // Example: make flame smaller when intensity goes down
         _rect.localScale = _baseScale * _flameIntensity;
     }
@@ -25,6 +27,16 @@ public class FlameScale : MonoBehaviour
     // Optional — call this from other scripts
     public void SetFlameSize(float value)
     {
-        _flameIntensity = Mathf.Clamp01(value);
+        _flameIntensity = Mathf.Clamp01(value / 1000f);
+    }
+
+    private void OnEnable()
+    {
+        Sanity.OnSanityChanged += SetFlameSize;
+    }
+
+    private void OnDisable()
+    {        
+        Sanity.OnSanityChanged -= SetFlameSize;
     }
 }
