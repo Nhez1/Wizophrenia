@@ -16,6 +16,6 @@ MonoBehaviour:
   <Icon>k__BackingField: {fileID: 21300000, guid: 5a5aa2846359b404a98b62e52a418f33,
     type: 3}
   <Type>k__BackingField: 0
-  healthModifier: -20
+  healthModifier: 10
   manaModifier: 0
-  sanityModifier: 0
+  sanityModifier: -10

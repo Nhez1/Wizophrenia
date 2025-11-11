@@ -7,13 +7,19 @@ public class LeftHandler : MonoBehaviour
     [SerializeField] private Animator _anim;
     [SerializeField] private CanvasGroup _self;
     [SerializeField] private ItemSlot _handSlot;
+    private IConsumable _heldConsumable;
     private LeftHandAnimator _view;
+    private Player _player;
+    public bool IsHoldingConsumable => _heldConsumable != null;
 
     private void Start()
     {
         Instance = this;
-        _self = GetComponent<CanvasGroup>();
+        if (_self == null) _self = GetComponent<CanvasGroup>();
         if (_anim == null) _anim = GetComponent<Animator>();
+        if (_player == null) _player = FindObjectOfType<Player>();
+
+        ClearHandSlot();
 
         _view = new(_anim);
 
@@ -22,21 +28,38 @@ public class LeftHandler : MonoBehaviour
 
     public void OccupyHandSlot(object sender, object data)
     {
+        _self.alpha = 1f;
+
         if (data is ItemSO item)
         {
-            if (item.Type == ItemType.Herb) _self.alpha = 1f;
+            if (item.Type == ItemType.Herb) _view.HoldHerb();
+            if (item.Type == ItemType.Potion) _view.HoldPotion();
+
+
+            _heldConsumable = item as IConsumable;
         }
     }
 
     public void ClearHandSlot()
     {
+        _heldConsumable = null;
         _self.alpha = 0f;
     }
 
     public void UseItem()
     {
-        if (_handSlot.UIItem == null) return;
-        // var usable = UIItem.Item as usable
+        if (!IsHoldingConsumable) return;
+
+        _heldConsumable.Consume(new(_player.Life, _player.Mana, _player.Sanity));
+        _heldConsumable = null;
+
+        Destroy(_handSlot.UIItem.gameObject);
+        ClearHandSlot();
+    }
+
+    private void OnDisable()
+    {
+        InputController.OnConsumableUse -= UseItem;
     }
 }
 
@@ -48,4 +71,7 @@ public class LeftHandAnimator
     {
         _a = a;
     }
+
+    public void HoldHerb() => _a.Play("HoldHerb");
+    public void HoldPotion() => _a.Play("HoldPotion");
 }

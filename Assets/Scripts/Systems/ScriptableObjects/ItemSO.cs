@@ -8,7 +8,7 @@ public abstract class ItemSO : ScriptableObject, IItem
     [field: SerializeField]
     public Sprite Icon { get; set; }
     [field: SerializeField]
-    public ItemType Type { get; private set; }
+    public ItemType Type { get; set; }
     public float Amount { get; private set; }
     public string Description => throw new System.NotImplementedException();
 }

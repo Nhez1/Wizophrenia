@@ -35,6 +35,5 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
             if (IsHandSlot && _fillHandSlot != null) _fillHandSlot.Raise(this, cursor.CurrentItem.Item);
             cursor.ClearCurrentItem();
         }
-
     }
 }

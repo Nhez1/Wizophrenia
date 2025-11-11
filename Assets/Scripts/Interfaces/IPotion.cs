@@ -1,4 +1,4 @@
 public interface IPotion
 {
-    void Consume();
+    void Consume(PlayerStats potionContext);
 }
