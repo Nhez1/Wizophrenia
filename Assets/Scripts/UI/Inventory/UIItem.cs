@@ -22,25 +22,15 @@ public class UIItem : MonoBehaviour, IPointerClickHandler
         Item = item;
 
         if (icon != null) _itemIcon.sprite = icon;
-        else _itemIcon.sprite = item.icon;
+        else _itemIcon.sprite = item.Icon;
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        UIItem item = UICursor.Instance.CurrentItem;
+        if (eventData.button != PointerEventData.InputButton.Left) return;
+        if (ActiveSlot.IsHandSlot) ActiveSlot.OnHandSlotClearEvent?.Raise(this, null);
 
-        if (eventData.button == PointerEventData.InputButton.Left)
-        {
-            if (item == null)
-            {
-                UICursor.Instance.PickUp(this);
-                if (ActiveSlot.IsHandSlot && ActiveSlot.OnHandSlotClearEvent != null) ActiveSlot.OnHandSlotClearEvent.Raise(this, null);
-            }
-            else
-            {
-                item.ActiveSlot.SetItem(item);
-                UICursor.Instance.PickUp(this);
-            }
-        }
+        var cursor = UICursor.Instance;
+        cursor.PickUp(this);
     }
 }

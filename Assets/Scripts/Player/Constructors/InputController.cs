@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class InputController
 {
@@ -8,6 +7,7 @@ public class InputController
     public static event Action<float> RefillHP;
     public static event Action OnPause;
     public static event Action OnBagToggle;
+    public static event Action OnConsumableUse;
 
     public float MouseSensibility { get; set; }
     private float _xAxis, _zAxis;
@@ -62,7 +62,7 @@ public class InputController
             if (Input.GetKeyDown(KeyCode.T)) RefillHP?.Invoke(20f);
 
             // Reset scene
-            if (Input.GetKeyDown(KeyCode.Y)) UnityEngine.SceneManagement.SceneManager.LoadScene("New Scene");
+            if (Input.GetKeyDown(KeyCode.Y)) UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
 
             // Pause game
             if (Input.GetKeyDown(KeyCode.P))
@@ -73,6 +73,9 @@ public class InputController
 
             // Open inventory
             if (Input.GetKeyDown(KeyCode.B)) OnBagToggle?.Invoke();
+
+            // Use consumable on left hand
+            if (Input.GetKeyDown(KeyCode.Q)) OnConsumableUse?.Invoke();
         }
 
         PauseSystem.OnUnpause += () => _paused = false;

@@ -25,21 +25,16 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        UIItem item = UICursor.Instance.CurrentItem;
+        var cursor = UICursor.Instance;
+        if (cursor.CurrentItem == null) return;
+        if (eventData.button != PointerEventData.InputButton.Left) return;
 
-        if (eventData.button == PointerEventData.InputButton.Left)
+        if (UIItem == null)
         {
-            if (item != null)
-            {
-                if (UIItem == null)
-                {
-                    SetItem(item);
-                    if (item.ActiveSlot.IsHandSlot && _fillHandSlot != null) _fillHandSlot.Raise(this, item.Item);
-                }
-                else item.ActiveSlot.SetItem(item);
-
-                UICursor.Instance.ClearHeldItem();
-            }
+            SetItem(cursor.CurrentItem);
+            if (IsHandSlot && _fillHandSlot != null) _fillHandSlot.Raise(this, cursor.CurrentItem.Item);
+            cursor.ClearCurrentItem();
         }
+
     }
 }

@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Lotus Flower
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Lotus Flower
-  icon: {fileID: 21300000, guid: 60af7fbe9df7d0c45aa1f4ecdab29fa7, type: 3}
-  type: 0
+  <Icon>k__BackingField: {fileID: 21300000, guid: 60af7fbe9df7d0c45aa1f4ecdab29fa7,
+    type: 3}
+  <Type>k__BackingField: 0
   healthModifier: 20
   manaModifier: 20
   sanityModifier: 20

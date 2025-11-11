@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class HandsAnimator
+public class RightHandAnimator
 {
     private Animator _anim;
 
-    public HandsAnimator(Animator a)
+    public RightHandAnimator(Animator a)
     {
         _anim = a;
     }

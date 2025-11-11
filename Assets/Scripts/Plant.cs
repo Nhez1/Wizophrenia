@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using TMPro;
 using UnityEngine;
 
 public enum PlantState
@@ -72,7 +70,7 @@ public class Plant : MonoBehaviour, IInteractable
     {
         if (_canHarvest)
         {
-            if(_player) _player.Inventory.AddItem(_yield);
+            if (_player) _player.Inventory.AddItem(_yield);
             _yield = null;
             AudioSource.PlayClipAtPoint(_harvestClip, transform.position);
             if (_brokenSprite != null)

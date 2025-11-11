@@ -6,7 +6,7 @@ public class RightHandler : MonoBehaviour
 {
     [SerializeField] private GameObject _leftHand;
     [SerializeField] private Animator _anim;
-    private HandsAnimator _view;
+    private RightHandAnimator _view;
 
     private void Start()
     {
@@ -25,16 +25,4 @@ public class RightHandler : MonoBehaviour
     public void FlameSwitchOn() => _view.SwitchFlameSpell(true);
     public void HUDFlameOff() => _view.SwitchFlameSpell(false);
 
-    public void OccupyHandSlot(object sender, object data)
-    {
-        if (data is ItemSO item)
-        {
-            if (item.type == ItemType.Herb) _leftHand.SetActive(true);
-        }
-    }
-
-    public void ClearHandSlot()
-    {
-        _leftHand.SetActive(false);
-    }
 }

@@ -5,16 +5,17 @@ public abstract class ItemSO : ScriptableObject, IItem
     [field: SerializeField]
     public string Name { get; set; }
 
-    public Sprite icon;
-    public ItemType type;
-    private float _amount;
-
-    public float Amount => _amount;
+    [field: SerializeField]
+    public Sprite Icon { get; set; }
+    [field: SerializeField]
+    public ItemType Type { get; private set; }
+    public float Amount { get; private set; }
     public string Description => throw new System.NotImplementedException();
 }
 
 public enum ItemType
 {
     Herb,
-    Potion
+    Potion,
+    EdibleFlower
 }
