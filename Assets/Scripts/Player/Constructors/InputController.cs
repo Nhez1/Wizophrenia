@@ -75,7 +75,7 @@ public class InputController
             if (Input.GetKeyDown(KeyCode.B)) OnBagToggle?.Invoke();
 
             // Use consumable on left hand
-            if (Input.GetKeyDown(KeyCode.Q)) OnConsumableUse?.Invoke();
+            if (Input.GetKeyDown(KeyCode.C)) OnConsumableUse?.Invoke();
         }
 
         PauseSystem.OnUnpause += () => _paused = false;
