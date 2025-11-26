@@ -79,7 +79,10 @@ public class EyeDeer : MonoBehaviour
     {
         while (Vector3.Distance(transform.position, _player.transform.position) <= _stopDistance)
         {
+            if (_isHidden) break;
+
             playerSanity.Reduce(10f);
+            _player.Life.Damage(5f);
 
             yield return new WaitForSeconds(1f);
         }
@@ -119,6 +122,7 @@ public class EyeDeer : MonoBehaviour
 
         _anim.Play("Idle");
         _isHidden = false;
+        _proximityBehaviour.ResumeBehaviour();
     }
 
     GameObject GetRandomRespawnNode()

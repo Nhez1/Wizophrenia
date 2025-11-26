@@ -17,21 +17,24 @@ public class Skeleton : MonoBehaviour, IDamageable, IKnockbackable
     [SerializeField] private float _attackCooldown = 1f;
     private bool _canAttack = true;
 
+    private Animator _anim;
+
     private void Awake()
     {
         _life = new(false, _maxHP, gameObject);
+        _anim = GetComponent<Animator>();
     }
 
     private void Update()
     {
-
         if (DetectPlayer(out var tgt) && _canMove)
         {
-            FollowPlayer(tgt);
-
             var disToPlayer = Vector3.Distance(transform.position, tgt.transform.position);
-            if (disToPlayer <= _attackRange && _canAttack) Attack(tgt.Life);
+
+            if(disToPlayer > _attackRange) FollowPlayer(tgt);
+            else if (disToPlayer <= _attackRange && _canAttack) Attack(tgt.Life);
         }
+        else _anim.SetBool("IsFollowing", false);
     }
 
     void Attack(Life target)
@@ -54,6 +57,7 @@ public class Skeleton : MonoBehaviour, IDamageable, IKnockbackable
     }
     private void FollowPlayer(Player target)
     {
+        _anim.SetBool("IsFollowing", true);
         Vector3 dir = (target.transform.position - transform.position).normalized;
 
         transform.position += _speed * Time.deltaTime * dir;

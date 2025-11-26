@@ -1,8 +1,9 @@
 using UnityEngine;
+using System;
 
 public class LeftHandler : MonoBehaviour
 {
-    public static LeftHandler Instance;
+
 
     [SerializeField] private Animator _anim;
     [SerializeField] private CanvasGroup _self;
@@ -14,7 +15,6 @@ public class LeftHandler : MonoBehaviour
 
     private void Start()
     {
-        Instance = this;
         if (_self == null) _self = GetComponent<CanvasGroup>();
         if (_anim == null) _anim = GetComponent<Animator>();
         if (_player == null) _player = FindObjectOfType<Player>();
@@ -35,6 +35,10 @@ public class LeftHandler : MonoBehaviour
             if (item.Type == ItemType.Herb) _view.HoldHerb();
             if (item.Type == ItemType.BadHerb) _view.HoldBadHerb();
             if (item.Type == ItemType.Potion) _view.HoldPotion();
+            if(item.Type == ItemType.LotusFlower)
+            {
+
+            }
 
 
             _heldConsumable = item as IConsumable;

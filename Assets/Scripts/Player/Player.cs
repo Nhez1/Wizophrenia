@@ -41,6 +41,7 @@ public class Player : MonoBehaviour, IDamageable
 
     private void Awake()
     {
+        if (!fireInHand) GetComponentInChildren<Light>();
         _rb = GetComponent<Rigidbody>();
 
         _sanity = new();

@@ -35,4 +35,5 @@ public class EnemyProximityAnimator
     }
 
     public void StopBehaviour() => _isStop = true;
+    public void ResumeBehaviour() => _isStop = false;
 }

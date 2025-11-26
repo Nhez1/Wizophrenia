@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class RightHandler : MonoBehaviour
 {
-    [SerializeField] private GameObject _leftHand;
     [SerializeField] private Animator _anim;
     private RightHandAnimator _view;
 

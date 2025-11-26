@@ -17,5 +17,5 @@ MonoBehaviour:
     type: 3}
   <Type>k__BackingField: 2
   healthModifier: 50
-  manaModifier: 20
+  manaModifier: 50
   sanityModifier: 1000
