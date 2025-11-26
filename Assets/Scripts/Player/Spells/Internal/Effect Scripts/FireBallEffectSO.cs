@@ -1,9 +1,10 @@
 using UnityEngine;
-using System;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Spell Effects/FireBall")]
 public class FireBallEffectSO : EffectSO
 {
+    [SerializeField] private GameEvent _onFireBallCast;
+
     private CastContext _context;
     private SpellSO _self;
 
@@ -16,6 +17,7 @@ public class FireBallEffectSO : EffectSO
 
     public override void OnCast()
     {
+        _onFireBallCast.Raise(this, null);
         var spawnPos = _context.SpawnPoint.position;
 
         var fireBall = FireBallFactory.Instance.GetFireBall();

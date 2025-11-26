@@ -6,6 +6,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     [SerializeField] private GameEvent _clearHandSlot;
     [SerializeField] private GameEvent _fillHandSlot;
     public GameEvent OnHandSlotClearEvent => _clearHandSlot;
+    public GameEvent OnHandSlotFillEvent => _fillHandSlot;
 
     public UIItem UIItem { get; set; }
     [field: SerializeField]

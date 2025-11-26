@@ -15,7 +15,7 @@ MonoBehaviour:
   <Name>k__BackingField: Herb 2
   <Icon>k__BackingField: {fileID: 21300000, guid: 5a5aa2846359b404a98b62e52a418f33,
     type: 3}
-  <Type>k__BackingField: 0
+  <Type>k__BackingField: 1
   healthModifier: 10
   manaModifier: 0
-  sanityModifier: -10
+  sanityModifier: -300
