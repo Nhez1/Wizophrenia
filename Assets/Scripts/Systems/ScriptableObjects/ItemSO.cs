@@ -16,6 +16,8 @@ public abstract class ItemSO : ScriptableObject, IItem
 public enum ItemType
 {
     Herb,
+    BadHerb,
+    LotusFlower,
     Potion,
     EdibleFlower
 }

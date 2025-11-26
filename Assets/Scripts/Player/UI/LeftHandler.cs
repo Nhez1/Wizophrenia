@@ -33,6 +33,7 @@ public class LeftHandler : MonoBehaviour
         if (data is ItemSO item)
         {
             if (item.Type == ItemType.Herb) _view.HoldHerb();
+            if (item.Type == ItemType.BadHerb) _view.HoldBadHerb();
             if (item.Type == ItemType.Potion) _view.HoldPotion();
 
 
@@ -73,5 +74,6 @@ public class LeftHandAnimator
     }
 
     public void HoldHerb() => _a.Play("HoldHerb");
+    public void HoldBadHerb() => _a.Play("HoldHerbBad");
     public void HoldPotion() => _a.Play("HoldPotion");
 }

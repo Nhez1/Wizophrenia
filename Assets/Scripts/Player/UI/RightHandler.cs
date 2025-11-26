@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RightHandler : MonoBehaviour
@@ -24,5 +22,5 @@ public class RightHandler : MonoBehaviour
     }
     public void FlameSwitchOn() => _view.SwitchFlameSpell(true);
     public void HUDFlameOff() => _view.SwitchFlameSpell(false);
-
+    public void CastFireBall() => _view.CastFire();
 }

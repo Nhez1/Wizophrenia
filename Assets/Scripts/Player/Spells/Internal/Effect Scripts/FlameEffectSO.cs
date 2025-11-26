@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Spell Effects/Main/Flame")]

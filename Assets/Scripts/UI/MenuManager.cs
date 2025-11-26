@@ -72,6 +72,9 @@ public class MenuManager : MonoBehaviour
     }
     #endregion
 
+    //Esto es re villero pero la otra era tener que pasarle la referencia de la cámara al botón de resumir del menú de pausa y eso era peor
+    public void UnlockCamera() => _mouse.UnlockCamera();
+
     void ActivatePauseMenu()
     {
         _pauseMenu.SetActive(true);

@@ -3,6 +3,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private ItemSlot[] _slots;
+    [SerializeField] private ItemSlot _handSlot;
 
     [SerializeField] private UIItem _itemPrefab;
 
@@ -10,13 +11,17 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(ItemSO item)
     {
-        for (int i = 0; i < _slots.Length; i++)
+        if (_handSlot.UIItem == null) UIItemFactory.Instance.CreateItem(item, _handSlot);
+        else
         {
-            //Check if the slot is empty
-            if (_slots[i].UIItem == null)
+            for (int i = 0; i < _slots.Length; i++)
             {
-                UIItemFactory.Instance.CreateItem(item, _slots[i]);
-                break;
+                //Check if the slot is empty
+                if (_slots[i].UIItem == null)
+                {
+                    UIItemFactory.Instance.CreateItem(item, _slots[i]);
+                    break;
+                }
             }
         }
     }

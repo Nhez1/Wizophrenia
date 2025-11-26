@@ -21,6 +21,8 @@ public class UIItem : MonoBehaviour, IPointerClickHandler
         ActiveSlot.UIItem = this;
         Item = item;
 
+        if (ActiveSlot.IsHandSlot) ActiveSlot.OnHandSlotFillEvent?.Raise(this, item);
+
         if (icon != null) _itemIcon.sprite = icon;
         else _itemIcon.sprite = item.Icon;
     }

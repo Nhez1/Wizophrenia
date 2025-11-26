@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3171df051f993a4b9311a746ba2c28b, type: 3}
-  m_Name: FireBallEffect
+  m_Script: {fileID: 11500000, guid: b77044dbffc14584faedbc14c93282a7, type: 3}
+  m_Name: OnFireBallCast
   m_EditorClassIdentifier: 
-  _onFireBallCast: {fileID: 11400000, guid: 9d2ed6444fb17a64296f34a375d67e1b, type: 2}
+  listeners: []

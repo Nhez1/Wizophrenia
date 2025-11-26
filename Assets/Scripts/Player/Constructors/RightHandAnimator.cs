@@ -17,4 +17,10 @@ public class RightHandAnimator
     }
 
     public void SwitchFlameSpell(bool isActive) => _anim.SetBool("isActive", isActive);
+
+    public void CastFire()
+    {
+        _anim.ResetTrigger("castFireBall");
+        _anim.SetTrigger("castFireBall");
+    }
 }
