@@ -30,7 +30,7 @@ public class UIItem : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button != PointerEventData.InputButton.Left) return;
-        if (ActiveSlot.IsHandSlot) ActiveSlot.OnHandSlotClearEvent?.Raise(this, null);
+        if (ActiveSlot.IsHandSlot) ActiveSlot.OnHandSlotClearEvent?.Raise(this, Item);
 
         var cursor = UICursor.Instance;
         cursor.PickUp(this);

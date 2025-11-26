@@ -85,6 +85,10 @@ public class Player : MonoBehaviour, IDamageable
         InputController.RefillMana += _mana.Restore;
         InputController.RefillHP += _life.Heal;
         CauldronObject.OnAlchemyToggle += _interacter.HoverLeave;
+        LeftHandler.OnLotusGrab += _controller.LockInputs;
+        LeftHandler.OnLotusLeave += _controller.UnlockInputs;
+        LeftHandler.OnLotusGrab += SetLightColorBlue;
+        LeftHandler.OnLotusLeave += SetLightColorDefault;
     }
 
     private void OnDisable()
@@ -92,6 +96,27 @@ public class Player : MonoBehaviour, IDamageable
         CauldronObject.OnAlchemyToggle -= _interacter.HoverLeave;
         InputController.RefillMana -= _mana.Restore;
         InputController.RefillHP -= _life.Heal;
+        LeftHandler.OnLotusGrab -= _controller.LockInputs;
+        LeftHandler.OnLotusLeave -= _controller.UnlockInputs;
+        LeftHandler.OnLotusGrab -= SetLightColorBlue;
+        LeftHandler.OnLotusLeave -= SetLightColorDefault;
         _spellManager?.SpellDispose();   //SALTABA ERROR, ASI QUE LO CORREGI
     }
+
+    #region LightInHand
+    Light _light;
+
+    void SetLightColorBlue()
+    {
+        fireInHand.SetActive(true);
+        _light = fireInHand.GetComponent<Light>();
+        _light.color = new(0.5518868f, 0.8779028f, 1);
+    }
+
+    void SetLightColorDefault()
+    {
+        fireInHand.SetActive(false);
+        _light.color = new(1, 0.6399195f, 0);
+    }
+    #endregion
 }

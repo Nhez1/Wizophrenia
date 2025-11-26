@@ -9864,8 +9864,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.7864266, y: 1, z: 2.4458053}
-  m_Center: {x: -0.10678648, y: 0, z: -11.350835}
+  m_Size: {x: 0.7864266, y: 1, z: 8.263348}
+  m_Center: {x: -0.10678648, y: 0, z: -14.2596}
 --- !u!1001 &145607790
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15051,7 +15051,7 @@ PrefabInstance:
     - target: {fileID: 7039105672147672273, guid: 4baad1060dfdbcf4a8216f4153c67126,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 46.6
+      value: 50.31
       objectReference: {fileID: 0}
     - target: {fileID: 7039105672147672273, guid: 4baad1060dfdbcf4a8216f4153c67126,
         type: 3}
@@ -15061,12 +15061,12 @@ PrefabInstance:
     - target: {fileID: 7039105672147672273, guid: 4baad1060dfdbcf4a8216f4153c67126,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 45.7
+      value: 46.07
       objectReference: {fileID: 0}
     - target: {fileID: 7039105672147672273, guid: 4baad1060dfdbcf4a8216f4153c67126,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.13052538
+      value: -0.46476707
       objectReference: {fileID: 0}
     - target: {fileID: 7039105672147672273, guid: 4baad1060dfdbcf4a8216f4153c67126,
         type: 3}
@@ -15076,7 +15076,7 @@ PrefabInstance:
     - target: {fileID: 7039105672147672273, guid: 4baad1060dfdbcf4a8216f4153c67126,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.991445
+      value: 0.885433
       objectReference: {fileID: 0}
     - target: {fileID: 7039105672147672273, guid: 4baad1060dfdbcf4a8216f4153c67126,
         type: 3}
@@ -15091,7 +15091,7 @@ PrefabInstance:
     - target: {fileID: 7039105672147672273, guid: 4baad1060dfdbcf4a8216f4153c67126,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 195
+      value: 235.39
       objectReference: {fileID: 0}
     - target: {fileID: 7039105672147672273, guid: 4baad1060dfdbcf4a8216f4153c67126,
         type: 3}
@@ -38803,6 +38803,8 @@ GameObject:
   - component: {fileID: 610796822}
   - component: {fileID: 610796819}
   - component: {fileID: 610796820}
+  - component: {fileID: 610796824}
+  - component: {fileID: 610796823}
   m_Layer: 0
   m_Name: Lotus Flower
   m_TagString: Untagged
@@ -38931,6 +38933,62 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.9200001, y: 1.8999594, z: 0.20000003}
   m_Center: {x: 0.000061020248, y: 0.9499794, z: 0}
+--- !u!114 &610796823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610796817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc41437f3d095004db67640cd28f6a12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameEvent: {fileID: 11400000, guid: 4aae0c86fccfdaa4685c16eac58d1f03, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 610796819}
+        m_TargetAssemblyTypeName: Plant, Assembly-CSharp
+        m_MethodName: DisableInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &610796824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610796817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc41437f3d095004db67640cd28f6a12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameEvent: {fileID: 11400000, guid: 1d8312944c973664ead8495add2a6f0b, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 610796819}
+        m_TargetAssemblyTypeName: Plant, Assembly-CSharp
+        m_MethodName: EnableInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &610927140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46292,6 +46350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6110ebf03f5eeaa45843eb2a6a9d36a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _self: {fileID: 738123442}
   _anim: {fileID: 0}
 --- !u!95 &738123439
 Animator:
@@ -57857,7 +57916,7 @@ PrefabInstance:
     - target: {fileID: 6194346565676971680, guid: e5d1ecb0504d13446b35686cb20e1041,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -64776,7 +64835,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1044883910}
         m_TargetAssemblyTypeName: LeftHandler, Assembly-CSharp
         m_MethodName: ClearHandSlot
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -81631,7 +81690,7 @@ PrefabInstance:
     - target: {fileID: 6194346565676971680, guid: e5d1ecb0504d13446b35686cb20e1041,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -115603,7 +115662,7 @@ PrefabInstance:
     - target: {fileID: 6194346565676971680, guid: e5d1ecb0504d13446b35686cb20e1041,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -116769,13 +116828,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1876122757}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.13279761, z: -0, w: 0.99114317}
+  m_LocalRotation: {x: -0, y: 0.09112903, z: -0, w: 0.9958391}
   m_LocalPosition: {x: -61.2, y: 0, z: -11.42}
   m_LocalScale: {x: 27.860771, y: 5, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1803210398}
-  m_LocalEulerAnglesHint: {x: 0, y: 15.263, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 10.457, z: 0}
 --- !u!65 &1876122759
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -116795,8 +116854,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.0741333, y: 1, z: 17.834175}
+  m_Center: {x: -0.0370661, y: 0, z: -15.963576}
 --- !u!4 &1876381883 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 838496326001704678, guid: 0798faaa12f2f844cbea681bd33782e9,

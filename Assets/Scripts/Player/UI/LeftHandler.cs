@@ -3,7 +3,8 @@ using System;
 
 public class LeftHandler : MonoBehaviour
 {
-
+    public static event Action OnLotusGrab;
+    public static event Action OnLotusLeave;
 
     [SerializeField] private Animator _anim;
     [SerializeField] private CanvasGroup _self;
@@ -19,7 +20,7 @@ public class LeftHandler : MonoBehaviour
         if (_anim == null) _anim = GetComponent<Animator>();
         if (_player == null) _player = FindObjectOfType<Player>();
 
-        ClearHandSlot();
+        ClearHandSlot(null, null);
 
         _view = new(_anim);
 
@@ -37,7 +38,8 @@ public class LeftHandler : MonoBehaviour
             if (item.Type == ItemType.Potion) _view.HoldPotion();
             if(item.Type == ItemType.LotusFlower)
             {
-
+                OnLotusGrab?.Invoke();
+                _view.HoldLotus();
             }
 
 
@@ -45,10 +47,12 @@ public class LeftHandler : MonoBehaviour
         }
     }
 
-    public void ClearHandSlot()
+    public void ClearHandSlot(object sender, object data)
     {
         _heldConsumable = null;
         _self.alpha = 0f;
+
+        if (data is ItemSO item && item.Type == ItemType.LotusFlower) OnLotusLeave?.Invoke();
     }
 
     public void UseItem()
@@ -59,7 +63,7 @@ public class LeftHandler : MonoBehaviour
         _heldConsumable = null;
 
         Destroy(_handSlot.UIItem.gameObject);
-        ClearHandSlot();
+        ClearHandSlot(null, null);
     }
 
     private void OnDisable()
@@ -80,4 +84,5 @@ public class LeftHandAnimator
     public void HoldHerb() => _a.Play("HoldHerb");
     public void HoldBadHerb() => _a.Play("HoldHerbBad");
     public void HoldPotion() => _a.Play("HoldPotion");
+    public void HoldLotus() => _a.Play("HoldLotus");
 }

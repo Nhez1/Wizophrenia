@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class RightHandler : MonoBehaviour
 {
+    [SerializeField] private CanvasGroup _self;
     [SerializeField] private Animator _anim;
     private RightHandAnimator _view;
 
@@ -22,4 +23,19 @@ public class RightHandler : MonoBehaviour
     public void FlameSwitchOn() => _view.SwitchFlameSpell(true);
     public void HUDFlameOff() => _view.SwitchFlameSpell(false);
     public void CastFireBall() => _view.CastFire();
+
+    void HideHand() => _self.alpha = 0f;
+    void ShowHand() => _self.alpha = 1f;
+
+    private void OnEnable()
+    {
+        LeftHandler.OnLotusGrab += HideHand;
+        LeftHandler.OnLotusLeave += ShowHand;
+    }
+
+    private void OnDisable()
+    {
+        LeftHandler.OnLotusGrab -= HideHand;
+        LeftHandler.OnLotusLeave -= ShowHand;
+    }
 }

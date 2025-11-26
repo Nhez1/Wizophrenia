@@ -83,6 +83,10 @@ public class Plant : MonoBehaviour, IInteractable
         }
     }
 
+    public void EnableInteraction() => _canHarvest = true;
+    public void DisableInteraction() => _canHarvest = false;
+
+    #region OnHover (not implemented)
     public void OnHoverEnter()
     {
         throw new NotImplementedException();
@@ -97,6 +101,7 @@ public class Plant : MonoBehaviour, IInteractable
     {
         throw new NotImplementedException();
     }
+    #endregion
 
     //void SetDefault()
     //{

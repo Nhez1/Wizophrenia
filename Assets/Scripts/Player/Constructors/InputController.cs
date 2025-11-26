@@ -17,6 +17,7 @@ public class InputController
     private PlayerInteraction _interacter;
 
     private bool _paused = false;
+    private bool _lotusLock = false;
 
     public float MouseX => _mouseX;
     public float MouseY => _mouseY;
@@ -43,14 +44,6 @@ public class InputController
             // Salto
             if (Input.GetKeyDown(KeyCode.Space) && _movement.IsGrounded()) _movement.Jump();
 
-            // Cast Flame Spell
-            if (Input.GetKeyDown(KeyCode.F)) _spells.CastSpell(SpellType.FlameSpell);
-
-            // Cast Fire Ball
-            if (Input.GetKeyDown(KeyCode.Mouse1)) _spells.CastSpell(SpellType.FireBall);
-
-            if (Input.GetKeyDown(KeyCode.Q)) _spells.CastSpell(SpellType.Reignite);
-
             // Interact
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -71,11 +64,22 @@ public class InputController
                 _paused = true;
             }
 
-            // Open inventory
-            if (Input.GetKeyDown(KeyCode.B)) OnBagToggle?.Invoke();
+            if (!_lotusLock)
+            {
+                // Cast Flame Spell
+                if (Input.GetKeyDown(KeyCode.F)) _spells.CastSpell(SpellType.FlameSpell);
 
-            // Use consumable on left hand
-            if (Input.GetKeyDown(KeyCode.C)) OnConsumableUse?.Invoke();
+                // Cast Fire Ball
+                if (Input.GetKeyDown(KeyCode.Mouse1)) _spells.CastSpell(SpellType.FireBall);
+
+                if (Input.GetKeyDown(KeyCode.Q)) _spells.CastSpell(SpellType.Reignite);
+
+                // Open inventory
+                if (Input.GetKeyDown(KeyCode.B)) OnBagToggle?.Invoke();
+
+                // Use consumable on left hand
+                if (Input.GetKeyDown(KeyCode.C)) OnConsumableUse?.Invoke();
+            }
         }
 
         PauseSystem.OnUnpause += () => _paused = false;
@@ -90,4 +94,7 @@ public class InputController
         if (Input.GetKey(KeyCode.LeftShift)) _movement.Run();
         else _movement.isRunning = false;
     }
+
+    public void LockInputs() => _lotusLock = true;
+    public void UnlockInputs() => _lotusLock = false;
 }
