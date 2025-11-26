@@ -82,8 +82,6 @@ public class Player : MonoBehaviour, IDamageable
 
     private void OnEnable()
     {
-        InputController.RefillMana += _mana.Restore;
-        InputController.RefillHP += _life.Heal;
         CauldronObject.OnAlchemyToggle += _interacter.HoverLeave;
         LeftHandler.OnLotusGrab += _controller.LockInputs;
         LeftHandler.OnLotusLeave += _controller.UnlockInputs;
@@ -94,8 +92,6 @@ public class Player : MonoBehaviour, IDamageable
     private void OnDisable()
     {
         CauldronObject.OnAlchemyToggle -= _interacter.HoverLeave;
-        InputController.RefillMana -= _mana.Restore;
-        InputController.RefillHP -= _life.Heal;
         LeftHandler.OnLotusGrab -= _controller.LockInputs;
         LeftHandler.OnLotusLeave -= _controller.UnlockInputs;
         LeftHandler.OnLotusGrab -= SetLightColorBlue;

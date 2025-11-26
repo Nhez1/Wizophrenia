@@ -1,10 +1,12 @@
 using System;
 using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 public class Sanity
 {
     public static event Action<float> OnSanityChanged;
+    public static event Action OnGameWin;
+    public static event Action OnSanityGameOver;
 
     [Tooltip("Maximum sanity")]
     [SerializeField] private float _maxSP = 1000f;
@@ -23,20 +25,20 @@ public class Sanity
     public void Reduce(float amount)
     {
         CurrentSanity -= amount;
-        if (CurrentSanity <= 0) GameOver();
+        if (CurrentSanity <= 0) OnSanityGameOver?.Invoke();
         else UpdateSanity();
     }
 
     public void Heal(float amount)
     {
-        if (CurrentSanity < MaxSP) CurrentSanity += amount;
+        if (CurrentSanity < MaxSP)
+        {
+            CurrentSanity += amount;
+            if (CurrentSanity >= _maxSP) OnGameWin.Invoke();
+        }
+
         UpdateSanity();
     }
 
     public void UpdateSanity() => OnSanityChanged?.Invoke(CurrentSanity);
-
-    void GameOver()
-    {
-        Debug.Log("Wizard lost his mind");
-    }
 }

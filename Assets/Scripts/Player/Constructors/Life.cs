@@ -1,10 +1,11 @@
 using System;
 using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 public class Life
 {
     public static event Action<float> OnHealthChanged;
+    public static event Action OnHealthGameOver;
 
     //public static event Action GameOverEvent;
     [Tooltip("Health Points")]
@@ -36,10 +37,8 @@ public class Life
         }
 
         HP -= amount;
-        if (HP <= 0)
-            GameOver();
-        else if (_isP)
-            UpdateHealth();
+        if (HP <= 0) GameOver();
+        else if (HP > 0 && _isP) UpdateHealth();
     }
 
     public void Heal(float amount)
@@ -56,7 +55,7 @@ public class Life
 
     void GameOver()
     {
-        if (_isP) Debug.Log("Wizard dead");
+        if (_isP) OnHealthGameOver?.Invoke();
         else UnityEngine.Object.Destroy(_client);
     }
 }

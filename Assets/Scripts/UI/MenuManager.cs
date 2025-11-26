@@ -7,6 +7,9 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject _settingsMenu;
     [SerializeField] private GameObject _alchemyMenu;
     [SerializeField] private GameObject _inventoryMenu;
+    [SerializeField] private GameObject _winMenu;
+    [SerializeField] private GameObject _healthGameOverMenu;
+    [SerializeField] private GameObject _sanityGameOverMenu;
     private CanvasGroup _inventory;
 
     private PauseSystem _pause;
@@ -82,16 +85,43 @@ public class MenuManager : MonoBehaviour
         _mouse.LockCamera();
     }
 
+    #region Win&GameOver
+    void HealthGameOver()
+    {
+        _mouse.LockCamera();
+        _pause.Pause();
+        _healthGameOverMenu.SetActive(true);
+    }
+    void SanityGameOver()
+    {
+        _mouse.LockCamera();
+        _pause.Pause();
+        _sanityGameOverMenu.SetActive(true);
+    }
+    void Win()
+    {
+        _mouse.LockCamera();
+        _pause.Pause();
+        _winMenu.SetActive(true);
+    }
+    #endregion
+
     private void OnEnable()
     {
         InputController.OnPause += ActivatePauseMenu;
         InputController.OnBagToggle += SwitchInventory;
         CauldronObject.OnAlchemyToggle += SwitchAlchemy;
+        Life.OnHealthGameOver += HealthGameOver;
+        Sanity.OnSanityGameOver += SanityGameOver;
+        Sanity.OnGameWin += Win;
     }
     private void OnDisable()
     {
         InputController.OnPause -= ActivatePauseMenu;
         InputController.OnBagToggle -= ActivateInventory;
         CauldronObject.OnAlchemyToggle -= SwitchAlchemy;
+        Life.OnHealthGameOver -= HealthGameOver;
+        Sanity.OnSanityGameOver -= SanityGameOver;
+        Sanity.OnGameWin -= Win;
     }
 }

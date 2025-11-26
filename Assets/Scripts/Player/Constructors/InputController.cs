@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class InputController
 {
-    public static event Action<float> RefillMana;
-    public static event Action<float> RefillHP;
     public static event Action OnPause;
     public static event Action OnBagToggle;
     public static event Action OnConsumableUse;
@@ -49,13 +47,6 @@ public class InputController
             {
                 _interacter.CurrentInteractable?.Interact();
             }
-
-            // Refill mana
-            if (Input.GetKeyDown(KeyCode.R)) RefillMana?.Invoke(20f);
-            if (Input.GetKeyDown(KeyCode.T)) RefillHP?.Invoke(20f);
-
-            // Reset scene
-            if (Input.GetKeyDown(KeyCode.Y)) UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
 
             // Pause game
             if (Input.GetKeyDown(KeyCode.P))
