@@ -31,13 +31,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9156424781977257812}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -1.3806117, y: 1.2, z: 2.123137}
   m_LocalScale: {x: 0.24000001, y: 0.6, z: 0.24000001}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!212 &235229522304605853
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -131,8 +131,8 @@ MonoBehaviour:
   _speed: 3
   _stopDistance: 1.5
   _isFollowing: 0
-  audioSource: {fileID: 7766461936226441487}
-  stealSound: {fileID: 8300000, guid: 98d76429228077b4b958f448ec0d5ddb, type: 3}
+  _audioSource: {fileID: 0}
+  _stealSound: {fileID: 0}
 --- !u!114 &4995948649011452201
 MonoBehaviour:
   m_ObjectHideFlags: 0

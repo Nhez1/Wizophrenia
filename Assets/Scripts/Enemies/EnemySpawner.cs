@@ -5,13 +5,12 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [Header("Prefabs y referencias")]
-    public GameObject shadowHandPrefab;   
-    public GameObject stalkerPrefab;
-    public Player playerRef;     
+    [SerializeField] private GameObject _shadowHandPrefab;
+    [SerializeField] private Player _playerRef;
 
     [Header("Configuracion de spawn")]
-    public float spawnDistance = 5f;   
-    public float spawnInterval = 3f;   
+    [SerializeField] private float _spawnDistance = 20f;   
+    [SerializeField] private float _spawnInterval = 60f;   
 
     void Start()
     {
@@ -23,37 +22,34 @@ public class EnemySpawner : MonoBehaviour
         while (true)
         {
             SpawnHand();
-            //SpawnStalker();
-            yield return new WaitForSeconds(spawnInterval);
+            yield return new WaitForSeconds(_spawnInterval);
         }
     }
 
     void SpawnHand()
     {
-        if (shadowHandPrefab == null || playerRef == null) return;
+        if (_shadowHandPrefab == null || _playerRef == null) return;
 
-        Vector3 dir = Random.onUnitSphere;
-        dir.y = Mathf.Abs(dir.y); // evita spawnear bajo el escenario
-        Vector3 spawnPos = playerRef.transform.position + dir.normalized * spawnDistance;
-        spawnPos.y = 0.5f;
+        Vector3 dir = Random.insideUnitCircle;
+        Vector3 spawnPos = _playerRef.transform.position + dir.normalized * _spawnDistance;
+        spawnPos.y = -0.1f;
 
-        GameObject g = Instantiate(shadowHandPrefab, spawnPos, Quaternion.identity);
-        ShadowHand shadowHand = g.GetComponent<ShadowHand>();
+        GameObject g = Instantiate(_shadowHandPrefab, spawnPos, _shadowHandPrefab.transform.rotation);
 
-        if (shadowHand != null) shadowHand.player = playerRef;
+        if(g.TryGetComponent<ShadowHand>(out var shadowHand)) shadowHand.player = _playerRef;
     }
 
-    void SpawnStalker()
-    {
-        if (stalkerPrefab == null || playerRef == null) return;
+    //void SpawnStalker()
+    //{
+    //    if (stalkerPrefab == null || playerRef == null) return;
 
-        Vector3 dir = Random.onUnitSphere;
-        dir.y = Mathf.Abs(dir.y);
-        Vector3 spawnPos = playerRef.transform.position + dir.normalized * spawnDistance;
+    //    Vector3 dir = Random.onUnitSphere;
+    //    dir.y = Mathf.Abs(dir.y);
+    //    Vector3 spawnPos = playerRef.transform.position + dir.normalized * spawnDistance;
 
-        GameObject s = Instantiate(stalkerPrefab, spawnPos, Quaternion.identity);
-        _ = s.GetComponent<EyeDeer>();
+    //    GameObject s = Instantiate(stalkerPrefab, spawnPos, Quaternion.identity);
+    //    _ = s.GetComponent<EyeDeer>();
 
-        Debug.Log("Stalker spawneado en " + spawnPos);
-    }
+    //    Debug.Log("Stalker spawneado en " + spawnPos);
+    //}
 }
