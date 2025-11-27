@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
+//TP2 Gomez Villarruel Jeremias
+
 public class ExpansiveWave : Bullet
 {
     private float _timer;
@@ -20,5 +22,10 @@ public class ExpansiveWave : Bullet
         //Returns FireBall to item pool
         ExpansiveWaveFactory.Instance.ReturnExpansiveWave(this);
     }
+
+    protected override void OnDespawn()
+{
+    ExpansiveWaveFactory.Instance.ReturnExpansiveWave(this);
 }
-//Marker
+
+}

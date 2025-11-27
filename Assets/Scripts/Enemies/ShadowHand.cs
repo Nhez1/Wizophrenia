@@ -1,7 +1,8 @@
 using UnityEngine;
 using System;
 
-// Por Jere
+//TP2 Gomez Villarruel Jeremias
+
 public class ShadowHand : MonoBehaviour, IDamageable
 {
     //Ghost Turn Off Lights

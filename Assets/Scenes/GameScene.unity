@@ -29030,7 +29030,7 @@ MonoBehaviour:
     type: 3}
   _playerRef: {fileID: 951216495}
   _spawnDistance: 10
-  _spawnInterval: 5
+  _spawnInterval: 50
 --- !u!4 &433617188
 Transform:
   m_ObjectHideFlags: 0

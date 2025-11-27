@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
+//TP2 Gomez Villarruel Jeremias
+
 public class FireballProjectile : Bullet
 {
     [Header("Fireball Settings")]
@@ -80,4 +82,10 @@ public class FireballProjectile : Bullet
     }
 
     void DealDamage(Life target) => target.Damage(Dmg);
+
+    protected override void OnDespawn()
+    {
+        FireBallFactory.Instance.ReturnFireBall(this);
+    }
+
 }

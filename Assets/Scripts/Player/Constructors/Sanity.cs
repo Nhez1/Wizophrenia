@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 
+//TP2 Gomez Villarruel Jeremias
+
 [Serializable]
 public class Sanity
 {

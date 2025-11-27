@@ -1,6 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
+//TP2 Gomez Villarruel Jeremias
+
+
 public class Skeleton : MonoBehaviour, IDamageable, IKnockbackable
 {
     [Header(" Passive Stats ")]
@@ -48,7 +51,7 @@ public class Skeleton : MonoBehaviour, IDamageable, IKnockbackable
         Collider[] detectionArea = Physics.OverlapSphere(transform.position, _detectArea);
         foreach (var detected in detectionArea)
         {
-            // Esto es una especie de doble return, devuelve Verdadero de que encontró un target y el Player.cs del Target.
+            // Esto es una especie de doble return, devuelve Verdadero de que encontrï¿½ un target y el Player.cs del Target.
             if (detected.TryGetComponent(out target)) return true;
         }
 
@@ -71,7 +74,7 @@ public class Skeleton : MonoBehaviour, IDamageable, IKnockbackable
     {
         Vector3 knockDir = (transform.position - source).normalized;
         knockDir.y = transform.position.y;
-        // Acá seteo la Y de knockDir a la actual porque por alguna razón en la Y se pasa cualquier cosa y sin esto el enemigo clippea por el piso y se va a la mierda
+        // Acï¿½ seteo la Y de knockDir a la actual porque por alguna razï¿½n en la Y se pasa cualquier cosa y sin esto el enemigo clippea por el piso y se va a la mierda
         float time = 0f;
 
         while (time < duration)

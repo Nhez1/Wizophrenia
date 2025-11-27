@@ -1,17 +1,16 @@
-using System.Collections;
 using UnityEngine;
+
+//TP2 Gomez Villarruel Jeremias
 
 public class SparksEffect : Bullet
 {
-    private float _timer;
-
-    private void OnEnable() =>_timer = 0f;
-
-    private void Update() => ReturnAfterLifeTime();
-
-    private void ReturnAfterLifeTime()
+    private void OnEnable()
     {
-        _timer += Time.deltaTime;
-        if (_timer >= lifeTime) SparksFactory.Instance.ReturnSparks(this);
+        StartCoroutine(ReturnToPoolAfterLifeTime());
+    }
+
+    protected override void OnDespawn()
+    {
+        SparksFactory.Instance.ReturnSparks(this);
     }
 }

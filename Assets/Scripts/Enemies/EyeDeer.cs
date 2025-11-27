@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+//TP2 Gomez Villarruel Jeremias
+
 public class EyeDeer : MonoBehaviour
 {
     [Header("Stats")]

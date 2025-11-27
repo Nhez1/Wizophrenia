@@ -1,5 +1,7 @@
 using UnityEngine;
 
+//TP2 Gomez Villarruel Jeremias
+
 public interface IDamageable
 {
     Life Life { get; }
