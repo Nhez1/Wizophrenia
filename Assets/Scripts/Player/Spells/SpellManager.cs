@@ -10,10 +10,10 @@ public enum SpellType
 
 public class SpellManager
 {
-    private static Dictionary<SpellType, SpellSO> _spells = new();
+    private Dictionary<SpellType, SpellSO> _spells = new();
     private Mana _mana;
-    Transform castPoint;
-    MonoBehaviour _coroutineStarter;
+    private Transform _castPoint;
+    private MonoBehaviour _coroutineStarter;
     private Dictionary<SpellType, GameObject> _spellPrefabs = new();
 
     public void RegisterSpellPrefab(SpellType type, GameObject prefab)
@@ -24,7 +24,7 @@ public class SpellManager
     public SpellManager(Mana m, Transform castPosition, MonoBehaviour mb)
     {
         _mana = m;
-        castPoint = castPosition;
+        _castPoint = castPosition;
         _coroutineStarter = mb;
     }
 
@@ -54,7 +54,7 @@ public class SpellManager
 
         _spells.Add(spell.type, spell);
         var prefab = _spellPrefabs.TryGetValue(spell.type, out var p) ? p : null;
-        _spells[spell.type].Init(_coroutineStarter, _mana, castPoint, prefab);
+        _spells[spell.type].Init(_coroutineStarter, _mana, _castPoint, prefab);
         Debug.Log("The Wizard has learned " + spell.type.ToString());
     }
 

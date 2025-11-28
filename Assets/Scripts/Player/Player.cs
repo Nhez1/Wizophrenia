@@ -18,10 +18,10 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] private Transform spellCastPoint;
 
     [Header(" Spells ")]
-    public GameObject fireInHand;
-    public SpellSO flameSpell;
-    public SpellSO fireSpell;
-    public SpellSO exorciseSpell;
+    [SerializeField] private SpellSO _flameSpell;
+    [SerializeField] private SpellSO _fireSpell;
+    [SerializeField] private SpellSO _reigniteSpell;
+    private Light _fireInHand;
 
     private PlayerInteraction _interacter;
     private InputController _controller;
@@ -41,29 +41,32 @@ public class Player : MonoBehaviour, IDamageable
 
     private void Awake()
     {
-        if (!fireInHand) GetComponentInChildren<Light>();
         _rb = GetComponent<Rigidbody>();
 
-        _sanity = new();
         _life = new(true, 100f);
         _mana = new(this);
+        _sanity = new();
         _interacter = new();
         _move = new(transform, _rb, _jumpForce, _speed, _runBoost, this);
         _spellManager = new(_mana, spellCastPoint, this);
         _controller = new(_move, _spellManager, _interacter);
+
         Inventory = FindObjectOfType<Inventory>();
+        _fireInHand = GetComponentInChildren<Light>(true);
     }
 
     private void Start()
     {
         _move.OnStart();
-        _spellManager.RegisterSpellPrefab(SpellType.FlameSpell, fireInHand);
-        _spellManager.RegisterSpellPrefab(SpellType.FireBall, fireSpell.prefab);
-        _spellManager.RegisterSpellPrefab(SpellType.Reignite, exorciseSpell.prefab);
 
-        _spellManager.AddSpell(flameSpell);
-        _spellManager.AddSpell(fireSpell);
-        _spellManager.AddSpell(exorciseSpell);
+        _spellManager.RegisterSpellPrefab(SpellType.FlameSpell, _fireInHand.gameObject);
+        _spellManager.RegisterSpellPrefab(SpellType.FireBall, _fireSpell.prefab);
+        _spellManager.RegisterSpellPrefab(SpellType.Reignite, _reigniteSpell.prefab);
+
+        _spellManager.AddSpell(_flameSpell);
+        _spellManager.AddSpell(_fireSpell);
+        _spellManager.AddSpell(_reigniteSpell);
+
         _controller.MouseSensibility = _mouseSensibility;
         _interacter.PlayerReach = _reach;
     }
@@ -100,19 +103,17 @@ public class Player : MonoBehaviour, IDamageable
     }
 
     #region LightInHand
-    Light _light;
 
     void SetLightColorBlue()
     {
-        fireInHand.SetActive(true);
-        _light = fireInHand.GetComponent<Light>();
-        _light.color = new(0.5518868f, 0.8779028f, 1);
+        _fireInHand.gameObject.SetActive(true);
+        _fireInHand.color = new(0.5518868f, 0.8779028f, 1);
     }
 
     void SetLightColorDefault()
     {
-        fireInHand.SetActive(false);
-        _light.color = new(1, 0.6399195f, 0);
+        _fireInHand.gameObject.SetActive(false);
+        _fireInHand.color = new(1, 0.6399195f, 0);
     }
     #endregion
 }

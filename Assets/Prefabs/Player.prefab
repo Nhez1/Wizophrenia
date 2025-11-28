@@ -557,16 +557,19 @@ MonoBehaviour:
   _mana:
     _maxMP: 100
     _mp: 100
+  _sanity:
+    _maxSP: 1000
+    _sanity: 700
   _speed: 3
   _runBoost: 3
   _jumpForce: 3
   _reach: 2
   _mouseSensibility: 250
   spellCastPoint: {fileID: 6687816065531029168}
-  fireInHand: {fileID: 4389371671464499850}
-  flameSpell: {fileID: 11400000, guid: 9b2fad25443b9784da4d516fdbc55b5e, type: 2}
-  fireSpell: {fileID: 11400000, guid: b132e8a5824d23e40bb9b2d000aa05b2, type: 2}
-  exorciseSpell: {fileID: 11400000, guid: 312c3e5f6b86c624abb4d1ae082406da, type: 2}
+  _fireInHand: {fileID: 2535667839079412563}
+  _flameSpell: {fileID: 11400000, guid: 9b2fad25443b9784da4d516fdbc55b5e, type: 2}
+  _fireSpell: {fileID: 11400000, guid: b132e8a5824d23e40bb9b2d000aa05b2, type: 2}
+  _reigniteSpell: {fileID: 11400000, guid: 312c3e5f6b86c624abb4d1ae082406da, type: 2}
 --- !u!82 &6120853900492584031
 AudioSource:
   m_ObjectHideFlags: 0

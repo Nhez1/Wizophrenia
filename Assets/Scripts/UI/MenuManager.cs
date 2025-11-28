@@ -22,7 +22,7 @@ public class MenuManager : MonoBehaviour
         _pause = GetComponent<PauseSystem>();
         _mouse = Camera.main.GetComponent<MouseLook>();
 
-        if (!_inventory) _inventory = _inventoryMenu.GetComponent<CanvasGroup>();
+        _inventory = _inventoryMenu.GetComponent<CanvasGroup>();
     }
 
     #region Inventory
