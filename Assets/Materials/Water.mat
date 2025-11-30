@@ -27,7 +27,7 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -58,10 +58,10 @@ Material:
     - _PixelateAmount: 120
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RippleDensity: 12
+    - _RippleDensity: 20
     - _RippleSlimness: 5
-    - _RippleSpeed: 1
+    - _RippleSpeed: 2
     m_Colors:
-    - _BaseColor: {r: 0.13830543, g: 0.26415092, b: 0.18025392, a: 0}
-    - _RippleColor: {r: 0.5, g: 0.47296157, b: 0.2476415, a: 0}
+    - _BaseColor: {r: 0.20305268, g: 0.3679245, b: 0.29061046, a: 0}
+    - _RippleColor: {r: 0.7924528, g: 0.7566256, b: 0.45977217, a: 0}
   m_BuildTextureStacks: []
