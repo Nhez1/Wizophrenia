@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Plant_Good
-  m_Shader: {fileID: -6465566751694194690, guid: 15f1ae64b477ec24e92696a8e27d9e19,
+  m_Name: MysterySoup
+  m_Shader: {fileID: -6465566751694194690, guid: 3a0cc9a3ebca83b439d19e0c648e1476,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -24,8 +24,12 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 006cfb1c14cbcfa44a06dc0c1f5a2bfd, type: 3}
+    - _SampleTexture2D_103589556b584e25acafb613e1c210f9_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 97c6b321b0702e248aa7c09f19b968b6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_dcd1010b6f1d4a9f8d48f2300fde5d03_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 794e57a6135b40c4abef534a1273637b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -42,12 +46,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaThreshold: 0.5
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors: []
   m_BuildTextureStacks: []
---- !u!114 &3030092699219992566
+--- !u!114 &7729994712843131247
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
