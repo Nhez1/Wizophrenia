@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PP_Vignette
-  m_Shader: {fileID: -6465566751694194690, guid: 0981afd0c4f24a145957472b26524454,
+  m_Name: PP_VolumetricFog
+  m_Shader: {fileID: -6465566751694194690, guid: 6b1a8e7f146571048851890ad80a1d1a,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -38,10 +38,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Frequency: 58.5
-    - _VignetteScale: 0.53
+    - _MaxDistance: 30
+    - _MaxOpacity: 0.634
+    - _MinDistance: 5
+    - _MinOpacity: 0.355
     m_Colors:
-    - _Offset: {r: 10, g: 0, b: 0, a: 0}
-    - _VignetteColorA: {r: 0.08005569, g: 0.09433961, b: 0.06363474, a: 0}
-    - _VignetteColorB: {r: 0.14707555, g: 0.1270915, b: 0.1764706, a: 0}
+    - _Color: {r: 0.0754717, g: 0.050653514, b: 0.010323961, a: 0.79607844}
+    - _Offset: {r: 0, g: 0.075, b: 0, a: 0}
+    - _Tiling: {r: 8.2, g: 5.71, b: 0, a: 0}
   m_BuildTextureStacks: []
