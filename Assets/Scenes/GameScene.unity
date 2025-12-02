@@ -9324,8 +9324,8 @@ MonoBehaviour:
   _shadowHandPrefab: {fileID: 1963397940782770894, guid: ab0df4bfa872c6743a6264b6a915bfef,
     type: 3}
   _playerRef: {fileID: 951216495}
-  _spawnDistance: 40
-  _spawnInterval: 20
+  _spawnDistance: 90
+  _spawnInterval: 150
 --- !u!4 &433617188
 Transform:
   m_ObjectHideFlags: 0
@@ -9335,7 +9335,7 @@ Transform:
   m_GameObject: {fileID: 433617186}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17, y: -3479, z: 84.4}
+  m_LocalPosition: {x: -17, y: -2.8, z: 88.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
