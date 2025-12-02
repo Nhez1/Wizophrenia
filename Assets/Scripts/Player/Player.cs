@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour, IDamageable
+public class Player : MementoEntity, IDamageable
 {
     [Header(" Stats ")]
     [SerializeField] private Life _life;
@@ -103,7 +103,6 @@ public class Player : MonoBehaviour, IDamageable
     }
 
     #region LightInHand
-
     void SetLightColorBlue()
     {
         _fireInHand.gameObject.SetActive(true);
@@ -116,4 +115,14 @@ public class Player : MonoBehaviour, IDamageable
         _fireInHand.color = new(1, 0.6399195f, 0);
     }
     #endregion
+
+    protected override void SaveStates()
+    {
+        _memento.SaveMemory(_life, _mana, Inventory);
+    }
+
+    protected override void LoadStates(object[] oldState)
+    {
+        throw new System.NotImplementedException();
+    }
 }
