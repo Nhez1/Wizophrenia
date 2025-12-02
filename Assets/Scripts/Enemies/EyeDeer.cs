@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class EyeDeer : MonoBehaviour
 {
@@ -15,8 +16,8 @@ public class EyeDeer : MonoBehaviour
     private EnemyProximityAnimator _proximityBehaviour;
 
     [Header("Effects")]
-    [SerializeField] private Volume _vignette;
-    private VignetteEffect _visualEffect;
+    [SerializeField] private Volume _volume;
+    [SerializeField] private VignetteEffect _visualEffect;
     private bool _isDraining = false;
     private bool _isHidden = false;
 
@@ -27,8 +28,23 @@ public class EyeDeer : MonoBehaviour
 
     void Start()
     {
+        if (_volume == null)
+        {
+            Debug.LogError("NO se asignó el Volume en el Inspector");
+            return;
+        }
+
+        if (!_volume.profile.TryGet(out _visualEffect))
+        {
+            Debug.LogError("El Volume NO tiene el override VignetteEffect en su Profile");
+        }
+        else
+        {
+            Debug.Log("VignetteEffect obtenido correctamente");
+        }
+
         if (Application.isPlaying)
-            _vignette.profile.TryGet(out _visualEffect);
+            _volume.profile.TryGet(out _visualEffect);
 
         _anim = GetComponent<Animator>();
 
@@ -40,6 +56,12 @@ public class EyeDeer : MonoBehaviour
 
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            _visualEffect._enableEffect.value = !_visualEffect._enableEffect.value;
+        }
+
         float distance = Vector3.Distance(transform.position, _player.transform.position);
 
         if (!LookedAt() && distance > _stopDistance && !_isHidden)
@@ -94,7 +116,7 @@ public class EyeDeer : MonoBehaviour
     void EnableVisualEffect(bool on)
     {
         if (_visualEffect != null)
-            _visualEffect.intensity.value = on ? 1f : 0f;
+            _visualEffect._enableEffect.value = on;
     }
     #endregion
 

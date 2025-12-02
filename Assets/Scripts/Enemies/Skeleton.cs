@@ -17,12 +17,21 @@ public class Skeleton : MonoBehaviour, IDamageable, IKnockbackable
     [SerializeField] private float _attackCooldown = 1f;
     private bool _canAttack = true;
 
+    private Material _myMaterial;
+
     private Animator _anim;
 
     private void Awake()
     {
         _life = new(false, _maxHP, gameObject);
         _anim = GetComponent<Animator>();
+
+        var sprite = GetComponent<SpriteRenderer>();
+        _myMaterial = sprite.material;
+        _life.OnTakeDamage += () =>
+        {
+            StartCoroutine(FlashDamage_Execute());
+        };
     }
 
     private void Update()
@@ -31,7 +40,7 @@ public class Skeleton : MonoBehaviour, IDamageable, IKnockbackable
         {
             var disToPlayer = Vector3.Distance(transform.position, tgt.transform.position);
 
-            if(disToPlayer > _attackRange) FollowPlayer(tgt);
+            if (disToPlayer > _attackRange) FollowPlayer(tgt);
             else if (disToPlayer <= _attackRange && _canAttack) Attack(tgt.Life);
         }
         else _anim.SetBool("IsFollowing", false);
@@ -41,6 +50,14 @@ public class Skeleton : MonoBehaviour, IDamageable, IKnockbackable
     {
         target.Damage(_damage);
         StartCoroutine(Cooldown());
+    }
+
+    IEnumerator FlashDamage_Execute()
+    {
+
+        _myMaterial.SetFloat("_Progress", 1);
+        yield return new WaitForSeconds(0.7f);
+        _myMaterial.SetFloat("_Progress", 0);
     }
 
     public bool DetectPlayer(out Player target)

@@ -1,12 +1,11 @@
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-// DISCLAIMER: MADE BY AI //
 [System.Serializable, VolumeComponentMenu("Custom/VignetteEffect")]
 public class VignetteEffect : VolumeComponent, IPostProcessComponent
 {
-    public ClampedFloatParameter intensity = new(1f, 0f, 1f);
+    public BoolParameter _enableEffect = new BoolParameter(false);
 
-    public bool IsActive() => intensity.value > 0f;
+    public bool IsActive() => _enableEffect.value;
     public bool IsTileCompatible() => false;
 }

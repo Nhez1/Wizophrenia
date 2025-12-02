@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: VignetteEffect
   m_EditorClassIdentifier: 
   active: 1
-  intensity:
-    m_OverrideState: 1
-    m_Value: 1
+  _enableEffect:
+    m_OverrideState: 0
+    m_Value: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29,4 +29,20 @@ MonoBehaviour:
   m_Name: Vignette
   m_EditorClassIdentifier: 
   components:
-  - {fileID: -5969921763196507592}
+  - {fileID: 3440752720973271855}
+--- !u!114 &3440752720973271855
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdbeeba0592615d4699904a40fb8d766, type: 3}
+  m_Name: VignetteEffect
+  m_EditorClassIdentifier: 
+  active: 1
+  _enableEffect:
+    m_OverrideState: 1
+    m_Value: 0
