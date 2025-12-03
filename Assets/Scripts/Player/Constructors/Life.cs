@@ -4,16 +4,14 @@ using UnityEngine;
 [Serializable]
 public class Life
 {
-    public static event Action<float> OnHealthChanged;
-    public static event Action OnHealthGameOver;
+    public event Action<float> OnHealthChanged;
+    public event Action OnHealthGameOver;
     public event Action OnTakeDamage = delegate { };
 
     //public static event Action GameOverEvent;
     [Tooltip("Health Points")]
     private float _maxHP;
     [SerializeField] private float _hp;
-
-    
 
     public float MaxHP { get { return _maxHP; } private set { _maxHP = value; } }
     public float HP { get { return _hp; } private set => _hp = Mathf.Clamp(value, 0f, _maxHP); }

@@ -15,6 +15,14 @@ public class MenuManager : MonoBehaviour
     private PauseSystem _pause;
     private MouseLook _mouse;
 
+    private Life _playerLife;
+
+    private void Awake()
+    {
+        var p = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        _playerLife = p.Life;
+    }
+
     private void Start()
     {
         Time.timeScale = 1.0f;
@@ -111,7 +119,7 @@ public class MenuManager : MonoBehaviour
         InputController.OnPause += ActivatePauseMenu;
         InputController.OnBagToggle += SwitchInventory;
         CauldronObject.OnAlchemyToggle += SwitchAlchemy;
-        Life.OnHealthGameOver += HealthGameOver;
+        _playerLife.OnHealthGameOver += HealthGameOver;
         Sanity.OnSanityGameOver += SanityGameOver;
         Sanity.OnGameWin += Win;
     }
@@ -120,7 +128,7 @@ public class MenuManager : MonoBehaviour
         InputController.OnPause -= ActivatePauseMenu;
         InputController.OnBagToggle -= ActivateInventory;
         CauldronObject.OnAlchemyToggle -= SwitchAlchemy;
-        Life.OnHealthGameOver -= HealthGameOver;
+        _playerLife.OnHealthGameOver -= HealthGameOver;
         Sanity.OnSanityGameOver -= SanityGameOver;
         Sanity.OnGameWin -= Win;
     }

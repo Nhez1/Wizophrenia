@@ -3,24 +3,27 @@ using System;
 
 public class StateOverlay : MonoBehaviour
 {
-    [Header("Overlay de Hielo")]
-    public GameObject iceOverlay;
-
     [Header("Overlays de Sangre")]
     public GameObject blood30;
     public GameObject blood50;
     public GameObject blood80;
 
+    private Life _playerLife;
+
+    private void Awake()
+    {
+        var p = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        _playerLife = p.Life;
+    }
+
     private void OnEnable()
     {
-        Life.OnHealthChanged += UpdateBloodOverlay;
-        IceWalker.OnIceArea += ShowIceOverlay;
+        _playerLife.OnHealthChanged += UpdateBloodOverlay;
     }
 
     private void OnDisable()
     {
-        Life.OnHealthChanged -= UpdateBloodOverlay;
-        IceWalker.OnIceArea -= ShowIceOverlay;
+        _playerLife.OnHealthChanged -= UpdateBloodOverlay;
     }
 
     private void UpdateBloodOverlay(float currentHP)
@@ -33,6 +36,4 @@ public class StateOverlay : MonoBehaviour
         else if (currentHP <= 50) blood50.SetActive(true);
         else if (currentHP <= 80) blood80.SetActive(true);
     }
-
-    private void ShowIceOverlay(bool active) => iceOverlay.SetActive(active);
 }

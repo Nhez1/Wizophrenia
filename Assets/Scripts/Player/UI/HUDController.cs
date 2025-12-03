@@ -23,7 +23,9 @@ public class HUDController : MonoBehaviour
     private Dictionary<SpellType, CooldownUI> _cdIcons;
 
     [SerializeField] TMP_Text _interactMessage;
-    bool _interactMessageSwitch = false;
+    private bool _interactMessageSwitch = false;
+
+    private Life _playerLife;
 
     private void Awake()
     {
@@ -33,6 +35,9 @@ public class HUDController : MonoBehaviour
             { SpellType.FlameSpell, _flameCD },
             { SpellType.Reignite, _reigniteCD }
         };
+
+        var p = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        _playerLife = p.Life;
     }
 
     private void Start()
@@ -77,7 +82,7 @@ public class HUDController : MonoBehaviour
         CooldownEffect.OnCooldownOver += CooldownOff;
         PlayerInteraction.OnHoverEnter += OnInteractableHoverEnter;
         PlayerInteraction.OnHoverExit += OnInteractableHoverExit;
-        Life.OnHealthChanged += UpdateHealthBar;
+        _playerLife.OnHealthChanged += UpdateHealthBar;
         Mana.OnManaChanged += UpdateManaBar;
     }
 
@@ -87,7 +92,7 @@ public class HUDController : MonoBehaviour
         CooldownEffect.OnCooldownOver -= CooldownOff;
         PlayerInteraction.OnHoverEnter -= OnInteractableHoverEnter;
         PlayerInteraction.OnHoverExit -= OnInteractableHoverExit;
-        Life.OnHealthChanged -= UpdateHealthBar;
+        _playerLife.OnHealthChanged -= UpdateHealthBar;
         Mana.OnManaChanged -= UpdateManaBar;
     }
     #endregion
