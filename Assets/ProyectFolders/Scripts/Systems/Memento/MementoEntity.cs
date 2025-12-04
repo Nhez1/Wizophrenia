@@ -3,10 +3,12 @@ using UnityEngine;
 public abstract class MementoEntity : MonoBehaviour
 {
     protected MementoState _memento;
+    protected object _scriptType;
 
     protected virtual void Awake()
     {
         _memento = new();
+        _scriptType = GetType();
     }
 
     protected abstract void SaveStates();
@@ -14,7 +16,6 @@ public abstract class MementoEntity : MonoBehaviour
 
     public void TryLoadStates()
     {
-        Debug.Log("Tried load before getmemoriesamount");
         if (_memento.GetMemoriesAmount == 0) return;
 
         var oldState = _memento.LoadState();
@@ -29,14 +30,16 @@ public abstract class MementoEntity : MonoBehaviour
         if (_memento.GetMemoriesAmount == 0)
             SaveStates();
 
-        GlobalMementoCache.CachedState = _memento.LoadState();
+        GlobalMementoCache.Save(GetType(),_memento.LoadState());
     }
+
     public void RestoreFromGlobalCache()
     {
-        if (!GlobalMementoCache.HasState) return;
+        if (!GlobalMementoCache.TryLoad(GetType(), out var state))
+            return;
 
-        _memento.SaveMemory(GlobalMementoCache.CachedState);
-        GlobalMementoCache.Clear();
+        _memento.SaveMemory(state);
+        GlobalMementoCache.Clear(GetType());
         TryLoadStates();
     }
 }
