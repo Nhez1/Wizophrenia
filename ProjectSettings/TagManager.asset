@@ -17,10 +17,10 @@ TagManager:
   - EyeDeer
   - 
   - Player
-  - OutlinePlants
-  - 
-  - 
-  - 
+  - HardLightArea
+  - MediumLightArea
+  - SoftLightArea
+  - DimLightArea
   - 
   - 
   - 
