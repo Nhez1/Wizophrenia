@@ -54,5 +54,6 @@ public class Sanity
     {
         MaxSP = data.maxSP;
         CurrentSanity = data.sp;
+        UpdateSanity();
     }
 }

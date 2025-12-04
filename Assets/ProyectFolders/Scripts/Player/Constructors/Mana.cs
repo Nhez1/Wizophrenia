@@ -40,19 +40,6 @@ public class Mana
         UpdateMana(MP);
     }
 
-    /// <summary>
-    /// Reduce the player's maximum MP by a specified amount.
-    /// </summary>
-    /// <param name="amount">How much maxMP you want to take away from the player.</param>
-    public void ReduceMaxMP(float amount)
-    {
-        if (amount >= _maxMP) _maxMP = 0;
-        else _maxMP -= amount;
-    }
-
-    public void SetMP(float amount) => MP = amount;
-    public void SetMaxMP(float amount) => MaxMP = amount;
-
     public void Drain(float amountPerSec)
     {
         _activateDrain = !_activateDrain;
@@ -106,6 +93,7 @@ public class Mana
     {
         MaxMP = data.maxSP;
         MP = data.sp;
+        UpdateMana(MP);
     }
 }
 

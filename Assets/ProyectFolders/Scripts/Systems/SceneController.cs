@@ -16,16 +16,16 @@ public class SceneController : MonoBehaviour
     private void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        foreach (MementoEntity entity in _mementoEntities) entity.RestoreFromGlobalCache();
     }
 
     public void ChangeSceneAsyncByName(object sender, object data)
     {
+        foreach(MementoEntity entity in _mementoEntities) entity.SaveToGlobalCache();
+
+        OldSceneName = SceneManager.GetActiveScene().name;
         var name = (string)data;
-        Debug.Log("Scene name " + name);
-
-        foreach (MementoEntity entity in _mementoEntities) entity.ForceSave();
         NewSceneName = name;
-
         SceneManager.LoadSceneAsync(name, LoadSceneMode.Single);
     }
 
@@ -42,11 +42,10 @@ public class SceneController : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        foreach (MementoEntity entity in _mementoEntities) entity.TryLoadStates();
-        if (scene.name != NewSceneName) return;
-        if (OldSceneName == null) return;
-
-        SceneManager.UnloadSceneAsync(OldSceneName);
+        if (scene.name != NewSceneName)
+            return;
+        if (OldSceneName == null)
+            return;
     }
 
     public void RestartLevel()

@@ -23,4 +23,20 @@ public abstract class MementoEntity : MonoBehaviour
     }
 
     public void ForceSave() => SaveStates();
+
+    public void SaveToGlobalCache()
+    {
+        if (_memento.GetMemoriesAmount == 0)
+            SaveStates();
+
+        GlobalMementoCache.CachedState = _memento.LoadState();
+    }
+    public void RestoreFromGlobalCache()
+    {
+        if (!GlobalMementoCache.HasState) return;
+
+        _memento.SaveMemory(GlobalMementoCache.CachedState);
+        GlobalMementoCache.Clear();
+        TryLoadStates();
+    }
 }

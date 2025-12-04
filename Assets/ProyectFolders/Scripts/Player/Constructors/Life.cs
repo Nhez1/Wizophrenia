@@ -25,7 +25,6 @@ public class Life
         HP = MaxHP;
         _isP = isPlayer;
 
-
         _client = gameObject;
     }
 
@@ -69,6 +68,7 @@ public class Life
     {
         MaxHP = data.maxSP;
         HP = data.sp;
+        UpdateHealth();
     }
 }
 
