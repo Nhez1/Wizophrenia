@@ -1317,10 +1317,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544a55a1705939a498db02ac2a181ef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iceOverlay: {fileID: 1854362627}
-  blood30: {fileID: 680181403}
-  blood50: {fileID: 291687511}
-  blood80: {fileID: 2071754286}
+  _blood30: {fileID: 680181403}
+  _blood50: {fileID: 291687511}
+  _blood80: {fileID: 2071754286}
 --- !u!114 &271364983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4285,7 +4284,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 860550470}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SceneManager, Assembly-CSharp
         m_MethodName: ChangeSceneByNumber
         m_Mode: 3
@@ -5038,7 +5037,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 860550471}
-  - component: {fileID: 860550470}
+  - component: {fileID: 860550472}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -5046,18 +5045,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &860550470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 860550469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6654340f3eb900348a5956f0ba05998a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &860550471
 Transform:
   m_ObjectHideFlags: 0
@@ -5075,6 +5062,18 @@ Transform:
   - {fileID: 2027516449}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &860550472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 860550469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fed611a11baf5141a24bdba0390ac03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &867118144
 GameObject:
   m_ObjectHideFlags: 0
@@ -7557,7 +7556,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 860550470}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SceneManager, Assembly-CSharp
         m_MethodName: ExitGame
         m_Mode: 1
@@ -8801,8 +8800,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 860550470}
-        m_TargetAssemblyTypeName: SceneManager, Assembly-CSharp
+      - m_Target: {fileID: 860550472}
+        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
         m_MethodName: ExitGame
         m_Mode: 1
         m_Arguments:
@@ -9449,7 +9448,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 860550470}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SceneManager, Assembly-CSharp
         m_MethodName: ExitGame
         m_Mode: 1
@@ -13469,7 +13468,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c51ef4b77c1f34d92e31365e01eb27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneManager: {fileID: 0}
+  _onSceneChange: {fileID: 0}
+  _sceneController: {fileID: 0}
   _targetScene: GameScene
   _interactMessage: Exit Cottage
 --- !u!1 &1887984598 stripped

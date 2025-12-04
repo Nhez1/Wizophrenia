@@ -44,6 +44,8 @@ public class SceneController : MonoBehaviour
     {
         if (scene.name != NewSceneName) return;
         if (OldSceneName == null) return;
+
+        foreach (MementoEntity entity in _mementoEntities) entity.TryLoadStates();
         SceneManager.UnloadSceneAsync(OldSceneName);
     }
 

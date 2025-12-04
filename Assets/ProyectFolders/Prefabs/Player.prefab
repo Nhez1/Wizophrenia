@@ -565,7 +565,7 @@ MonoBehaviour:
   _jumpForce: 3
   _reach: 2
   _mouseSensibility: 250
-  spellCastPoint: {fileID: 6687816065531029168}
+  _spellCastPoint: {fileID: 6687816065531029168}
   _flameSpell: {fileID: 11400000, guid: 9b2fad25443b9784da4d516fdbc55b5e, type: 2}
   _fireSpell: {fileID: 11400000, guid: b132e8a5824d23e40bb9b2d000aa05b2, type: 2}
   _reigniteSpell: {fileID: 11400000, guid: 312c3e5f6b86c624abb4d1ae082406da, type: 2}

@@ -78,6 +78,7 @@ public class Player : MementoEntity, IDamageable
         _move.OnUpdate();
         _controller.OnUpdate();
 
+        if (Input.GetKeyDown(KeyCode.K)) SaveStates();
         if (Input.GetKeyDown(KeyCode.L)) TryLoadStates();
     }
 
@@ -121,14 +122,14 @@ public class Player : MementoEntity, IDamageable
 
     protected override void SaveStates()
     {
-        _memento.SaveMemory(_life, _mana, transform.position, transform.rotation);
+        Debug.Log("Saved");
+        _memento.SaveMemory(_life, _mana);
     }
 
     protected override void LoadStates(object[] oldState)
     {
+        Debug.Log("Loaded");
         _life = (Life)oldState[0];
         _mana = (Mana)oldState[1];
-        transform.position = (Vector3)oldState[2];
-        transform.rotation = (Quaternion)oldState[3];
     }
 }

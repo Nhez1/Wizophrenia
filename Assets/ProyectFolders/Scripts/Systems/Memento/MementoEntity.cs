@@ -14,6 +14,7 @@ public abstract class MementoEntity : MonoBehaviour
 
     public void TryLoadStates()
     {
+        Debug.Log("Tried load before getmemoriesamount");
         if (_memento.GetMemoriesAmount == 0) return;
 
         var oldState = _memento.LoadState();
