@@ -94,5 +94,18 @@ public class Mana
 
     private void UpdateMana(float mP) => OnManaChanged?.Invoke(mP);
 
+    public PlayerData GetData()
+    {
+        return new PlayerData
+        {
+            maxSP = MaxMP,
+            sp = MP
+        };
+    }
+    public void LoadData(PlayerData data)
+    {
+        MaxMP = data.maxSP;
+        MP = data.sp;
+    }
 }
 

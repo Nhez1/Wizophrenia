@@ -49,15 +49,34 @@ public class Life
 
         if (_isP) UpdateHealth();
     }
-
     public void UpdateHealth() => OnHealthChanged?.Invoke(HP);
-
-    public void SetHP(float amount) => HP = amount;
-    public void SetMaxHP(float amount) => MaxHP = amount;
 
     void GameOver()
     {
         if (_isP) OnHealthGameOver?.Invoke();
         else UnityEngine.Object.Destroy(_client);
     }
+
+    public PlayerData GetData()
+    {
+        return new PlayerData
+        {
+            maxSP = MaxHP,
+            sp = HP
+        };
+    }
+    public void LoadData(PlayerData data)
+    {
+        MaxHP = data.maxSP;
+        HP = data.sp;
+    }
+}
+
+[Serializable]
+public struct PlayerData
+{
+    [Tooltip("The maximum stat points")]
+    public float maxSP;
+    [Tooltip("The current stat points")]
+    public float sp;
 }

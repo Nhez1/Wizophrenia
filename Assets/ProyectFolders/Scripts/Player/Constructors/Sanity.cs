@@ -41,4 +41,18 @@ public class Sanity
     }
 
     public void UpdateSanity() => OnSanityChanged?.Invoke(CurrentSanity);
+
+    public PlayerData GetData()
+    {
+        return new PlayerData
+        {
+            maxSP = MaxSP,
+            sp = CurrentSanity
+        };
+    }
+    public void LoadData(PlayerData data)
+    {
+        MaxSP = data.maxSP;
+        CurrentSanity = data.sp;
+    }
 }

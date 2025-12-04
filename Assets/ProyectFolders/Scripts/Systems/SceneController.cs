@@ -42,10 +42,10 @@ public class SceneController : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        foreach (MementoEntity entity in _mementoEntities) entity.TryLoadStates();
         if (scene.name != NewSceneName) return;
         if (OldSceneName == null) return;
 
-        foreach (MementoEntity entity in _mementoEntities) entity.TryLoadStates();
         SceneManager.UnloadSceneAsync(OldSceneName);
     }
 

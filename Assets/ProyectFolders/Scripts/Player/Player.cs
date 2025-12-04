@@ -123,13 +123,12 @@ public class Player : MementoEntity, IDamageable
     protected override void SaveStates()
     {
         Debug.Log("Saved");
-        _memento.SaveMemory(_life, _mana);
+        _memento.SaveMemory(_life.GetData());
     }
 
     protected override void LoadStates(object[] oldState)
     {
         Debug.Log("Loaded");
-        _life = (Life)oldState[0];
-        _mana = (Mana)oldState[1];
+        _life.LoadData((PlayerData)oldState[0]);
     }
 }
