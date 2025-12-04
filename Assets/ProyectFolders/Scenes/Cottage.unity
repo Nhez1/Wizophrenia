@@ -10842,6 +10842,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: casa_interior_fbx
       objectReference: {fileID: 0}
+    - target: {fileID: 1439571747073420588, guid: 72d8019b6d7bbe148961eeb23ba6ffc1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 47dc7ac3feee6414f9079acef978734a, type: 2}
     - target: {fileID: 4744428142475063946, guid: 72d8019b6d7bbe148961eeb23ba6ffc1,
         type: 3}
       propertyPath: m_LocalScale.x
