@@ -15,7 +15,7 @@ public class Player : MementoEntity, IDamageable
     [Header(" Internal ")]
     [SerializeField] private float _mouseSensibility = 100f;
     [Tooltip("El punto desde el que se van a instanciar los hechizos")]
-    [SerializeField] private Transform spellCastPoint;
+    [SerializeField] private Transform _spellCastPoint;
 
     [Header(" Spells ")]
     [SerializeField] private SpellSO _flameSpell;
@@ -34,13 +34,14 @@ public class Player : MementoEntity, IDamageable
     // Lo mismo para el mana, cuando sea que se necesite gastar mana, se usa Player.Mana.SpendMP(cantidad);
     public Mana Mana => _mana;
     public Sanity Sanity => _sanity;
-    public float Speed => _speed;
     public float RunBoost => _runBoost;
     public InputController InputControl => _controller;
     public Inventory Inventory { get; private set; }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         _rb = GetComponent<Rigidbody>();
 
         _life = new(true, 100f);
@@ -48,7 +49,7 @@ public class Player : MementoEntity, IDamageable
         _sanity = new();
         _interacter = new();
         _move = new(transform, _rb, _jumpForce, _speed, _runBoost, this);
-        _spellManager = new(_mana, spellCastPoint, this);
+        _spellManager = new(_mana, _spellCastPoint, this);
         _controller = new(_move, _spellManager, _interacter);
 
         Inventory = FindObjectOfType<Inventory>();
@@ -76,6 +77,8 @@ public class Player : MementoEntity, IDamageable
         _interacter.HoverUpdate();
         _move.OnUpdate();
         _controller.OnUpdate();
+
+        if (Input.GetKeyDown(KeyCode.L)) TryLoadStates();
     }
 
     private void FixedUpdate()
@@ -118,11 +121,14 @@ public class Player : MementoEntity, IDamageable
 
     protected override void SaveStates()
     {
-        _memento.SaveMemory(_life, _mana, Inventory);
+        _memento.SaveMemory(_life, _mana, transform.position, transform.rotation);
     }
 
     protected override void LoadStates(object[] oldState)
     {
-        throw new System.NotImplementedException();
+        _life = (Life)oldState[0];
+        _mana = (Mana)oldState[1];
+        transform.position = (Vector3)oldState[2];
+        transform.rotation = (Quaternion)oldState[3];
     }
 }

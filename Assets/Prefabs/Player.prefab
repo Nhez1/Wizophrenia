@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 8785319015418687407}
   m_Layer: 3
   m_Name: Point Light
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -566,7 +566,6 @@ MonoBehaviour:
   _reach: 2
   _mouseSensibility: 250
   spellCastPoint: {fileID: 6687816065531029168}
-  _fireInHand: {fileID: 2535667839079412563}
   _flameSpell: {fileID: 11400000, guid: 9b2fad25443b9784da4d516fdbc55b5e, type: 2}
   _fireSpell: {fileID: 11400000, guid: b132e8a5824d23e40bb9b2d000aa05b2, type: 2}
   _reigniteSpell: {fileID: 11400000, guid: 312c3e5f6b86c624abb4d1ae082406da, type: 2}
@@ -773,7 +772,7 @@ GameObject:
   - component: {fileID: 6687816065531029168}
   m_Layer: 3
   m_Name: FirePoint
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -806,7 +805,7 @@ GameObject:
   - component: {fileID: 3716867014688892801}
   m_Layer: 3
   m_Name: schizophrenic wizard eyes eyes
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

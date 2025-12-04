@@ -8,7 +8,7 @@ public class Movement
 
     //Stats
     public float Speed { get; private set; }
-    private float _baseSpeed = 5f;
+    private float _baseSpeed;
     private float _speedMin = 2f;
     private float _speedCap = 15f;
     private float _runBoost;
@@ -36,7 +36,11 @@ public class Movement
         _player = MB as Player;
     }
 
-    public void OnStart() => _baseSpeed = Speed;
+    public void OnStart()
+    {
+        _baseSpeed = Speed;
+        _runBoost = _player.RunBoost;
+    }
 
     public void OnUpdate()
     {
@@ -49,8 +53,6 @@ public class Movement
                 _runApplied = false;
             }
         }
-        _baseSpeed = _player.Speed;   //
-        _runBoost = _player.RunBoost; //Estas dos líneas están para que los cambios en el editor sobre la velocidad se apliquen inmediatamente.
     }
 
     //-------------------------------------------------------------------------------- Movimiento
@@ -70,6 +72,7 @@ public class Movement
             BuffSpeed(_runBoost);
             _runApplied = true;
         }
+
         isRunning = true;
     }
 

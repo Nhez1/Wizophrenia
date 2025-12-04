@@ -4,20 +4,17 @@ using System;
 public class StateOverlay : MonoBehaviour
 {
     [Header("Overlays de Sangre")]
-    public GameObject blood30;
-    public GameObject blood50;
-    public GameObject blood80;
+    [SerializeField] private GameObject _blood30;
+    [SerializeField] private GameObject _blood50;
+    [SerializeField] private GameObject _blood80;
 
     private Life _playerLife;
 
-    private void Awake()
+    private void Start()
     {
-        var p = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        _playerLife = p.Life;
-    }
+        var p = GameObject.FindGameObjectWithTag("Player");
+        _playerLife = p.GetComponent<Player>().Life;            
 
-    private void OnEnable()
-    {
         _playerLife.OnHealthChanged += UpdateBloodOverlay;
     }
 
@@ -28,12 +25,12 @@ public class StateOverlay : MonoBehaviour
 
     private void UpdateBloodOverlay(float currentHP)
     {
-        blood30.SetActive(false);
-        blood50.SetActive(false);
-        blood80.SetActive(false);
+        _blood30.SetActive(false);
+        _blood50.SetActive(false);
+        _blood80.SetActive(false);
 
-        if (currentHP <= 30) blood30.SetActive(true);
-        else if (currentHP <= 50) blood50.SetActive(true);
-        else if (currentHP <= 80) blood80.SetActive(true);
+        if (currentHP <= 30) _blood30.SetActive(true);
+        else if (currentHP <= 50) _blood50.SetActive(true);
+        else if (currentHP <= 80) _blood80.SetActive(true);
     }
 }

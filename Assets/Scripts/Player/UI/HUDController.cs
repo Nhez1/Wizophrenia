@@ -36,14 +36,16 @@ public class HUDController : MonoBehaviour
             { SpellType.Reignite, _reigniteCD }
         };
 
-        var p = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        _playerLife = p.Life;
     }
 
     private void Start()
     {
         if (_interactMessage) _interactMessage.gameObject.SetActive(_interactMessageSwitch);
         else Debug.LogWarning("Interact message reference not applied in the inspector.");
+
+        var p = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        _playerLife = p.Life;
+        _playerLife.OnHealthChanged += UpdateHealthBar;
     }
 
     #region Interactables
@@ -82,7 +84,6 @@ public class HUDController : MonoBehaviour
         CooldownEffect.OnCooldownOver += CooldownOff;
         PlayerInteraction.OnHoverEnter += OnInteractableHoverEnter;
         PlayerInteraction.OnHoverExit += OnInteractableHoverExit;
-        _playerLife.OnHealthChanged += UpdateHealthBar;
         Mana.OnManaChanged += UpdateManaBar;
     }
 

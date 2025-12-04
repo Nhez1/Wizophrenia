@@ -3,12 +3,30 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
+    private MementoEntity[] _mementoEntities;
+
     public string OldSceneName { get; set; }
     public string NewSceneName { get; set; }
+
+    private void Awake()
+    {
+        _mementoEntities = FindObjectsOfType<MementoEntity>();
+    }
 
     private void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    public void ChangeSceneAsyncByName(object sender, object data)
+    {
+        var name = (string)data;
+        Debug.Log("Scene name " + name);
+
+        foreach (MementoEntity entity in _mementoEntities) entity.ForceSave();
+        NewSceneName = name;
+
+        SceneManager.LoadSceneAsync(name, LoadSceneMode.Single);
     }
 
     public void ChangeSceneByNumber(int index)
@@ -20,12 +38,6 @@ public class SceneController : MonoBehaviour
     {
         NewSceneName = name;
         SceneManager.LoadScene(name, loadSceneMode);
-    }
-
-    public void ChangeSceneAsyncByName(string name, LoadSceneMode loadSceneMode)
-    {
-        NewSceneName = name;
-        SceneManager.LoadSceneAsync(name, loadSceneMode);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)

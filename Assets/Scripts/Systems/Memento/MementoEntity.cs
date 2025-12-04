@@ -1,22 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class MementoEntity : MonoBehaviour
 {
     protected MementoState _memento;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _memento = new();
     }
 
-    private void LateUpdate()
-    {
-        SaveStates();
-    }
-
     protected abstract void SaveStates();
+    protected abstract void LoadStates(object[] oldState);
 
     public void TryLoadStates()
     {
@@ -27,5 +21,5 @@ public abstract class MementoEntity : MonoBehaviour
         LoadStates(oldState);
     }
 
-    protected abstract void LoadStates(object[] oldState);
+    public void ForceSave() => SaveStates();
 }
