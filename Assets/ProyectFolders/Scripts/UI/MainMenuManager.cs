@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -6,6 +7,9 @@ public class MainMenuManager : MonoBehaviour
     public Canvas[] allMenus;
     public Canvas wantedActiveMenu;
 
+    [Header("Scene References")]
+    [SerializeField] public SceneField _startinglevel;
+    //con SceneField hice que se puedan agregar escenas desde los menus de unity, drag & drop, mucho mas facil y no hay que referenciar en codigo o por nombre o numero
 
     void Start()
     {
@@ -19,5 +23,18 @@ public class MainMenuManager : MonoBehaviour
 
             return;
         }
+    }
+
+    public void HideMenu()
+    {
+        for (int i = 0; i < allMenus.Length; i++)
+        {
+            allMenus[i].gameObject.SetActive(false);
+        }
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadSceneAsync(_startinglevel);
     }
 }
