@@ -4,6 +4,7 @@ using System;
 
 public class PauseSystem : MonoBehaviour
 {
+    [SerializeField] private GameEvent _onUnpause;
     private bool _paused = false;
 
     public bool IsPaused => _paused;
@@ -24,5 +25,6 @@ public class PauseSystem : MonoBehaviour
     {
         _paused = false;
         Time.timeScale = 1;
+        _onUnpause.Raise(this, null);
     }
 }

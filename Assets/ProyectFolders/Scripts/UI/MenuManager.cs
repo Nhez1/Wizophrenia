@@ -89,28 +89,36 @@ public class MenuManager : MonoBehaviour
         if (_alchSwitch)
         {
             ActivateAlchemyMenu();
-            
+
         }
         else
         {
             DeactivateAlchemyMenu();
-            
+
         }
 
-     }
+    }
     #endregion
 
     //Esto es re villero pero la otra era tener que pasarle la referencia de la cámara al botón de resumir del menú de pausa y eso era peor
     public void UnlockCamera() => _mouse.UnlockCamera();
 
+    #region Pause
     //PauseMenu
-    public void ShowPauseMenu()
+    void ShowPauseMenu()
     {
-        _inventory.alpha = 0f;
-        _alchemyMenu.SetActive(false);
+        if (_inventory.alpha > 0)
+        {
+            _inventory.alpha = 0f;
+            _invSwitch = false;
+        }
 
-        _invSwitch = false;
-        _alchSwitch = false;
+        if (_alchemyMenu.activeSelf)
+        {
+            _alchemyMenu.SetActive(false);
+            _alchSwitch = false;
+        }
+
 
         _anyMenuOpen = false;
 
@@ -118,7 +126,8 @@ public class MenuManager : MonoBehaviour
         _mouse.LockCamera();
         _anyMenuOpen = true;
     }
-    public void HidePauseMenu()
+
+    void HidePauseMenu()
     {
         _pauseMenu.SetActive(false);
         _mouse.UnlockCamera();
@@ -138,7 +147,7 @@ public class MenuManager : MonoBehaviour
         _pauseSystem.Unpause();
         HidePauseMenu();
     }
-
+    #endregion
 
 
     #region Win&GameOver

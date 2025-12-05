@@ -38,9 +38,6 @@ public class Player : MementoEntity, IDamageable
     public InputController InputControl => _controller;
     public Inventory Inventory { get; private set; }
 
-    [SerializeField] private MenuManager _menuManager;
-    [SerializeField] private PauseSystem _pauseSystem;
-
     protected override void Awake()
     {
         base.Awake();
@@ -53,7 +50,7 @@ public class Player : MementoEntity, IDamageable
         _interacter = new();
         _move = new(transform, _rb, _jumpForce, _speed, _runBoost, this);
         _spellManager = new(_mana, _spellCastPoint, this);
-        _controller = new InputController(_move, _spellManager, _interacter, _pauseSystem, _menuManager);
+        _controller = new(_move, _spellManager, _interacter);
 
         _fireInHand = GetComponentInChildren<Light>(true);
     }
@@ -102,8 +99,8 @@ public class Player : MementoEntity, IDamageable
     private void OnEnable()
     {
         CauldronObject.OnAlchemyToggle += _interacter.HoverLeave;
-        LeftHandler.OnLotusGrab += _controller.LockInputs;
-        LeftHandler.OnLotusLeave += _controller.UnlockInputs;
+        LeftHandler.OnLotusGrab += _controller.LotusLock;
+        LeftHandler.OnLotusLeave += _controller.LotusUnlock;
         LeftHandler.OnLotusGrab += SetLightColorBlue;
         LeftHandler.OnLotusLeave += SetLightColorDefault;
     }
@@ -111,8 +108,8 @@ public class Player : MementoEntity, IDamageable
     private void OnDisable()
     {
         CauldronObject.OnAlchemyToggle -= _interacter.HoverLeave;
-        LeftHandler.OnLotusGrab -= _controller.LockInputs;
-        LeftHandler.OnLotusLeave -= _controller.UnlockInputs;
+        LeftHandler.OnLotusGrab -= _controller.LotusLock;
+        LeftHandler.OnLotusLeave -= _controller.LotusUnlock;
         LeftHandler.OnLotusGrab -= SetLightColorBlue;
         LeftHandler.OnLotusLeave -= SetLightColorDefault;
         _spellManager?.SpellDispose();   //SALTABA ERROR, ASI QUE LO CORREGI
