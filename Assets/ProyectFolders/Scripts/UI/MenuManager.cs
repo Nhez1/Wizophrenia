@@ -17,10 +17,6 @@ public class MenuManager : MonoBehaviour
 
     private Life _playerLife;
 
-    private void Awake()
-    {
-    }
-
     private void Start()
     {
         Time.timeScale = 1.0f;
@@ -28,7 +24,7 @@ public class MenuManager : MonoBehaviour
         _pause = GetComponent<PauseSystem>();
         _mouse = Camera.main.GetComponent<MouseLook>();
 
-        _inventory = _inventoryMenu.GetComponent<CanvasGroup>();
+        _inventory = GetComponentInChildren<CanvasGroup>();
 
         var p = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         _playerLife = p.Life;
@@ -40,18 +36,20 @@ public class MenuManager : MonoBehaviour
 
     void ActivateInventory()
     {
+        if (_inventory == null) return;
         _inventory.alpha = 1f;
 
         _mouse.LockCamera();
     }
     void DeactivateInventory()
     {
+        if (_inventory == null) return;
         _mouse.UnlockCamera();
 
         _inventory.alpha = 0f;
     }
 
-    void SwitchInventory()
+    public void SwitchInventory()
     {
         _invSwitch = !_invSwitch;
 
@@ -119,7 +117,6 @@ public class MenuManager : MonoBehaviour
     private void OnEnable()
     {
         InputController.OnPause += ActivatePauseMenu;
-        InputController.OnBagToggle += SwitchInventory;
         CauldronObject.OnAlchemyToggle += SwitchAlchemy;
         Sanity.OnSanityGameOver += SanityGameOver;
         Sanity.OnGameWin += Win;
@@ -127,7 +124,6 @@ public class MenuManager : MonoBehaviour
     private void OnDisable()
     {
         InputController.OnPause -= ActivatePauseMenu;
-        InputController.OnBagToggle -= ActivateInventory;
         CauldronObject.OnAlchemyToggle -= SwitchAlchemy;
         _playerLife.OnHealthGameOver -= HealthGameOver;
         Sanity.OnSanityGameOver -= SanityGameOver;

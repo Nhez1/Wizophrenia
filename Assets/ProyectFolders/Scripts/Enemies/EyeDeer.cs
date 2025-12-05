@@ -56,12 +56,6 @@ public class EyeDeer : MonoBehaviour
 
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            _visualEffect._enableEffect.value = !_visualEffect._enableEffect.value;
-        }
-
         float distance = Vector3.Distance(transform.position, _player.transform.position);
 
         if (!LookedAt() && distance > _stopDistance && !_isHidden)

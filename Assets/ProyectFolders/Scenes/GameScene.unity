@@ -26454,6 +26454,7 @@ GameObject:
   - component: {fileID: 1001946824}
   - component: {fileID: 1001946823}
   - component: {fileID: 1001946822}
+  - component: {fileID: 1001946827}
   m_Layer: 5
   m_Name: Menus
   m_TagString: Untagged
@@ -26473,8 +26474,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 349976006}
   - {fileID: 1684087419}
+  - {fileID: 349976006}
   - {fileID: 1477125583}
   - {fileID: 684593735}
   - {fileID: 511863641}
@@ -26585,6 +26586,34 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1001946827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1001946820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc41437f3d095004db67640cd28f6a12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameEvent: {fileID: 11400000, guid: 7c89c67274825fd4ebacb73ad723ff4f, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1001946822}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: SwitchInventory
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1012816079
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43560,7 +43589,7 @@ MonoBehaviour:
   - {fileID: 2097788601}
   - {fileID: 278287431}
   - {fileID: 361350837}
-  _handSlot: {fileID: 1679264394}
+  - {fileID: 1679264394}
   _itemPrefab: {fileID: 1711610455610333848, guid: e3ad515fbe7f92e45bf1f171180e1541,
     type: 3}
   _itemGetMsg: {fileID: 11400000, guid: 46e663ce698702e489e926eecf7b3bf2, type: 2}

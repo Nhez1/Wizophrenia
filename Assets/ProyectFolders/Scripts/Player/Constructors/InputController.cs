@@ -4,7 +4,7 @@ using UnityEngine;
 public class InputController
 {
     public static event Action OnPause;
-    public static event Action OnBagToggle;
+    public event Action OnBagToggle;
     public static event Action OnConsumableUse;
 
     public float MouseSensibility { get; set; }

@@ -52,7 +52,6 @@ public class Player : MementoEntity, IDamageable
         _spellManager = new(_mana, _spellCastPoint, this);
         _controller = new(_move, _spellManager, _interacter);
 
-        Inventory = FindObjectOfType<Inventory>();
         _fireInHand = GetComponentInChildren<Light>(true);
     }
 
@@ -70,6 +69,8 @@ public class Player : MementoEntity, IDamageable
 
         _controller.MouseSensibility = _mouseSensibility;
         _interacter.PlayerReach = _reach;
+
+        Inventory = FindObjectOfType<Inventory>();
     }
 
     private void Update()
