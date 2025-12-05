@@ -44,7 +44,7 @@ public class Player : MementoEntity, IDamageable
     protected override void Awake()
     {
         base.Awake();
-
+        
         _rb = GetComponent<Rigidbody>();
 
         _life = new(true, 100f);
