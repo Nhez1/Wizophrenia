@@ -68,6 +68,6 @@ public class ShadowHand : MonoBehaviour, IDamageable
 
         ForceFlameOff?.Invoke();
         player.Life.Damage(_dmg);
-        Destroy(gameObject);
+        ShadowHandFactory.Instance.ReturnShadowHand(this);
     }
 }

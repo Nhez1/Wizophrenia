@@ -34,9 +34,10 @@ public class EnemySpawner : MonoBehaviour
         Vector3 spawnPos = _playerRef.transform.position + dir.normalized * _spawnDistance;
         spawnPos.y = -0.1f;
 
-        GameObject g = Instantiate(_shadowHandPrefab, spawnPos, _shadowHandPrefab.transform.rotation);
+        var s = ShadowHandFactory.Instance.GetShadowHand();
+        s.gameObject.transform.SetLocalPositionAndRotation(spawnPos, _shadowHandPrefab.transform.rotation);
 
-        if(g.TryGetComponent<ShadowHand>(out var shadowHand)) shadowHand.player = _playerRef;
+        s.player = _playerRef;
     }
 
     //void SpawnStalker()

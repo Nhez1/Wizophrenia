@@ -24,7 +24,7 @@ public class ReigniteEffect : EffectSO
         foreach (ShadowHand hand in hands)
         {
             float dist = Vector3.Distance(spawnPoint, hand.transform.position);
-            if (dist <= 5) hand.gameObject.SetActive(false);
+            if (dist <= 5) ShadowHandFactory.Instance.ReturnShadowHand(hand);
         }
     }
 
