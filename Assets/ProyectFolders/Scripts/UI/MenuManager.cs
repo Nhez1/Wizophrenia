@@ -18,6 +18,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private PauseSystem _pauseSystem;
 
     private bool _anyMenuOpen = false;
+    private bool _anyEndGameScreensOpen = false;
 
     private Life _playerLife;
 
@@ -55,7 +56,7 @@ public class MenuManager : MonoBehaviour
 
     public void SwitchInventory()
     {
-        if (!_invSwitch && _anyMenuOpen) return;
+        if (!_invSwitch && _anyMenuOpen && _anyEndGameScreensOpen) return;
         _invSwitch = !_invSwitch;
 
         if (_invSwitch) ActivateInventory();
@@ -83,7 +84,7 @@ public class MenuManager : MonoBehaviour
 
     private void SwitchAlchemy()
     {
-        if (!_alchSwitch && _anyMenuOpen) return;
+        if (!_alchSwitch && _anyMenuOpen && _anyEndGameScreensOpen) return;
         _alchSwitch = !_alchSwitch;
 
         if (_alchSwitch)
@@ -106,23 +107,28 @@ public class MenuManager : MonoBehaviour
     //PauseMenu
     public void ShowPauseMenu()
     {
+        if (_anyEndGameScreensOpen == true) return;
+        if (_anyEndGameScreensOpen == false) 
+        { 
         _inventory.alpha = 0f;
         _alchemyMenu.SetActive(false);
 
         _invSwitch = false;
         _alchSwitch = false;
 
-        _anyMenuOpen = false;
-
         _pauseMenu.SetActive(true);
         _mouse.LockCamera();
-        _anyMenuOpen = true;
+        _anyMenuOpen = false;
+        }
     }
     public void HidePauseMenu()
     {
-        _pauseMenu.SetActive(false);
-        _mouse.UnlockCamera();
-        _anyMenuOpen = false;
+        if (_anyEndGameScreensOpen == false)
+        {
+            _pauseMenu.SetActive(false);
+            _mouse.UnlockCamera();
+            _anyMenuOpen = false; 
+        }
     }
 
     public void TogglePauseMenu()
@@ -148,6 +154,7 @@ public class MenuManager : MonoBehaviour
         _pauseSystem.Pause();
         _healthGameOverMenu.SetActive(true);
         _anyMenuOpen = true;
+        _anyEndGameScreensOpen = true;
     }
     void SanityGameOver()
     {
@@ -155,6 +162,7 @@ public class MenuManager : MonoBehaviour
         _pauseSystem.Pause();
         _sanityGameOverMenu.SetActive(true);
         _anyMenuOpen = true;
+        _anyEndGameScreensOpen = true;
     }
     void Win()
     {
@@ -162,6 +170,7 @@ public class MenuManager : MonoBehaviour
         _pauseSystem.Pause();
         _winMenu.SetActive(true);
         _anyMenuOpen = true;
+        _anyEndGameScreensOpen = true;
     }
     #endregion
 
