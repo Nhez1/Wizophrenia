@@ -147,18 +147,21 @@ public class MenuManager : MonoBehaviour
         _mouse.LockCamera();
         _pauseSystem.Pause();
         _healthGameOverMenu.SetActive(true);
+        _anyMenuOpen = true;
     }
     void SanityGameOver()
     {
         _mouse.LockCamera();
         _pauseSystem.Pause();
         _sanityGameOverMenu.SetActive(true);
+        _anyMenuOpen = true;
     }
     void Win()
     {
         _mouse.LockCamera();
         _pauseSystem.Pause();
         _winMenu.SetActive(true);
+        _anyMenuOpen = true;
     }
     #endregion
 
@@ -167,6 +170,7 @@ public class MenuManager : MonoBehaviour
         CauldronObject.OnAlchemyToggle += SwitchAlchemy;
         Sanity.OnSanityGameOver += SanityGameOver;
         Sanity.OnGameWin += Win;
+
     }
     private void OnDisable()
     {
