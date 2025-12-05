@@ -28,6 +28,11 @@ public class Life
         _client = gameObject;
     }
 
+    public void OnUpdate()
+    {
+        if (_isP) UpdateHealth();
+    }
+
     public void Damage(float amount)
     {
         if (_maxHP <= 0f)
@@ -39,14 +44,11 @@ public class Life
         HP -= amount;
         OnTakeDamage?.Invoke();
         if (HP <= 0) GameOver();
-        else if (HP > 0 && _isP) UpdateHealth();
     }
 
     public void Heal(float amount)
     {
         if (HP < MaxHP) HP += amount;
-
-        if (_isP) UpdateHealth();
     }
     public void UpdateHealth() => OnHealthChanged?.Invoke(HP);
 
@@ -68,7 +70,6 @@ public class Life
     {
         MaxHP = data.maxSP;
         HP = data.sp;
-        UpdateHealth();
     }
 }
 

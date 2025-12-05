@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class InputController
 {
-    public static event Action OnPause;
+    public event Action OnPause;
     public event Action OnBagToggle;
-    public static event Action OnConsumableUse;
+    public event Action OnConsumableUse;
 
     public float MouseSensibility { get; set; }
     private float _xAxis, _zAxis;

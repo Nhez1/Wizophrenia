@@ -23,8 +23,6 @@ public class LeftHandler : MonoBehaviour
         ClearHandSlot(null, null);
 
         _view = new(_anim);
-
-        InputController.OnConsumableUse += UseItem;
     }
 
     public void OccupyHandSlot(object sender, object data)
@@ -64,11 +62,6 @@ public class LeftHandler : MonoBehaviour
 
         Destroy(_handSlot.UIItem.gameObject);
         ClearHandSlot(null, null);
-    }
-
-    private void OnDisable()
-    {
-        InputController.OnConsumableUse -= UseItem;
     }
 }
 

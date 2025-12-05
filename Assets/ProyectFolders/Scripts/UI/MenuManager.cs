@@ -116,14 +116,12 @@ public class MenuManager : MonoBehaviour
 
     private void OnEnable()
     {
-        InputController.OnPause += ActivatePauseMenu;
         CauldronObject.OnAlchemyToggle += SwitchAlchemy;
         Sanity.OnSanityGameOver += SanityGameOver;
         Sanity.OnGameWin += Win;
     }
     private void OnDisable()
     {
-        InputController.OnPause -= ActivatePauseMenu;
         CauldronObject.OnAlchemyToggle -= SwitchAlchemy;
         _playerLife.OnHealthGameOver -= HealthGameOver;
         Sanity.OnSanityGameOver -= SanityGameOver;

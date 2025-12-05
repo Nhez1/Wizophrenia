@@ -13,7 +13,7 @@ public class Player : MementoEntity, IDamageable
     [SerializeField] private float _reach = 3f;
 
     [Header(" Internal ")]
-    [SerializeField] private float _mouseSensibility = 100f;
+    [SerializeField] private float _mouseSensibility;
     [Tooltip("El punto desde el que se van a instanciar los hechizos")]
     [SerializeField] private Transform _spellCastPoint;
 
@@ -78,6 +78,7 @@ public class Player : MementoEntity, IDamageable
         _interacter.HoverUpdate();
         _move.OnUpdate();
         _controller.OnUpdate();
+        _life.OnUpdate();
     }
 
     private void FixedUpdate()
