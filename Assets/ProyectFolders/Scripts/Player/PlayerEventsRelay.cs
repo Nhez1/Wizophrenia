@@ -32,4 +32,5 @@ public class PlayerEventsRelay : MonoBehaviour
     void ToggleBag() => _onBagToggle.Raise(this, null);
     void UseConsumable() => _onConsumableUse.Raise(this, null);
     void PauseGame() => _onPause.Raise(this, null);
+    public void UnpauseGame() => _player.InputControl.UnpauseInputs();
 }

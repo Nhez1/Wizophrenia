@@ -10010,7 +10010,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 4.6499023, y: 13.195038}
+  m_AnchoredPosition: {x: 4.6499023, y: 13.195068}
   m_SizeDelta: {x: -9.300177, y: 26.389908}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &461575066
@@ -11874,6 +11874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6926046b47bfc114a8070d1b49b68c10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onUnpause: {fileID: 0}
 --- !u!43 &528793072
 Mesh:
   m_ObjectHideFlags: 0
@@ -26635,6 +26636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6926046b47bfc114a8070d1b49b68c10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onUnpause: {fileID: 11400000, guid: b0ba37fa68c3b8f4fb0cd3752a33196a, type: 2}
 --- !u!114 &1001946824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26744,7 +26746,19 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1001946823}
         m_TargetAssemblyTypeName: PauseSystem, Assembly-CSharp
-        m_MethodName: Pause
+        m_MethodName: TogglePause
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1001946822}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: TogglePauseMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

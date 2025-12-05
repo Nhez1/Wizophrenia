@@ -415,6 +415,7 @@ GameObject:
   - component: {fileID: 6120853900492584031}
   - component: {fileID: 3037593629113265491}
   - component: {fileID: 526297769735016237}
+  - component: {fileID: 442105252091412104}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -777,6 +778,34 @@ MonoBehaviour:
   _onBagToggle: {fileID: 11400000, guid: 7c89c67274825fd4ebacb73ad723ff4f, type: 2}
   _onPause: {fileID: 11400000, guid: ca93b29476aeb214a9e653a08e5e256d, type: 2}
   _onConsumableUse: {fileID: 11400000, guid: 29e5348e0536bd74c9f1c16d9a67f074, type: 2}
+--- !u!114 &442105252091412104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4786352395828924300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc41437f3d095004db67640cd28f6a12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameEvent: {fileID: 11400000, guid: b0ba37fa68c3b8f4fb0cd3752a33196a, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 526297769735016237}
+        m_TargetAssemblyTypeName: PlayerEventsRelay, Assembly-CSharp
+        m_MethodName: UnpauseGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6030383159358289305
 GameObject:
   m_ObjectHideFlags: 0
