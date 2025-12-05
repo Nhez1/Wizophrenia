@@ -14,14 +14,19 @@ public class MouseLook : MonoBehaviour
     [field: SerializeField]
     public bool CameraLocked { get; private set; }
 
+    private void Awake()
+    {
+        
+        _parentTransform = transform.parent;
+        _player = GetComponentInParent<Player>();
+        
+    }
+
     private void Start()
     {
         UnlockCamera();
-
-        _parentTransform = transform.parent;
-        _player = GetComponentInParent<Player>();
-
         _input = _player.InputControl;
+
     }
 
     private void Update()

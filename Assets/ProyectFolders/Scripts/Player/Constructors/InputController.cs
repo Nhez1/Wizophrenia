@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class InputController
 {
-    public event Action OnPause;
     public event Action OnBagToggle;
     public event Action OnConsumableUse;
 
@@ -15,16 +14,24 @@ public class InputController
     private PlayerInteraction _interacter;
 
     private bool _paused = false;
+    private PauseSystem _pauseSystem;
+    private MenuManager _menuManager;
+    
+
+    
     private bool _lotusLock = false;
 
     public float MouseX => _mouseX;
     public float MouseY => _mouseY;
 
-    public InputController(Movement m, SpellManager spellManager, PlayerInteraction interacter)
+    public InputController(Movement m, SpellManager spellManager, PlayerInteraction interacter, PauseSystem pauseSystem, MenuManager menuManager)
     {
         _movement = m;
         _spells = spellManager;
         _interacter = interacter;
+        _pauseSystem = pauseSystem;
+        _menuManager = menuManager;
+        
     }
 
     public void OnUpdate()
@@ -51,8 +58,20 @@ public class InputController
             // Pause game
             if (Input.GetKeyDown(KeyCode.P))
             {
-                OnPause?.Invoke();
-                _paused = true;
+                _pauseSystem.TogglePause();
+                if (_pauseSystem.IsPaused) 
+                {
+                    _menuManager.ShowPauseMenu();
+                }
+                else
+                {
+                    _menuManager.HidePauseMenu();
+                }
+            }
+
+            if (_pauseSystem.IsPaused)
+            {
+                return;
             }
 
             if (!_lotusLock)
@@ -72,8 +91,6 @@ public class InputController
                 if (Input.GetKeyDown(KeyCode.C)) OnConsumableUse?.Invoke();
             }
         }
-
-        PauseSystem.OnUnpause += () => _paused = false;
         // Se restauran los inputs al despausarse el juego
     }
 

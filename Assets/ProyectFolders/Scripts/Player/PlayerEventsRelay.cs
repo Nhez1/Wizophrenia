@@ -19,17 +19,17 @@ public class PlayerEventsRelay : MonoBehaviour
     {
         _player.InputControl.OnBagToggle += ToggleBag;
         _player.InputControl.OnConsumableUse += UseConsumable;
-        _player.InputControl.OnPause += PauseGame;
+        //_player.InputControl.OnPause += PauseGame;
     }
 
     private void OnDestroy()
     {
         _player.InputControl.OnBagToggle -= ToggleBag;
         _player.InputControl.OnConsumableUse -= UseConsumable;
-        _player.InputControl.OnPause -= PauseGame;
+        //_player.InputControl.OnPause -= PauseGame;
     }
 
     void ToggleBag() => _onBagToggle.Raise(this, null);
     void UseConsumable() => _onConsumableUse.Raise(this, null);
-    void PauseGame() => _onPause.Raise(this, null);
+    //void PauseGame() => _onPause.Raise(this, null);
 }

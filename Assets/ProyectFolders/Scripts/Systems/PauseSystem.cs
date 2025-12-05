@@ -1,19 +1,28 @@
 using UnityEngine;
 using System;
 
-//Por Jere
 
 public class PauseSystem : MonoBehaviour
 {
-    public static event Action OnUnpause;
+    private bool _paused = false;
+
+    public bool IsPaused => _paused;
+
+    public void TogglePause()
+    {
+        if (_paused) Unpause();
+        else Pause();
+    }
 
     public void Pause()
     {
+        _paused = true;
         Time.timeScale = 0;
     }
+
     public void Unpause()
     {
-        Time.timeScale = 1;  //Importante, el tiempo se reanuda, de no aclarar esto la pantalla quedaria congelada
-        OnUnpause?.Invoke();
+        _paused = false;
+        Time.timeScale = 1;
     }
 }

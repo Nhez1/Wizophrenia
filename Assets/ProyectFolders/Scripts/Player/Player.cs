@@ -38,6 +38,9 @@ public class Player : MementoEntity, IDamageable
     public InputController InputControl => _controller;
     public Inventory Inventory { get; private set; }
 
+    [SerializeField] private MenuManager _menuManager;
+    [SerializeField] private PauseSystem _pauseSystem;
+
     protected override void Awake()
     {
         base.Awake();
@@ -50,7 +53,7 @@ public class Player : MementoEntity, IDamageable
         _interacter = new();
         _move = new(transform, _rb, _jumpForce, _speed, _runBoost, this);
         _spellManager = new(_mana, _spellCastPoint, this);
-        _controller = new(_move, _spellManager, _interacter);
+        _controller = new InputController(_move, _spellManager, _interacter, _pauseSystem, _menuManager);
 
         _fireInHand = GetComponentInChildren<Light>(true);
     }
