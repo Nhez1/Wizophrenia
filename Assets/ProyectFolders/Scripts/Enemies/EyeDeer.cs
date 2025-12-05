@@ -20,6 +20,7 @@ public class EyeDeer : MonoBehaviour
     [SerializeField] private VignetteEffect _visualEffect;
     private bool _isDraining = false;
     private bool _isHidden = false;
+    private bool slowed = false;
 
     [Header("Respawn Settings")]
     [SerializeField] private List<GameObject> respawnNodes = new();
@@ -66,6 +67,18 @@ public class EyeDeer : MonoBehaviour
 
         if (distance <= _stopDistance && !_isHidden)
             DrainSanity();
+
+        bool isAffecting = !_isHidden && distance <= _stopDistance && _isDraining;
+        if (isAffecting && !slowed)
+        {
+            _player.ApplySlowness();
+            slowed = true;
+        }
+        else if (!isAffecting && slowed)
+        {
+            _player.RemoveSlowness();
+            slowed = false;
+        }
     }
 
     void Move()
@@ -123,6 +136,9 @@ public class EyeDeer : MonoBehaviour
         _isHidden = true;
 
         StartCoroutine(RespawnAfterDelay());
+        
+        _player.RemoveSlowness();
+        slowed = false;
     }
 
     IEnumerator RespawnAfterDelay()

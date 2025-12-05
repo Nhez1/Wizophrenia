@@ -86,6 +86,16 @@ public class Player : MementoEntity, IDamageable
         _controller.OnFixedUpdate();
     }
 
+    public void ApplySlowness()
+    {
+        _move.speedDecorator.SetSlow(0.20f);
+    }
+
+    public void RemoveSlowness()
+    {
+        _move.speedDecorator.ClearSlow();
+    }
+
     private void OnEnable()
     {
         CauldronObject.OnAlchemyToggle += _interacter.HoverLeave;

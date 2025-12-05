@@ -5,6 +5,7 @@ using UnityEngine;
 public class Movement
 {
     public static event Action OnSpeedBoostEnd;
+    public SpeedDecorator speedDecorator;
 
     //Stats
     public float Speed { get; private set; }
@@ -34,6 +35,8 @@ public class Movement
         _jumpForce = jF;
         _cRunner = MB;
         _player = MB as Player;
+
+        speedDecorator = new SpeedDecorator();
     }
 
     public void OnStart()
@@ -60,7 +63,8 @@ public class Movement
     {
         Vector3 dir = (_transform.right * _xAxis + _transform.forward * _zAxis).normalized;
 
-        _rb.MovePosition(_transform.position + Speed * Time.fixedDeltaTime * dir);
+        float finalSpeed = Speed * speedDecorator.SpeedMultiplier;
+        _rb.MovePosition(_transform.position + finalSpeed * Time.fixedDeltaTime * dir);
     }
 
     //-------------------------------------------------------------------------------- Correr
