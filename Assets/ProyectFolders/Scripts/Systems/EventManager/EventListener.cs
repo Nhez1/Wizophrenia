@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,6 +10,8 @@ public class EventListener : MonoBehaviour
 {
     [SerializeField] private GameEvent _gameEvent;
     [SerializeField] private CustomGameEvent _response;
+
+    [SerializeField] EventCouple[] _events;
 
     private void OnEnable()
     {
@@ -23,4 +26,11 @@ public class EventListener : MonoBehaviour
     {
         _response.Invoke(sender, data);
     }
+}
+
+[Serializable]
+public class EventCouple
+{
+   public GameEvent _gameEvent;
+    public CustomGameEvent _response;
 }

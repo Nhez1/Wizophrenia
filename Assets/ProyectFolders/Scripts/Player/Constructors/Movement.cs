@@ -131,3 +131,37 @@ public class Movement
     //
     //Puede que sea prudente revisar esto en el futuro, está medio raro.
 }
+
+
+public class SpeedStat
+{
+    public virtual float GetSpeed()
+    {
+        return 3;
+    }
+}
+
+public class SpeedDeco : SpeedStat
+{
+
+    protected SpeedStat _base;
+
+    public SpeedDeco(SpeedStat statBase)
+    {
+        _base = statBase;
+    }
+}
+
+public class SlowDecorator : SpeedDeco
+{
+    int _modifier;
+    public SlowDecorator(SpeedStat statBase, int modifier) : base(statBase)
+    {
+        _modifier = modifier;
+    }
+
+    public override float GetSpeed()
+    {
+        return _base.GetSpeed() * _modifier;
+    }
+}
