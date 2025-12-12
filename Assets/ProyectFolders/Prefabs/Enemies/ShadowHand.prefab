@@ -130,7 +130,7 @@ MonoBehaviour:
     _hp: 0
   _dmg: 10
   player: {fileID: 0}
-  _speed: 3.9
+  _speed: 4.5
   _stopDistance: 1.5
   _isFollowing: 0
   _audioSource: {fileID: 3462973607683749746}

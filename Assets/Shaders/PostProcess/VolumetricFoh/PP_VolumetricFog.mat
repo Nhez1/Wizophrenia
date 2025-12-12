@@ -38,12 +38,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _MaxDistance: 30
-    - _MaxOpacity: 0.634
-    - _MinDistance: 5
-    - _MinOpacity: 0.355
+    - _MaxDistance: 25
+    - _MaxOpacity: 1
+    - _MinDistance: 0.5
+    - _MinOpacity: 0.5
     m_Colors:
     - _Color: {r: 0.0754717, g: 0.050653514, b: 0.010323961, a: 0.79607844}
     - _Offset: {r: 0, g: 0.075, b: 0, a: 0}
-    - _Tiling: {r: 8.2, g: 5.71, b: 0, a: 0}
+    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
