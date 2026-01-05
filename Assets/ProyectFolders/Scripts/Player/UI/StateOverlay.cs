@@ -8,7 +8,7 @@ public class StateOverlay : MonoBehaviour
     [SerializeField] private GameObject _blood50;
     [SerializeField] private GameObject _blood80;
 
-    private Life _playerLife;
+    private PlayerLife _playerLife;
 
     private void Start()
     {

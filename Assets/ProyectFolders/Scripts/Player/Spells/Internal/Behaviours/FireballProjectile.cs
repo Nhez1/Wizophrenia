@@ -79,5 +79,5 @@ public class FireballProjectile : Bullet
         FireBallFactory.Instance.ReturnFireBall(this);
     }
 
-    void DealDamage(Life target) => target.Damage(Dmg);
+    void DealDamage(LifeOther target) => target.Damage(Dmg);
 }

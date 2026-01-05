@@ -19,7 +19,7 @@ public class MenuManager : MonoBehaviour
 
     private bool _anyMenuOpen = false;
 
-    private Life _playerLife;
+    private PlayerLife _playerLife;
 
     private void Start()
     {

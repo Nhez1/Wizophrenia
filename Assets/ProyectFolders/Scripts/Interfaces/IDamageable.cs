@@ -2,7 +2,7 @@ using UnityEngine;
 
 public interface IDamageable
 {
-    Life Life { get; }
+    LifeOther Life { get; }
 }
 
 public interface IKnockbackable

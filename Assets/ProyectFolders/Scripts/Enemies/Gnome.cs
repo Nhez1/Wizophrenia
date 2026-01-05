@@ -8,7 +8,7 @@ using System;
 [RequireComponent(typeof(Rigidbody))]
 public class Gnome : MonoBehaviour, IDamageable, IKnockbackable
 {
-    private Life _life;
+    private LifeOther _life;
 
     [Header("Stats")]
     public float maxHP = 50f;
@@ -18,23 +18,21 @@ public class Gnome : MonoBehaviour, IDamageable, IKnockbackable
     public float moveSpeed = 3f;         // Velocidad de acercamiento
 
     private Transform playerTransform;
-    private Player playerScript;
     private NavMeshAgent agent;
 
     private bool isChasing = false;
     private bool hasKicked = false;
 
-    public Life Life => _life;
+    public LifeOther Life => _life;
 
     void Start()
     {
-        _life = new(false, maxHP);
+        _life = new(maxHP, gameObject);
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
         {
             playerTransform = playerObj.transform;
-            playerScript = playerObj.GetComponent<Player>();
         }
 
         agent = GetComponent<NavMeshAgent>();

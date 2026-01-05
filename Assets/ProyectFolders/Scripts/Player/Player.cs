@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class Player : MementoEntity, IDamageable
+public class Player : MementoEntity
 {
     [Header(" Stats ")]
-    [SerializeField] private Life _life;
+    [SerializeField] private PlayerLife _life;
     [SerializeField] private Mana _mana;
     [SerializeField] private Sanity _sanity;
     [Tooltip("Sped")] [SerializeField] private float _speed = 3f;
@@ -30,7 +30,7 @@ public class Player : MementoEntity, IDamageable
     private SpellManager _spellManager;
 
     // Cuando sea que se necesite hacerle da�o al jugador, se usa Player.Life.TakeDamage(cantidad);
-    public Life Life => _life;
+    public PlayerLife Life => _life;
     // Lo mismo para el mana, cuando sea que se necesite gastar mana, se usa Player.Mana.SpendMP(cantidad);
     public Mana Mana => _mana;
     public Sanity Sanity => _sanity;

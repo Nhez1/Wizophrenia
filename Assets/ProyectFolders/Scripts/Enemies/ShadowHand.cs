@@ -6,9 +6,10 @@ public class ShadowHand : MonoBehaviour, IDamageable
 {
     //Ghost Turn Off Lights
     public static event Action ForceFlameOff;
+    [SerializeField] private GameEvent _forceFlameOff;
 
     public float maxHP = 50f;
-    [SerializeField] private Life _life;
+    [SerializeField] private LifeOther _life;
     [SerializeField] private float _dmg = 10f;
 
     public Player player;  //Aca colocar la mano desde el inspector (usar firepoint de ser necesario)
@@ -17,7 +18,7 @@ public class ShadowHand : MonoBehaviour, IDamageable
     [SerializeField] private float _stopDistance = 1.5f;
     [SerializeField] private bool _isFollowing;
 
-    public Life Life => _life;
+    public LifeOther Life => _life;
 
     // 🎧 Nuevo: sonido al robar el fuego
     [Header("Audio")]
@@ -26,7 +27,7 @@ public class ShadowHand : MonoBehaviour, IDamageable
 
     private void Start()
     {
-        _life = new(false, maxHP, gameObject);
+        _life = new(maxHP, gameObject);
 
         // Si no hay AudioSource asignado, agregar uno al vuelo
         if (_audioSource == null)
@@ -67,6 +68,7 @@ public class ShadowHand : MonoBehaviour, IDamageable
         }
 
         ForceFlameOff?.Invoke();
+        _forceFlameOff.Raise(this, null);
         player.Life.Damage(_dmg);
         ShadowHandFactory.Instance.ReturnShadowHand(this);
     }

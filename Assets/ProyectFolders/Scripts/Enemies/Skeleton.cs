@@ -6,9 +6,9 @@ public class Skeleton : MonoBehaviour, IDamageable, IKnockbackable
     [Header(" Passive Stats ")]
     [SerializeField] private float _maxHP = 75f;
     [SerializeField] private float _speed = 2f;
-    [SerializeField] private Life _life;
+    [SerializeField] private LifeOther _life;
     private bool _canMove = true;
-    public Life Life => _life;
+    public LifeOther Life => _life;
 
     [Header(" Combat Stats ")]
     [SerializeField] private float _detectArea = 8f;
@@ -23,7 +23,7 @@ public class Skeleton : MonoBehaviour, IDamageable, IKnockbackable
 
     private void Awake()
     {
-        _life = new(false, _maxHP, gameObject);
+        _life = new(_maxHP, gameObject);
         _anim = GetComponent<Animator>();
 
         var sprite = GetComponent<SpriteRenderer>();
@@ -46,7 +46,7 @@ public class Skeleton : MonoBehaviour, IDamageable, IKnockbackable
         else _anim.SetBool("IsFollowing", false);
     }
 
-    void Attack(Life target)
+    void Attack(PlayerLife target)
     {
         target.Damage(_damage);
         StartCoroutine(Cooldown());

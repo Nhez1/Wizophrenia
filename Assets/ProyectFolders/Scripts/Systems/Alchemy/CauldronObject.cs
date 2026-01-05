@@ -4,6 +4,7 @@ using UnityEngine;
 public class CauldronObject : MonoBehaviour, IInteractable
 {
     public static event Action OnAlchemyToggle;
+    [SerializeField] private GameEvent _onAlchemyToggle;
     private readonly string _interactMessage = "Brew";
 
     public string InteractMessage => _interactMessage;

@@ -25,7 +25,7 @@ public class HUDController : MonoBehaviour
     [SerializeField] TMP_Text _interactMessage;
     private bool _interactMessageSwitch = false;
 
-    private Life _playerLife;
+    private PlayerLife _playerLife;
 
     private void Awake()
     {

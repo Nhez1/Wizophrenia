@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
 
 public class EyeDeer : MonoBehaviour
 {
     [Header("Stats")]
-    public float maxHP = 100f;
     [SerializeField] private float _speed = 1.5f;
     [SerializeField] private float _stopDistance = 5f;
 
@@ -35,14 +33,7 @@ public class EyeDeer : MonoBehaviour
             return;
         }
 
-        if (!_volume.profile.TryGet(out _visualEffect))
-        {
-            Debug.LogError("El Volume NO tiene el override VignetteEffect en su Profile");
-        }
-        else
-        {
-            Debug.Log("VignetteEffect obtenido correctamente");
-        }
+        if (!_volume.profile.TryGet(out _visualEffect)) Debug.LogError("El Volume NO tiene el override VignetteEffect en su Profile");
 
         if (Application.isPlaying)
             _volume.profile.TryGet(out _visualEffect);
@@ -136,7 +127,7 @@ public class EyeDeer : MonoBehaviour
         _isHidden = true;
 
         StartCoroutine(RespawnAfterDelay());
-        
+
         _player.RemoveSlowness();
         slowed = false;
     }

@@ -5,6 +5,8 @@ public class LeftHandler : MonoBehaviour
 {
     public static event Action OnLotusGrab;
     public static event Action OnLotusLeave;
+    [SerializeField] private GameEvent _onLotusGrab;
+    [SerializeField] private GameEvent _onLotusLeave;
 
     [SerializeField] private Animator _anim;
     [SerializeField] private CanvasGroup _self;

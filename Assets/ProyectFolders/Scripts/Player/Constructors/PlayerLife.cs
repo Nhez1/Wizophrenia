@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class Life
+public class PlayerLife
 {
     public event Action<float> OnHealthChanged;
     public event Action OnHealthGameOver;
@@ -19,7 +19,7 @@ public class Life
     private bool _isP;
     private GameObject _client;
 
-    public Life(bool isPlayer, float maxHP, GameObject gameObject = null)
+    public PlayerLife(bool isPlayer, float maxHP, GameObject gameObject = null)
     {
         MaxHP = maxHP;
         HP = MaxHP;

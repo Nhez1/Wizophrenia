@@ -28,12 +28,12 @@ public class PotionSO : ItemSO, IConsumable
 
 public class PlayerStats
 {
-    public Life life;
+    public PlayerLife life;
     public Mana mana;
     public Sanity sanity;
     //Acá también se va a pedir el script de Sanidad, cuando esté hecho.
 
-    public PlayerStats(Life L, Mana M, Sanity S)
+    public PlayerStats(PlayerLife L, Mana M, Sanity S)
     {
         life = L;
         mana = M;

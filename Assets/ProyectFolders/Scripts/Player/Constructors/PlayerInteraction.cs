@@ -6,6 +6,9 @@ public class PlayerInteraction
     public static event Action<IInteractable> OnHoverEnter;
     public static event Action<IInteractable> OnHoverExit;
 
+    private GameEvent _onHoverEnter;
+    private GameEvent _onHoverExit;
+
     public float PlayerReach { get; set; }
     private IInteractable currentInteractable;
     public IInteractable CurrentInteractable
@@ -46,6 +49,7 @@ public class PlayerInteraction
     {
         currentInteractable = newInteractable;
         OnHoverEnter?.Invoke(currentInteractable);
+        _onHoverEnter.Raise(this, currentInteractable);
     }
 
     public void HoverLeave() // Esto se ejecuta cuando se deja de mirar hacia un objeto.
@@ -53,8 +57,8 @@ public class PlayerInteraction
         if (currentInteractable != null)
         {
             OnHoverExit?.Invoke(currentInteractable);
+            _onHoverExit.Raise(this, currentInteractable);
             currentInteractable = null;
         }
     }
 }
-// Marker
