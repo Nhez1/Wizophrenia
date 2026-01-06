@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.050494906, g: 0.08126248, b: 0.14401445, a: 1}
+  m_IndirectSpecularColor: {r: 0.050948605, g: 0.08186592, b: 0.14521484, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -13937,22 +13937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc41437f3d095004db67640cd28f6a12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameEvent: {fileID: 11400000, guid: 4aae0c86fccfdaa4685c16eac58d1f03, type: 2}
-  _response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 610796819}
-        m_TargetAssemblyTypeName: Plant, Assembly-CSharp
-        m_MethodName: DisableInteraction
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  _events: []
 --- !u!114 &610796824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13965,22 +13950,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc41437f3d095004db67640cd28f6a12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameEvent: {fileID: 11400000, guid: 1d8312944c973664ead8495add2a6f0b, type: 2}
-  _response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 610796819}
-        m_TargetAssemblyTypeName: Plant, Assembly-CSharp
-        m_MethodName: EnableInteraction
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  _events: []
 --- !u!1 &615927354
 GameObject:
   m_ObjectHideFlags: 0
@@ -15145,8 +15115,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a4b7f390d62f684d80ca0ec0ae96107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _instancesAmount: 0
-  _shadowHandPrefab: {fileID: 6711505825293902981}
 --- !u!4 &644446062
 Transform:
   m_ObjectHideFlags: 0
@@ -17538,22 +17506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc41437f3d095004db67640cd28f6a12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameEvent: {fileID: 11400000, guid: 9d2ed6444fb17a64296f34a375d67e1b, type: 2}
-  _response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 738123438}
-        m_TargetAssemblyTypeName: RightHandler, Assembly-CSharp
-        m_MethodName: CastFireBall
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  _events: []
 --- !u!114 &738123436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17566,46 +17519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc41437f3d095004db67640cd28f6a12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameEvent: {fileID: 11400000, guid: 1d8312944c973664ead8495add2a6f0b, type: 2}
-  _response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 738123438}
-        m_TargetAssemblyTypeName: RightHandler, Assembly-CSharp
-        m_MethodName: FlameOff
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: 325cd98f18c89914a97a8cd2a47a2865, type: 2}
-        m_TargetAssemblyTypeName: FireBallEffectSO, Assembly-CSharp
-        m_MethodName: SwitchOff
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: e66b7cd3755796e46982147cc12a8cbb, type: 2}
-        m_TargetAssemblyTypeName: ReigniteEffect, Assembly-CSharp
-        m_MethodName: SwitchOff
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  _events: []
 --- !u!114 &738123437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17618,46 +17532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc41437f3d095004db67640cd28f6a12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameEvent: {fileID: 11400000, guid: 4aae0c86fccfdaa4685c16eac58d1f03, type: 2}
-  _response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 738123438}
-        m_TargetAssemblyTypeName: RightHandler, Assembly-CSharp
-        m_MethodName: FlameSwitchOn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: 325cd98f18c89914a97a8cd2a47a2865, type: 2}
-        m_TargetAssemblyTypeName: FireBallEffectSO, Assembly-CSharp
-        m_MethodName: SwitchOn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: e66b7cd3755796e46982147cc12a8cbb, type: 2}
-        m_TargetAssemblyTypeName: ReigniteEffect, Assembly-CSharp
-        m_MethodName: SwitchOn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  _events: []
 --- !u!114 &738123438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24113,7 +23988,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &925556173
 Light:
   m_ObjectHideFlags: 0
@@ -26565,7 +26440,6 @@ GameObject:
   - component: {fileID: 1001946823}
   - component: {fileID: 1001946822}
   - component: {fileID: 1001946827}
-  - component: {fileID: 1001946828}
   m_Layer: 5
   m_Name: Menus
   m_TagString: Untagged
@@ -26712,62 +26586,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc41437f3d095004db67640cd28f6a12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameEvent: {fileID: 11400000, guid: 7c89c67274825fd4ebacb73ad723ff4f, type: 2}
-  _response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1001946822}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: SwitchInventory
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1001946828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1001946820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc41437f3d095004db67640cd28f6a12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gameEvent: {fileID: 11400000, guid: ca93b29476aeb214a9e653a08e5e256d, type: 2}
-  _response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1001946823}
-        m_TargetAssemblyTypeName: PauseSystem, Assembly-CSharp
-        m_MethodName: TogglePause
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1001946822}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: TogglePauseMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  _events:
+  - gameEvent: {fileID: 11400000, guid: ca93b29476aeb214a9e653a08e5e256d, type: 2}
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1001946822}
+          m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+          m_MethodName: TogglePauseMenu
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &1012816079
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27731,6 +27566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc1917529817e394d95711888f6970fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onAlchemyToggle: {fileID: 0}
 --- !u!64 &1038220569
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -27890,22 +27726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc41437f3d095004db67640cd28f6a12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameEvent: {fileID: 11400000, guid: 442f3ba95a95e6044968e30ec6293dc0, type: 2}
-  _response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1044883910}
-        m_TargetAssemblyTypeName: LeftHandler, Assembly-CSharp
-        m_MethodName: ClearHandSlot
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  _events: []
 --- !u!114 &1044883909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27918,22 +27739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc41437f3d095004db67640cd28f6a12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameEvent: {fileID: 11400000, guid: 6ebe90ec14a7b2944bbfb6088c8add27, type: 2}
-  _response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1044883910}
-        m_TargetAssemblyTypeName: LeftHandler, Assembly-CSharp
-        m_MethodName: OccupyHandSlot
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  _events: []
 --- !u!114 &1044883910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27946,6 +27752,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0de7c31afeb2196459be7723840fc89a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onLotusGrab: {fileID: 0}
+  _onLotusLeave: {fileID: 0}
   _anim: {fileID: 1044883913}
   _self: {fileID: 1044883912}
   _handSlot: {fileID: 1679264394}
@@ -28032,22 +27840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc41437f3d095004db67640cd28f6a12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameEvent: {fileID: 11400000, guid: 29e5348e0536bd74c9f1c16d9a67f074, type: 2}
-  _response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1044883910}
-        m_TargetAssemblyTypeName: LeftHandler, Assembly-CSharp
-        m_MethodName: UseItem
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  _events: []
 --- !u!1 &1048576381
 GameObject:
   m_ObjectHideFlags: 0
@@ -34497,6 +34290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc1917529817e394d95711888f6970fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onAlchemyToggle: {fileID: 0}
 --- !u!64 &1273053215
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -51559,22 +51353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc41437f3d095004db67640cd28f6a12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameEvent: {fileID: 11400000, guid: 849b5e5ce0fb9414f8c8a152011dc134, type: 2}
-  _response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2015938341}
-        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
-        m_MethodName: ChangeSceneAsyncByName
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  _events: []
 --- !u!114 &2015938341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53240,7 +53019,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2069437083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53513,6 +53292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc1917529817e394d95711888f6970fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onAlchemyToggle: {fileID: 0}
 --- !u!64 &2078091051
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -54294,6 +54074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc1917529817e394d95711888f6970fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onAlchemyToggle: {fileID: 0}
 --- !u!64 &2132939056
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -57667,18 +57448,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab0df4bfa872c6743a6264b6a915bfef, type: 3}
---- !u!114 &6711505825293902981 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3475837097116752170, guid: ab0df4bfa872c6743a6264b6a915bfef,
-    type: 3}
-  m_PrefabInstance: {fileID: 6711505825293902980}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c770187d22b039f4e8e757ad2dfb38ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &7202877815778501410
 BoxCollider:
   m_ObjectHideFlags: 0
